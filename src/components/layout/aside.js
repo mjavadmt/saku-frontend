@@ -3,7 +3,6 @@ import {
   ProSidebar,
   Menu,
   MenuItem,
-  SubMenu,
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
@@ -11,21 +10,17 @@ import {
 import {
   FaTachometerAlt,
   FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
+  FaInstagram,
 } from "react-icons/fa";
 
-const Aside = ({  collapsed, toggled, handleToggleSidebar }) => {
+const Aside = ({ toggled, handleToggleSidebar }) => {
   return (
     <ProSidebar
-
       rtl={true}
-      collapsed={collapsed}
       toggled={toggled}
       breakPoint="md"
       onToggle={handleToggleSidebar}
+      className="bg-gradient-to-r from-cyan-500 to-blue-500"
     >
       <SidebarHeader>
         <div
@@ -40,7 +35,7 @@ const Aside = ({  collapsed, toggled, handleToggleSidebar }) => {
             whiteSpace: "nowrap",
           }}
         >
-          sdfgfad
+          Saku
         </div>
       </SidebarHeader>
 
@@ -48,13 +43,13 @@ const Aside = ({  collapsed, toggled, handleToggleSidebar }) => {
         <Menu iconShape="circle">
           <MenuItem
             icon={<FaTachometerAlt />}
-            suffix={<span className="badge red">alyyy</span>}
+            suffix={<span className="badge red">پروفایل</span>}
           >
             mmd
           </MenuItem>
           <MenuItem icon={<FaGem />}>comment</MenuItem>
         </Menu>
-        <Menu iconShape="circle">
+        {/* <Menu iconShape="circle">
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
             title="withSuffix"
@@ -85,7 +80,7 @@ const Aside = ({  collapsed, toggled, handleToggleSidebar }) => {
               </SubMenu>
             </SubMenu>
           </SubMenu>
-        </Menu>
+        </Menu> */}
       </SidebarContent>
 
       <SidebarFooter style={{ textAlign: "center" }}>
@@ -101,15 +96,14 @@ const Aside = ({  collapsed, toggled, handleToggleSidebar }) => {
             className="sidebar-btn"
             rel="noopener noreferrer"
           >
-            <FaGithub />
+            <FaInstagram />
             <span
               style={{
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
                 overflow: "hidden",
               }}
-            >
-            </span>
+            ></span>
           </a>
         </div>
       </SidebarFooter>

@@ -1,19 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-$sidebar-bg-color: #0c1e35;
+$orange: #ffa600;
+$blue: #82d2e5;
+$green: #c1d72e;
+
+$list1: $blue, $green, $orange;
+
+$sidebar-bg-color: #101820;
 $submenu-bg-color: rgba(255, 255, 255, 0.05);
 $submenu-bg-color-collapsed: rgba(#0c1e35, 0.95);
-$sidebar-color: #b3b8d4;
+$sidebar-color: #f2aa4c;
 $highlight-color: #dee2ec;
 $icon-bg-color: rgba(255, 255, 255, 0.05);
 $icon-size: 35px;
 
-@import '~react-pro-sidebar/dist/scss/styles.scss';
+@import "~react-pro-sidebar/dist/scss/styles.scss";
 body {
   margin: 0;
   height: 100vh;
   color: #353535;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 #root {
@@ -27,8 +33,8 @@ body {
 
   .btn-toggle {
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     background: #353535;
     color: #fff;
     text-align: center;

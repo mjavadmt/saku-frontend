@@ -1,3 +1,3 @@
 export const Splash = () => {
-  return <p>sdfassadfasdfdf</p>;
+  return <p className="text-3xl font-bold underline">First Page</p>;
 };
