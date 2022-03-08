@@ -1,5 +1,11 @@
+import { Layout } from "./components/layout/index";
+import 'react-pro-sidebar/dist/css/styles.css';
+import'./styles/layout.scss';
+
 function App() {
-  return <div>Hi </div>;
+  return (
+      <Layout/>
+  );
 }
 
 export default App;
