@@ -1,2 +1,9 @@
 export const SPLASH = "/splash";
-export const NOT_FOUND = "/not-found"; 
+export const NOT_FOUND = "/not-found";
+export const PROFILE = "/profile";
+export const TRANSACTIONS = "/transactions";
+export const JOB_INFO = "/job-info";
+export const MESSAGES = "/messages";
+export const NOTIFICATIONS = "/notifications";
+export const CREATE_AUCTION = "/create-auction";
+export const MY_AUCTIONS = "/my-auctions";

@@ -1,2 +1,9 @@
 export { Splash } from "./splash";
 export { NotFound } from "./notFound";
+export { CreateAuction } from "./createAuction";
+export { JobInfo } from "./jobInfo";
+export { Messages } from "./messages";
+export { MyAuctions } from "./myAuctions";
+export { Notifications } from "./notifications";
+export { Profile } from "./profile";
+export { Transactions } from "./transactions";

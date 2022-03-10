@@ -1,3 +1,34 @@
 export const Splash = () => {
-  return <p className="text-3xl font-bold underline">First Page</p>;
+  return (
+    <div>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p><p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+      <p className="text-3xl font-bold underline">First Page</p>
+       
+      
+      </div>
+  );
 };
