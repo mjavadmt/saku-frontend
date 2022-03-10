@@ -7,11 +7,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaTachometerAlt, FaGem, FaInstagram } from "react-icons/fa";
 
 const Aside = ({ toggled, handleToggleSidebar }) => {
   return (
@@ -35,7 +31,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             whiteSpace: "nowrap",
           }}
         >
-          Saku
+          سکو
         </div>
       </SidebarHeader>
 
@@ -45,9 +41,9 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             icon={<FaTachometerAlt />}
             suffix={<span className="badge red">پروفایل</span>}
           >
-            mmd
+            صفحه اصلی
           </MenuItem>
-          <MenuItem icon={<FaGem />}>comment</MenuItem>
+          <MenuItem icon={<FaGem />}>مزایده ها</MenuItem>
         </Menu>
         {/* <Menu iconShape="circle">
           <SubMenu
