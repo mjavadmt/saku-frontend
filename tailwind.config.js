@@ -38,7 +38,12 @@ module.exports = {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
-      lightGray : "#f0f1f3",
+      lightGray: "#f0f1f3",
+      palette0: "#7848c0",
+      palette1: "#483090",
+      palette2: "#301860",
+      palette3: "#181830",
+      palette4: "#000030",
     }),
     columns: {
       auto: "auto",
