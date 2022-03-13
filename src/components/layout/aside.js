@@ -17,7 +17,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   SPLASH,
   CREATE_AUCTION,
@@ -39,7 +39,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
       onToggle={handleToggleSidebar}
     >
       <SidebarHeader>
-        <div onClick={(e) => navigate(SPLASH)}  className="flex cursor-pointer">
+        <div onClick={(e) => navigate(SPLASH)} className="flex cursor-pointer">
           <div
             style={{
               padding: "24px",
@@ -68,30 +68,54 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
               <IoMdAlert size={24} color="orange" />
               // </span>
             }
+            active={window.location.pathname === PROFILE}
             onClick={(e) => navigate(PROFILE)}
           >
             پروفایل
           </MenuItem>
-          <MenuItem onClick={(e) => navigate(JOB_INFO)} icon={<WorkIcon />}>
+          <MenuItem
+            active={window.location.pathname === JOB_INFO}
+            onClick={(e) => navigate(JOB_INFO)}
+            icon={<WorkIcon />}
+          >
             کسب و کار
           </MenuItem>
-          <MenuItem onClick={(e) => navigate(TRANSACTIONS)} icon={<AccountBalanceWalletIcon />}>
+          <MenuItem
+            active={window.location.pathname === TRANSACTIONS}
+            onClick={(e) => navigate(TRANSACTIONS)}
+            icon={<AccountBalanceWalletIcon />}
+          >
             تراکنش‌های مالی
           </MenuItem>
           <MenuItem
+            active={window.location.pathname === MESSAGES}
             onClick={(e) => navigate(MESSAGES)}
             icon={<InsertCommentIcon />}
             suffix={<span className="badge red">3</span>}
           >
             پیام‌ها
           </MenuItem>
-          <MenuItem onClick={(e) => navigate(NOTIFICATIONS)} icon={<NotificationsIcon />}>اعلانات</MenuItem>
+          <MenuItem
+            active={window.location.pathname === NOTIFICATIONS}
+            onClick={(e) => navigate(NOTIFICATIONS)}
+            icon={<NotificationsIcon />}
+          >
+            اعلانات
+          </MenuItem>
         </Menu>
         <Menu iconShape="circle">
-          <MenuItem onClick={(e) => navigate(CREATE_AUCTION)} icon={<AddOutlinedIcon fontSize="small" />}>
+          <MenuItem
+            active={window.location.pathname === CREATE_AUCTION}
+            onClick={(e) => navigate(CREATE_AUCTION)}
+            icon={<AddOutlinedIcon fontSize="small" />}
+          >
             ایجاد مزایده
           </MenuItem>
-          <MenuItem onClick={(e) => navigate(MY_AUCTIONS)} icon={<GavelIcon fontSize="small" />}>
+          <MenuItem
+            active={window.location.pathname === MY_AUCTIONS}
+            onClick={(e) => navigate(MY_AUCTIONS)}
+            icon={<GavelIcon fontSize="small" />}
+          >
             مزایده‌های من
           </MenuItem>
         </Menu>

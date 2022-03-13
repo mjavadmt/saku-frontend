@@ -6,12 +6,12 @@ $green: #c1d72e;
 
 $list1: $blue, $green, $orange;
 
-$sidebar-bg-color: #101820;
-$submenu-bg-color: rgba(255, 255, 255, 0.05);
+$sidebar-bg-color: #000030;
+$submenu-bg-color: #000030;
 $submenu-bg-color-collapsed: rgba(#0c1e35, 0.95);
 $sidebar-color: #ffa44f;
 $highlight-color: #dee2ec;
-$icon-bg-color: rgba(255, 255, 255, 0.05);
+$icon-bg-color: #000030;
 $icon-size: 35px;
 
 @import "~react-pro-sidebar/dist/scss/styles.scss";
@@ -35,7 +35,7 @@ body {
     cursor: pointer;
     width: 30px;
     height: 30px;
-    background: #353535;
+    background: #000030;
     color: #fff;
     text-align: center;
     border-radius: 50%;
