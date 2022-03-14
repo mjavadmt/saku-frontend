@@ -7,3 +7,4 @@ export { MyAuctions } from "./myAuctions";
 export { Notifications } from "./notifications";
 export { Profile } from "./profile";
 export { Transactions } from "./transactions";
+export { Login } from "./login";
