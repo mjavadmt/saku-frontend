@@ -12,7 +12,7 @@ const NavBar = ({ handleToggleSidebar }) => {
   let hoverColored = "hover:text-orange-500";
 
   return (
-    <div className="w-full bg-palette1 h-12 rounded-xl sticky top-0">
+    <div className="w-full bg-palette1 h-12 rounded-xl sticky top-0 z-10">
       <div className="flex flex-row-reverse items-center">
         <Link className={hoverColored} to={SPLASH}>
           <AiOutlineHome className="m-3" size={24} />

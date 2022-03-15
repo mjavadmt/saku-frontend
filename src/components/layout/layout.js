@@ -33,18 +33,18 @@ export function Layout() {
   const theme = createTheme(getDesignTokens("dark"));
 
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <BrowserRouter>
         <div className={`app rtl ${toggled ? "toggled" : ""}`}>
           <Aside toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
 
-          <main className="bg-palette3 text-white">
+          <main className="bg-bodyBackground text-white">
             <NavBar handleToggleSidebar={handleToggleSidebar} />
             <Navigation />
           </main>
         </div>
       </BrowserRouter>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 }
 
