@@ -22,10 +22,10 @@ export const Splash = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={8}>
-        <div className=" bg-cardColor m-2 rounded-xl h-40 p-9">meow :)</div>
+        <div className=" bg-cardColor m-2 rounded-l h-40 p-9 shadow-2xl">meow :)</div>
       </Grid>
       <Grid item xs={4}>
-        <div className=" bg-cardColor m-2 rounded-xl h-60 p-9">meow :)</div>
+        <div className=" bg-cardColor m-2 rounded-l h-60 p-9 shadow-2xl">meow :)</div>
       </Grid> 
     </Grid>
   );

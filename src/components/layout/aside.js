@@ -50,7 +50,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
-              color: "#ffee8f",
+              color: "#8ba8f5",
             }}
           >
             سکو
