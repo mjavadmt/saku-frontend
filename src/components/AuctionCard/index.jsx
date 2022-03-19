@@ -17,7 +17,7 @@ export const ActionCard = ({
 }) => {
   return (
     <div className="mt-8 flex justify-center">
-      <div className="lg:w-3/4  lg:h-52 sm:w-1/2 bg-palette1 rounded-2xl lg:grid lg:grid-cols-5 ">
+      <div className="lg:w-3/4  lg:h-52 sm:w-1/2 bg-cardColor rounded-2xl lg:grid lg:grid-cols-5 ">
         <div className="flex items-start justify-center mt-4">
           <img
             alt=""
@@ -28,7 +28,11 @@ export const ActionCard = ({
         <div className="col-span-3 mt-3 p-3 lg:p-0  ">
           <div>
             <span>{title}</span>
-            <Chip className=" mr-2" label={`${remainingDay} روز مانده`} />
+            <Chip
+              color="secondary"
+              className=" mr-2"
+              label={`${remainingDay} روز مانده`}
+            />
           </div>
 
           <div className="flex items-center">
@@ -47,7 +51,7 @@ export const ActionCard = ({
           </div>
           <div className="flex items-center flex-wrap gap-2">
             {tags.map((label) => (
-              <Chip label={label} />
+              <Chip color="primary" label={label} />
             ))}
           </div>
         </div>
