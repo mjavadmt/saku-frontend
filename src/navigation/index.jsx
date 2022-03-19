@@ -10,6 +10,7 @@ import {
   Profile,
   Transactions,
   Login,
+  SignUp,
 } from "../pages";
 import {
   NOT_FOUND,
@@ -22,6 +23,7 @@ import {
   PROFILE,
   TRANSACTIONS,
   LOGIN,
+  SIGNUP,
 } from "./../constant/routes";
 
 export const Navigation = () => (
@@ -37,6 +39,7 @@ export const Navigation = () => (
     <Route element={<Transactions />} path={TRANSACTIONS} />
     <Route element={<NotFound />} path={NOT_FOUND} />
     <Route element={<Login />} path={LOGIN} />
+    <Route element={<SignUp />} path={SIGNUP} />
     <Route path="*" element={<Navigate to={NOT_FOUND} />} />
   </Routes>
 );

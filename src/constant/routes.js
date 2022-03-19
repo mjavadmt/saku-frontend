@@ -8,3 +8,4 @@ export const NOTIFICATIONS = "/notifications";
 export const CREATE_AUCTION = "/create-auction";
 export const MY_AUCTIONS = "/my-auctions";
 export const LOGIN = "/login";
+export const SIGNUP = "/signup";
