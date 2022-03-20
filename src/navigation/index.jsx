@@ -27,7 +27,7 @@ import {
 } from "./../constant/routes";
 import { Layout } from "components/layout/layout";
 
-const screenLayout = ({ elemnt, isFullscreen = false }) => {
+const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
   return isFullscreen ? { elemnt } : <Layout>{elemnt}</Layout>;
 };
 
@@ -35,17 +35,38 @@ export const Navigation = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Navigate to={SPLASH} />} />
-      <Route element={screenLayout(<Splash />)} path={SPLASH} />
-      <Route element={screenLayout(<CreateAuction />)} path={CREATE_AUCTION} />
-      <Route element={<JobInfo />} path={JOB_INFO} />
-      <Route element={<Messages />} path={MESSAGES} />
-      <Route element={<MyAuctions />} path={MY_AUCTIONS} />
-      <Route element={<Notifications />} path={NOTIFICATIONS} />
-      <Route element={<Profile />} path={PROFILE} />
-      <Route element={<Transactions />} path={TRANSACTIONS} />
-      <Route element={<NotFound />} path={NOT_FOUND} />
-      <Route element={<Login />} path={LOGIN} />
-      <Route element={<SignUp />} path={SIGNUP} />
+      <Route element={<ScreenLayout elemnt={<Splash />} />} path={SPLASH} />
+      <Route
+        element={<ScreenLayout elemnt={<CreateAuction />} />}
+        path={CREATE_AUCTION}
+      />
+      <Route element={<ScreenLayout elemnt={<JobInfo />} />} path={JOB_INFO} />
+      <Route element={<ScreenLayout elemnt={<Messages />} />} path={MESSAGES} />
+      <Route
+        element={<ScreenLayout elemnt={<MyAuctions />} />}
+        path={MY_AUCTIONS}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<Notifications />} />}
+        path={NOTIFICATIONS}
+      />
+      <Route element={<ScreenLayout elemnt={<Profile />} />} path={PROFILE} />
+      <Route
+        element={<ScreenLayout elemnt={<Transactions />} />}
+        path={TRANSACTIONS}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<NotFound />} />}
+        path={NOT_FOUND}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<Login />} isFullscreen={true} />}
+        path={LOGIN}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<SignUp />} isFullscreen={true} />}
+        path={SIGNUP}
+      />
       <Route path="*" element={<Navigate to={NOT_FOUND} />} />
     </Routes>
   </BrowserRouter>
