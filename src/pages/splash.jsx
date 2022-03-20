@@ -1,3 +1,3 @@
 export const Splash = () => {
-  return <div></div>;
+  return <div>sdafasdfasasdfdsafadsfasdffasfd</div>;
 };

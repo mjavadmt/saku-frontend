@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import { Navigation } from "../../navigation";
 import Aside from "./aside";
 import NavBar from "./navbar";
@@ -24,7 +24,7 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-export function Layout() {
+export function Layout({ Children }) {
   const [toggled, setToggled] = useState(false);
 
   const handleToggleSidebar = (value) => {
@@ -34,16 +34,14 @@ export function Layout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <div className={`app rtl ${toggled ? "toggled" : ""}`}>
-          <Aside toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
+      <div className={`app rtl ${toggled ? "toggled" : ""}`}>
+        <Aside toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
 
-          <main className="bg-palette3 text-white">
-            <NavBar handleToggleSidebar={handleToggleSidebar} />
-            <Navigation />
-          </main>
-        </div>
-      </BrowserRouter>
+        <main className="bg-palette3 text-white">
+          <NavBar handleToggleSidebar={handleToggleSidebar} />
+          {Children}
+        </main>
+      </div>
     </ThemeProvider>
   );
 }

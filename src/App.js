@@ -1,9 +1,9 @@
-import { Layout } from "./components/layout/layout";
+import { Navigation } from "navigation";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./styles/layout.scss";
 
 function App() {
-  return <Layout />;
+  return <Navigation />;
 }
 
 export default App;
