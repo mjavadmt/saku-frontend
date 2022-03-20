@@ -28,7 +28,7 @@ import {
 import { Layout } from "components/layout/layout";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
-  return isFullscreen ? { elemnt } : <Layout>{elemnt}</Layout>;
+  return isFullscreen ? <div>{elemnt}</div> : <Layout>{elemnt}</Layout>;
 };
 
 export const Navigation = () => (
