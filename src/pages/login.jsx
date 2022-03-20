@@ -45,7 +45,10 @@ export function Login() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="xs">
+      <Container
+        className="bg-palette3 p-4 m-4 mt-16 rounded-3xl"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
           sx={{
