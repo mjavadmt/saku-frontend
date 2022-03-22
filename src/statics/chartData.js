@@ -1,10 +1,57 @@
+const numberWithCommas = (x) => {
+  return `${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`;
+};
+
 const chartData = {
   options: {
     chart: {
       id: "basic-bar",
     },
+    // grid : {
+    //   show : false
+    // },
+    legend: {
+      show: true,
+      fontFamily: "Dana-FaNum, Arial, sans-serif",
+      labels: {
+        colors: ["red", "white"],
+      },
+      markers : {
+        offsetX : 3
+      }
+    },
+    colors: ["#eb658f", "#7bca5c"],
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+      width: 2.5,
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.25,
+        stops: [0, 80, 100],
+      },
+    },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+      categories: [
+        "فروردین",
+        "اردیبهشت",
+        "خرداد",
+        "تیر",
+        "مرداد",
+        "شهریور",
+        "مهر",
+        "آبان",
+        "آذر",
+        "دی",
+        "بهمن",
+        "اسفند",
+      ],
       labels: {
         show: true,
         rotate: 0,
@@ -16,13 +63,9 @@ const chartData = {
           // cssClass: "apexcharts-yaxis-label",
         },
       },
-      title: {
-        text: "ساعت برگزاری ",
-        // offsetY: 5,
-        style: {
-          color: "white",
-          fontFamily: "Dana-FaNum, Arial, sans-serif",
-        },
+
+      tooltip: {
+        enabled: false,
       },
       tickAmount: 4,
     },
@@ -36,24 +79,40 @@ const chartData = {
           fontFamily: "Dana-FaNum, Arial, sans-serif",
           fontWeight: 10,
         },
-        offsetX: -23,
+        offsetX: -75,
         offsetY: 0,
         rotate: 0,
-      },
-      title: {
-        text: "درصد شرکت ",
-        offsetX: -40,
-        style: {
-          color: "white",
-          fontFamily: "Dana-FaNum, Arial, sans-serif",
+        formatter: (value) => {
+          return numberWithCommas(value)
         },
+      },
+      // title: {
+      //   text: "میزان حساب",
+      //   offsetX: -40,
+      //   style: {
+      //     color: "white",
+      //     fontFamily: "Dana-FaNum, Arial, sans-serif",
+      //   },
+      // },
+    },
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: "Dana-FaNum, Arial, sans-serif",
+      },
+      marker: {
+        show: true,
       },
     },
   },
   series: [
     {
-      name: "series-1",
-      data: [30, 40, 45, 50, 67, 60, 70, 91],
+      name: "هزینه",
+      data: [430000, 100000, 870000, 690000, 910000, 700000, 60000, 670000, 500000, 450000, 400000, 300000],
+    },
+    {
+      name: "درآمد",
+      data: [300000, 400000, 450000, 500000, 110000, 60000, 700000, 910000, 690000, 870000, 100000, 430000],
     },
   ],
 };

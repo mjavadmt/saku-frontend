@@ -21,7 +21,7 @@ export function Layout() {
         <main className="bg-bodyBackground  text-white">
           <NavBar handleToggleSidebar={handleToggleSidebar} />
 
-          <div className="mt-1 h-full overflow-y-scroll overflow-x-hidden">
+          <div className="mt-1 h-full overflow-x-hidden">
             <Navigation />
           </div>
         </main>

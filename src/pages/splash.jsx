@@ -1,29 +1,55 @@
-import Chart from "react-apexcharts";
 import { Grid } from "@mui/material";
-import chartData from "statics/chartData";
-import inComeGain from "statics/noAxisplot";
+import {
+  AuctionActivity,
+  LastMessages,
+  AuctionCreatedTable,
+  AuctionParticipatedTable,
+  RevenueOnMonth,
+  IncomeGain,
+  ViewFromDashboard,
+  PurchasedStats,
+  AuctionViewStats,
+  InComeStats,
+  NumberOfAuctionCreated,
+  SuccessfulAuctionParticipated,
+  UniqueProfileParticipated,
+} from ".";
 
 export const Splash = () => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md="6">
-        <div className=" bg-cardColor m-4 mt-7 rounded-xl p-3 shadow-2xl">
-          <Chart
-            series={chartData.series}
-            options={chartData.options}
-            type="area"
-          />
-        </div>
+      <Grid item xs={12} md={3}>
+        <ViewFromDashboard />
+        <PurchasedStats />
       </Grid>
-      <Grid item xs={12} md="3">
-        <div className=" bg-cardColor m-4 mt-7 rounded-xl pb-0 overflow-hidden shadow-2xl text-black">
-          <Chart
-            series={inComeGain.series}
-            options={inComeGain.options}
-            type="area"
-            height="100"
-          />
-        </div>
+      <Grid item xs={12} md={3}>
+        <InComeStats />
+        <AuctionViewStats />
+      </Grid>
+      <Grid container className="mt-4" xs={12} md={6}>
+        <Grid item xs={12} md={6}>
+          <SuccessfulAuctionParticipated />
+          <NumberOfAuctionCreated />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <IncomeGain />
+          <UniqueProfileParticipated />
+        </Grid>
+        <Grid item xs={12}>
+          <AuctionParticipatedTable />
+        </Grid>
+      </Grid>
+      <Grid item xs={12} md={8}>
+        <LastMessages />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <AuctionActivity />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <AuctionCreatedTable />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <RevenueOnMonth />
       </Grid>
     </Grid>
   );
