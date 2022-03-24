@@ -11,20 +11,53 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { deepPurple, grey } from "@mui/material/colors";
+
+
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ['"Dana-FaNum"'],
+  },
+  palette: {
+    primary: deepPurple,
+    divider: deepPurple[700],
+    background: {
+      default: "#070028",
+      paper: deepPurple[900],
+    },
+    text: {
+      primary: "#fff",
+      secondary: grey[500],
+    },
+  },
+});
+
 
 
 export function SignUp() {
   const [user,setValue]= useState({username:"",password:""});
+  const [cofirmpass,setCofirmPass]= useState("");
+  const [isSamePass,setIsSamePass]= useState(false)
+;
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const usertmp = {username:data.get("username"), password:data.get("password")};
+    checkPass(data.get("password"),cofirmpass);
     setValue(usertmp);
   };
-
+  const checkPass=(password,confirm)=>{
+    password ===confirm ? setIsSamePass(true) : setIsSamePass(false);
+}
   return (
-      <Container component="main" maxWidth="xs">
+    <ThemeProvider theme={theme}>
+      
+      <Container
+        className="bg-palette3 p-4 m-4 mt-16 rounded-3xl"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -40,68 +73,53 @@ export function SignUp() {
           <Typography component="h1" variant="h5">
             ثبت نام
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+          <Box component="form"  onSubmit={handleSubmit}  noValidate sx={{ mt: 1 }}>
+                <TextField                
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              placeholder="نام کاربری"
+              name="username"
+              autoFocus
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              placeholder="رمز عبور"
+              type="password"
+              id="password"
                 />
-              </Grid>
-              <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+              margin="normal"
+              required
+              fullWidth
+              name="verifypassword"
+              placeholder="تایید رمز عبور"
+              type="password"
+              id="verifypassword"
+              onChange={(e)=> setCofirmPass(e.target.value)}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
+
             <Button
               type="submit"
-              fullWidth
               variant="contained"
+              fullWidth
               sx={{ mt: 3, mb: 2 }}
+              disabled={!isSamePass}
             >
-              Sign Up
+              ثبت نام
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+            <Grid container className="flex justify-center">
+                <Link href="/login" variant="body2">
+                 ورود به اکانت
                 </Link>
-              </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
+      </ThemeProvider >
   );
 }
