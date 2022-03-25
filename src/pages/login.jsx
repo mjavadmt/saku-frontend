@@ -42,6 +42,7 @@ export function Login() {
       username: data.get("username"),
       password: data.get("password"),
     };
+    console.log(userInfo);
     toast.error("عمیلات با موفقیت انجام شد.");
     setUserInfo(usertmp);
   };

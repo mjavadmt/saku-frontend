@@ -6,6 +6,7 @@ import {
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
+  SubMenu,
 } from "react-pro-sidebar";
 import { FaInstagram } from "react-icons/fa";
 import { IoMdAlert } from "react-icons/io";
@@ -17,6 +18,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import { useNavigate } from "react-router-dom";
 import {
   SPLASH,
@@ -27,6 +29,7 @@ import {
   NOTIFICATIONS,
   PROFILE,
   TRANSACTIONS,
+  AUCTION_PAGE,
 } from "constant/routes";
 
 const Aside = ({ toggled, handleToggleSidebar }) => {
@@ -105,19 +108,37 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
         </Menu>
         <Menu iconShape="circle">
           <MenuItem
+            active={window.location.pathname === AUCTION_PAGE}
+            onClick={(e) => navigate(AUCTION_PAGE)}
+            icon={<GavelIcon fontSize="small" />}
+          >
+            مزایده‌ها
+          </MenuItem>
+          <MenuItem
             active={window.location.pathname === CREATE_AUCTION}
             onClick={(e) => navigate(CREATE_AUCTION)}
             icon={<AddOutlinedIcon fontSize="small" />}
           >
             ایجاد مزایده
           </MenuItem>
-          <MenuItem
-            active={window.location.pathname === MY_AUCTIONS}
-            onClick={(e) => navigate(MY_AUCTIONS)}
-            icon={<GavelIcon fontSize="small" />}
+
+          <SubMenu
+            title="مزایده‌ های من"
+            icon={<LocalActivityIcon fontSize="small" />}
           >
-            مزایده‌های من
-          </MenuItem>
+            <MenuItem
+              active={window.location.pathname === MY_AUCTIONS}
+              onClick={(e) => navigate(MY_AUCTIONS)}
+            >
+              ایجاد شده
+            </MenuItem>
+            <MenuItem
+              active={window.location.pathname === MY_AUCTIONS}
+              onClick={(e) => navigate(MY_AUCTIONS)}
+            >
+              شرکت کرده
+            </MenuItem>
+          </SubMenu>
         </Menu>
       </SidebarContent>
 

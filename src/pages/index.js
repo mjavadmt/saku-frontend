@@ -26,3 +26,4 @@ export {
   AuctionViewStats,
   InComeStats,
 } from "./homePageComponents/smallCardChart";
+export {AuctionPage} from "./auctionPage"

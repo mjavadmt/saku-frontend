@@ -51,7 +51,7 @@ export const Filtering = () => {
       <div className="m-4 ">
         <Select
           fullWidth
-          // value={sortBy}
+          value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}

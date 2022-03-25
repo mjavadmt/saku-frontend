@@ -46,6 +46,7 @@ export function SignUp() {
       password: data.get("password"),
       confirmPassword: data.get("confirmPassword"),
     };
+    console.log(user);
     if (data.get("password") === data.get("confirmPassword")) {
       setValue(usertmp);
       setIsSamePass(true);

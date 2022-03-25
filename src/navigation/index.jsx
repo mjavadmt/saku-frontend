@@ -11,7 +11,8 @@ import {
   Transactions,
   Login,
   SignUp,
-} from "../pages";
+  AuctionPage,
+} from "pages";
 import {
   NOT_FOUND,
   SPLASH,
@@ -24,7 +25,8 @@ import {
   TRANSACTIONS,
   LOGIN,
   SIGNUP,
-} from "./../constant/routes";
+  AUCTION_PAGE,
+} from "constant/routes";
 import { Layout } from "components/layout/layout";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
@@ -45,6 +47,10 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<MyAuctions />} />}
         path={MY_AUCTIONS}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<AuctionPage />} />}
+        path={AUCTION_PAGE}
       />
       <Route
         element={<ScreenLayout elemnt={<Notifications />} />}
