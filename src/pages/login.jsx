@@ -11,11 +11,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
+import { toast } from "react-toastify";
 
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
   },
+  direction: "rtl",
   palette: {
     // palette values for dark mode
     primary: deepPurple,
@@ -40,6 +42,7 @@ export function Login() {
       username: data.get("username"),
       password: data.get("password"),
     };
+    toast.error("عمیلات با موفقیت انجام شد.");
     setUserInfo(usertmp);
   };
 
@@ -52,7 +55,7 @@ export function Login() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
