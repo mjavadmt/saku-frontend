@@ -19,15 +19,12 @@ code {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
   background: #070028;
-}
-
-::-webkit-scrollbar-button {
-  height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
