@@ -1,6 +1,3 @@
-
-
 export const MyAuctions = () => {
-    return <p>MyAuctions PAGE</p>;
-  };
-   
+  return <p>MY_AUCTIONS PAGE</p>;
+};

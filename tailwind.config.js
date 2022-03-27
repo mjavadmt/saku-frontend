@@ -6,7 +6,7 @@ module.exports = {
     screens: {
       sm: "640px",
       md: "768px",
-      lg: "1024px",
+      lg: "1090px",
       xl: "1280px",
       "2xl": "1536px",
     },
@@ -39,11 +39,20 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
       lightGray: "#f0f1f3",
+      bodyBackground : "#070028",
+      navbarColor : "#628af973",
+      cardColor : "#4877c336",
+      lightBlue : "#adc4f0",
       palette0: "#7848c0",
       palette1: "#483090",
       palette2: "#301860",
       palette3: "#181830",
       palette4: "#000030",
+      primary : "#7848c0",
+      success : "#28C76F",
+      danger : "#EA5455",
+      warning : "#FF9F43",
+      
     }),
     columns: {
       auto: "auto",
@@ -377,6 +386,7 @@ module.exports = {
         "Times",
         "serif",
       ],
+      DanaFaNum: ["Dana-FaNum"],
       mono: [
         "ui-monospace",
         "SFMono-Regular",
