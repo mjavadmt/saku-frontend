@@ -12,6 +12,7 @@ import {
   Login,
   SignUp,
   AuctionPage,
+  Logout,
 } from "pages";
 import {
   NOT_FOUND,
@@ -26,6 +27,7 @@ import {
   LOGIN,
   SIGNUP,
   AUCTION_PAGE,
+  LOGOUT,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 
@@ -72,6 +74,10 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<SignUp />} isFullscreen={true} />}
         path={SIGNUP}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<Logout />} isFullscreen={true} />}
+        path={LOGOUT}
       />
       <Route path="*" element={<Navigate to={NOT_FOUND} />} />
     </Routes>

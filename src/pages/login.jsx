@@ -11,8 +11,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
+import { login } from "requests/user";
+import { useNavigate } from "react-router-dom";
+import { SPLASH } from "constant/routes";
+import { LOGIN_FAILED, EMPTY_ERROR_MESSAGE } from "constant/errorText";
 import { toast } from "react-toastify";
-
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
@@ -34,7 +37,8 @@ const theme = createTheme({
 });
 
 export function Login() {
-  const [userInfo, setUserInfo] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,9 +46,17 @@ export function Login() {
       username: data.get("username"),
       password: data.get("password"),
     };
-    console.log(userInfo);
-    toast.error("عمیلات با موفقیت انجام شد.");
-    setUserInfo(usertmp);
+    if (!!usertmp.username || !!usertmp.password) {
+      login(usertmp)
+        .then((response) => {
+          localStorage.setItem("access", response.access);
+          localStorage.setItem("refresh", response.refresh);
+          navigate(SPLASH);
+        })
+        .catch((error) => toast.error(LOGIN_FAILED));
+    } else {
+      toast.error(EMPTY_ERROR_MESSAGE);
+    }
   };
 
   return (

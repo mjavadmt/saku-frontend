@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +11,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
-
+import { toast } from "react-toastify";
+import { signup } from "requests/user";
+import { useNavigate } from "react-router-dom";
+import { LOGIN } from "constant/routes";
+import {
+  DIFFERENT_PASSWORDS,
+  SIZE_PASSWORDS,
+  SUCCESS_SIGNUP,
+} from "constant/errorText";
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
@@ -32,12 +40,7 @@ const theme = createTheme({
 });
 
 export function SignUp() {
-  const [user, setValue] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [isSamePass, setIsSamePass] = useState(true);
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,12 +49,17 @@ export function SignUp() {
       password: data.get("password"),
       confirmPassword: data.get("confirmPassword"),
     };
-    console.log(user);
-    if (data.get("password") === data.get("confirmPassword")) {
-      setValue(usertmp);
-      setIsSamePass(true);
+    if (data.get("password") !== data.get("confirmPassword")) {
+      toast.error(DIFFERENT_PASSWORDS);
+    } else if (usertmp.password.length < 8) {
+      toast.error(SIZE_PASSWORDS);
     } else {
-      setIsSamePass(false);
+      signup(usertmp)
+        .then((response) => {
+          toast.success(SUCCESS_SIGNUP);
+          navigate(LOGIN);
+        })
+        .catch((error) => {});
     }
   };
 
@@ -110,9 +118,6 @@ export function SignUp() {
               type="password"
               id="confirmPassword"
             />
-            {!isSamePass && (
-              <span className="text-red-500">رمز وارد شده مطابقت ندارد.</span>
-            )}
 
             <Button
               type="submit"

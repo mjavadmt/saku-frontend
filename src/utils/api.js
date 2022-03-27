@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import host from "utils/config";
+import { host } from "utils/config";
 import { toast } from "react-toastify";
 import { CONNECTION_ERROR } from "constant/errorText";
 import { redirect } from "utils/redirect";
@@ -11,7 +11,9 @@ export const api = axios.create({
   headers: {},
 });
 
-api.defaults.headers.common["token"] = `Bearer 'token'`; //tODO
+api.defaults.headers.common["access"] = `Bearer ${localStorage.getItem(
+  "access"
+)}`;
 
 api.interceptors.request.use(
   async function (config) {
@@ -30,6 +32,10 @@ api.interceptors.response.use(
   function (error) {
     if (error?.response?.status === 401) {
       redirect(LOGOUT);
+    }
+    if (error?.response?.status === 504) {
+      toast.error(CONNECTION_ERROR);
+      return;
     }
 
     if (!!error.response.data && !!error.response.data.message) {

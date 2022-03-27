@@ -14,7 +14,7 @@ export const Filtering = () => {
   const [value, setValue] = useState([20, 37]);
   const [sortBy, setSortBy] = useState("");
   return (
-    <div className="bg-palette3 grid md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-4  rounded-3xl ">
+    <div className="bg-palette3 p-4 grid md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-4  rounded-3xl ">
       <div className=" m-4 ">
         <TextField
           fullWidth

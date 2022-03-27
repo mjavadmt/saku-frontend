@@ -2,23 +2,22 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { logout } from "requests/user";
-
+import { LOGIN } from "constant/routes";
 import { api } from "utils/api";
-import { LOGIN } from "constants/appRoutes";
 
-export const LogoutPage = () => {
+export const Logout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      // if (getItem(TOKEN)) {
-      //   await logout();
-      // }
-      // delete api.defaults.headers.common["token"];
-      // removeItem(TOKEN);
-      // removeItem(REFRESH_TOKEN);
-      // navigate(LOGIN);
+      if (localStorage.getItem("access")) {
+        await logout();
+      }
+      delete api.defaults.headers.common["access"];
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      navigate(LOGIN);
     };
 
     fetchData();
