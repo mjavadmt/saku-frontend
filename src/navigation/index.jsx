@@ -13,6 +13,7 @@ import {
   SignUp,
   AuctionPage,
   Logout,
+  AuctionDetialPage,
 } from "pages";
 import {
   NOT_FOUND,
@@ -28,6 +29,7 @@ import {
   SIGNUP,
   AUCTION_PAGE,
   LOGOUT,
+  AUCTION_DETAIL_PAGE,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 
@@ -53,6 +55,10 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<AuctionPage />} />}
         path={AUCTION_PAGE}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<AuctionDetialPage />} />}
+        path={AUCTION_DETAIL_PAGE}
       />
       <Route
         element={<ScreenLayout elemnt={<Notifications />} />}

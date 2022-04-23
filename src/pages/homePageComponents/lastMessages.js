@@ -68,6 +68,7 @@ export const LastMessages = () => {
             bgcolor: colors[randomIntFromInterval(0, 3)],
             height: 40,
             width: 40,
+            color: "white",
           }}
         >
           N
@@ -89,6 +90,7 @@ export const LastMessages = () => {
             bgcolor: colors[randomIntFromInterval(0, 3)],
             height: 40,
             width: 40,
+            color: "white",
           }}
         >
           N
@@ -110,6 +112,7 @@ export const LastMessages = () => {
             bgcolor: colors[randomIntFromInterval(0, 3)],
             height: 40,
             width: 40,
+            color: "white",
           }}
         >
           N
@@ -131,6 +134,7 @@ export const LastMessages = () => {
             bgcolor: colors[randomIntFromInterval(0, 3)],
             height: 40,
             width: 40,
+            color: "white",
           }}
         >
           N

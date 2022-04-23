@@ -28,3 +28,4 @@ export {
 } from "./homePageComponents/smallCardChart";
 export { AuctionPage } from "./auctionPage";
 export { Logout } from "./logout";
+export { AuctionDetialPage } from "./auctionDetailPage";

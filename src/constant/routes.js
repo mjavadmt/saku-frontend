@@ -11,3 +11,5 @@ export const AUCTION_PAGE = "/auction-page";
 export const LOGIN = "/login";
 export const SIGNUP = "/signup";
 export const LOGOUT = "/logout";
+export const AUCTION_DETAIL_PAGE = "/auction-detail/:auctionId";
+export const AUCTION_DETAIL_WITHOUT_SUFFIX = "/auction-detail";

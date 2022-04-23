@@ -32,8 +32,8 @@ const NavBar = ({ handleToggleSidebar }) => {
           />
           <div className="grow"></div>
           <Avatar
-            className="m-2 mr-4"
-            sx={{ bgcolor: "orange", height: 30, width: 30 }}
+            className="m-2 mr-4 "
+            sx={{ bgcolor: "orange", height: 30, width: 30, color: "white" }}
           >
             N
           </Avatar>
