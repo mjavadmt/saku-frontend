@@ -1,4 +1,20 @@
+import { defineUnit } from "utils/formatPrice";
+
 const chipConstantClass = "rounded-2xl  p-1 pr-2 pl-2 text-xs";
+
+export const attendanceStatusChip = (isPrivate) => {
+  if (isPrivate)
+    return (
+      <div className={`${chipConstantClass} bg-purple-100 text-pink-400`}>
+        خصوصی
+      </div>
+    );
+  return (
+    <div className={`${chipConstantClass} bg-teal-200 text-green-600`}>
+      عمومی
+    </div>
+  );
+};
 
 export const typeChipMaker = (type) => {
   if (type === "مزایده")
@@ -14,7 +30,6 @@ export const typeChipMaker = (type) => {
   );
 };
 
-
 export const defineStatusColor = (status) => {
   if (status === "fail")
     return (
@@ -28,7 +43,6 @@ export const defineStatusColor = (status) => {
     </div>
   );
 };
-
 
 export const defineParticipantsColor = (num) => {
   if (num < 100)
@@ -54,24 +68,24 @@ export const definePriceColor = (num) => {
   if (num < 100_000)
     return (
       <div className={`${chipConstantClass} bg-purple-100 text-pink-400`}>
-        {`${numberWithCommas(num)} تومان`}
+        {`${defineUnit(num, 1)} `}
       </div>
     );
   if (num < 1_000_000)
     return (
       <div className={`${chipConstantClass} bg-indigo-300 text-indigo-700`}>
-        {`${numberWithCommas(num)} تومان`}
+        {`${defineUnit(num, 1)} `}
       </div>
     );
   if (num < 10_000_000)
     return (
       <div className={`${chipConstantClass} bg-yellow-100 text-orange-400`}>
-        {`${numberWithCommas(num)} تومان`}
+        {`${defineUnit(num, 1)} `}
       </div>
     );
   return (
     <div className={`${chipConstantClass} bg-teal-200 text-green-600`}>
-      {`${numberWithCommas(num)} تومان`}
+      {`${defineUnit(num, 1)} `}
     </div>
   );
 };

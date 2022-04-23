@@ -6,7 +6,6 @@ import {
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
-  SubMenu,
 } from "react-pro-sidebar";
 import { FaInstagram } from "react-icons/fa";
 import { IoMdAlert } from "react-icons/io";
@@ -122,23 +121,13 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             ایجاد مزایده
           </MenuItem>
 
-          <SubMenu
-            title="مزایده‌ های من"
+          <MenuItem
+            active={window.location.pathname === MY_AUCTIONS}
+            onClick={(e) => navigate(MY_AUCTIONS)}
             icon={<LocalActivityIcon fontSize="small" />}
           >
-            <MenuItem
-              active={window.location.pathname === MY_AUCTIONS}
-              onClick={(e) => navigate(MY_AUCTIONS)}
-            >
-              ایجاد شده
-            </MenuItem>
-            <MenuItem
-              active={window.location.pathname === MY_AUCTIONS}
-              onClick={(e) => navigate(MY_AUCTIONS)}
-            >
-              شرکت کرده
-            </MenuItem>
-          </SubMenu>
+            مزایده‌های من
+          </MenuItem>
         </Menu>
       </SidebarContent>
 

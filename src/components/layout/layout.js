@@ -38,7 +38,7 @@ export const Layout = ({ children }) => {
       <div className={`app rtl ${toggled ? "toggled" : ""}`}>
         <Aside toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
 
-        <main className="bg-palette3 text-white">
+        <main className="bg-bodyBackground text-white">
           <NavBar handleToggleSidebar={handleToggleSidebar} />
           {children}
         </main>
