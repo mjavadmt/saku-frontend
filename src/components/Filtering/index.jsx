@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import cx from "classnames";
 import { Search } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -8,13 +8,36 @@ import Slider from "@mui/material/Slider";
 import { formatPrice } from "utils/formatPrice";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import "./index.css";
 
-export const Filtering = () => {
+export const Filtering = ({
+  hasRadioBtn = false,
+  onChangeStatus,
+  onChangeType,
+  status,
+  type,
+}) => {
   const [value, setValue] = useState([20, 37]);
   const [sortBy, setSortBy] = useState("");
+
+  const handleChangeRadio = (event, identifier) => {
+    if (identifier === "type") onChangeType(event.target.value);
+    else onChangeStatus(event.target.value);
+  };
+
   return (
-    <div className="bg-palette3 p-4 grid md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-4  rounded-3xl ">
+    <div
+      className={cx(
+        "bg-cardColor p-4 grid rounded-3xl md:grid-cols-2 grid-cols-1",
+        {
+          " md:grid-rows-2  grid-rows-4": !hasRadioBtn,
+          " md:grid-rows-2  grid-rows-6": hasRadioBtn,
+        }
+      )}
+    >
       <div className=" m-4 ">
         <TextField
           fullWidth
@@ -32,7 +55,11 @@ export const Filtering = () => {
           options={top100Films}
           getOptionLabel={(option) => option.title}
           renderInput={(params) => (
-            <TextField {...params} placeholder="فیلتر ها" />
+            <TextField
+              className="text-white"
+              {...params}
+              placeholder="فیلترها"
+            />
           )}
         />
       </div>
@@ -55,7 +82,8 @@ export const Filtering = () => {
           onChange={(e) => setSortBy(e.target.value)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
-          defaultValue={10}
+          // defaultValue={10}
+          placeholder="مرتب‌سازی"
         >
           <MenuItem value={10}>کمترین قیمت</MenuItem>
           <MenuItem value={20}>بیشترین قیمت</MenuItem>
@@ -63,6 +91,60 @@ export const Filtering = () => {
           <MenuItem value={40}>دور ترین زمان</MenuItem>
         </Select>
       </div>
+      {hasRadioBtn && (
+        <React.Fragment>
+          <div className="m-4">
+            <div className="text-white" id="demo-setType">
+              نوع
+            </div>
+            <RadioGroup
+              aria-labelledby="demo-setType"
+              name="setType"
+              value={type}
+              onChange={(e) => handleChangeRadio(e, "type")}
+            >
+              <div className="flex justify-around ">
+                <FormControlLabel value="همه" control={<Radio />} label="همه" />
+                <FormControlLabel
+                  value="مزایده"
+                  control={<Radio />}
+                  label="مزایده"
+                />
+                <FormControlLabel
+                  value="مناقصه"
+                  control={<Radio />}
+                  label="مناقصه"
+                />
+              </div>
+            </RadioGroup>
+          </div>
+          <div className="m-4">
+            <div className="text-white" id="demo-setStatus">
+              وضعیت
+            </div>
+            <RadioGroup
+              aria-labelledby="demo-setStatus"
+              name="setStatus"
+              value={status}
+              onChange={(e) => handleChangeRadio(e, "status")}
+            >
+              <div className="flex justify-around">
+                <FormControlLabel value="همه" control={<Radio />} label="همه" />
+                <FormControlLabel
+                  value="در جریان"
+                  control={<Radio />}
+                  label="در جریان"
+                />
+                <FormControlLabel
+                  value="پایان‌یافته"
+                  control={<Radio />}
+                  label="پایان‌یافته"
+                />
+              </div>
+            </RadioGroup>
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 };

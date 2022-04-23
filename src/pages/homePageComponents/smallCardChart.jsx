@@ -28,7 +28,7 @@ export const ViewFromDashboard = () => {
         series={siteViewDetail.series}
         options={siteViewDetail.options}
         type="area"
-        height="100"
+        height="140"
       />
     </div>
   );
@@ -53,7 +53,7 @@ export const PurchasedStats = () => {
         series={purchasedDetail.series}
         options={purchasedDetail.options}
         type="area"
-        height="100"
+        height="140"
       />
     </div>
   );
@@ -78,7 +78,7 @@ export const InComeStats = () => {
         series={inComeDetail.series}
         options={inComeDetail.options}
         type="area"
-        height="100"
+        height="140"
       />
     </div>
   );
@@ -103,7 +103,7 @@ export const AuctionViewStats = () => {
         series={auctionViewDetail.series}
         options={auctionViewDetail.options}
         type="area"
-        height="100"
+        height="140"
       />
     </div>
   );

@@ -10,7 +10,7 @@ export const IncomeGain = () => {
     <div className={cardClass}>
       <div className="p-3 flex ">
         <div className="text-white m-2 mt-3">
-          <div className="font-bold ">3.67 تومان</div>
+          <div className="font-bold ">3.67 </div>
           <div className="font-thin text-xs">درآمد کسب شده</div>
         </div>
         <div className="grow"></div>

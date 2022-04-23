@@ -5,8 +5,12 @@
   color: #fff !important;
 }
 .MuiAutocomplete-root fieldset {
-  border-color: #d0cee3 !important;
+  border-color: #adacb9 !important;
 }
 .MuiInputBase-root fieldset {
-  border-color: #d0cee3 !important;
+  border-color: #adacb9 !important;
+}
+
+.css-gxulhl-MuiTypography-root {
+  font-size: 14px !important;
 }

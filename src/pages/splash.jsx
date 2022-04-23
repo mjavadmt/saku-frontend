@@ -20,10 +20,12 @@ export const Splash = () => {
     <Grid container spacing={2}>
       <Grid item xs={12} md={3}>
         <ViewFromDashboard />
+        <div className="h-4" />
         <PurchasedStats />
       </Grid>
       <Grid item xs={12} md={3}>
         <InComeStats />
+        <div className="h-4" />
         <AuctionViewStats />
       </Grid>
       <Grid container className="mt-4" xs={12} md={6}>
