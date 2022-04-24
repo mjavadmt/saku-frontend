@@ -4,10 +4,10 @@ export const auctions = [
   {
     img: ImgUrl,
     title: "مصطفی",
-    participantsNum: 43,
+    participantsNum: 156,
     type: "مزایده",
-    endDate: "2021-09-05T12:29:53.000Z",
-    startDate: "2021-10-05T12:29:53.000Z",
+    endDate: "2021-09-05T12:21:53.000Z",
+    startDate: "2021-10-05T12:21:53.000Z",
     category: "ساختمانی",
     price: 1242,
     id: 1,

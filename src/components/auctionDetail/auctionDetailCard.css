@@ -1,0 +1,14 @@
+.hidden-price {
+  filter: blur(4px);
+}
+
+.opaque {
+  opacity: 1 !important;
+}
+
+.submit-price:disabled {
+  background-color: #a9b4b4 !important;
+  color: #6e6565 !important;
+}
+
+
