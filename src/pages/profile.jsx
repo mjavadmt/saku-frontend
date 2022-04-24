@@ -24,7 +24,7 @@ export const Profile = () => {
             <img
               alt="Profile"
               className="rounded-3xl  "
-              src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png"
+              src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
             />
             <GrEdit style={{ marginTop: -25 }} size={24} />
           </div>

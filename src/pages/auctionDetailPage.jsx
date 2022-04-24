@@ -7,9 +7,12 @@ const auction = {
   ...auctions[0],
   private: false,
   bestPrice: false,
+  canEnterPrice : true,
   tags: ["شرکتی", "مهندسی", "کانونی"],
   location: "تهران، خیابان رجایی، کوچه ذاکری",
   userName: "محمد اجباری",
+  description:
+    "این مزایده در این مکان ساعت مقرر برگزار می‌شود لطفا توجه داشته‌باشید که اعدادی که وارد می‌کنید معقول باشد",
 };
 
 export const AuctionDetialPage = () => {
