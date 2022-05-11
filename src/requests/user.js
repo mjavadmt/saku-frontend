@@ -29,7 +29,6 @@ export const signup = ({ username, password }) =>
       return Promise.reject(error);
     });
 export const forgot = ({email})=>
-{
   post(FORGOT, {email})
   .then((response) =>
   {
@@ -39,4 +38,4 @@ export const forgot = ({email})=>
   {
     return Promise.reject(error);
   })
-};
+;
