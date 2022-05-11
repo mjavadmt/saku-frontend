@@ -93,6 +93,7 @@ export function Login() {
               id="username"
               placeholder="نام کاربری"
               name="username"
+              data-testid = "username"
               autoFocus
             />
             <TextField
@@ -102,12 +103,14 @@ export function Login() {
               name="password"
               placeholder="رمز عبور"
               type="password"
+              data-testid = "password"
               id="password"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              data-testid = "button"
               sx={{ mt: 3, mb: 2 }}
             >
               ورود
