@@ -10,16 +10,15 @@ const repliedCondition = (comments, idx) => {
   return idx < comments.length - 1 && comments[idx + 1].isReplied;
 };
 
-
 export const CommentBox = () => {
-  const [replied, setReplied] = React.useState(false);
+  // const [replied, setReplied] = React.useState(false);
   return (
     <div className={cx(cardClass, "p-4")}>
       <div className={headerClass}>دیدگاه‌ها</div>
       <div className="overflow-y-auto h-96 p-2">
         {commentsData.map((item, index) => (
           <React.Fragment>
-            <Comment commentDetail={item} idx={index}/>
+            <Comment commentDetail={item} idx={index} />
             {index < commentsData.length - 1 &&
               !repliedCondition(commentsData, index) && (
                 <hr className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
