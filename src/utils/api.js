@@ -11,9 +11,7 @@ export const api = axios.create({
   headers: {},
 });
 
-api.defaults.headers.common["access"] = `Bearer ${localStorage.getItem(
-  "access"
-)}`;
+api.defaults.headers.Authorization = `Bearer ${localStorage.getItem("access")}`;
 
 api.interceptors.request.use(
   async function (config) {
