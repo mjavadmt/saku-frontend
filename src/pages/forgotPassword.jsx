@@ -6,15 +6,15 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
-import { login } from "requests/user";
+import { forgot } from "requests/user";
 import { useNavigate } from "react-router-dom";
-import { SPLASH } from "constant/routes";
-import { LOGIN_FAILED, EMPTY_ERROR_MESSAGE } from "constant/errorText";
+import { LOGIN } from "constant/routes";
+import { FAILED_FORGOT, SUCCESS_FORGOT,EMPTY_ERROR_MESSAGE } from "constant/errorText";
 import { toast } from "react-toastify";
 const theme = createTheme({
   typography: {
@@ -36,24 +36,22 @@ const theme = createTheme({
   },
 });
 
-export function Login() {
+export function ForgotPassword() {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const usertmp = {
-      username: data.get("username"),
-      password: data.get("password"),
+      email: data.get("email")
     };
-    if (!!usertmp.username || !!usertmp.password) {
-      login(usertmp)
+    if (!!usertmp.email ) {
+      forgot(usertmp)
         .then((response) => {
-          localStorage.setItem("access", response.access);
-          localStorage.setItem("refresh", response.refresh);
-          navigate(SPLASH);
+          navigate(LOGIN);
+          toast(SUCCESS_FORGOT);
         })
-        .catch((error) => toast.error(LOGIN_FAILED));
+        .catch((error) => toast.error(FAILED_FORGOT));
     } else {
       toast.error(EMPTY_ERROR_MESSAGE);
     }
@@ -75,10 +73,10 @@ export function Login() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <AccountCircle />
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            ورود
+            فراموشی رمز عبور
           </Typography>
           <Box
             component="form"
@@ -90,35 +88,23 @@ export function Login() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              placeholder="نام کاربری"
-              name="username"
-              data-testid = "username"
+              id="email"
+              placeholder="ایمیل"
+              name="email"
               autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              placeholder="رمز عبور"
-              type="password"
-              data-testid = "password"
-              id="password"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              data-testid = "button"
               sx={{ mt: 3, mb: 2 }}
             >
-              ورود
+              تایید 
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgotpassword" variant="body2">
-                  فراموشی رمز عبور
+                <Link href="/login" variant="body2">
+                  ورود
                 </Link>
               </Grid>
               <Grid item>

@@ -11,11 +11,27 @@ import { FcInfo, FcCalendar } from "react-icons/fc";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker from "react-modern-calendar-datepicker";
 import InputAdornment from "@mui/material/InputAdornment";
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 export const CreateAuction = () => {
   const [sortBy, setSortBy] = useState("");
   const [auctionType, setAuctionType] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
+  const [isOpen , setOpen]= useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   const renderCustomInput = ({ ref }) => (
     <Box
       className="col-span-2 ml-24"
@@ -38,12 +54,13 @@ export const CreateAuction = () => {
         variant="standard"
       />
     </Box>
+    
   );
   return (
     <div className="flex justify-center">
       <div className="mt-12 bg-cardColor rounded-3xl w-11/12">
         <div className="flex justify-center mt-10">
-          <FcInspection size={150} />
+          <FcInspection  size={150} />
         </div>
 
         <div className="mt-5 mb-10 grid grid-cols-3 gap-8">
@@ -88,7 +105,7 @@ export const CreateAuction = () => {
           </Box>
 
           <div className="mt-5 flex justify-center gap-2">
-            <FcInfo color="" size={24} />
+            <FcInfo onClick={handleOpen} color="" size={24} />
             <p>نوع:</p>
           </div>
           <Box
@@ -165,6 +182,31 @@ export const CreateAuction = () => {
           </button>
         </div>
       </div>
+      <Modal
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        open={isOpen}
+        onClose={handleClose}
+      >
+        <Box sx= {style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+                انواع مزایده
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <ul>
+              <li>
+                انلاین:
+              </li>
+              <li>
+                افلاین:
+              </li>
+              <li>
+                به روز رسانی دلخواه:
+              </li>
+            </ul>
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 };

@@ -30,8 +30,10 @@ import {
   AUCTION_PAGE,
   LOGOUT,
   AUCTION_DETAIL_PAGE,
+  FORGOTPASSWORD,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
+import { ForgotPassword } from "pages/forgotPassword";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
   return isFullscreen ? <div>{elemnt}</div> : <Layout>{elemnt}</Layout>;
@@ -76,6 +78,10 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<Login />} isFullscreen={true} />}
         path={LOGIN}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<ForgotPassword />} isFullscreen={true} />}
+        path={FORGOTPASSWORD}
       />
       <Route
         element={<ScreenLayout elemnt={<SignUp />} isFullscreen={true} />}

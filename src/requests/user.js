@@ -1,5 +1,5 @@
 import { post } from "utils/api";
-import { LOGOUT, LOGIN, SIGNUP } from "constant/apiRoutes";
+import { LOGOUT, LOGIN, SIGNUP, FORGOT } from "constant/apiRoutes";
 import axios from "axios";
 import { host } from "utils/config";
 
@@ -28,3 +28,14 @@ export const signup = ({ username, password }) =>
       
       return Promise.reject(error);
     });
+export const forgot = ({email})=>
+  post(FORGOT, {email})
+  .then((response) =>
+  {
+    return response.data;
+  })
+  .catch((error) =>
+  {
+    return Promise.reject(error);
+  })
+;
