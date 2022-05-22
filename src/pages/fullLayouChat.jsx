@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { TextMessage } from "components/TextMessage";
 import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
 import { ImageMessage } from "components/ImageMessage";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import OpenInNewOff from "@mui/icons-material/OpenInNewOff";
 import { useNavigate } from "react-router-dom";
-import { FULL_LAYOUT_CHAT } from "constant/routes";
+import { MESSAGES } from "constant/routes";
 import { FileMessage } from "components/FileMessage";
-export const Messages = () => {
+export const FullLayoutChat = () => {
   const endOfMsg = useRef(null);
   const fileRef = useRef();
   const handleKeyDown = (event) => {
@@ -92,14 +92,14 @@ export const Messages = () => {
           backgroundPosition: "center",
           backgroundRepeat: "repeat",
         }}
-        className="flex m-12 h-4/5 rounded-3xl"
+        className="flex h-screen w-full "
       >
-        <div className="flex h-full md:w-1/3 w-full bg-sky-800 rounded-3xl overflow-y-auto">
+        <div className="flex h-screen md:w-1/3 w-full  bg-sky-800 rounded-3xl overflow-y-auto">
           {/* <span
-            onClick={() => navigate(FULL_LAYOUT_CHAT)}
-            className="mr-5 -mt-4 cursor-pointer"
+            className=" cursor-pointer m-3"
+            onClick={() => navigate(MESSAGES)}
           >
-            <OpenInNewIcon color="warning" className="" />
+            <OpenInNewOff color="warning" />
           </span> */}
           <div className="flex-1 w-full h-full">
             {userList.map((user) => (
@@ -121,15 +121,15 @@ export const Messages = () => {
               />
             ))}
             <div
-              onClick={() => navigate(FULL_LAYOUT_CHAT)}
-              className="md:flex flex-1 cursor-pointer justify-center rounded-t-md z-40 self-end items-center sticky bottom-0 w-full h-10 bg-slate-800 hidden "
+              onClick={() => navigate(MESSAGES)}
+              className="md:flex flex-1 cursor-pointer text-white justify-center rounded-l-md z-40 self-end items-center sticky bottom-0 w-full h-10 bg-slate-800 hidden "
             >
-              مشاهده تمام صفحه
+              بازگشت به حالت قبل
             </div>
           </div>
         </div>
         <div className="md:h-full grid grid-rows-6 items-end md:w-2/3 w-0 h-0 ">
-          <div className="h-full grid row-span-6 items-end overflow-y-auto gap-2 ">
+          <div className="h-screen grid row-span-6 items-end overflow-y-auto gap-2  ">
             {msgList.map((m) => {
               switch (m.type) {
                 case "text":
@@ -144,16 +144,19 @@ export const Messages = () => {
             })}
             <div ref={endOfMsg}></div>
           </div>
+          <div className="text-white text-sm text-left ml-8 bg-slate-600 p-4 rounded-3xl w-32">
+            در حال نوشتن...
+          </div>
           <div className="md:flex items-center sticky bottom-0 w-full hidden ">
             <span
               role="button"
               onClick={() => fileRef.current.click()}
-              className="p-2 bg-cyan-500 rounded-full m-2 "
+              className="p-2 bg-cyan-500 rounded-full m-2 text-white "
             >
               <input
                 type="file"
                 onChange={uploadFile}
-                className="p-2 bg-cyan-500 rounded-full m-2 "
+                className="p-2 bg-cyan-500 rounded-full m-2  "
                 hidden
                 ref={fileRef}
               />
@@ -162,11 +165,10 @@ export const Messages = () => {
             <span
               role="button"
               onClick={sendMsg}
-              className="p-2 bg-cyan-500 rounded-full m-2 "
+              className="p-2 bg-cyan-500 rounded-full m-2 text-white"
             >
               <SendRounded />
             </span>
-
             <input
               style={{
                 textIndent: "20px",
