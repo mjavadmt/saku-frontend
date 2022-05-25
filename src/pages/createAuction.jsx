@@ -19,15 +19,19 @@ export const CreateAuction = () => {
   const [auctionType, setAuctionType] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
   const [isOpen , setOpen]= useState(false);
+  const [isOpenTwo , setOpenTwo]= useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpenTwo = () => setOpenTwo(true);
+  const handleCloseTwo = () => setOpenTwo(false);
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'white',
+    width: 600,
+    bgcolor: 'black',
+    borderRadius:'25px',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -126,7 +130,8 @@ export const CreateAuction = () => {
             </Select>
           </Box>
 
-          <div className="mt-5 flex justify-center">
+          <div className="mt-5 flex justify-center gap-2">
+            <FcInfo onClick={handleOpenTwo} color="" size={24} />
             <p>قیمت پایه:</p>
           </div>
           <Box
@@ -189,19 +194,46 @@ export const CreateAuction = () => {
         onClose={handleClose}
       >
         <Box sx= {style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography className="text-white" id="modal-modal-title" variant="h6" component="h2">
                 انواع مزایده
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography className="text-white" id="modal-modal-description" sx={{ mt: 2 }}>
             <ul>
-              <li>
-                انلاین:
+              <li className="flex gap-3 justify-between">
+              <span className="font-semibold text-sky-400/100 text-xl"> افلاین: </span> 
+                قیمت ها برای کسانی که می‌خواهند قیمت ثبت کنند تا آخر تازیخ ثبت قیمت پنهان است و در آخر برنده و مبلغ آن مشخص می‌شود.
               </li>
-              <li>
-                افلاین:
+              <li className="flex gap-3 justify-between">
+              <span className="font-semibold text-sky-400/100 text-xl"> انلاین: </span>
+                قیمت ها برای همه قابل نمایش است و در هر لحظه قیمت ها تغییر خواهد کرد.
               </li>
-              <li>
-                به روز رسانی دلخواه:
+              {/* <li className="flex gap-3 justify-between">
+              <span className="font-semibold text-sky-400/100 text-xl"> آپدیت زمان دار:</span>
+                قیمت و مبلغ پیشنهادی در زمان های مشخص شده آپدیت می‌شوند.
+              </li> */}
+            </ul>
+          </Typography>
+        </Box>
+      </Modal>
+      <Modal
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        open={isOpenTwo}
+        onClose={handleCloseTwo}
+      >
+        <Box sx= {style}>
+          <Typography className="text-white" id="modal-modal-title" variant="h6" component="h2">
+                نکات
+          </Typography>
+          <Typography className="text-white" id="modal-modal-description" sx={{ mt: 2 }}>
+            <ul>
+              <li className=" gap-3 justify-between">
+              <span className="flex font-semibold text-sky-400/100 text-xl"> نکته اول: </span> 
+                در مناقصه ها در حالت آفلاین میبایست از این قیمت پایین تر باشد.
+              </li>
+              <li className=" gap-3 justify-between">
+              <span className="flex font-semibold text-sky-400/100 text-xl"> نکته دوم: </span>
+            در مزایده ها در حالت آفلاین میبایست از این قیمت بالاتر باشد.
               </li>
             </ul>
           </Typography>
