@@ -29,13 +29,6 @@ export const FileMessage = ({ message }) => {
             }
           )}
         >
-          <div
-            className={cx("text-white text-xs mb-1 font-semibold", {
-              "text-left": !isSender,
-            })}
-          >
-            {isSender ? message.fromUserName : message.toUserName}
-          </div>
           <div className="flex justify-around w-auto">
             <a
               className="bg-slate-800 rounded-full p-2 m-2 h-10 w-10 text-center ml-4 my-2 text-white "
@@ -49,7 +42,6 @@ export const FileMessage = ({ message }) => {
             </p>
           </div>
 
-          {/* <a className="rounded-xl h-40 w-52" href={message.fileContent} /> */}
           <div
             className={cx("text-xs -mb-2  mt-2 text-white", {
               "text-right": !isSender,

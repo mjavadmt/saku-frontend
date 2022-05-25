@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { TextMessage } from "components/TextMessage";
 import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
 import { ImageMessage } from "components/ImageMessage";
-import OpenInNewOff from "@mui/icons-material/OpenInNewOff";
 import { useNavigate } from "react-router-dom";
 import { MESSAGES } from "constant/routes";
 import { FileMessage } from "components/FileMessage";
+import { Avatar } from "@mui/material";
 export const FullLayoutChat = () => {
   const endOfMsg = useRef(null);
   const fileRef = useRef();
@@ -95,12 +95,6 @@ export const FullLayoutChat = () => {
         className="flex h-screen w-full "
       >
         <div className="flex h-screen md:w-1/3 w-full  bg-sky-800 rounded-3xl overflow-y-auto">
-          {/* <span
-            className=" cursor-pointer m-3"
-            onClick={() => navigate(MESSAGES)}
-          >
-            <OpenInNewOff color="warning" />
-          </span> */}
           <div className="flex-1 w-full h-full">
             {userList.map((user) => (
               <UserRow
@@ -130,6 +124,17 @@ export const FullLayoutChat = () => {
         </div>
         <div className="md:h-full grid grid-rows-6 items-end md:w-2/3 w-0 h-0 ">
           <div className="h-screen grid row-span-6 items-end overflow-y-auto gap-2  ">
+            <div className="md:flex items-center bg-slate-900 h-16 sticky rounded-b-2xl top-14 w-full hidden z-50 ">
+              <Avatar
+                sx={{ width: 50, height: 50 }}
+                src={userList[0].avatar}
+                className="m-3 mr-6 "
+              />
+              <p className="flex-1 mt-1 text-white">
+                جعفر رضایی
+                <small className="block text-neutral-500"> 2 دقیقه پیش</small>
+              </p>
+            </div>
             {msgList.map((m) => {
               switch (m.type) {
                 case "text":
@@ -144,9 +149,9 @@ export const FullLayoutChat = () => {
             })}
             <div ref={endOfMsg}></div>
           </div>
-          <div className="text-white text-sm text-left ml-8 bg-slate-600 p-4 rounded-3xl w-32">
+          {/* <div className="text-white text-sm text-left ml-8 bg-slate-600 p-4 rounded-3xl w-32">
             در حال نوشتن...
-          </div>
+          </div> */}
           <div className="md:flex items-center sticky bottom-0 w-full hidden ">
             <span
               role="button"

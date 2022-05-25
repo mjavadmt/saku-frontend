@@ -28,13 +28,6 @@ export const ImageMessage = ({ message }) => {
             }
           )}
         >
-          <div
-            className={cx("text-white text-xs mb-1 font-semibold", {
-              "text-left": !isSender,
-            })}
-          >
-            {isSender ? message.fromUserName : message.toUserName}
-          </div>
           <img
             className="rounded-xl h-40 w-52"
             alt="img"

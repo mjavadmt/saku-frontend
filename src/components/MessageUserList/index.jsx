@@ -10,7 +10,13 @@ export const UserRow = ({ unReadMsg, date, userName, avatar }) => {
             <Avatar src={!!avatar ? avatar : null} />
           </Badge>
 
-          <p>{userName}</p>
+          <p className="flex-1">
+            {userName}
+            <div className="text-slate-900 w-40 font-thin text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+              سلام سلام سلام سلام سشیبشسیبسشی شسیبسشیبشسشسبی سشیبشسیبشسیبشسی
+              شسیبیسبسیشب شسیبسشیبشسیب
+            </div>
+          </p>
         </div>
         <small>{date}</small>
       </div>

@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { TextMessage } from "components/TextMessage";
 import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
 import { ImageMessage } from "components/ImageMessage";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useNavigate } from "react-router-dom";
 import { FULL_LAYOUT_CHAT } from "constant/routes";
 import { FileMessage } from "components/FileMessage";
+import { Avatar } from "@mui/material";
 export const Messages = () => {
   const endOfMsg = useRef(null);
   const fileRef = useRef();
@@ -47,7 +47,6 @@ export const Messages = () => {
   const uploadFile = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
-      console.log(img);
       var msgList1 = [...msgList];
       if (img.type.includes("image")) {
         msgList1.push({
@@ -95,12 +94,6 @@ export const Messages = () => {
         className="flex m-12 h-4/5 rounded-3xl"
       >
         <div className="flex h-full md:w-1/3 w-full bg-sky-800 rounded-3xl overflow-y-auto">
-          {/* <span
-            onClick={() => navigate(FULL_LAYOUT_CHAT)}
-            className="mr-5 -mt-4 cursor-pointer"
-          >
-            <OpenInNewIcon color="warning" className="" />
-          </span> */}
           <div className="flex-1 w-full h-full">
             {userList.map((user) => (
               <UserRow
@@ -130,6 +123,17 @@ export const Messages = () => {
         </div>
         <div className="md:h-full grid grid-rows-6 items-end md:w-2/3 w-0 h-0 ">
           <div className="h-full grid row-span-6 items-end overflow-y-auto gap-2 ">
+            <div className="md:flex items-center bg-slate-900 h-14 sticky rounded-b-2xl top-0 w-full hidden z-50 ">
+              <Avatar
+                sx={{ width: 50, height: 50 }}
+                src={userList[0].avatar}
+                className="m-3 mr-6 "
+              />
+              <p className="flex-1 mt-4">
+                جعفر رضایی
+                <small className="block"> 2 دقیقه پیش</small>
+              </p>
+            </div>
             {msgList.map((m) => {
               switch (m.type) {
                 case "text":

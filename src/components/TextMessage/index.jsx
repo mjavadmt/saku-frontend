@@ -28,13 +28,6 @@ export const TextMessage = ({ message }) => {
             }
           )}
         >
-          <div
-            className={cx("text-white text-xs mb-1 font-semibold", {
-              "text-left": !isSender,
-            })}
-          >
-            {isSender ? message.fromUserName : message.toUserName}
-          </div>
           <div className="text-white mx-2">{message.msg}</div>
           <div
             className={cx("text-xs -mb-2  mt-2 text-white", {
