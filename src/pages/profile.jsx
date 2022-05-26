@@ -72,7 +72,7 @@ export const Profile = () => {
                   className="rounded-3xl  "
                   src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
                 />
-                <GrEdit style={{ marginTop: -25 }} size={24} />
+                <GrEdit  style={{ marginTop: -25 }} size={24} />
               </div>
               <div className="">
                 <div>
@@ -80,23 +80,20 @@ export const Profile = () => {
                 </div>
 
                 <div className="flex gap-3">
-                  <Chip color="secondary" label="حقیقی" />
+                  <Chip
+                    color="secondary"
+                    label={userData.person_type === "N" ? "حقیقی" : "حقوقی"}
+                  />
 
                   <GoLocation size={20} />
-                  <p>{userData.city}</p>
+                  <p>{userData.province}</p>
                 </div>
               </div>
-              <div className="flex gap-2 flex-wrap ">
-                <Rating
-                  name="half-rating-read"
-                  // className="bg-purple-600"
-                  color="secondary"
-                  defaultValue={2}
-                  precision={1}
-                  readOnly
-                />
-                <b className="text-xl">2.5</b>
-              </div>
+              {!!userData.email && (
+                <div className="flex gap-2 flex-wrap bg-slate-600 rounded-lg items-center justify-center h-1/2 ">
+                  <p>{userData.email}</p>
+                </div>
+              )}
             </div>
           ) : (
             "اطلاعات خود را کامل کنید."
@@ -119,6 +116,7 @@ export const Profile = () => {
                         direction: changeDIR(userData["name"]),
                       }}
                       fullWidth
+                      inputProps={{ maxLength: 20 }}
                       // helperText="Please specify the first name"
                       name="name"
                       onChange={(e, val) => handleChange(e, val)}

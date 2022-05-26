@@ -33,7 +33,7 @@ api.interceptors.response.use(
     }
     if (error?.response?.status === 504) {
       toast.error(CONNECTION_ERROR);
-      return;
+      return Promise.reject(error);
     }
 
     if (!!error.response.data && !!error.response.data.message) {
