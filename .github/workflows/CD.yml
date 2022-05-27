@@ -1,0 +1,24 @@
+name: CD
+
+#on:
+#  release:
+#    types:
+#      - created
+on:
+  push: null
+
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+            ssh-private-key: ${{ secrets.SSH }}
+
+      - name: Deploy
+        shell: bash
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@188.121.110.151 "docker login --username=${{ secrets.REGISTRY_USERNAME }} --password=${{ secrets.PAT }} ghcr.io && docker run -p 3000:3000 ghcr.io/mjavadmt/saku:8b1f3588989426ec2c8440605758129b73435823 "
