@@ -29,3 +29,4 @@ export {
 export { AuctionPage } from "./auctionPage";
 export { Logout } from "./logout";
 export { AuctionDetialPage } from "./auctionDetailPage";
+export { FullLayoutChat } from "./fullLayouChat";

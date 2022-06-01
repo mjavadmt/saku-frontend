@@ -14,6 +14,7 @@ import {
   AuctionPage,
   Logout,
   AuctionDetialPage,
+  FullLayoutChat,
 } from "pages";
 import {
   NOT_FOUND,
@@ -31,6 +32,7 @@ import {
   LOGOUT,
   AUCTION_DETAIL_PAGE,
   FORGOTPASSWORD,
+  FULL_LAYOUT_CHAT,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -50,6 +52,12 @@ export const Navigation = () => (
       />
       <Route element={<ScreenLayout elemnt={<JobInfo />} />} path={JOB_INFO} />
       <Route element={<ScreenLayout elemnt={<Messages />} />} path={MESSAGES} />
+      <Route
+        element={
+          <ScreenLayout elemnt={<FullLayoutChat />} isFullscreen={true} />
+        }
+        path={FULL_LAYOUT_CHAT}
+      />
       <Route
         element={<ScreenLayout elemnt={<MyAuctions />} />}
         path={MY_AUCTIONS}
@@ -80,7 +88,9 @@ export const Navigation = () => (
         path={LOGIN}
       />
       <Route
-        element={<ScreenLayout elemnt={<ForgotPassword />} isFullscreen={true} />}
+        element={
+          <ScreenLayout elemnt={<ForgotPassword />} isFullscreen={true} />
+        }
         path={FORGOTPASSWORD}
       />
       <Route

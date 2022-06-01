@@ -5,7 +5,7 @@ import profileImg_3 from "assets/img/avatar-s-8.jpg";
 import profileImg_4 from "assets/img/avatar-s-11.jpg";
 import profileImg_5 from "assets/img/avatar-s-13.jpg";
 
-const images = [
+export const images = [
   profileImg_1,
   profileImg_2,
   profileImg_3,

@@ -4,6 +4,7 @@ export const PROFILE = "/profile";
 export const TRANSACTIONS = "/transactions";
 export const JOB_INFO = "/job-info";
 export const MESSAGES = "/messages";
+export const FULL_LAYOUT_CHAT = "/fullChat";
 export const NOTIFICATIONS = "/notifications";
 export const CREATE_AUCTION = "/create-auction";
 export const MY_AUCTIONS = "/my-auctions";
