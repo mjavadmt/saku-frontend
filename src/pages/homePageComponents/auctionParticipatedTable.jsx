@@ -5,7 +5,6 @@ import ReactTooltip from "react-tooltip";
 import {
   dateConverter,
   defineStatusColor,
-  typeChipMaker,
 } from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
@@ -14,7 +13,7 @@ const columns = [
     name: "نوع",
     center: true,
     minWidth: "100px",
-    selector: (row) => typeChipMaker(row.type),
+    selector: (row) => row.type,
   },
   {
     name: "نام",
