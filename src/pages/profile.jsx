@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   Box,
@@ -12,20 +12,42 @@ import { CircularProgress } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { GoLocation } from "react-icons/go";
-import Rating from "@mui/material/Rating";
+import { FaTrash } from "react-icons/fa";
 import Chip from "@mui/material/Chip";
 import "components/Filtering/index.css";
-import { GrEdit } from "react-icons/gr";
-import { get, put } from "utils/api";
-import { PRIFILE } from "constant/apiRoutes";
+import {
+  RiEditCircleFill,
+  RiPhoneFill,
+  RiFingerprintFill,
+} from "react-icons/ri";
+import { get, post, put } from "utils/api";
+import { PRIFILE, DEL_IMAGE } from "constant/apiRoutes";
 import { provinceList } from "constant/iranProvince";
 import { cityList } from "constant/iranCities";
 import { toast } from "react-toastify";
 
 export const Profile = () => {
+  const fileRef = useRef(null);
   const [userData, setUserData] = useState({});
   const [provinceId, setProvinceId] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploadImg, setIsUploadImg] = useState(false);
+  const [fackUrl, setfackUrl] = useState();
+  const uploadFile = (event) => {
+    setIsUploadImg(true);
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      if (img.type.includes("image")) {
+        var userData1 = { ...userData };
+        userData1["profile_image"] = img;
+        setfackUrl(URL.createObjectURL(img));
+        setUserData(userData1);
+      } else {
+        toast.error("لطفا فقط عکس آپلود کنید");
+      }
+    }
+  };
+
   const handleChange = (e, val) => {
     let data = { ...userData };
     data[e.target.name] = e.target.value;
@@ -41,13 +63,38 @@ export const Profile = () => {
     }
     return "rtl";
   };
+  const handleDelete = () => {
+    setIsLoading(true);
+    post(DEL_IMAGE)
+      .then(() => {
+        toast.success("تصویر با موفقیت حذف شد.");
+        setIsLoading(false);
+        userData.profile_image = "";
+        setUserData(userData);
+        setfackUrl("");
+      })
+      .catch(() => {
+        toast.error("خطا رخ داده است.");
+        setIsLoading(false);
+      });
+  };
   const updateUserDara = (e) => {
     if (userData.national_id === "0") {
       delete userData.national_id;
     }
+    let form_data = new FormData();
+    for (var key in userData) {
+      form_data.append(key, userData[key]);
+    }
+    var x = { ...userData };
+    if (!isUploadImg) delete x.profile_image;
+
     setIsLoading(true);
-    put(PRIFILE, userData)
-      .then(() => toast.success("عملیات با موفقیت انجام شد"))
+    put(PRIFILE, isUploadImg ? form_data : x)
+      .then(() => {
+        toast.success("عملیات با موفقیت انجام شد");
+        setIsUploadImg(false);
+      })
       .catch((e) => toast.error("مشکلی در تکمیل اطلاعات وجود دارد."))
       .finally(() => setIsLoading(false));
   };
@@ -69,10 +116,41 @@ export const Profile = () => {
               <div className="row-span-2">
                 <img
                   alt="Profile"
-                  className="rounded-3xl  "
-                  src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                  className="rounded-3xl h-32 "
+                  src={
+                    isUploadImg || !!fackUrl
+                      ? fackUrl
+                      : !!userData.profile_image
+                      ? userData.profile_image
+                      : "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                  }
                 />
-                <GrEdit  style={{ marginTop: -25 }} size={24} />
+                <RiEditCircleFill
+                  onClick={() => fileRef.current.click()}
+                  style={{
+                    marginTop: -22,
+                    zIndex: 125,
+                    color: "wheat",
+                  }}
+                  size={24}
+                />
+                <FaTrash
+                  onClick={() => handleDelete()}
+                  style={{
+                    marginTop: -22,
+                    marginRight: 25,
+                    zIndex: 125,
+                    color: "darkred",
+                  }}
+                  size={20}
+                />
+                <input
+                  type="file"
+                  onChange={uploadFile}
+                  className="p-2 bg-cyan-500 rounded-full m-2 "
+                  hidden
+                  ref={fileRef}
+                />
               </div>
               <div className="">
                 <div>
@@ -89,11 +167,25 @@ export const Profile = () => {
                   <p>{userData.province}</p>
                 </div>
               </div>
-              {!!userData.email && (
-                <div className="flex gap-2 flex-wrap bg-slate-600 rounded-lg items-center justify-center h-1/2 ">
-                  <p>{userData.email}</p>
-                </div>
-              )}
+              <div>
+                {" "}
+                {!!userData.phone && (
+                  <div className="flex gap-2 flex-wrap mt-2 bg-slate-600 rounded-lg items-center justify-around h-1/3 ">
+                    <p>{userData.phone}</p>
+                    <RiPhoneFill />
+                  </div>
+                )}
+                {!!userData.national_id && (
+                  <div className="flex gap-2 flex-wrap mt-2 bg-slate-600 rounded-lg items-center justify-around h-1/3 ">
+                    <p>{userData.national_id}</p>
+                    <RiFingerprintFill />
+                  </div>
+                )}
+              </div>
+              {/* <div>
+                {" "}
+                <button className="bg-red-600  w-full h-8">حذف تصویر</button>
+              </div> */}
             </div>
           ) : (
             "اطلاعات خود را کامل کنید."

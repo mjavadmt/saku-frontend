@@ -13,6 +13,7 @@ import DatePicker from "react-modern-calendar-datepicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
+import { Chip } from "@mui/material";
 
 export const CreateAuction = () => {
   const [sortBy, setSortBy] = useState("");
@@ -216,11 +217,20 @@ export const CreateAuction = () => {
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <Autocomplete
+              freeSolo
               fullWidth
               multiple
               id="tags-standard"
-              options={top100Films}
-              getOptionLabel={(option) => option.title}
+              options={top100Films.map((option) => option.title)}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
               renderInput={(params) => (
                 <TextField {...params} placeholder="فیلتر ها" />
               )}

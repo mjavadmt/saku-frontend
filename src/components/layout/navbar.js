@@ -6,7 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import cx from "classnames";
-import { SPLASH, NOTIFICATIONS, PROFILE, LOGIN } from "constant/routes";
+import { SPLASH, NOTIFICATIONS, PROFILE, LOGIN, LOGOUT } from "constant/routes";
 
 const NavBar = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const NavBar = ({ handleToggleSidebar }) => {
             <IoMdNotificationsOutline className="m-3" size={24} />
           </Link>
           <FiLogOut
-            onClick={() => navigate(LOGIN)}
+            onClick={() => navigate(LOGOUT)}
             className={cx(hoverColored, "m-3")}
             size={24}
           />
