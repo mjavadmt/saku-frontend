@@ -1,11 +1,12 @@
 import DataTable from "react-data-table-component";
-import {
-  auctionCreated,
-  categoryMapper,
-} from "statics/fakeDataAuction";
+import { auctionCreated, categoryMapper } from "statics/fakeDataAuction";
 import tableStyles from "./tableStyles";
 import ReactTooltip from "react-tooltip";
-import {dateConverter , defineParticipantsColor , definePriceColor, typeChipMaker} from "./tableCellFunctions"
+import {
+  dateConverter,
+  defineParticipantsColor,
+  definePriceColor,
+} from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
 const columns = [
@@ -13,7 +14,7 @@ const columns = [
     name: "نوع",
     center: true,
     minWidth: "100px",
-    selector: (row) => typeChipMaker(row.type),
+    selector: (row) => row.type,
   },
   {
     name: "نام",
@@ -66,14 +67,10 @@ const columns = [
   },
 ];
 
-
-
 export const AuctionCreatedTable = () => {
   return (
     <div className={cardClass}>
-      <div className={headerClass}>
-        ‌آخرین مزایده‌های ایجاد‌کرده
-      </div>
+      <div className={headerClass}>‌آخرین مزایده‌های ایجاد‌کرده</div>
       <div className="p-6 ">
         <DataTable
           data={auctionCreated}
