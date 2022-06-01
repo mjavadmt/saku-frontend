@@ -10,10 +10,10 @@ export const Logout = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (localStorage.getItem("access")) {
-        await logout();
-      }
-      delete api.defaults.headers.common["access"];
+      // if (localStorage.getItem("access")) {
+      //   await logout();
+      // }
+      delete api.defaults.headers.Authorization;
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       navigate(LOGIN);

@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,8 +11,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
 import { forgot } from "requests/user";
 import { useNavigate } from "react-router-dom";
-import { LOGIN } from "constant/routes";
-import { FAILED_FORGOT, SUCCESS_FORGOT,EMPTY_ERROR_MESSAGE } from "constant/errorText";
+import { LOGIN, SIGNUP } from "constant/routes";
+import { CircularProgress } from "@mui/material";
+import cx from "classnames";
+import {
+  FAILED_FORGOT,
+  SUCCESS_FORGOT,
+  EMPTY_ERROR_MESSAGE,
+} from "constant/errorText";
 import { toast } from "react-toastify";
 const theme = createTheme({
   typography: {
@@ -38,20 +42,26 @@ const theme = createTheme({
 
 export function ForgotPassword() {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const usertmp = {
-      email: data.get("email")
+      email: data.get("email"),
     };
-    if (!!usertmp.email ) {
+    if (!!usertmp.email) {
+      setIsLoading(true);
       forgot(usertmp)
         .then((response) => {
           navigate(LOGIN);
           toast(SUCCESS_FORGOT);
+          setIsLoading(false);
         })
-        .catch((error) => toast.error(FAILED_FORGOT));
+        .catch((error) => {
+          toast.error(FAILED_FORGOT);
+          setIsLoading(false);
+        });
     } else {
       toast.error(EMPTY_ERROR_MESSAGE);
     }
@@ -78,42 +88,64 @@ export function ForgotPassword() {
           <Typography component="h1" variant="h5">
             فراموشی رمز عبور
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              placeholder="ایمیل"
-              name="email"
-              autoFocus
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+          {isLoading ? (
+            <div className="w-full h-64 ">
+              <span className="flex h-full justify-center items-center">
+                <CircularProgress color="inherit" />
+              </span>
+            </div>
+          ) : (
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              تایید 
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/login" variant="body2">
-                  ورود
-                </Link>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                placeholder="ایمیل"
+                name="email"
+                autoFocus
+                onChange={(e, val) => setEmail(e.target.value)}
+                value={email}
+              />
+              <button
+                className={cx(
+                  "text-white w-full h-10 r bg-palette1 my-2 rounded-xl",
+                  {
+                    "text-white bg-slate-500": !email,
+                  }
+                )}
+                type="submit"
+                disabled={!email}
+              >
+                بازیابی{" "}
+              </button>
+              <Grid container>
+                <Grid item xs>
+                  <div
+                    onClick={() => navigate(LOGIN)}
+                    role="button"
+                    className=" underline text-sm"
+                  >
+                    ورود
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div
+                    onClick={() => navigate(SIGNUP)}
+                    role="button"
+                    className=" underline text-sm"
+                  >
+                    ساخت اکانت
+                  </div>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  ساخت اکانت
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

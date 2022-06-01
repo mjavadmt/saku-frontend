@@ -11,8 +11,13 @@ export const api = axios.create({
   headers: {},
 });
 
-api.defaults.headers.Authorization = `Bearer ${localStorage.getItem("access")}`;
+export const setAPIHeader = () => {
+  api.defaults.headers.Authorization = `Bearer ${localStorage.getItem(
+    "access"
+  )}`;
+};
 
+setAPIHeader();
 api.interceptors.request.use(
   async function (config) {
     return config;
@@ -33,7 +38,7 @@ api.interceptors.response.use(
     }
     if (error?.response?.status === 504) {
       toast.error(CONNECTION_ERROR);
-      return;
+      return Promise.reject(error);
     }
 
     if (!!error.response.data && !!error.response.data.message) {
@@ -47,3 +52,4 @@ export const get = api.get;
 export const post = api.post;
 export const put = api.put;
 export const remove = api.delete;
+
