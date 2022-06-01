@@ -35,7 +35,7 @@ const NavBar = ({ handleToggleSidebar }) => {
             className="m-2 mr-4 "
             sx={{ bgcolor: "orange", height: 30, width: 30, color: "white" }}
           >
-            N
+            M
           </Avatar>
           <div
             className="btn-toggle m-3"
