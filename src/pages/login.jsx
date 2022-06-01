@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -13,9 +11,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
 import { login } from "requests/user";
 import { useNavigate } from "react-router-dom";
-import { SPLASH } from "constant/routes";
+import { FORGOTPASSWORD, SIGNUP, SPLASH } from "constant/routes";
 import { LOGIN_FAILED, EMPTY_ERROR_MESSAGE } from "constant/errorText";
 import { toast } from "react-toastify";
+import { setAPIHeader } from "utils/api";
+import cx from "classnames";
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
@@ -38,7 +38,9 @@ const theme = createTheme({
 
 export function Login() {
   const navigate = useNavigate();
-
+  // const [isLoading, setIsLoading] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [pass, setPass] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,6 +53,7 @@ export function Login() {
         .then((response) => {
           localStorage.setItem("access", response.access);
           localStorage.setItem("refresh", response.refresh);
+          setAPIHeader();
           navigate(SPLASH);
         })
         .catch((error) => toast.error(LOGIN_FAILED));
@@ -58,6 +61,7 @@ export function Login() {
       toast.error(EMPTY_ERROR_MESSAGE);
     }
   };
+  const disabledCondition = !userName || !pass;
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,8 +97,10 @@ export function Login() {
               id="username"
               placeholder="نام کاربری"
               name="username"
-              data-testid = "username"
+              data-testid="username"
               autoFocus
+              onChange={(e, val) => setUserName(e.target.value)}
+              value={userName}
             />
             <TextField
               margin="normal"
@@ -103,28 +109,41 @@ export function Login() {
               name="password"
               placeholder="رمز عبور"
               type="password"
-              data-testid = "password"
+              data-testid="password"
               id="password"
+              onChange={(e, val) => setPass(e.target.value)}
+              value={pass}
             />
-            <Button
+            <button
+              className={cx(
+                "text-white w-full h-10 r bg-palette1 my-2 rounded-xl",
+                {
+                  "text-white bg-slate-500": disabledCondition,
+                }
+              )}
               type="submit"
-              fullWidth
-              variant="contained"
-              data-testid = "button"
-              sx={{ mt: 3, mb: 2 }}
+              disabled={disabledCondition}
             >
-              ورود
-            </Button>
+              ورود{" "}
+            </button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgotpassword" variant="body2">
+                <div
+                  onClick={() => navigate(FORGOTPASSWORD)}
+                  role="button"
+                  className=" underline text-sm"
+                >
                   فراموشی رمز عبور
-                </Link>
+                </div>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <div
+                  onClick={() => navigate(SIGNUP)}
+                  role="button"
+                  className=" underline text-sm"
+                >
                   ساخت اکانت
-                </Link>
+                </div>
               </Grid>
             </Grid>
           </Box>

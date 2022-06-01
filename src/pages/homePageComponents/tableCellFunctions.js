@@ -1,4 +1,5 @@
 import { defineUnit } from "utils/formatPrice";
+import { categoryMapper } from "statics/fakeDataAuction";
 
 const chipConstantClass = "rounded-2xl  p-1 pr-2 pl-2 text-xs";
 
@@ -17,15 +18,15 @@ export const attendanceStatusChip = (isPrivate) => {
 };
 
 export const typeChipMaker = (type) => {
-  if (type === "مزایده")
+  if (type <= 3)
     return (
       <div className={`${chipConstantClass} bg-purple-100 text-pink-400`}>
-        {type}
+        {categoryMapper[type]}
       </div>
     );
   return (
     <div className={`${chipConstantClass} bg-teal-200 text-green-600`}>
-      {type}
+      {categoryMapper[type]}
     </div>
   );
 };

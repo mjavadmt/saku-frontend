@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,15 +6,17 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
 import { toast } from "react-toastify";
-import { signup } from "requests/user";
+import { signup, vrify } from "requests/user";
 import { useNavigate } from "react-router-dom";
 import { LOGIN } from "constant/routes";
+import { CircularProgress } from "@mui/material";
+import cx from "classnames";
 import {
   DIFFERENT_PASSWORDS,
   SIZE_PASSWORDS,
@@ -23,6 +25,9 @@ import {
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
+  },
+  disabledButton: {
+    color: "red",
   },
   direction: "rtl",
   palette: {
@@ -39,30 +44,57 @@ const theme = createTheme({
   },
 });
 
-export function SignUp() {
+export const SignUp = () => {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const usertmp = {
-      username: data.get("username"),
-      password: data.get("password"),
-      confirmPassword: data.get("confirmPassword"),
-    };
-    if (data.get("password") !== data.get("confirmPassword")) {
+  const [isConfirmStep, setIsconfirmStep] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [confirmCode, setConfirmCode] = useState();
+  const [confirmCodeInput, setConfirmCodeInput] = useState();
+  const [userData, setUserData] = useState({});
+  const handleChange = (e, val) => {
+    let data = { ...userData };
+    data[e.target.name] = e.target.value;
+    setUserData(data);
+  };
+  const updateUserDara = (e) => {
+    if (userData.password !== userData.confirmPassword) {
       toast.error(DIFFERENT_PASSWORDS);
-    } else if (usertmp.password.length < 8) {
+      return;
+    } else if (userData.password.length < 8) {
       toast.error(SIZE_PASSWORDS);
-    } else {
-      signup(usertmp)
-        .then((response) => {
+      return;
+    }
+    setIsLoading(true);
+    signup(userData)
+      .then((response) => {
+        setConfirmCode(response.code);
+        setIsconfirmStep(true);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        toast.error("مشکلی درثبت نام به وجود آمده است.");
+        setIsLoading(false);
+      });
+  };
+  const chekCodeIsCorrect = () => {
+    if (parseInt(confirmCode) === parseInt(confirmCodeInput)) {
+      vrify(userData)
+        .then(() => {
           toast.success(SUCCESS_SIGNUP);
           navigate(LOGIN);
         })
-        .catch((error) => {});
+        .catch(() => {
+          toast.error("کد وارد شده صحیح نمی باشد.");
+        });
+    } else {
+      toast.error("کد وارد شده صحیح نمی باشد.");
     }
   };
-
+  const disabledCondition =
+    !userData.username ||
+    !userData.email ||
+    !userData.password ||
+    !userData.confirmPassword;
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -84,57 +116,115 @@ export function SignUp() {
           <Typography component="h1" variant="h5">
             ثبت نام
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              tex
-              id="username"
-              placeholder="نام کاربری"
-              name="username"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              placeholder="رمز عبور"
-              type="password"
-              id="password"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="confirmPassword"
-              placeholder="تایید رمز عبور"
-              type="password"
-              id="confirmPassword"
-            />
+          {isLoading ? (
+            <div className="w-full h-64 ">
+              <span className="flex h-full justify-center items-center">
+                <CircularProgress color="inherit" />
+              </span>
+            </div>
+          ) : (
+            <div>
+              {isConfirmStep ? (
+                <div>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="confirmCode"
+                    placeholder="کد تایید"
+                    name="confirmCode"
+                    onChange={(e) => setConfirmCodeInput(e.target.value)}
+                    value={confirmCodeInput}
+                  />
 
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              sx={{ mt: 3, mb: 2 }}
-            >
-              ثبت نام
-            </Button>
-            <Grid container className="flex justify-center">
-              <Link href="/login" variant="body2">
-                ورود به اکانت
-              </Link>
-            </Grid>
-          </Box>
+                  <Button
+                    onClick={() => chekCodeIsCorrect()}
+                    variant="contained"
+                    fullWidth
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    تایید
+                  </Button>
+                  <Grid container className="flex justify-center">
+                    <Link href="/login" variant="body2">
+                      ورود به اکانت
+                    </Link>
+                  </Grid>
+                </div>
+              ) : (
+                <div>
+                  <div>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="username"
+                      placeholder="نام کاربری"
+                      name="username"
+                      onChange={(e, val) => handleChange(e, val)}
+                      value={userData.username}
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      placeholder="ایمیل"
+                      name="email"
+                      onChange={(e, val) => handleChange(e, val)}
+                      value={userData.email}
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      placeholder="رمز عبور"
+                      type="password"
+                      id="password"
+                      onChange={(e, val) => handleChange(e, val)}
+                      value={userData.password}
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="confirmPassword"
+                      placeholder="تایید رمز عبور"
+                      type="password"
+                      id="confirmPassword"
+                      onChange={(e, val) => handleChange(e, val)}
+                      value={userData.confirmPassword}
+                    />
+
+                    <button
+                      className={cx(
+                        "text-white w-full h-10 r bg-palette1 my-2 rounded-xl",
+                        {
+                          "text-white bg-slate-500": disabledCondition,
+                        }
+                      )}
+                      onClick={(e) => updateUserDara(e)}
+                      disabled={disabledCondition}
+                    >
+                      ثبت نام
+                    </button>
+                    <Grid container className="flex justify-center">
+                      <div
+                        onClick={() => navigate(LOGIN)}
+                        role="button"
+                        className=" underline text-sm"
+                      >
+                        ورود به اکانت
+                      </div>
+                    </Grid>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </Box>
       </Container>
     </ThemeProvider>
   );
-}
+};
