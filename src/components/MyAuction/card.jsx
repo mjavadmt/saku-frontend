@@ -25,6 +25,12 @@ const defineStatus = (startDate, endDate) => {
   );
 };
 
+const defineType = (num) => {
+  if (num <= 3)
+    return "مزایده"
+  return "مناقصه"
+}
+
 export const Card = ({
   img,
   title,
@@ -61,7 +67,7 @@ export const Card = ({
         <div className="flex items-center m-1">
           <GavelRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">نوع : ‌</p>
-          <p className="text-sm">{type}</p>
+          <p className="text-sm">{defineType(type)}</p>
         </div>
         <div className="flex items-center m-1">
           <DescriptionIcon className="m-0.5" fontSize="inherit" />

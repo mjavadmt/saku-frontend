@@ -3,6 +3,8 @@ const tableStyles = {
     style: {
       borderRadius: "15px !important",
       marginTop: "2px",
+      height: "312px",
+      backgroundColor: "#161a49",
       // border: "2px solid red"
     },
   },
