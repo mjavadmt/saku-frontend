@@ -323,6 +323,7 @@ export const Profile = () => {
                         direction: "ltr",
                       }}
                       fullWidth
+                      data-testid="emailInp"
                       // helperText="لطفا ایمیل صحیح واردکنید"
                       name="email"
                       onChange={handleChange}

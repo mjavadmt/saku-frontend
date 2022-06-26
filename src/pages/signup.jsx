@@ -113,7 +113,7 @@ export const SignUp = () => {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <GroupAddIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography data-testid="singUpPage" component="h1" variant="h5">
             ثبت نام
           </Typography>
           {isLoading ? (

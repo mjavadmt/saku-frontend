@@ -53,6 +53,7 @@ export function Login() {
         .then((response) => {
           localStorage.setItem("access", response.access);
           localStorage.setItem("refresh", response.refresh);
+          
           setAPIHeader();
           navigate(SPLASH);
         })
@@ -97,7 +98,8 @@ export function Login() {
               id="username"
               placeholder="نام کاربری"
               name="username"
-              data-testid="username"
+              inputProps={{ "data-testid": "username" }}
+              // data-testid="username"
               autoFocus
               onChange={(e, val) => setUserName(e.target.value)}
               value={userName}
@@ -141,6 +143,7 @@ export function Login() {
                   onClick={() => navigate(SIGNUP)}
                   role="button"
                   className=" underline text-sm"
+                  data-testid="createAccountLink"
                 >
                   ساخت اکانت
                 </div>
