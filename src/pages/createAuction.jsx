@@ -28,16 +28,33 @@ export const CreateAuction = () => {
   const [isOpenTwo, setOpenTwo] = useState(false);
   const [auctionValue, setAuctionValue] = useState({});
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
+  const [tags, setTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
   const handleSubmit = () => {
+    setIsLoading(true);
     post(POST_AUCTION, {
       ...auctionValue,
       user: localStorage.getItem("userId"),
-    }).then((res) => toast.success("با موفقیت انجام شد"));
+    })
+      .then((res) => {
+        toast.success("با موفقیت انجام شد");
+        setIsLoading(false);
+        Array.from(document.querySelectorAll("input")).forEach(
+          (input) => (input.value = "")
+        );
+        setAuctionValue({});
+        setAuctionType("");
+        setCategory("");
+        setFinishDate(null);
+        setStartDate(null);
+        setTags([]);
+      })
+      .catch(() => setIsLoading(false));
   };
   useEffect(() => {
     get(GET_CATEGORIES).then((res) => setCategories(res.data));
@@ -268,6 +285,7 @@ export const CreateAuction = () => {
               freeSolo
               fullWidth
               multiple
+              value={tags}
               id="tags-standard"
               options={top100Films.map((option) => option.title)}
               renderTags={(value, getTagProps) => {
@@ -279,9 +297,10 @@ export const CreateAuction = () => {
                   />
                 ));
               }}
-              onChange={(e, newval) =>
-                setAuctionValue({ ...auctionValue, tags: newval })
-              }
+              onChange={(e, newval) => {
+                setAuctionValue({ ...auctionValue, tags: newval });
+                setTags(newval);
+              }}
               renderInput={(params) => (
                 <TextField {...params} placeholder="فیلتر ها" />
               )}
@@ -292,7 +311,15 @@ export const CreateAuction = () => {
           <button
             onClick={handleSubmit}
             className="bg-gray-700 py-4 w-1/2 rounded-3xl "
-            // disabled={Object.keys(auctionValue).length < 7}
+            disabled={
+              tags.length === 0 ||
+              auctionType === "" ||
+              category === "" ||
+              !auctionValue.name ||
+              !auctionValue.limit ||
+              !finishDate ||
+              !startDate
+            }
           >
             ثبت درخواست
           </button>

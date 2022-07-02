@@ -6,6 +6,7 @@ import { waitFor } from "@testing-library/dom";
 import { Profile } from "pages/profile";
 import axios from "axios";
 import { get } from "./../../utils/api";
+import { login } from "requests/user";
 
 const ProfileTest = () => {
   return (
@@ -15,42 +16,26 @@ const ProfileTest = () => {
   );
 };
 describe("profile page test", () => {
-  axios.get.mockResolvedValueOnce({
-    data: {
-      id: 2,
-      person_type: "N",
-      name: "علی",
-      national_id: "5300052991",
-      phone: "09224519088",
-      email: "ali.alamdari9088@gmail.com",
-      city: "چمران",
-      province: "خوزستان",
-      address: "",
-      profile_image:
-        "http://188.121.110.151:8887/media/images/profile_images/FR96L0nsh2.jpg",
-      user: 3,
-    },
-  });
-  it("Email must be exist", async () => {
+  it("Email input onchange", async () => {
     render(<ProfileTest />);
     const emailInp = screen.getByTestId("emailInp");
-    expect(emailInp.value).toBe(undefined);
-    await wait(800);
-    const resolvedSpan = await waitFor(() => emailInp.value);
-    expect(resolvedSpan.value).toHaveTextContent("ali");
+    fireEvent.change(emailInp, { target: { value: "ali.alamdari@gmail.com" } });
+    expect(emailInp.value).toBe("ali.alamdari@gmail.com");
   });
-  // it("get Api Call", async () => {
-  //   axiosMock.get.mockResolvedValueOnce({ data: { greeting: "hello there" } });
+  it("Email must be valid", async () => {
+    render(<ProfileTest />);
+    const emailInp = screen.getByTestId("emailInp");
+    const submitBtn = screen.getByTestId("submit-btn");
+    fireEvent.change(emailInp, { target: { value: "ali.alamdarigmail.com" } });
+    // fireEvent.click(submitBtn);
+    login("Ali", "12341234").then(() => fireEvent.click(submitBtn));
+    expect(await screen.f("مشکلی")).toBeInTheDocument();
+  });
+  // it("", async () => {
   //   render(<ProfileTest />);
-  //   const userNameInput = screen.getByTestId("username");
-  //   fireEvent.change(userNameInput, { target: { value: "Ali_Alamdari" } });
-  //   expect(userNameInput.value).toBe("Ali_Alamdari");
+  //   const divTag = screen.getByTestId("createAccountLink");
+  //   fireEvent.click(divTag);
+  //   await wait(500);
+  //   expect(window.location.pathname).toBe("/signup");
   // });
-  //   it("create account Tag click", async () => {
-  //     render(<ProfileTest />);
-  //     const divTag = screen.getByTestId("createAccountLink");
-  //     fireEvent.click(divTag);
-  //     await wait(500);
-  //     expect(window.location.pathname).toBe("/signup");
-  //   });
 });

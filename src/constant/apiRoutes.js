@@ -8,3 +8,4 @@ export const DEL_IMAGE = "/profile/delete/picture/";
 export const GET_ALL_AUCTIONS = "/auction/";
 export const GET_CATEGORIES = "/auction/categories/";
 export const POST_AUCTION = "/auction/";
+export const GET_USER_LIST = "/chat/my/";

@@ -323,7 +323,7 @@ export const Profile = () => {
                         direction: "ltr",
                       }}
                       fullWidth
-                      data-testid="emailInp"
+                      inputProps={{ "data-testid": "emailInp" }}
                       // helperText="لطفا ایمیل صحیح واردکنید"
                       name="email"
                       onChange={handleChange}
@@ -362,6 +362,7 @@ export const Profile = () => {
                   onClick={updateUserDara}
                   color="primary"
                   variant="contained"
+                  data-testid="submit-btn"
                 >
                   ثبت تغییرات
                 </Button>
