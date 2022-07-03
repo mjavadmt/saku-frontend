@@ -3,7 +3,10 @@ import classNames from "classnames";
 import { SectionSplitProps } from "../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
 import Image from "../elements/Image";
-
+import profiling from "assets/img/Profiling_Outline.svg";
+import completTask from "assets/img/Completed task _Two Color.svg";
+import analytics from "assets/img/Finance analytics _Two Color.svg";
+import ranking from "assets/img/Ranking_Two Color.svg";
 const propTypes = {
   ...SectionSplitProps.types,
 };
@@ -60,15 +63,15 @@ const FeaturesSplit = ({
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
-            <div className="split-item">
+            <div className="split-item justify-center">
               <div
                 className="split-item-content center-content-mobile reveal-from-left"
                 data-reveal-container=".split-item"
               >
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  تکمیل اطلاعات
+                  تکمیل اطلاعات شخصی
                 </div>
-                <h3 className="mt-0 mb-12">بخش پروفایل</h3>
+                <h3 className="mt-0 mb-12 font-DanaFaNum">بخش پروفایل</h3>
                 <p className="m-0">
                   با ورود به پروفایل کاربری خود تمامی اطلاعات را به درستی وارد
                   نموده تا در فرایند ثبت ، دچار مشکل نشوید.
@@ -76,16 +79,17 @@ const FeaturesSplit = ({
               </div>
               <div
                 className={classNames(
-                  "split-item-image center-content-mobile reveal-from-bottom",
+                  "split-item-image center-content-mobile reveal-from-bottom ",
                   imageFill && "split-item-image-fill"
                 )}
                 data-reveal-container=".split-item"
               >
                 <Image
-                  src={require("assets/img/features-split-image-01.png")}
+                  src={profiling}
                   alt="Features split 01"
-                  width={300}
-                  height={100}
+                  width={500}
+                  height={180}
+                  className="text-center"
                 />
               </div>
             </div>
@@ -95,15 +99,16 @@ const FeaturesSplit = ({
                 className="split-item-content center-content-mobile reveal-from-right"
                 data-reveal-container=".split-item"
               >
-                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                <div className="text-xxs text-color-primary fw-600 tt-u mb-8 ">
+                  وارد کردن اطلاعات مزایده/مناقصه
                 </div>
-                <h3 className="mt-0 mb-12">Data-driven insights</h3>
+                <h3 className="mt-0 mb-12 font-DanaFaNum">
+                  ایجاد مزایده/مناقصه
+                </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                  — Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  پس از تکمیل اطلاعات شخصی با ورود به بخش ایجاد مزایده/مناقصه و
+                  تکمیل اطلاعات میتوانید مزایده خود را ایجاد کرده و تمامی
+                  ملاحظات خود را در نظر بگیرید
                 </p>
               </div>
               <div
@@ -114,10 +119,10 @@ const FeaturesSplit = ({
                 data-reveal-container=".split-item"
               >
                 <Image
-                  src={require("assets/img/features-split-image-02.png")}
+                  src={completTask}
                   alt="Features split 02"
-                  width={528}
-                  height={396}
+                  width={500}
+                  height={180}
                 />
               </div>
             </div>
@@ -128,14 +133,15 @@ const FeaturesSplit = ({
                 data-reveal-container=".split-item"
               >
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  مشاهده و بررسی پیشنهاد ها
                 </div>
-                <h3 className="mt-0 mb-12">Data-driven insights</h3>
+                <h3 className="mt-0 mb-12 font-DanaFaNum">
+                  مزایده/مناقصه های من
+                </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                  — Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  با ورود به بخش مزایده/مناقصه های من و انتخاب آن میتوانید
+                  جزییاتی از مزایده ایجاد شده خود و قیمت های پیشنهادی را مشاهده
+                  کرده و پیشنهاد دهندگان به گفت و گو بپردازید.
                 </p>
               </div>
               <div
@@ -146,10 +152,41 @@ const FeaturesSplit = ({
                 data-reveal-container=".split-item"
               >
                 <Image
-                  src={require("assets/img/features-split-image-03.png")}
+                  src={analytics}
                   alt="Features split 03"
-                  width={528}
-                  height={396}
+                  width={500}
+                  height={180}
+                />
+              </div>
+            </div>
+            <div className="split-item">
+              <div
+                className="split-item-content center-content-mobile reveal-from-left"
+                data-reveal-container=".split-item"
+              >
+                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
+                  پایان مزایده/مناقصه و اعلام برنده
+                </div>
+                <h3 className="mt-0 mb-12 font-DanaFaNum">
+                  صفحه جزییات مزایده/مناقصه
+                </h3>
+                <p className="m-0">
+                  پس از پایان تاریخ مزایده/مناقصه برنده این رویداد با تایید
+                  ایجاد کننده به اطلاع همه خواهد رسید.
+                </p>
+              </div>
+              <div
+                className={classNames(
+                  "split-item-image center-content-mobile reveal-from-bottom",
+                  imageFill && "split-item-image-fill"
+                )}
+                data-reveal-container=".split-item"
+              >
+                <Image
+                  src={ranking}
+                  alt="Features split 03"
+                  width={500}
+                  height={180}
                 />
               </div>
             </div>

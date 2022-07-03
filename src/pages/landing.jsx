@@ -17,7 +17,7 @@ export const LandingPage = () => {
         <FeaturesSplit
           invertMobile
           topDivider
-          // imageFill
+          imageFill
           className="illustration-section-02"
         />
         <Testimonial topDivider />
