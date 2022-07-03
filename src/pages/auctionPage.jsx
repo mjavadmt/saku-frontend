@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
+import Pagination from "@mui/material/Pagination";
+
 export const AuctionPage = () => {
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   return (
     <div>
       <Filtering />
@@ -48,6 +55,14 @@ export const AuctionPage = () => {
         tags={["عمرانی", "فوری", "پیش پرداختی", "دولتی"]}
         id={1}
       />
+      <div className="flex justify-center mt-5">
+        <Pagination
+          count={Math.ceil(20 / 5)}
+          page={page}
+          onChange={handleChange}
+          color="primary"
+        />
+      </div>
     </div>
   );
 };
