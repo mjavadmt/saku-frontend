@@ -12,8 +12,8 @@ const SplashTest = () => {
   );
 };
 
-it("render CreateTable", async () => {
-    render(<SplashTest />);
-    const table = screen.getByTestId("createdTable"); 
-    expect(table).toBeTruthy();
-  });
+// it("render CreateTable", async () => {
+//     render(<SplashTest />);
+//     const table = screen.getByTestId("createdTable"); 
+//     expect(table).toBeTruthy();
+//   });
