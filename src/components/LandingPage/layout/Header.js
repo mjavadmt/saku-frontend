@@ -89,7 +89,6 @@ const Header = ({
             bottomDivider && "has-bottom-divider"
           )}
         >
-          {/* <Logo /> */}
           <div
             onClick={(e) => navigate(SPLASH)}
             className="flex cursor-pointer"

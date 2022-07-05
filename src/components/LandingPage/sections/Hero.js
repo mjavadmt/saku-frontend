@@ -57,19 +57,21 @@ const Hero = ({
         <div className={innerClasses}>
           <div className="hero-content">
             <h1
-              className="mt-0 mb-16 reveal-from-bottom"
+              className="mt-0 mb-16 reveal-from-bottom font-DanaFaNum text-2xl"
               data-reveal-delay="200"
             >
-              Landing template for{" "}
-              <span className="text-color-primary">startups</span>
+              تمامی مزایده و مناقصه های کسب خود را به
+              <span className="text-color-primary text-3xl"> سکو </span>
+              بسپارید
             </h1>
             <div className="container-xs">
               <p
-                className="m-0 mb-32 reveal-from-bottom"
+                className="m-0 mb-32 reveal-from-bottom text-slate-600"
                 data-reveal-delay="400"
               >
-                Our landing page template works on all devices, so you only have
-                to set it up once, and get beautiful results forever.
+                با ثبت نام در این سایت هم میتواند برای تمامی موارد مجاز مناقصه و
+                مزایده تعریف کنید و هم میتوانید در مزایده و مناقصه ها قیمت ثبت
+                کنید.
               </p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>
@@ -79,15 +81,15 @@ const Hero = ({
                     wideMobile
                     href="https://cruip.com/"
                   >
-                    Get started
+                    شروع فعالیت
                   </Button>
                   <Button
                     tag="a"
                     color="dark"
                     wideMobile
-                    href="https://github.com/cruip/open-react-template/"
+                    href="https://github.com/mjavadmt/saku-frontend"
                   >
-                    View on Github
+                    سورس کد
                   </Button>
                 </ButtonGroup>
               </div>
@@ -106,7 +108,7 @@ const Hero = ({
             >
               <Image
                 className="has-shadow"
-                // src={require("assets/img/video-placeholder.jpg")}
+                src={require("assets/img/video-placeholder.jpg")}
                 alt="Hero"
                 width={896}
                 height={504}

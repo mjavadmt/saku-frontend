@@ -58,10 +58,9 @@ const Testimonial = ({
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <p className="text-sm mb-0 text-white">
-                    — Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                    — یک تابلو نقاشی قدیمی در منزل داشتم و با ایجاد مزایده در
+                    این سایت و دریافت پیشنهاد قیمت های مختلف موفق شدم تابلئ خود
+                    را 3 برابر قیمت پایه این تابلو به فروش برسانم.
                   </p>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
@@ -80,10 +79,9 @@ const Testimonial = ({
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <p className="text-sm mb-0 text-white">
-                    — Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                    — برای انجام پروژه عمرانی آسفالت ریزی در یکی از خیابان های
+                    منطقه 5 تهران نیاز به یک پیمانکار بود لذا با ایجاد مناقصه در
+                    این سایت موفق به یافتن پیمانکاری با نازل ترین قیمت شده ایم.
                   </p>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
@@ -105,19 +103,19 @@ const Testimonial = ({
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <p className="text-sm mb-0 text-white">
-                    — Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                    — در مزایده فروش یک زمین شرکت کردم و پس از 1 ماه و پایان
+                    مزایده مشخص شد که برنده شدم و با پرداخت مبلغ زمین صاحب اون
+                    شدم . بسیار از شیوه برگزاری و اطلاع رسانی این سایت راضی هستم
+                    وممنون.
                   </p>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
                   <span className="testimonial-item-name text-color-high">
-                    Ben Stafford
+                    شقایق رضایی
                   </span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">AppName</a>
+                    <a href="#0">حقیقی</a>
                   </span>
                 </div>
               </div>

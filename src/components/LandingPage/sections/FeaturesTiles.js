@@ -71,7 +71,7 @@ const FeaturesTiles = ({
                 </div>
                 <div className="features-tiles-item-content">
                   <h4 className="mt-0 mb-8 font-DanaFaNum">تنوع کار فرما</h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm text-slate-600 text-justify">
                     با استفاده از این سایت پیمانکاران پیشنهاد های کاری در تمام
                     کشور را مشاهده کرده ومتناسب با شرایط خود شانس برنده شدن در
                     آن را دارند
@@ -97,7 +97,7 @@ const FeaturesTiles = ({
                 </div>
                 <div className="features-tiles-item-content">
                   <h4 className="mt-0 mb-8 font-DanaFaNum">تنوع پیمانکار</h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm text-slate-600 text-justify">
                     دراین سایت تمامی کسب وکار ها در معرض دید تعداد زیادی از
                     پیمانکاران قرار گرفته و کسب کار ها شانس همکاری با بهترین
                     پیمانکاران و بهترین پیشنهاد های قیمت را دارند.
@@ -125,7 +125,7 @@ const FeaturesTiles = ({
                   <h4 className="mt-0 mb-8 font-DanaFaNum">
                     شفافیت در معاملات
                   </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm text-slate-600 text-justify">
                     با استفاده از این سایت تمامی معاملات به صورت کاملا واضح و
                     روشن صورت گرفته و از تقلب و رانت در برنده شده در
                     مزایده/مناقصه ها خبری نخواهد بود.
@@ -150,61 +150,9 @@ const FeaturesTiles = ({
                   <h4 className="mt-0 mb-8 font-DanaFaNum">
                     ارتباط مستقیم و راحت بین دو طرف
                   </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm text-slate-600 text-justify">
                     در این سایت دو طرف میتوانند با یکدیگر ارتباط بر قرار کرده و
                     از جزییات کار و روند مطلع شوند.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="tiles-item reveal-from-bottom"
-              data-reveal-delay="200"
-            >
-              <div className="tiles-item-inner">
-                <div className="features-tiles-item-header justify-center flex">
-                  <div className="features-tiles-item-image mb-16">
-                    <Image
-                      src={require("assets/img/feature-tile-icon-05.svg")}
-                      alt="Features tile icon 05"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                </div>
-                <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">Robust Workflow</h4>
-                  <p className="m-0 text-sm">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="tiles-item reveal-from-bottom"
-              data-reveal-delay="400"
-            >
-              <div className="tiles-item-inner">
-                <div className="features-tiles-item-header">
-                  <div className="features-tiles-item-image mb-16">
-                    <Image
-                      src={require("assets/img/feature-tile-icon-06.svg")}
-                      alt="Features tile icon 06"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                </div>
-                <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">Robust Workflow</h4>
-                  <p className="m-0 text-sm">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat.
                   </p>
                 </div>
               </div>
