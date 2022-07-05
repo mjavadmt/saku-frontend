@@ -22,15 +22,15 @@ describe("profile page test", () => {
     fireEvent.change(emailInp, { target: { value: "ali.alamdari@gmail.com" } });
     expect(emailInp.value).toBe("ali.alamdari@gmail.com");
   });
-  it("Email must be valid", async () => {
-    render(<ProfileTest />);
-    const emailInp = screen.getByTestId("emailInp");
-    const submitBtn = screen.getByTestId("submit-btn");
-    fireEvent.change(emailInp, { target: { value: "ali.alamdarigmail.com" } });
-    // fireEvent.click(submitBtn);
-    login("Ali", "12341234").then(() => fireEvent.click(submitBtn));
-    expect(await screen.f("مشکلی")).toBeInTheDocument();
-  });
+  // it("Email must be valid", async () => {
+  //   render(<ProfileTest />);
+  //   const emailInp = screen.getByTestId("emailInp");
+  //   const submitBtn = screen.getByTestId("submit-btn");
+  //   fireEvent.change(emailInp, { target: { value: "ali.alamdarigmail.com" } });
+  //   // fireEvent.click(submitBtn);
+  //   login("Ali", "12341234").then(() => fireEvent.click(submitBtn));
+  //   expect(await screen.f("مشکلی")).toBeInTheDocument();
+  // });
   // it("", async () => {
   //   render(<ProfileTest />);
   //   const divTag = screen.getByTestId("createAccountLink");

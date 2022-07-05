@@ -160,6 +160,7 @@ export const SignUp = () => {
                       fullWidth
                       id="username"
                       placeholder="نام کاربری"
+                      inputProps={{ "data-testid": "username" }}
                       name="username"
                       onChange={(e, val) => handleChange(e, val)}
                       value={userData.username}
@@ -169,6 +170,7 @@ export const SignUp = () => {
                       required
                       fullWidth
                       id="email"
+                      inputProps={{ "data-testid": "email" }}
                       placeholder="ایمیل"
                       name="email"
                       onChange={(e, val) => handleChange(e, val)}
@@ -214,6 +216,7 @@ export const SignUp = () => {
                         onClick={() => navigate(LOGIN)}
                         role="button"
                         className=" underline text-sm"
+                        data-testid="loginLink"
                       >
                         ورود به اکانت
                       </div>
