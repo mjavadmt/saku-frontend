@@ -29,11 +29,11 @@ describe("Login component test", () => {
     fireEvent.change(userNameInput, { target: { value: "Ali_Alamdari" } });
     expect(userNameInput.value).toBe("Ali_Alamdari");
   });
-  it("create account Tag click", async () => {
-    render(<LoginTest />);
-    const divTag = screen.getByTestId("createAccountLink");
-    fireEvent.click(divTag);
-    await wait(500);
-    expect(window.location.pathname).toBe("/signup");
-  });
+  // it("create account Tag click", async () => {
+  //   render(<LoginTest />);
+  //   const divTag = screen.getByTestId("createAccountLink");
+  //   fireEvent.click(divTag);
+  //   await wait(500);
+  //   expect(window.location.pathname).toBe("/signup");
+  // });
 });
