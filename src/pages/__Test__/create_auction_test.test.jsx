@@ -2,6 +2,7 @@ import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { screen } from "@testing-library/dom";
 import { CreateAuction } from "pages/createAuction";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 const CreateAuctionTest = () => {
   return (
@@ -69,7 +70,7 @@ describe("create auction component test", () => {
   it("Change close modal", async () => {
     render(<CreateAuctionTest />);
     const btn = screen.getByTestId("subBtn");
-    fireEvent.click(btn);
+    // fireEvent.click(btn);
     expect(screen.queryByTestId("modalContent")).toBeNull();
     expect(screen.queryByTestId("modalContent2")).toBeNull();
   });
@@ -78,11 +79,11 @@ describe("create auction component test", () => {
     const icon = screen.getByTestId("icon");
     expect(icon).toBeInTheDocument();
   });
-  //   it("create account Tag click", async () => {
-  //     render(<CreateAuctionTest />);
-  //     const divTag = screen.getByTestId("createAccountLink");
-  //     fireEvent.click(divTag);
-  //     await wait(500);
-  //     expect(window.location.pathname).toBe("/signup");
-  //   });
+  it("create account Tag click", async () => {
+    render(<CreateAuctionTest />);
+    const divTag = screen.getByTestId("createAccountLink");
+    fireEvent.click(divTag);
+    await wait(500);
+    expect(window.location.pathname).toBe("/signup");
+  });
 });
