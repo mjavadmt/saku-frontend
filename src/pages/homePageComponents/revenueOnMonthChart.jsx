@@ -46,6 +46,7 @@ export const RevenueOnMonth = () => {
           series={chartData.series}
           options={chartData.options}
           type="area"
+          height="400px"
         />
       </div>
     </div>

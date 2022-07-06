@@ -6,6 +6,7 @@ const chartData = {
   options: {
     chart: {
       id: "basic-bar",
+      height: 100,
     },
     // grid : {
     //   show : false
@@ -16,9 +17,9 @@ const chartData = {
       labels: {
         colors: ["red", "white"],
       },
-      markers : {
-        offsetX : 3
-      }
+      markers: {
+        offsetX: 3,
+      },
     },
     colors: ["#eb658f", "#7bca5c"],
     dataLabels: {
@@ -83,7 +84,7 @@ const chartData = {
         offsetY: 0,
         rotate: 0,
         formatter: (value) => {
-          return numberWithCommas(value)
+          return numberWithCommas(value);
         },
       },
       // title: {
@@ -108,11 +109,37 @@ const chartData = {
   series: [
     {
       name: "هزینه",
-      data: [430000, 100000, 870000, 690000, 910000, 700000, 60000, 670000, 500000, 450000, 400000, 300000],
+      data: [
+        430000,
+        100000,
+        870000,
+        690000,
+        910000,
+        700000,
+        60000,
+        670000,
+        500000,
+        450000,
+        400000,
+        300000,
+      ],
     },
     {
       name: "درآمد",
-      data: [300000, 400000, 450000, 500000, 110000, 60000, 700000, 910000, 690000, 870000, 100000, 430000],
+      data: [
+        300000,
+        400000,
+        450000,
+        500000,
+        110000,
+        60000,
+        700000,
+        910000,
+        690000,
+        870000,
+        100000,
+        430000,
+      ],
     },
   ],
 };

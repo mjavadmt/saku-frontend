@@ -37,8 +37,9 @@ export const EnteredPrices = () => {
   return (
     <div className={cardClass}>
       <div className={headerClass}>قیمت‌های ثبت‌شده شما</div>
+      <div className="h-7" />
       <div className="p-3 overflow-y-auto h-80">
-        <div className="grid grid-cols-12 m-3">
+        <div className="grid grid-cols-12 m-5">
           <div className="col-span-6">تاریخ وارد شده</div>
           <div className="col-span-6">قیمت وارد شده</div>
         </div>
@@ -65,6 +66,7 @@ export const EnteredPrices = () => {
           </div>
         )}
       </div>
+      <div className="h-12" />
     </div>
   );
 };
