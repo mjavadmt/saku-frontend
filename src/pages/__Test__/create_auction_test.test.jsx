@@ -13,7 +13,7 @@ const CreateAuctionTest = () => {
 
 describe("create auction component test", () => {
   it("Change type input", async () => {
-    render(<CreateAuctionTest />);
+    render(<CreateAuctionTest />, { flushUseEffects: false });
     const userNameInput = screen.getByTestId("select");
     fireEvent.change(userNameInput, { target: { value: "0" } });
     expect(userNameInput.value).toBe("0");
