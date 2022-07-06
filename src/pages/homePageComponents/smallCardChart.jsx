@@ -12,29 +12,27 @@ import {
 } from "statics/noAxisplot";
 import Chart from "react-apexcharts";
 
-export const ViewFromDashboard = () => {
+export const ViewFromDashboard = ({ list, total }) => {
   return (
     <div className={cx(cardClass, "text-black")}>
       <div className="p-3">
         <div className="bg-purple-100 rounded-full w-11 h-11 flex justify-center items-center">
           <NotesRoundedIcon className="text-pink-400" fontSize="medium" />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">
-          {siteViewDetail.series[0].data.reduce((a, b) => a + b, 0)}
-        </div>
+        <div className="text-white m-2 mt-3 font-bold ">{total}</div>
         <div className="text-white font-thin text-xs"> بازدید ماهانه شما </div>
       </div>
       <Chart
-        series={siteViewDetail.series}
+        series={list}
         options={siteViewDetail.options}
         type="area"
-        height="140"
+        height="135"
       />
     </div>
   );
 };
 
-export const PurchasedStats = () => {
+export const PurchasedStats = ({ list, total }) => {
   return (
     <div className={cx(cardClass, "text-black")}>
       <div className="p-3">
@@ -44,22 +42,20 @@ export const PurchasedStats = () => {
             fontSize="medium"
           />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">
-          {purchasedDetail.series[0].data.reduce((a, b) => a + b, 0)} تومان
-        </div>
+        <div className="text-white m-2 mt-3 font-bold ">{total} تومان</div>
         <div className="text-white font-thin text-xs"> هزینه‌ها تا کنون </div>
       </div>
       <Chart
-        series={purchasedDetail.series}
+        series={list}
         options={purchasedDetail.options}
         type="area"
-        height="140"
+        height="135"
       />
     </div>
   );
 };
 
-export const InComeStats = () => {
+export const InComeStats = ({ list, total }) => {
   return (
     <div className={cx(cardClass, "text-black")}>
       <div className="p-3">
@@ -69,41 +65,37 @@ export const InComeStats = () => {
             fontSize="medium"
           />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">
-          {inComeDetail.series[0].data.reduce((a, b) => a + b, 0)} تومان
-        </div>
+        <div className="text-white m-2 mt-3 font-bold ">{total} تومان</div>
         <div className="text-white font-thin text-xs"> درآمدها تا کنون </div>
       </div>
       <Chart
-        series={inComeDetail.series}
+        series={list}
         options={inComeDetail.options}
         type="area"
-        height="140"
+        height="135"
       />
     </div>
   );
 };
 
-export const AuctionViewStats = () => {
+export const AuctionViewStats = ({ list, total }) => {
   return (
     <div className={cx(cardClass, "text-black")}>
       <div className="p-3">
         <div className="bg-violet-200 rounded-full w-11 h-11 flex justify-center items-center">
           <GroupsRoundedIcon className="text-violet-500" fontSize="medium" />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">
-          {auctionViewDetail.series[0].data.reduce((a, b) => a + b, 0)}
-        </div>
+        <div className="text-white m-2 mt-3 font-bold ">{total}</div>
         <div className="text-white font-thin text-xs">
           {" "}
           مشاهده افراد از مزایده شما{" "}
         </div>
       </div>
       <Chart
-        series={auctionViewDetail.series}
+        series={list}
         options={auctionViewDetail.options}
         type="area"
-        height="140"
+        height="135"
       />
     </div>
   );

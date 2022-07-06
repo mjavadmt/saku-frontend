@@ -2,10 +2,7 @@ import DataTable from "react-data-table-component";
 import { auctionParticipated, categoryMapper } from "statics/fakeDataAuction";
 import tableStyles from "./tableStyles";
 import ReactTooltip from "react-tooltip";
-import {
-  dateConverter,
-  defineStatusColor,
-} from "./tableCellFunctions";
+import { dateConverter, defineStatusColor } from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
 const columns = [
@@ -59,20 +56,24 @@ const columns = [
   },
 ];
 // box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+let changedStyle = { ...tableStyles };
+let tableObj = { ...changedStyle.table };
+let tableStyle = { ...tableObj.style };
+tableStyle.height = "215px";
+tableObj = { ...tableObj, style: tableStyle };
+changedStyle = { ...changedStyle, table: tableObj };
 export const AuctionParticipatedTable = () => {
   return (
     <div className={cardClass}>
-      <div className={headerClass}>
-        آخرین مزایده‌های شرکت‌کرده
-      </div>
+      <div className={headerClass}>آخرین مزایده‌های شرکت‌کرده</div>
       <div className="p-6 ">
         <DataTable
-          data={auctionParticipated}
+          data={auctionParticipated.slice(0, 3)}
           columns={columns}
           noHeader
           highlightOnHover
           responsive
-          customStyles={tableStyles}
+          customStyles={changedStyle}
           pointerOnHover
           noDataComponent="آیتمی برای نشان دادن نیست."
         />
