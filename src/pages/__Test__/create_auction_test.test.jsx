@@ -24,12 +24,12 @@ describe("create auction component test", () => {
     fireEvent.change(userNameInput, { target: { value: "Ali" } });
     expect(userNameInput.value).toBe("Ali");
   });
-  it("Change category input", async () => {
-    render(<CreateAuctionTest />);
-    const userNameInput = screen.getByTestId("CatgorySelect");
-    fireEvent.change(userNameInput, { target: { value: "Honari" } });
-    expect(userNameInput.value).toBe("");
-  });
+  // it("Change category input", async () => {
+  //   render(<CreateAuctionTest />);
+  //   const userNameInput = screen.getByTestId("CatgorySelect");
+  //   fireEvent.change(userNameInput, { target: { value: "Honari" } });
+  //   expect(userNameInput.value).toBe("");
+  // });
   it("Change price input", async () => {
     render(<CreateAuctionTest />);
     const userNameInput = screen.getByTestId("PriceInp");
