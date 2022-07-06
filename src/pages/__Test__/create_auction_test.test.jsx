@@ -6,7 +6,7 @@ import { CreateAuction } from "pages/createAuction";
 const CreateAuctionTest = () => {
   return (
     <BrowserRouter>
-      <CreateAuction />
+      <CreateAuction inTestEnvierment />
     </BrowserRouter>
   );
 };

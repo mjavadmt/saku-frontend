@@ -26,7 +26,7 @@ import { provinceList } from "constant/iranProvince";
 import { cityList } from "constant/iranCities";
 import { toast } from "react-toastify";
 
-export const Profile = () => {
+export const Profile = ({inTestEnvierment = false}) => {
   const fileRef = useRef(null);
   const [userData, setUserData] = useState({});
   const [provinceId, setProvinceId] = useState(-1);
@@ -99,8 +99,8 @@ export const Profile = () => {
       .finally(() => setIsLoading(false));
   };
   useEffect(() => {
-    get(PRIFILE).then((res) => setUserData(res.data));
-  }, []);
+    if (!inTestEnvierment) get(PRIFILE).then((res) => setUserData(res.data));
+  }, [inTestEnvierment]);
   return isLoading ? (
     <div className="w-full h-full ">
       <span className="flex justify-center items-center">

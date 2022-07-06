@@ -20,7 +20,7 @@ import { GET_CATEGORIES } from "./../constant/apiRoutes";
 import { POST_AUCTION } from "constant/apiRoutes";
 import { toast } from "react-toastify";
 import { toUsDate } from "utils/dateConverter";
-export const CreateAuction = () => {
+export const CreateAuction = ({ inTestEnvierment = false }) => {
   const [auctionType, setAuctionType] = useState("");
   const [finishDate, setFinishDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
@@ -57,8 +57,9 @@ export const CreateAuction = () => {
       .catch(() => setIsLoading(false));
   };
   useEffect(() => {
-    get(GET_CATEGORIES).then((res) => setCategories(res.data));
-  }, []);
+    if (!inTestEnvierment)
+      get(GET_CATEGORIES).then((res) => setCategories(res.data));
+  }, [inTestEnvierment]);
   const style = {
     position: "absolute",
     top: "50%",

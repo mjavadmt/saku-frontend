@@ -6,7 +6,7 @@ import { Profile } from "pages/profile";
 const ProfileTest = () => {
   return (
     <BrowserRouter>
-      <Profile />
+      <Profile inTestEnvierment/>
     </BrowserRouter>
   );
 };
