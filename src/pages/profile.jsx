@@ -259,7 +259,7 @@ export const Profile = () => {
                         direction: "ltr",
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 11 }}
+                      inputProps={{ maxLength: 11, "data-testid": "phoneInp" }}
                       name="phone"
                       onChange={handleChange}
                       type="text"
@@ -339,7 +339,7 @@ export const Profile = () => {
                         direction: changeDIR(userData["address"]),
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 50 }}
+                      inputProps={{ maxLength: 50, "data-testid": "addInp" }}
                       name="address"
                       multiline
                       onChange={handleChange}

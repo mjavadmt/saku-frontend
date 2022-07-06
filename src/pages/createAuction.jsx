@@ -107,6 +107,9 @@ export const CreateAuction = () => {
             ? `${finishDate.year}/${finishDate.month}/${finishDate.day}`
             : ""
         }
+        inputProps={{
+          "data-testid": "startDate",
+        }}
         endAdornment={
           <InputAdornment position="end">
             <FcCalendar size={24} />
@@ -124,7 +127,7 @@ export const CreateAuction = () => {
     <div className="flex justify-center">
       <div className="mt-12 bg-cardColor rounded-3xl w-11/12">
         <div className="flex justify-center mt-10">
-          <FcInspection size={150} />
+          <FcInspection data-testid="icon" size={150} />
         </div>
 
         <div className="mt-5 mb-10 grid grid-cols-8 gap-8">
@@ -143,11 +146,18 @@ export const CreateAuction = () => {
                 setAuctionValue({ ...auctionValue, mode: e.target.value })
               }
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
+              inputProps={{
+                "aria-label": "Without label",
+                "data-testid": "select",
+              }}
               defaultValue={"0"}
             >
-              <MenuItem value={"0"}>مزایده</MenuItem>
-              <MenuItem value={"1"}>مناقصه</MenuItem>
+              <MenuItem data-testid="select-option" value={"0"}>
+                مزایده
+              </MenuItem>
+              <MenuItem data-testid="select-option" value={"1"}>
+                مناقصه
+              </MenuItem>
             </Select>
           </Box>
 
@@ -165,6 +175,9 @@ export const CreateAuction = () => {
               value={auctionValue.name}
               onChange={handleData}
               variant="standard"
+              inputProps={{
+                "data-testid": "nameInp",
+              }}
             />
           </Box>
 
@@ -183,7 +196,10 @@ export const CreateAuction = () => {
                 setAuctionValue({ ...auctionValue, category: e.target.value });
               }}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
+              inputProps={{
+                "aria-label": "Without label",
+                "data-testid": "CatgorySelect",
+              }}
             >
               {categories.map((cat) => (
                 <MenuItem value={cat.name}>{cat.name}</MenuItem>
@@ -192,7 +208,12 @@ export const CreateAuction = () => {
           </Box>
 
           <div className="mt-5 flex justify-center gap-2">
-            <FcInfo onClick={handleOpen} color="" size={24} />
+            <FcInfo
+              data-testid="modalOpen"
+              onClick={handleOpen}
+              color=""
+              size={24}
+            />
             <p>نوع:</p>
           </div>
           <Box
@@ -214,7 +235,12 @@ export const CreateAuction = () => {
           </Box>
 
           <div className="mt-5 flex justify-center gap-2">
-            <FcInfo onClick={handleOpenTwo} color="" size={24} />
+            <FcInfo
+              data-testid="2modal"
+              onClick={handleOpenTwo}
+              color=""
+              size={24}
+            />
             <p>قیمت پایه:</p>
           </div>
           <Box
@@ -231,6 +257,9 @@ export const CreateAuction = () => {
               value={auctionValue.limit}
               name="limit"
               onChange={handleData}
+              inputProps={{
+                "data-testid": "PriceInp",
+              }}
             />
           </Box>
           <div className="mt-5 flex justify-center">
@@ -302,7 +331,11 @@ export const CreateAuction = () => {
                 setTags(newval);
               }}
               renderInput={(params) => (
-                <TextField {...params} placeholder="فیلتر ها" />
+                <TextField
+                  data-testid="tagInp"
+                  {...params}
+                  placeholder="فیلتر ها"
+                />
               )}
             />
           </Box>
@@ -320,6 +353,7 @@ export const CreateAuction = () => {
               !finishDate ||
               !startDate
             }
+            data-testid="subBtn"
           >
             ثبت درخواست
           </button>
@@ -345,7 +379,7 @@ export const CreateAuction = () => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            <ul>
+            <ul data-testid="modalContent">
               <li className="flex gap-3 justify-between">
                 <span className="font-semibold text-sky-400/100 text-xl">
                   افلاین:
@@ -384,7 +418,7 @@ export const CreateAuction = () => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            <ul>
+            <ul data-testid="modalContent2">
               <li className=" gap-3 justify-between">
                 <span className="flex font-semibold text-sky-400/100 text-xl">
                   نکته اول:

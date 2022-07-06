@@ -39,7 +39,7 @@ describe("profile page test", () => {
     const email = screen.getByTestId("emailInp");
     expect(email).toBeTruthy();
   });
-  it("render address ", async () => {
+  it("render address", async () => {
     render(<ProfileTest />);
     const address = screen.getByTestId("phoneInp");
     expect(address).toBeTruthy();
