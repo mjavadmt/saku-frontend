@@ -88,6 +88,7 @@ export const AuctionCreatedTable = () => {
           customStyles={changedStyle}
           pointerOnHover
           noDataComponent="آیتمی برای نشان دادن نیست."
+          data-testid="createdTable"
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineMessage, AiOutlineHome } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -7,11 +7,18 @@ import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import cx from "classnames";
 import { SPLASH, NOTIFICATIONS, PROFILE, LOGIN, LOGOUT } from "constant/routes";
-
+import { get } from "utils/api";
+import { PRIFILE } from "constant/apiRoutes";
 const NavBar = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
   let hoverColored = "hover:text-orange-500";
-
+  const [userImage, setUserImage] = useState();
+  useEffect(() => {
+    get(PRIFILE).then((res) => {
+      setUserImage(res.data.profile_image);
+      localStorage.setItem("userId", res.data.id);
+    });
+  }, []);
   return (
     <div className="p-2">
       <div className="w-full  bg-navbarColor h-12 rounded-xl top-0 z-10">
@@ -34,6 +41,7 @@ const NavBar = ({ handleToggleSidebar }) => {
           <Avatar
             className="m-2 mr-4 "
             sx={{ bgcolor: "orange", height: 30, width: 30, color: "white" }}
+            src={userImage}
           >
             M
           </Avatar>

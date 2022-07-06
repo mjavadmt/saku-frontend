@@ -26,7 +26,7 @@ import { provinceList } from "constant/iranProvince";
 import { cityList } from "constant/iranCities";
 import { toast } from "react-toastify";
 
-export const Profile = () => {
+export const Profile = ({inTestEnvierment = false}) => {
   const fileRef = useRef(null);
   const [userData, setUserData] = useState({});
   const [provinceId, setProvinceId] = useState(-1);
@@ -99,8 +99,8 @@ export const Profile = () => {
       .finally(() => setIsLoading(false));
   };
   useEffect(() => {
-    get(PRIFILE).then((res) => setUserData(res.data));
-  }, []);
+    if (!inTestEnvierment) get(PRIFILE).then((res) => setUserData(res.data));
+  }, [inTestEnvierment]);
   return isLoading ? (
     <div className="w-full h-full ">
       <span className="flex justify-center items-center">
@@ -259,7 +259,7 @@ export const Profile = () => {
                         direction: "ltr",
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 11 }}
+                      inputProps={{ maxLength: 11, "data-testid": "phoneInp" }}
                       name="phone"
                       onChange={handleChange}
                       type="text"
@@ -323,6 +323,7 @@ export const Profile = () => {
                         direction: "ltr",
                       }}
                       fullWidth
+                      inputProps={{ "data-testid": "emailInp" }}
                       // helperText="لطفا ایمیل صحیح واردکنید"
                       name="email"
                       onChange={handleChange}
@@ -338,7 +339,7 @@ export const Profile = () => {
                         direction: changeDIR(userData["address"]),
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 50 }}
+                      inputProps={{ maxLength: 50, "data-testid": "addInp" }}
                       name="address"
                       multiline
                       onChange={handleChange}
@@ -361,6 +362,7 @@ export const Profile = () => {
                   onClick={updateUserDara}
                   color="primary"
                   variant="contained"
+                  data-testid="submit-btn"
                 >
                   ثبت تغییرات
                 </Button>

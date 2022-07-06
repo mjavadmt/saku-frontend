@@ -7,9 +7,18 @@ import { ImageMessage } from "components/ImageMessage";
 import { useNavigate } from "react-router-dom";
 import { FULL_LAYOUT_CHAT } from "constant/routes";
 import { FileMessage } from "components/FileMessage";
-import { Avatar } from "@mui/material";
+import { Avatar, Chip } from "@mui/material";
+import useChat from "hooks/useChatHook";
+import { get } from "utils/api";
+import { GET_USER_LIST } from "constant/apiRoutes";
+import empty from "assets/img/Empty-Inbox.png";
 export const Messages = () => {
   const endOfMsg = useRef(null);
+
+  const [userName, setUserName] = useState("mjavad");
+  const [msgList, setMsgList] = useState(MSG_LIST_1_3);
+  const { messages, sendMessage } = useChat(userName, msgList);
+  var curDate = "1401/05/05";
   const fileRef = useRef();
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -27,7 +36,7 @@ export const Messages = () => {
   };
   const navigate = useNavigate();
   const [msgInput, setMsgInput] = useState("");
-  const [msgList, setMsgList] = useState(MSG_LIST_1_3);
+  // const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   const [userList, setUserList] = useState(USER_LIST);
   const sendMsg = (e) => {
     msgList.push({
@@ -80,6 +89,7 @@ export const Messages = () => {
 
   useEffect(() => {
     scrollToBottom();
+    // get(GET_USER_LIST).then((res) => setUserList(res.data));
   }, [msgList.length, msgInput]);
   return (
     <React.Fragment>
@@ -93,36 +103,33 @@ export const Messages = () => {
         }}
         className="flex m-12 h-4/5 rounded-3xl"
       >
-        <div className="flex h-full md:w-1/3 w-full bg-sky-800 rounded-3xl overflow-y-auto">
-          <div className="flex-1 w-full h-full">
-            {userList.map((user) => (
-              <UserRow
-                date={user.date}
-                unReadMsg={user.unReadMsg}
-                key={user.date + user.unReadMsg}
-                userName={user.userName}
-                avatar={user.avatar}
-              />
-            ))}
-            {userList.map((user) => (
-              <UserRow
-                date={user.date}
-                unReadMsg={user.unReadMsg}
-                key={user.date + user.unReadMsg}
-                userName={user.userName}
-                avatar={user.avatar}
-              />
-            ))}
+        <div className="flex h-full md:w-1/3 w-full bg-sky-800 rounded-r-3xl overflow-y-auto">
+          <div className="grid flex-1 w-full h-full ">
+            {userList.length === 0 ? (
+              <img src={empty} alt="empty" />
+            ) : (
+              userList.map((user) => (
+                <UserRow
+                  date={user.date}
+                  unReadMsg={user.unReadMsg}
+                  key={user.date + user.unReadMsg}
+                  userName={user.userName}
+                  avatar={user.avatar}
+                  // onClickRow={() => setUserName(user.username)}
+                />
+              ))
+            )}
+
             <div
               onClick={() => navigate(FULL_LAYOUT_CHAT)}
-              className="md:flex flex-1 cursor-pointer justify-center rounded-t-md z-40 self-end items-center sticky bottom-0 w-full h-10 bg-slate-800 hidden "
+              className="md:flex flex-1 cursor-pointer justify-center  z-40 self-end items-center sticky bottom-0 w-full h-10 bg-slate-800 hidden "
             >
               مشاهده تمام صفحه
             </div>
           </div>
         </div>
         <div className="md:h-full grid grid-rows-6 items-end md:w-2/3 w-0 h-0 ">
-          <div className="h-full grid row-span-6 items-end overflow-y-auto gap-2 ">
+          <div className="h-full grid row-span-6  overflow-y-auto gap-2 ">
             <div className="md:flex items-center bg-slate-900 h-14 sticky rounded-b-2xl top-0 w-full hidden z-50 ">
               <Avatar
                 sx={{ width: 50, height: 50 }}
@@ -135,6 +142,43 @@ export const Messages = () => {
               </p>
             </div>
             {msgList.map((m) => {
+              if (m.date.split(" ")[0] !== curDate) {
+                curDate = m.date.split(" ")[0];
+                switch (m.type) {
+                  case "text":
+                    return (
+                      <>
+                        <div className="w-full flex justify-center">
+                          <div className="bg-slate-600 rounded-3xl  p-2   ">
+                            {m.date.split(" ")[0]}
+                          </div>
+                        </div>
+
+                        <TextMessage message={m} />
+                      </>
+                    );
+                  case "image":
+                    return (
+                      <>
+                        <div className="bg-slate-600 rounded-xl w-20 ">
+                          {m.date.split(" ")[0]}
+                        </div>
+                        <ImageMessage message={m} />
+                      </>
+                    );
+                  case "file":
+                    return (
+                      <>
+                        <div className="bg-slate-600 rounded-xl w-20 ">
+                          {m.date.split(" ")[0]}
+                        </div>
+                        <FileMessage message={m} />
+                      </>
+                    );
+                  default:
+                    return null;
+                }
+              }
               switch (m.type) {
                 case "text":
                   return <TextMessage message={m} />;
