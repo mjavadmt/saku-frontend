@@ -1,7 +1,6 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { screen } from "@testing-library/dom";
-import { wait } from "@testing-library/user-event/dist/utils";
 import { CreateAuction } from "pages/createAuction";
 
 const CreateAuctionTest = () => {
