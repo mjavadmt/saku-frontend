@@ -70,7 +70,6 @@ export const TableLog = () => {
           noHeader
           responsive
           customStyles={tableStyles}
-          style={{ height: "296px" }}
           noDataComponent="آیتمی برای نشان دادن نیست."
         />
         <div className="flex justify-center">

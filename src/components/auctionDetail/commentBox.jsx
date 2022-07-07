@@ -6,16 +6,31 @@ import { commentsData } from "statics/fakeDataComments";
 import React from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useRef, useState } from "react";
+import "./replyStyle.css";
+import ReplyIcon from "@mui/icons-material/Reply";
+import ClearIcon from "@mui/icons-material/Clear";
 
 export const CommentBox = () => {
   const [comments, setComments] = useState(commentsData);
   const [commentTxt, setCommentTxt] = useState("");
+  const [reply, setReply] = useState(null);
   const endOfMsg = useRef(null);
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && commentTxt !== "") {
+    if (event.key === "Enter" && commentTxt !== "" && !event.shiftKey) {
+      console.log("jafar");
       addComment();
+      return;
     }
+    if (event.key === "Enter" && event.shiftKey) {
+      console.log("mmd");
+      setCommentTxt(commentTxt + "\n");
+      return;
+    }
+  };
+
+  const replyClicked = (index) => {
+    setReply(index);
   };
 
   const scrollToBottom = () => {
@@ -29,6 +44,12 @@ export const CommentBox = () => {
   };
 
   const addComment = () => {
+    if (reply) {
+      replyComment(reply, commentTxt);
+      setReply(null);
+      setCommentTxt("");
+      return;
+    }
     const addedComment = {
       senderName: "Dutch User",
       dateSent: `${new Date()}`,
@@ -44,6 +65,13 @@ export const CommentBox = () => {
   useEffect(() => {
     scrollToBottom();
   }, [comments.length]);
+
+  const handleReplyCommentContent = (index) => {
+    if (index[1] != -1) {
+      return comments[index[0]].replies[index[1]].content;
+    }
+    return comments[index[0]].content;
+  };
 
   const changeCollapseState = (index, isCollapsed) => {
     let commentsTmp = [...comments];
@@ -91,6 +119,7 @@ export const CommentBox = () => {
               depth={0}
               changeCollapseState={changeCollapseState}
               replyComment={replyComment}
+              replyClicked={replyClicked}
               key={`${index0}-1-1`}
             />
             {rootComment.isCollapsed &&
@@ -101,6 +130,7 @@ export const CommentBox = () => {
                     index={[index0, index1, -1]}
                     depth={1}
                     key={`${index0}${index1}-1`}
+                    replyClicked={replyClicked}
                     replyComment={replyComment}
                   />
                   {secondComment.replies.map((thirdComment, index2) => (
@@ -125,10 +155,27 @@ export const CommentBox = () => {
         ))}
         <div ref={endOfMsg}></div>
       </div>
+      {reply && (
+        <div className="replyDiv p-3 bg-blue-900 rounded-t-lg mr-9">
+          <div className="flex">
+            <ReplyIcon fontSize="small" />
+            <div className="text-sm whitespace-nowrap overflow-hidden text-ellipsis mr-2">
+              {handleReplyCommentContent(reply)}
+            </div>
+            <div className="grow" />
+            <ClearIcon
+              onClick={() => setReply(null)}
+              className="text-gray-500 hover:text-white hover:cursor-pointer mr-2"
+              fontSize="small"
+            />
+          </div>
+        </div>
+      )}
       <div className="flex items-center">
         <SendIcon
           className={cx({
             "hover:text-blue-300 hover:cursor-pointer": commentTxt.length !== 0,
+            "mb-2": reply,
           })}
           onClick={(e) => {
             if (commentTxt.length !== 0) {
@@ -136,7 +183,10 @@ export const CommentBox = () => {
             }
           }}
         />
-        <div className="w-full m-3 mt-5 mb-2">
+
+        <div
+          className={cx("w-full", { "m-3 mb-2": !reply, "mr-3 ml-3": reply })}
+        >
           <TextField
             value={commentTxt}
             onChange={(e) => {

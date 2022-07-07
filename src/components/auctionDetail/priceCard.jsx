@@ -92,7 +92,7 @@ export const PriceCard = ({ auction }) => {
         <div className="grid grid-cols-12">
           <div className="col-span-12 flex justify-center">
             <img
-              className=" rounded-2xl p-3 h-60 "
+              className=" rounded-2xl p-3 h-56 "
               alt="submit-price"
               src={submitPrice}
             />

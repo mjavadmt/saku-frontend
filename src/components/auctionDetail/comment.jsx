@@ -30,6 +30,7 @@ export const Comment = ({
   depth,
   changeCollapseState,
   replyComment,
+  replyClicked
 }) => {
   const [replyModal, setReplyModal] = React.useState(false);
   const [replyValue, setReplyValue] = React.useState("");
@@ -73,7 +74,7 @@ export const Comment = ({
                 data-tip
                 data-for={`reply-${index[0]}${index[1]}${index[2]}`}
                 className="text-sm text-gray-500 mr-2 mt-2 hover:text-white hover:cursor-pointer"
-                onClick={() => setReplyModal(true)}
+                onClick={() => replyClicked(index)}
               >
                 <ReplyIcon />
               </div>

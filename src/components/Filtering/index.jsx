@@ -18,11 +18,12 @@ export const Filtering = ({
   onChangeStatus,
   onChangeType,
   status,
+  setStatus,
   type,
+  setType,
 }) => {
   const [value, setValue] = useState([20, 37]);
-  const [sortBy, setSortBy] = useState("");
-
+  const [sortBy, setSortBy] = useState(10);
   const handleChangeRadio = (event, identifier) => {
     if (identifier === "type") onChangeType(event.target.value);
     else onChangeStatus(event.target.value);
@@ -94,54 +95,30 @@ export const Filtering = ({
       {hasRadioBtn && (
         <React.Fragment>
           <div className="m-4">
-            <div className="text-white" id="demo-setType">
-              نوع
-            </div>
-            <RadioGroup
-              aria-labelledby="demo-setType"
-              name="setType"
+            <Select
+              fullWidth
               value={type}
-              onChange={(e) => handleChangeRadio(e, "type")}
+              onChange={(e) => setType(e.target.value)}
+              defaultValue={10}
+              placeholder="نوع"
             >
-              <div className="flex justify-around ">
-                <FormControlLabel value="همه" control={<Radio />} label="همه" />
-                <FormControlLabel
-                  value="مزایده"
-                  control={<Radio />}
-                  label="مزایده"
-                />
-                <FormControlLabel
-                  value="مناقصه"
-                  control={<Radio />}
-                  label="مناقصه"
-                />
-              </div>
-            </RadioGroup>
+              <MenuItem value={10}>مزایده</MenuItem>
+              <MenuItem value={20}>مناقصه</MenuItem>
+              <MenuItem value={30}>همه</MenuItem>
+            </Select>
           </div>
           <div className="m-4">
-            <div className="text-white" id="demo-setStatus">
-              وضعیت
-            </div>
-            <RadioGroup
-              aria-labelledby="demo-setStatus"
-              name="setStatus"
+            <Select
+              fullWidth
               value={status}
-              onChange={(e) => handleChangeRadio(e, "status")}
+              onChange={(e) => setStatus(e.target.value)}
+              defaultValue={10}
+              placeholder="نوع"
             >
-              <div className="flex justify-around">
-                <FormControlLabel value="همه" control={<Radio />} label="همه" />
-                <FormControlLabel
-                  value="در جریان"
-                  control={<Radio />}
-                  label="در جریان"
-                />
-                <FormControlLabel
-                  value="پایان‌یافته"
-                  control={<Radio />}
-                  label="پایان‌یافته"
-                />
-              </div>
-            </RadioGroup>
+              <MenuItem value={10}>همه</MenuItem>
+              <MenuItem value={20}>درجریان</MenuItem>
+              <MenuItem value={30}>پایان یافته</MenuItem>
+            </Select>
           </div>
         </React.Fragment>
       )}
