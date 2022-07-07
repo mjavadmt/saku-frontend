@@ -67,6 +67,13 @@ const columns = [
   },
 ];
 
+let changedStyle = { ...tableStyles };
+let tableObj = { ...changedStyle.table };
+let tableStyle = { ...tableObj.style };
+tableStyle.height = "350px";
+tableObj = { ...tableObj, style: tableStyle };
+changedStyle = { ...changedStyle, table: tableObj };
+
 export const AuctionCreatedTable = () => {
   return (
     <div className={cardClass}>
@@ -78,9 +85,10 @@ export const AuctionCreatedTable = () => {
           noHeader
           highlightOnHover
           responsive
-          customStyles={tableStyles}
+          customStyles={changedStyle}
           pointerOnHover
           noDataComponent="آیتمی برای نشان دادن نیست."
+          data-testid="createdTable"
         />
       </div>
     </div>

@@ -48,7 +48,7 @@ export const FileMessage = ({ message }) => {
               "text-left": isSender,
             })}
           >
-            {message.date}
+            {message.date.split(" ")[1]}
           </div>
         </div>
       </div>

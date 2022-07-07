@@ -14,8 +14,8 @@ export const AuctionActivity = () => {
           options={pieChartData.options}
           series={pieChartData.series}
           type="pie"
-          height={250}
-          width={250}
+          height={230}
+          width={230}
         />
       </div>
       <hr className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />

@@ -9,10 +9,10 @@ export const TextMessage = ({ message }) => {
         className={cx(
           "flex",
           {
-            "ml-4 mt-16  justify-self-end flex-row-reverse": !isSender,
+            "ml-4   justify-self-end flex-row-reverse": !isSender,
           },
           {
-            "mr-4  mt-16": isSender,
+            "mr-4  ": isSender,
           }
         )}
       >
@@ -35,7 +35,7 @@ export const TextMessage = ({ message }) => {
               "text-left": isSender,
             })}
           >
-            {message.date}
+            {message.date.split(" ")[1]}
           </div>
         </div>
       </div>

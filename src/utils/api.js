@@ -41,7 +41,7 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    if (!!error.response.data && !!error.response.data.message) {
+    if (!!error.response?.data && !!error.response?.data?.message) {
       toast.error(error.response.data.message);
     }
     return Promise.reject(error);
@@ -52,4 +52,3 @@ export const get = api.get;
 export const post = api.post;
 export const put = api.put;
 export const remove = api.delete;
-

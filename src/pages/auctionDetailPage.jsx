@@ -24,7 +24,7 @@ const auction = {
 
 export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
-  const randomSide = false;
+  const randomSide = true;
   return (
     <React.Fragment>
       <Grid container spacing={0}>
@@ -34,11 +34,12 @@ export const AuctionDetialPage = () => {
         <Grid item xs={12} md={5}>
           <PriceCard auction={auction} />
         </Grid>
-        <Grid item xs={12} md={8}>
-          <TableLog />
-        </Grid>
+
         <Grid item xs={12} md={4}>
           {randomSide ? <EnteredPrices /> : <CurrentWinner />}
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <TableLog />
         </Grid>
         <Grid item xs={12}>
           <CommentBox />

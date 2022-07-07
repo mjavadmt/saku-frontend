@@ -1,27 +1,27 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { screen } from "@testing-library/dom";
-import { Login } from "../login";
-import { wait } from '@testing-library/user-event/dist/utils';
+import { SignUp } from "../signup";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 const LoginTest = () => {
   return (
     <BrowserRouter>
-      <Login />
+      <SignUp />
     </BrowserRouter>
   );
 };
 
-describe("Login component test", () => {
+describe("signup component test", () => {
   it("render username", async () => {
     render(<LoginTest />);
     const username = screen.getByTestId("username");
     expect(username).toBeTruthy();
   });
-  it("render password", async () => {
+  it("render email", async () => {
     render(<LoginTest />);
-    const password = screen.getByTestId("password");
-    expect(password).toBeTruthy();
+    const email = screen.getByTestId("email");
+    expect(email).toBeTruthy();
   });
   it("Change userNamre input", async () => {
     render(<LoginTest />);
@@ -29,11 +29,11 @@ describe("Login component test", () => {
     fireEvent.change(userNameInput, { target: { value: "Ali_Alamdari" } });
     expect(userNameInput.value).toBe("Ali_Alamdari");
   });
-  it("create account Tag click", async () => {
+  it("login Tag click", async () => {
     render(<LoginTest />);
-    const divTag = screen.getByTestId("createAccountLink");
+    const divTag = screen.getByTestId("loginLink");
     fireEvent.click(divTag);
     await wait(500);
-    expect(window.location.pathname).toBe("/signup");
+    expect(window.location.pathname).toBe("/login");
   });
 });
