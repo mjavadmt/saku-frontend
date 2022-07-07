@@ -101,7 +101,7 @@ const Hero = ({
             data-reveal-delay="800"
           >
             <a
-              data-video="https://player.vimeo.com/video/174002812"
+              data-video="https://mazwai.com/videvo_files/video/free/2014-12/small_watermarked/james-look_up_preview.webm?v=1378936"
               href="#0"
               aria-controls="video-modal"
               onClick={openModal}
@@ -119,7 +119,7 @@ const Hero = ({
             id="video-modal"
             show={videoModalActive}
             handleClose={closeModal}
-            video="https://player.vimeo.com/video/174002812"
+            video="https://mazwai.com/videvo_files/video/free/2014-12/small_watermarked/james-look_up_preview.webm?v=1378936"
             videoTag="iframe"
           />
         </div>

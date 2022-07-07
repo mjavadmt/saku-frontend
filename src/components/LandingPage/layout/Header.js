@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import logo from "assets/img/gavel.svg";
-import { SPLASH } from "constant/routes";
+import { LOGIN, SIGNUP, SPLASH } from "constant/routes";
 import { useNavigate } from "react-router-dom";
 
 const propTypes = {
@@ -134,7 +134,7 @@ const Header = ({
                     )}
                   >
                     <li>
-                      <Link to="#0" onClick={closeMenu}>
+                      <Link to={LOGIN} onClick={closeMenu}>
                         ورود
                       </Link>
                     </li>
@@ -143,7 +143,7 @@ const Header = ({
                     <ul className="list-reset header-nav-right">
                       <li>
                         <Link
-                          to="#0"
+                          to={SIGNUP}
                           className="button button-primary button-wide-mobile button-sm"
                           onClick={closeMenu}
                         >
