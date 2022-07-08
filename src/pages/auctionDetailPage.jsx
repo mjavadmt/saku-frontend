@@ -9,6 +9,10 @@ import { PopUpModal } from "components/auctionDetail/popUpModal";
 import { CurrentWinner } from "components/auctionDetail/currentWinnerCard";
 import { useState } from "react";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { get } from "utils/api";
+import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 
 const auction = {
   ...auctions[0],
@@ -24,19 +28,34 @@ const auction = {
 
 export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
+  const [auctionData, setAuctionData] = useState({});
   const randomSide = true;
+  const { token } = useParams();
+  useEffect(() => {
+    get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
+      setAuctionData(res.data);
+      if (res.data.user.id === localStorage.getItem("userId")) {
+        setIsOwner(true);
+      }
+    });
+  }, [token]);
   return (
     <React.Fragment>
       <Grid container spacing={0}>
         <Grid item xs={12} md={7}>
-          <AuctionDetailCard auction={auction} />
+          <AuctionDetailCard auctionData={auctionData} />
         </Grid>
         <Grid item xs={12} md={5}>
-          <PriceCard auction={auction} />
+          <PriceCard token={token} auctionData={auctionData} />
         </Grid>
 
         <Grid item xs={12} md={4}>
-          {randomSide ? <EnteredPrices /> : <CurrentWinner />}
+          {isOwner ? (
+            <EnteredPrices token={token} />
+          ) : (
+            <CurrentWinner bestBidUser={auctionData.best_bid} />
+          )}
         </Grid>
         <Grid item xs={12} md={8}>
           <TableLog />

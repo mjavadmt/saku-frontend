@@ -151,12 +151,12 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                 "aria-label": "Without label",
                 "data-testid": "select",
               }}
-              defaultValue={"0"}
+              defaultValue={1}
             >
-              <MenuItem data-testid="select-option" value={"0"}>
+              <MenuItem data-testid="select-option" value={1}>
                 مزایده
               </MenuItem>
-              <MenuItem data-testid="select-option" value={"1"}>
+              <MenuItem data-testid="select-option" value={2}>
                 مناقصه
               </MenuItem>
             </Select>
