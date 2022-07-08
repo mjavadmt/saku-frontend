@@ -35,7 +35,7 @@ export const AuctionDetialPage = () => {
   useEffect(() => {
     get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
       setAuctionData(res.data);
-      if (res.data.user.id === localStorage.getItem("userId")) {
+      if (res.data.user.id == localStorage.getItem("userId")) {
         setIsOwner(true);
       }
     });
@@ -51,7 +51,7 @@ export const AuctionDetialPage = () => {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          {isOwner ? (
+          {!isOwner ? (
             <EnteredPrices token={token} />
           ) : (
             <CurrentWinner bestBidUser={auctionData.best_bid} />
