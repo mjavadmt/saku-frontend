@@ -98,7 +98,7 @@ export const PriceCard = ({ auctionData, token }) => {
   };
   return (
     <React.Fragment>
-      <div className={cardClass}>
+      <div className={cx(cardClass, "h-97")}>
         <div className={headerClass}>ثبت قیمت</div>
         <div className="grid grid-cols-12">
           <div className="col-span-12 flex justify-center">

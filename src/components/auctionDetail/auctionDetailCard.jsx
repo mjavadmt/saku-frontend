@@ -24,10 +24,10 @@ export const AuctionDetailCard = ({ auctionData }) => {
     <React.Fragment>
       <div
         // style={{ height: "500px" }}
-        className={cx(cardClass, "grid grid-cols-12")}
+        className={cx(cardClass, "grid grid-cols-12 h-97")}
       >
         <img
-          className="p-3 rounded-3xl h-52 col-span-5 md:col-span-6"
+          className="p-3 rounded-3xl h-52  col-span-5 md:col-span-6"
           src={
             "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&w=1000&q=80"
           }
