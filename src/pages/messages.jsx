@@ -1,6 +1,6 @@
 import { AttachFileOutlined, SendRounded } from "@mui/icons-material";
 import { UserRow } from "components/MessageUserList";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { TextMessage } from "components/TextMessage";
 import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
 import { ImageMessage } from "components/ImageMessage";
@@ -11,13 +11,21 @@ import { Avatar, Chip } from "@mui/material";
 import useChat from "hooks/useChatHook";
 import { get } from "utils/api";
 import { GET_USER_LIST } from "constant/apiRoutes";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 import empty from "assets/img/Empty-Inbox.png";
 export const Messages = () => {
   const endOfMsg = useRef(null);
 
+  const [socketUrl, setSocketUrl] = useState(
+    "ws://188.121.110.151:8887/chat/mjavad/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYxNDQ5NzYwLCJpYXQiOjE2NTYyNjU3NjAsImp0aSI6IjRlNzNhYTVjMzNkMjRkNGRiOTg3M2E3NTdiYmE2MGZlIiwidXNlcl9pZCI6M30.4PHLLWr3ZBFLpu4IWQsOfXVRuX-fB6590tmlPvhkbg8"
+  );
+  const [messageHistory, setMessageHistory] = useState([]);
+
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+
   const [userName, setUserName] = useState("mjavad");
   const [msgList, setMsgList] = useState(MSG_LIST_1_3);
-  const { messages, sendMessage } = useChat(userName, msgList);
+  // const { messages, sendMessage } = useChat(userName, msgList);
   var curDate = "1401/05/05";
   const fileRef = useRef();
   const handleKeyDown = (event) => {
@@ -37,18 +45,19 @@ export const Messages = () => {
   const navigate = useNavigate();
   const [msgInput, setMsgInput] = useState("");
   // const [msgList, setMsgList] = useState(MSG_LIST_1_3);
-  const [userList, setUserList] = useState(USER_LIST);
+  const [userList, setUserList] = useState([]);
   const sendMsg = (e) => {
-    msgList.push({
-      type: "text",
-      msg: msgInput,
-      date: `${new Date().toLocaleDateString(
-        "fa-IR"
-      )} ${new Date().toLocaleTimeString("fa-IR")}`,
-      from: 1,
-      to: 3,
-      fromUserName: "اصغر فرهادی",
-    });
+    // msgList.push({
+    //   type: "text",
+    //   msg: msgInput,
+    //   date: `${new Date().toLocaleDateString(
+    //     "fa-IR"
+    //   )} ${new Date().toLocaleTimeString("fa-IR")}`,
+    //   from: 1,
+    //   to: 3,
+    //   fromUserName: "اصغر فرهادی",
+    // });
+    sendMessage(msgInput);
     setMsgInput("");
     setMsgList(msgList);
     scrollToBottom();
@@ -88,9 +97,20 @@ export const Messages = () => {
   };
 
   useEffect(() => {
+    if (lastMessage !== null) {
+      setMessageHistory((prev) => prev.concat(lastMessage));
+    }
     scrollToBottom();
-    // get(GET_USER_LIST).then((res) => setUserList(res.data));
-  }, [msgList.length, msgInput]);
+    get(GET_USER_LIST).then((res) => setUserList(res.data));
+  }, [msgList.length, msgInput, lastMessage, setMessageHistory]);
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+  }[readyState];
   return (
     <React.Fragment>
       <div
@@ -110,10 +130,10 @@ export const Messages = () => {
             ) : (
               userList.map((user) => (
                 <UserRow
-                  date={user.date}
+                  date={user.created_at}
                   unReadMsg={user.unReadMsg}
                   key={user.date + user.unReadMsg}
-                  userName={user.userName}
+                  userName={user.username}
                   avatar={user.avatar}
                   // onClickRow={() => setUserName(user.username)}
                 />
@@ -133,7 +153,7 @@ export const Messages = () => {
             <div className="md:flex items-center bg-slate-900 h-14 sticky rounded-b-2xl top-0 w-full hidden z-50 ">
               <Avatar
                 sx={{ width: 50, height: 50 }}
-                src={userList[0].avatar}
+                // src={userList[0].avatar}
                 className="m-3 mr-6 "
               />
               <p className="flex-1 mt-4">
