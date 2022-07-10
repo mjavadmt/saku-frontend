@@ -34,20 +34,36 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   const [imgUrl, setImgUrl] = useState("");
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploadImg, setIsUploadImg] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
   const fileRef = useRef();
   const handleSubmit = () => {
+    let form_data = new FormData();
+    setAuctionValue({ ...auctionValue, user: localStorage.getItem("userId") });
+    for (var key in auctionValue) {
+      if (key === "tags") {
+        console.log(auctionValue[key]);
+        for (var tag in auctionValue[key]) {
+          console.log(auctionValue[key][tag]);
+          form_data.append(
+            key,
+            JSON.stringify({ tag: auctionValue[key][tag] })
+          );
+        }
+      } else {
+        form_data.append(key, auctionValue[key]);
+      }
+    }
+
     setIsLoading(true);
-    post(POST_AUCTION, {
-      ...auctionValue,
-      user: localStorage.getItem("userId"),
-    })
+    post(POST_AUCTION, form_data)
       .then((res) => {
         toast.success("با موفقیت انجام شد");
         setIsLoading(false);
+        setIsUploadImg(false);
         Array.from(document.querySelectorAll("input")).forEach(
           (input) => (input.value = "")
         );
@@ -62,9 +78,11 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
       .catch(() => setIsLoading(false));
   };
   const uploadFile = (event) => {
+    setIsUploadImg(true);
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
       setImgUrl(URL.createObjectURL(img));
+      setAuctionValue({ ...auctionValue, auction_image: img });
     }
   };
 
@@ -234,14 +252,20 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <Select
               fullWidth
               value={auctionType}
-              onChange={(e) => setAuctionType(e.target.value)}
+              onChange={(e) => {
+                setAuctionType(e.target.value);
+                setAuctionValue({
+                  ...auctionValue,
+                  is_online: e.target.value !== 10,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               defaultValue={10}
             >
               <MenuItem value={10}>آفلاین</MenuItem>
               <MenuItem value={20}>آنلاین</MenuItem>
-              <MenuItem value={30}>به‌روز‌رسانی دلخواه</MenuItem>
+              {/* <MenuItem value={30}>به‌روز‌رسانی دلخواه</MenuItem> */}
             </Select>
           </Box>
 
