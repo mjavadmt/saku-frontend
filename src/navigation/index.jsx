@@ -15,6 +15,7 @@ import {
   Logout,
   AuctionDetialPage,
   FullLayoutChat,
+  LandingPage,
 } from "pages";
 import {
   NOT_FOUND,
@@ -33,6 +34,7 @@ import {
   AUCTION_DETAIL_PAGE,
   FORGOTPASSWORD,
   FULL_LAYOUT_CHAT,
+  LANDING_PAGE,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -86,6 +88,10 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<Login />} isFullscreen={true} />}
         path={LOGIN}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<LandingPage />} isFullscreen={true} />}
+        path={LANDING_PAGE}
       />
       <Route
         element={
