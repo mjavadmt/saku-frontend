@@ -64,6 +64,7 @@ export const auctionCreated = [
     dueDate: "2021-09-05T12:29:53.000Z",
     category: 2,
   },
+  
 ];
 
 export const auctionParticipated = [

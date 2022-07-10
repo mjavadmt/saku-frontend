@@ -80,7 +80,7 @@ const chartData = {
           fontFamily: "Dana-FaNum, Arial, sans-serif",
           fontWeight: 10,
         },
-        offsetX: -75,
+        offsetX: -65,
         offsetY: 0,
         rotate: 0,
         formatter: (value) => {
