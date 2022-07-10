@@ -12,8 +12,8 @@ const options = [
   { value: "1398", label: "1398" },
 ];
 
-export const RevenueOnMonth = () => {
-  const [selectedOption, setSelectedOption] = React.useState(options[0]);
+export const RevenueOnMonth = ({ data }) => {
+  // const [selectedOption, setSelectedOption] = React.useState(options[0]);
 
   return (
     <div className={cardClass}>
@@ -21,7 +21,7 @@ export const RevenueOnMonth = () => {
         <div>کسب درآمد</div>
         <div className="flex-grow" />
         <div>
-          <div className="text-xs font-thin">انتخاب سال</div>
+          {/* <div className="text-xs font-thin">انتخاب سال</div>
           <Select
             defaultValue={selectedOption}
             onChange={setSelectedOption}
@@ -38,7 +38,7 @@ export const RevenueOnMonth = () => {
             // })}
             options={options}
             className="text-sm text-black"
-          />
+          /> */}
         </div>
       </div>
       <div className="p-5">
