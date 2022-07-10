@@ -6,13 +6,11 @@ const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
 const useChat = (userName, messageList) => {
   const [messages, setMessages] = useState(messageList); // Sent and received messages
   const socketRef = useRef();
-  const SOCKET_SERVER_URL = `ws://188.121.110.151:8887`;
+  const SOCKET_SERVER_URL = `ws://188.121.110.151:8887/chat/mjavad/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYxNDQ5NzYwLCJpYXQiOjE2NTYyNjU3NjAsImp0aSI6IjRlNzNhYTVjMzNkMjRkNGRiOTg3M2E3NTdiYmE2MGZlIiwidXNlcl9pZCI6M30.4PHLLWr3ZBFLpu4IWQsOfXVRuX-fB6590tmlPvhkbg8`;
   useEffect(() => {
     if (!!userName) {
       // Creates a WebSocket connection
-      socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-        query: { userName },
-      });
+      socketRef.current = socketIOClient(SOCKET_SERVER_URL);
 
       // Listens for incoming messages
       socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
@@ -29,7 +27,7 @@ const useChat = (userName, messageList) => {
         socketRef.current.disconnect();
       };
     }
-  }, [userName]);
+  }, [userName, SOCKET_SERVER_URL]);
 
   // Sends a message to the server that
   // forwards it to all users in the same room

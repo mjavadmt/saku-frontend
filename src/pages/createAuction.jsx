@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Box from "@mui/material/Box";
-import { FcInspection } from "react-icons/fc";
+import { FcAddImage, FcInspection } from "react-icons/fc";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -20,6 +20,7 @@ import { GET_CATEGORIES } from "./../constant/apiRoutes";
 import { POST_AUCTION } from "constant/apiRoutes";
 import { toast } from "react-toastify";
 import { toUsDate } from "utils/dateConverter";
+
 export const CreateAuction = ({ inTestEnvierment = false }) => {
   const [auctionType, setAuctionType] = useState("");
   const [finishDate, setFinishDate] = useState(null);
@@ -29,21 +30,40 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   const [auctionValue, setAuctionValue] = useState({});
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploadImg, setIsUploadImg] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
+  const fileRef = useRef();
   const handleSubmit = () => {
+    let form_data = new FormData();
+    setAuctionValue({ ...auctionValue, user: localStorage.getItem("userId") });
+    for (var key in auctionValue) {
+      if (key === "tags") {
+        console.log(auctionValue[key]);
+        for (var tag in auctionValue[key]) {
+          console.log(auctionValue[key][tag]);
+          form_data.append(
+            key,
+            JSON.stringify({ tag: auctionValue[key][tag] })
+          );
+        }
+      } else {
+        form_data.append(key, auctionValue[key]);
+      }
+    }
+
     setIsLoading(true);
-    post(POST_AUCTION, {
-      ...auctionValue,
-      user: localStorage.getItem("userId"),
-    })
+    post(POST_AUCTION, form_data)
       .then((res) => {
         toast.success("با موفقیت انجام شد");
         setIsLoading(false);
+        setIsUploadImg(false);
         Array.from(document.querySelectorAll("input")).forEach(
           (input) => (input.value = "")
         );
@@ -52,10 +72,20 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         setCategory("");
         setFinishDate(null);
         setStartDate(null);
+        setDescription("");
         setTags([]);
       })
       .catch(() => setIsLoading(false));
   };
+  const uploadFile = (event) => {
+    setIsUploadImg(true);
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      setImgUrl(URL.createObjectURL(img));
+      setAuctionValue({ ...auctionValue, auction_image: img });
+    }
+  };
+
   useEffect(() => {
     if (!inTestEnvierment)
       get(GET_CATEGORIES).then((res) => setCategories(res.data));
@@ -65,7 +95,6 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 600,
     bgcolor: "black",
     borderRadius: "25px",
     border: "2px solid #000",
@@ -74,7 +103,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   };
   const renderStartCustomInput = ({ ref }) => (
     <Box
-      className="col-span-2 ml-24"
+      className="col-span-2 md:ml-24 "
       sx={{ display: "flex", alignItems: "flex-end" }}
     >
       <OutlinedInput
@@ -97,7 +126,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   );
   const renderEndCustomInput = ({ ref }) => (
     <Box
-      className="col-span-2 ml-24"
+      className="col-span-2 md:ml-24"
       sx={{ display: "flex", alignItems: "flex-end" }}
     >
       <OutlinedInput
@@ -131,12 +160,12 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           <FcInspection data-testid="icon" size={150} />
         </div>
 
-        <div className="mt-5 mb-10 grid grid-cols-8 gap-8">
+        <div className="mt-5 mb-10 grid md:grid-cols-8 gap-8">
           <div className="mt-5 flex justify-center">
             <p>نوع:</p>
           </div>
           <Box
-            className="col-span-7 ml-24"
+            className="col-span-7 md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <Select
@@ -151,7 +180,6 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                 "aria-label": "Without label",
                 "data-testid": "select",
               }}
-              defaultValue={1}
             >
               <MenuItem data-testid="select-option" value={1}>
                 مزایده
@@ -166,7 +194,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <p>نام:</p>
           </div>
           <Box
-            className="col-span-7 ml-24"
+            className="col-span-7 md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <OutlinedInput
@@ -186,7 +214,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <p>دسته بندی:</p>
           </div>
           <Box
-            className="col-span-7 ml-24"
+            className="col-span-7 md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <Select
@@ -218,20 +246,26 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <p>نوع:</p>
           </div>
           <Box
-            className="col-span-7  ml-24"
+            className="col-span-7  md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <Select
               fullWidth
               value={auctionType}
-              onChange={(e) => setAuctionType(e.target.value)}
+              onChange={(e) => {
+                setAuctionType(e.target.value);
+                setAuctionValue({
+                  ...auctionValue,
+                  is_online: e.target.value !== 10,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               defaultValue={10}
             >
               <MenuItem value={10}>آفلاین</MenuItem>
               <MenuItem value={20}>آنلاین</MenuItem>
-              <MenuItem value={30}>به‌روز‌رسانی دلخواه</MenuItem>
+              {/* <MenuItem value={30}>به‌روز‌رسانی دلخواه</MenuItem> */}
             </Select>
           </Box>
 
@@ -245,7 +279,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <p>قیمت پایه:</p>
           </div>
           <Box
-            className="col-span-7 ml-24"
+            className="col-span-7 md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <OutlinedInput
@@ -266,7 +300,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           <div className="mt-5 flex justify-center">
             <p>تاریخ شروع:</p>
           </div>
-          <div className="w-full col-span-7 ml-24">
+          <div className="w-full col-span-7 md:ml-24 px-5">
             <DatePicker
               wrapperClassName="w-full"
               value={startDate}
@@ -286,7 +320,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           <div className="mt-5 flex justify-center">
             <p>مهلت ارسال:</p>
           </div>
-          <div className="w-full col-span-7 ml-24">
+          <div className="w-full col-span-7 md:ml-24 px-5">
             <DatePicker
               wrapperClassName="w-full"
               value={finishDate}
@@ -308,7 +342,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <p>تگ های مرتبط:</p>
           </div>
           <Box
-            className="col-span-7 ml-24"
+            className="col-span-7 md:ml-24 px-5"
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <Autocomplete
@@ -340,7 +374,43 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               )}
             />
           </Box>
+          <div className="mt-5 flex justify-center">
+            <p>تصویر:</p>
+          </div>
+          <div
+            role="button"
+            onClick={() => fileRef.current.click()}
+            className="w-52 flex justify-center items-end col-span-7 border mr-4 "
+          >
+            <input type="file" onChange={uploadFile} hidden ref={fileRef} />
+            {!!imgUrl ? (
+              <img className="w-32 h-32 p-2  flex " src={imgUrl} alt="img" />
+            ) : (
+              <FcAddImage className="w-32 h-32 p-2  flex " />
+            )}
+          </div>
+          <div className="mt-5 flex justify-center">
+            <p>توضیحات:</p>
+          </div>
+          <Box
+            className="col-span-7 md:ml-24 px-5"
+            sx={{ display: "flex", alignItems: "flex-end" }}
+          >
+            <OutlinedInput
+              fullWidth
+              multiline
+              id="input-with-sx"
+              name="description"
+              value={description}
+              onChange={(e) => {
+                handleData(e);
+                setDescription(e.target.value);
+              }}
+              variant="standard"
+            />
+          </Box>
         </div>
+
         <div className="flex justify-center mb-5">
           <button
             onClick={handleSubmit}
@@ -352,7 +422,8 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               !auctionValue.name ||
               !auctionValue.limit ||
               !finishDate ||
-              !startDate
+              !startDate ||
+              !auctionValue.description
             }
             data-testid="subBtn"
           >
@@ -366,7 +437,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         open={isOpen}
         onClose={handleClose}
       >
-        <Box sx={style}>
+        <Box className="md:w-96 w-full" sx={style}>
           <Typography
             className="text-white"
             id="modal-modal-title"
@@ -405,7 +476,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         open={isOpenTwo}
         onClose={handleCloseTwo}
       >
-        <Box sx={style}>
+        <Box className="md:w-96 w-full" sx={style}>
           <Typography
             className="text-white"
             id="modal-modal-title"

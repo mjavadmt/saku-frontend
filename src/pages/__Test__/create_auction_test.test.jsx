@@ -16,7 +16,7 @@ describe("create auction component test", () => {
     render(<CreateAuctionTest />, { flushUseEffects: false });
     const userNameInput = screen.getByTestId("select");
     fireEvent.change(userNameInput, { target: { value: "0" } });
-    expect(userNameInput.value).toBe("1");
+    expect(userNameInput.value).toBe("0");
   });
   it("Change name input", async () => {
     render(<CreateAuctionTest />, { flushUseEffects: false });

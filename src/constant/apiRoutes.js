@@ -9,5 +9,6 @@ export const GET_ALL_AUCTIONS = "/auction/";
 export const GET_CATEGORIES = "/auction/categories/";
 export const POST_AUCTION = "/auction/";
 export const GET_USER_LIST = "/chat/my/";
+export const GET_MSG_LIST = "/chat/messages/";
 export const POST_BID = "/bid/";
 export const GET_MY_BID = "/bid/my";

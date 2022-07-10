@@ -2,7 +2,8 @@ import React from "react";
 import cx from "classnames";
 import { Avatar } from "@mui/material";
 export const TextMessage = ({ message }) => {
-  const isSender = message.from === 1 ? true : false;
+  const isSender =
+    message.sender === localStorage.getItem("userId") ? true : false;
   return (
     <React.Fragment>
       <div
@@ -28,14 +29,17 @@ export const TextMessage = ({ message }) => {
             }
           )}
         >
-          <div className="text-white mx-2">{message.msg}</div>
+          <div className="text-white mx-2">{message.text}</div>
           <div
             className={cx("text-xs -mb-2  mt-2 text-white", {
               "text-right": !isSender,
               "text-left": isSender,
             })}
           >
-            {message.date.split(" ")[1]}
+            {new Date(message.created_at).toLocaleTimeString("fa-IR", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </div>
         </div>
       </div>
