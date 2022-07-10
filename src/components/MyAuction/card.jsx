@@ -26,10 +26,9 @@ const defineStatus = (startDate, endDate) => {
 };
 
 const defineType = (num) => {
-  if (num <= 3)
-    return "مزایده"
-  return "مناقصه"
-}
+  if (num <= 3) return "مزایده";
+  return "مناقصه";
+};
 
 export const Card = ({
   img,
@@ -53,6 +52,7 @@ export const Card = ({
         src={img}
         alt="عکس مزایده"
       />
+
       <div className="mt-2 p-4 grid grid-cols-2 grid-rows-3">
         <div className="flex items-center m-1">
           <DescriptionIcon className="m-0.5" fontSize="inherit" />

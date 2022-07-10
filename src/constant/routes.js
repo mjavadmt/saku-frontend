@@ -13,5 +13,7 @@ export const LOGIN = "/login";
 export const SIGNUP = "/signup";
 export const LOGOUT = "/logout";
 export const FORGOTPASSWORD = "/forgotpassword";
-export const AUCTION_DETAIL_PAGE = "/auction-detail/:auctionId";
+export const AUCTION_DETAIL_PAGE = "/auction-detail/:token";
 export const AUCTION_DETAIL_WITHOUT_SUFFIX = "/auction-detail";
+export const LANDING_PAGE = "/landing";
+

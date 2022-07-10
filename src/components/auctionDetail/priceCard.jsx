@@ -14,6 +14,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import { toast } from "react-toastify";
 import submitPrice from "assets/img/submit-price.png";
+import { post } from "utils/api";
+import { POST_BID } from "constant/apiRoutes";
 
 const style = {
   position: "absolute",
@@ -72,7 +74,7 @@ const ChildModal = ({
   );
 };
 
-export const PriceCard = ({ auction }) => {
+export const PriceCard = ({ auctionData, token }) => {
   const [enterPriceModal, setEnterPriceModal] = React.useState(false);
   const [valuePriceModal, setValuePriceModal] = React.useState("");
   const [onInitializedInput, setOnInitializedInput] = React.useState(true);
@@ -80,14 +82,23 @@ export const PriceCard = ({ auction }) => {
 
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    toast.success("ثبت قیمت با موفقیت انجام شد");
-    setValuePriceModal(0);
-    setEnterPriceModal(false);
-    setConfirmPriceModal(false);
+    post(`${POST_BID}/${token}`, {
+      price: valuePriceModal,
+      time: new Date().toISOString(),
+      user: localStorage.getItem("userId"),
+      auction: 0,
+    })
+      .then(() => {
+        toast.success("ثبت قیمت با موفقیت انجام شد");
+        setValuePriceModal(0);
+        setEnterPriceModal(false);
+        setConfirmPriceModal(false);
+      })
+      .catch(() => {});
   };
   return (
     <React.Fragment>
-      <div className={cardClass}>
+      <div className={cx(cardClass, "h-97")}>
         <div className={headerClass}>ثبت قیمت</div>
         <div className="grid grid-cols-12">
           <div className="col-span-12 flex justify-center">
@@ -101,31 +112,32 @@ export const PriceCard = ({ auction }) => {
             <div className="font-bold">بهترین قیمت : </div>
             <div
               className={cx("mr-1", {
-                "hidden-price": !auction.bestPrice,
+                "hidden-price":
+                  !!auctionData.best_bid && !auctionData.best_bid.price,
               })}
               data-tip
-              data-for={`price-auction-${auction.id}`}
+              data-for={`price-auction-${auctionData.id}`}
             >
-              {auction.bestPrice
-                ? defineUnit(auction.bestPrice, 1)
+              {!!auctionData.best_bid && auctionData.best_bid.price
+                ? defineUnit(auctionData.best_bid.price, 1)
                 : "غیرقابل‌نمایش"}
             </div>
           </div>
-          {!auction.bestPrice && (
+          {!!auctionData.best_bid && !auctionData.best_bid.price && (
             <ReactTooltip
               className="opaque"
               effect="solid"
               backgroundColor="white"
               textColor="#000"
               place="top"
-              id={`price-auction-${auction.id}`}
+              id={`price-auction-${auctionData.id}`}
             >
               غیر قابل نمایش
             </ReactTooltip>
           )}
           <div className="p-3 flex col-span-12 md:col-span-6">
             <div className="font-bold"> تاریخ پایان : </div>
-            <div className="mr-1">{dateConverter(auction.endDate)}</div>
+            <div className="mr-1">{dateConverter(auctionData.finished_at)}</div>
           </div>
         </div>
         <div className="flex justify-center p-3">
@@ -133,7 +145,7 @@ export const PriceCard = ({ auction }) => {
             className="rounded-lg submit-price w-2/3"
             variant="contained"
             size="medium"
-            disabled={disabledSubmitPrice(auction.endDate)}
+            disabled={disabledSubmitPrice(auctionData.finished_at)}
             onClick={() => setEnterPriceModal(true)}
           >
             ثبت قیمت
@@ -159,7 +171,7 @@ export const PriceCard = ({ auction }) => {
               inputProps={{ maxLength: 4 }}
               error={
                 !onInitializedInput &&
-                showErrorInput(valuePriceModal, auction.price)
+                showErrorInput(valuePriceModal, auctionData.limit)
               }
               placeholder="قیمت وارد شده به تومان می‌باشد"
               startAdornment={
@@ -169,7 +181,7 @@ export const PriceCard = ({ auction }) => {
               }
             />
             {!onInitializedInput &&
-              showErrorInput(valuePriceModal, auction.price) && (
+              showErrorInput(valuePriceModal, auctionData.limit) && (
                 <p className="font-thin text-xs text-red-600 mt-2 mr-2">
                   قیمت ثبت شده باید از قیمت پایه وارد شده بالاتر باشد
                 </p>
@@ -178,13 +190,13 @@ export const PriceCard = ({ auction }) => {
           <div className="flex justify-end mt-4">
             <Button
               onClick={() => {
-                if (!showErrorInput(valuePriceModal, auction.price)) {
+                if (!showErrorInput(valuePriceModal, auctionData.limit)) {
                   setConfirmPriceModal(true);
                 }
               }}
               variant="contained"
               className="submit-price "
-              disabled={showErrorInput(valuePriceModal, auction.price)}
+              disabled={showErrorInput(valuePriceModal, auctionData.limit)}
             >
               ثبت
             </Button>

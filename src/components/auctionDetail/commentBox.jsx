@@ -18,12 +18,10 @@ export const CommentBox = () => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && commentTxt !== "" && !event.shiftKey) {
-      console.log("jafar");
       addComment();
       return;
     }
     if (event.key === "Enter" && event.shiftKey) {
-      console.log("mmd");
       setCommentTxt(commentTxt + "\n");
       return;
     }
