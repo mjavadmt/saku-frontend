@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { get } from "utils/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
+import useWebSocket from "react-use-websocket";
 
 const auction = {
   ...auctions[0],
@@ -29,17 +30,50 @@ const auction = {
 export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
   const [auctionData, setAuctionData] = useState({});
   const randomSide = true;
   const { token } = useParams();
+  const [socketUrl, setSocketUrl] = useState(
+    `ws://188.121.110.151:8888/auction/${token}/${localStorage.getItem(
+      "access"
+    )}`
+  );
+
+  const [bidHistory, setBidHistory] = useState([]);
+
+  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
+
   useEffect(() => {
+    setIsLoading(true);
+    get(`/bid/${token}`)
+      .then((res) => {
+        setBidHistory(res.data.reverse());
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
     get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
       setAuctionData(res.data);
+      // setIsOnline(res.data.is_online);
       if (res.data.user.id == localStorage.getItem("userId")) {
         setIsOwner(true);
       }
     });
-  }, [token]);
+    if (lastJsonMessage !== null) {
+      console.log(lastJsonMessage);
+      setBidHistory([
+        {
+          price: lastJsonMessage.price,
+          user: localStorage.getItem("userId"),
+          time: new Date().toISOString(),
+        },
+        ...bidHistory,
+      ]);
+    }
+  }, [token, lastJsonMessage]);
   return (
     <React.Fragment>
       <Grid container spacing={0}>
@@ -47,7 +81,12 @@ export const AuctionDetialPage = () => {
           <AuctionDetailCard auctionData={auctionData} />
         </Grid>
         <Grid item xs={12} md={5}>
-          <PriceCard token={token} auctionData={auctionData} />
+          <PriceCard
+            token={token}
+            auctionData={auctionData}
+            isOnline={isOnline}
+            submitOnlinePrice={sendJsonMessage}
+          />
         </Grid>
 
         <Grid item xs={12} md={4}>
@@ -58,16 +97,20 @@ export const AuctionDetialPage = () => {
           )}
         </Grid>
         <Grid item xs={12} md={8}>
-          <TableLog />
+          <TableLog
+            bidHistory={bidHistory}
+            isLoading={isLoading}
+            isOwner={isOwner}
+          />
         </Grid>
         <Grid item xs={12}>
-          <CommentBox />
+          <CommentBox token={token} />
         </Grid>
       </Grid>
       <PopUpModal
         handleClose={setPopUpModal}
         isOpen={popUpModal}
-        type={auction.type}
+        type={isOnline}
       />
     </React.Fragment>
   );
