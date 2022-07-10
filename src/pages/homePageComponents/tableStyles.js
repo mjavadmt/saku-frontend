@@ -35,6 +35,15 @@ const tableStyles = {
       borderBottomColor: "white",
     },
   },
+  noData: {
+		style: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: "#161a49",
+      color : "white"
+		},
+	},
 };
 
 export default tableStyles;

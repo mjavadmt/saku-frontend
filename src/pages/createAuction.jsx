@@ -181,10 +181,10 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                 "data-testid": "select",
               }}
             >
-              <MenuItem data-testid="select-option" value={"0"}>
+              <MenuItem data-testid="select-option" value={1}>
                 مزایده
               </MenuItem>
-              <MenuItem data-testid="select-option" value={"1"}>
+              <MenuItem data-testid="select-option" value={2}>
                 مناقصه
               </MenuItem>
             </Select>

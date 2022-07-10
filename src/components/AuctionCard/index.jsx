@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "constant/routes";
 
-
 export const ActionCard = ({
   imgSrc,
   title,
@@ -17,7 +16,8 @@ export const ActionCard = ({
   date,
   price,
   tags,
-  id
+  id,
+  token,
 }) => {
   let navigate = useNavigate();
   return (
@@ -68,7 +68,9 @@ export const ActionCard = ({
           </div>
           <div className="flex items-end justify-end">
             <Button
-              onClick={() => navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${id}`)}
+              onClick={() =>
+                navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`)
+              }
               className="rounded-lg"
               variant="contained"
               size="medium"

@@ -32,10 +32,16 @@ export const typeChipMaker = (type) => {
 };
 
 export const defineStatusColor = (status) => {
-  if (status === "fail")
+  if (status === "failed")
     return (
       <div className={`${chipConstantClass} bg-purple-100 text-pink-400`}>
         ناموفق
+      </div>
+    );
+    if (status === "unknown")
+    return (
+      <div className={`${chipConstantClass} bg-yellow-100 text-orange-400`}>
+        نامشخص
       </div>
     );
   return (
