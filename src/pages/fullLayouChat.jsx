@@ -47,7 +47,6 @@ export const FullLayoutChat = () => {
   const uploadFile = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
-      console.log(img);
       var msgList1 = [...msgList];
       if (img.type.includes("image")) {
         msgList1.push({

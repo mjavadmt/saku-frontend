@@ -6,7 +6,7 @@ export const UserRow = ({ unReadMsg, date, userName, avatar, onClickRow }) => {
     <React.Fragment>
       <div
         onClick={onClickRow}
-        className="flex justify-between items-center m-4 mt-4  text-white"
+        className="flex justify-between items-center m-4 mt-4 cursor-pointer  text-white"
       >
         <div className="flex gap-4 items-center">
           <Badge badgeContent={!!unReadMsg ? unReadMsg : null} color="error">
@@ -15,10 +15,10 @@ export const UserRow = ({ unReadMsg, date, userName, avatar, onClickRow }) => {
 
           <p className="flex-1">
             {userName}
-            <div className="text-slate-900 w-40 font-thin text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+            {/* <div className="text-slate-900 w-40 font-thin text-sm whitespace-nowrap overflow-hidden text-ellipsis">
               سلام سلام سلام سلام سشیبشسیبسشی شسیبسشیبشسشسبی سشیبشسیبشسیبشسی
               شسیبیسبسیشب شسیبسشیبشسیب
-            </div>
+            </div> */}
           </p>
         </div>
         <small>{new Date(date).toLocaleDateString("fa-IR")}</small>
