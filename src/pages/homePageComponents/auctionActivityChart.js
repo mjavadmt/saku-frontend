@@ -31,15 +31,15 @@ export const AuctionActivity = ({ data }) => {
       </div>
       <hr className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
       <div className="p-3 flex">
-        <div className="h-2 w-2 m-1 rounded-full bg-palette4 "></div>
-        <div className="text-sm">مزایده‌های شرکت کرده</div>
+        <div className="h-2 w-2 m-1 rounded-full bg-danger "></div>
+        <div className="text-sm">مزایده‌های ایجاد کرده</div>
         <div className="flex-grow"></div>
         <div>{data[2]}</div>
       </div>
       <hr className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
       <div className="p-3 flex">
-        <div className="h-2 w-2 m-1 rounded-full bg-danger "></div>
-        <div className="text-sm">مزایده‌های ایجاد کرده</div>
+        <div className="h-2 w-2 m-1 rounded-full bg-palette4 "></div>
+        <div className="text-sm">مزایده‌های شرکت کرده</div>
         <div className="flex-grow"></div>
         <div>{data[3]}</div>
       </div>
