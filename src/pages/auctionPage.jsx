@@ -44,7 +44,7 @@ export const AuctionPage = () => {
 
       <div className="flex justify-center mt-5">
         <Pagination
-          count={Math.ceil(auctions.length / 5)}
+          count={Math.ceil(auctions.length / dataOnPage)}
           page={page}
           onChange={handleChange}
           color="primary"

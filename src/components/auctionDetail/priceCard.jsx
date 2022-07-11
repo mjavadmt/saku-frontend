@@ -86,7 +86,7 @@ export const PriceCard = ({
   const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    if (true) {
+    if (isOnline) {
       submitOnlinePrice({ price: valuePriceModal });
       setConfirmPriceModal(false);
       setEnterPriceModal(false);

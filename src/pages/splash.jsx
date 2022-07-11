@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 import { homePageData } from "statics/homePageStats";
 import { get } from "utils/api";
+import { CircularProgress } from "@mui/material";
 
 const chartHandler = (name, listObj) => {
   return [
@@ -49,13 +50,23 @@ const pieChartHanlder = (num1, num2, num3, num4) => {
 
 export const Splash = () => {
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setData(homePageData);
-    get("/homepage/2022").then((res) => setData(res.data.data))
+    get("/homepage/2022")
+      .then((res) => {
+        setData(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((e) => setIsLoading(false));
   }, []);
 
-  return (
+  return isLoading ? (
+    <span className="flex h-full justify-center items-center mt-24">
+      <CircularProgress color="inherit" />
+    </span>
+  ) : (
     <Grid container spacing={2}>
       <Grid item xs={12} md={3}>
         <ViewFromDashboard

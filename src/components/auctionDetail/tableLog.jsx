@@ -82,7 +82,7 @@ export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
             />
             <div className="flex justify-center">
               <Pagination
-                count={Math.ceil(bidHistory.length / 5)}
+                count={Math.ceil(bidHistory.length / dataOnPage)}
                 page={page}
                 onChange={handleChange}
                 color="primary"
