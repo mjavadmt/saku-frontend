@@ -79,6 +79,7 @@ export const PriceCard = ({
   token,
   isOnline,
   submitOnlinePrice,
+  isOwner,
 }) => {
   const [enterPriceModal, setEnterPriceModal] = React.useState(false);
   const [valuePriceModal, setValuePriceModal] = React.useState("");
@@ -86,7 +87,7 @@ export const PriceCard = ({
   const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    if (isOnline) {
+    if (false) {
       submitOnlinePrice({ price: valuePriceModal });
       setConfirmPriceModal(false);
       setEnterPriceModal(false);
@@ -156,7 +157,7 @@ export const PriceCard = ({
             className="rounded-lg submit-price w-2/3"
             variant="contained"
             size="medium"
-            disabled={disabledSubmitPrice(auctionData.finished_at)}
+            disabled={disabledSubmitPrice(auctionData.finished_at) || isOwner}
             onClick={() => setEnterPriceModal(true)}
           >
             ثبت قیمت
