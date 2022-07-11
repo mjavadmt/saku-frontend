@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, Badge } from "@mui/material";
+import { host } from "utils/config";
 
 export const UserRow = ({ unReadMsg, date, userName, avatar, onClickRow }) => {
   return (
@@ -10,7 +11,7 @@ export const UserRow = ({ unReadMsg, date, userName, avatar, onClickRow }) => {
       >
         <div className="flex gap-4 items-center">
           <Badge badgeContent={!!unReadMsg ? unReadMsg : null} color="error">
-            <Avatar src={!!avatar ? avatar : null} />
+            <Avatar src={host + avatar} />
           </Badge>
 
           <p className="flex-1">

@@ -91,14 +91,14 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             onClick={(e) => navigate(AUCTION_PAGE)}
             icon={<GavelIcon fontSize="small" />}
           >
-            مزایده‌ها
+            مزایده‌ها / مناقصه ها
           </MenuItem>
           <MenuItem
             active={window.location.pathname === CREATE_AUCTION}
             onClick={(e) => navigate(CREATE_AUCTION)}
             icon={<AddOutlinedIcon fontSize="small" />}
           >
-            ایجاد مزایده
+            ایجاد مزایده / مناقصه
           </MenuItem>
 
           <MenuItem
@@ -106,7 +106,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             onClick={(e) => navigate(MY_AUCTIONS)}
             icon={<LocalActivityIcon fontSize="small" />}
           >
-            مزایده‌های من
+            مزایده‌/ مناقصه های من
           </MenuItem>
         </Menu>
       </SidebarContent>

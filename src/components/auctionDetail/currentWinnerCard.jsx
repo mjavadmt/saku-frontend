@@ -21,7 +21,7 @@ export const CurrentWinner = ({ bestBidUser }) => {
             width: 100,
             color: "white",
           }}
-          src={!!bestBidUser && bestBidUser.user.profile_image}
+          src={!!bestBidUser.user && bestBidUser.user.profile_image}
         />
       </div>
       <div className="flex m-4 items-center">

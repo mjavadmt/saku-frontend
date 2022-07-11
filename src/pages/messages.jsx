@@ -16,11 +16,13 @@ import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
 import { useParams } from "react-router-dom";
 import "assets/css/style.css";
+import { host } from "utils/config";
 
 export const Messages = () => {
   const endOfMsg = useRef(null);
   const { username } = useParams();
   const [userName, setUserName] = useState(username);
+  const [userImg, setUserImg] = useState("");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [socketUrl, setSocketUrl] = useState(
     `ws://188.121.110.151:8888/chat/${userName}/${localStorage.getItem(
@@ -30,9 +32,8 @@ export const Messages = () => {
 
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
-    socketUrl
-  );
+  const { sendJsonMessage, lastJsonMessage, readyState } =
+    useWebSocket(socketUrl);
 
   const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   // const { messages, sendMessage } = useChat(userName, msgList);
@@ -157,10 +158,11 @@ export const Messages = () => {
                   unReadMsg={user.unReadMsg}
                   key={user.date + user.unReadMsg}
                   userName={user.username}
-                  avatar={user.avatar}
+                  avatar={user.profile_image}
                   onClickRow={() => {
                     setUserName(user.username);
                     getMsgList(user.username);
+                    setUserImg(host + user.profile_image);
                     setSocketUrl(
                       `ws://188.121.110.151:8888/chat/${
                         user.username
@@ -199,7 +201,7 @@ export const Messages = () => {
             >
               <Avatar
                 sx={{ width: 50, height: 50 }}
-                // src={userList[0].avatar}
+                src={userImg}
                 className="m-3 mr-6 "
               />
               <p className="flex-1 mt-8">
@@ -228,7 +230,11 @@ export const Messages = () => {
                         </div>
                       </div>
 
-                      <TextMessage message={m} />
+                      <TextMessage
+                        message={m}
+                        myImg={localStorage.getItem("profileImg")}
+                        userImg={userImg}
+                      />
                     </>
                   );
 
@@ -261,10 +267,16 @@ export const Messages = () => {
                 //   default:
                 //     return null;
                 // }
-                return <TextMessage message={m} />;
+                return (
+                  <TextMessage
+                    message={m}
+                    myImg={localStorage.getItem("profileImg")}
+                    userImg={userImg}
+                  />
+                );
               })
             ) : (
-              <img src={empty} className="mr-20" alt="empty" />
+              <img src={empty} className="flex justify-center" alt="empty" />
             )}
             <div ref={endOfMsg}></div>
           </div>

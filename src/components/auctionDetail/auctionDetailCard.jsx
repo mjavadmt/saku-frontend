@@ -11,6 +11,8 @@ import { defineUnit } from "utils/formatPrice";
 import ReactTooltip from "react-tooltip";
 import { useWindowDimensions } from "pages/homePageComponents/lastMessages";
 import { dateConverter } from "utils/dateConverter";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import { host } from "utils/config";
 
 const setLengthOfDescription = (width) => {
   if (width < 500) return 100;
@@ -28,7 +30,11 @@ export const AuctionDetailCard = ({ auctionData }) => {
       >
         <img
           className="p-3 rounded-3xl h-52  col-span-5 md:col-span-6"
-          src={!!auctionData.auction_image ? auctionData.auction_image : ""}
+          src={
+            !!auctionData.auction_image
+              ? host + auctionData.auction_image
+              : noAuctionImage
+          }
           alt="عکس جزئیات مزایده"
         />
         <div className="p-0 m-1 col-span-7 md:col-span-6">

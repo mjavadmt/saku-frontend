@@ -14,6 +14,7 @@ import { get } from "utils/api";
 import { GET_MSG_LIST, GET_USER_LIST } from "constant/apiRoutes";
 import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
+import { host } from "./../utils/config";
 
 export const FullLayoutChat = () => {
   const endOfMsg = useRef(null);
@@ -35,6 +36,7 @@ export const FullLayoutChat = () => {
   const navigate = useNavigate();
   const { username } = useParams();
   const [userName, setUserName] = useState(username);
+  const [userImg, setUserImg] = useState("");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [socketUrl, setSocketUrl] = useState(
     `ws://188.121.110.151:8888/chat/${userName}/${localStorage.getItem(
@@ -145,7 +147,7 @@ export const FullLayoutChat = () => {
         >
           <div className="flex-1 w-full h-full">
             {userList.length === 0 ? (
-              <img src={empty} alt="empty" />
+              <img src={empty} className="flex justify-center" alt="empty" />
             ) : (
               userList.map((user) => (
                 <UserRow
@@ -153,10 +155,11 @@ export const FullLayoutChat = () => {
                   unReadMsg={user.unReadMsg}
                   key={user.date + user.unReadMsg}
                   userName={user.username}
-                  avatar={user.avatar}
+                  avatar={user.profile_image}
                   onClickRow={() => {
                     setUserName(user.username);
                     getMsgList(user.username);
+                    setUserImg(host + user.profile_image);
                     setSocketUrl(
                       `ws://188.121.110.151:8888/chat/${
                         user.username
@@ -195,7 +198,7 @@ export const FullLayoutChat = () => {
             >
               <Avatar
                 sx={{ width: 50, height: 50 }}
-                // src={userList[0].avatar}
+                src={userImg}
                 className="m-3 mr-6 "
               />
               <p className="flex-1 mt-3 text-lg text-white">{userName}</p>
@@ -222,7 +225,11 @@ export const FullLayoutChat = () => {
                         </div>
                       </div>
 
-                      <TextMessage message={m} />
+                      <TextMessage
+                        myImg={localStorage.getItem("profileImg")}
+                        userImg={userImg}
+                        message={m}
+                      />
                     </>
                   );
 
@@ -255,10 +262,20 @@ export const FullLayoutChat = () => {
                 //   default:
                 //     return null;
                 // }
-                return <TextMessage message={m} />;
+                return (
+                  <TextMessage
+                    myImg={localStorage.getItem("profileImg")}
+                    userImg={userImg}
+                    message={m}
+                  />
+                );
               })
             ) : (
-              <img src={empty} className="flex justify-center" alt="empty" />
+              <img
+                src={empty}
+                className="flex justify-center w-full"
+                alt="empty"
+              />
             )}
             <div ref={endOfMsg}></div>
           </div>
