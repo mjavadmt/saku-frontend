@@ -65,11 +65,6 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
         <Menu iconShape="circle">
           <MenuItem
             icon={<Person />}
-            suffix={
-              // <span className="badge yellow">
-              <IoMdAlert size={24} color="orange" />
-              // </span>
-            }
             active={window.location.pathname === PROFILE}
             onClick={(e) => navigate(PROFILE)}
           >
@@ -80,7 +75,6 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             active={window.location.pathname === MESSAGES}
             onClick={(e) => navigate(MESSAGES)}
             icon={<InsertCommentIcon />}
-            suffix={<span className="badge red">3</span>}
           >
             پیام‌ها
           </MenuItem>

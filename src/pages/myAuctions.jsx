@@ -31,9 +31,10 @@ export const MyAuctions = () => {
     let username = localStorage.getItem("username");
     let filteredObj = {};
     if (name !== "") filteredObj["name"] = name;
-    if (status !== "") filteredObj["finished"] = status;
+    if (status !== "") filteredObj["finished"] = !status;
     if (type !== "") filteredObj["mode"] = type;
     if (basePrice !== "") filteredObj["limit"] = basePrice;
+
     get(`${GET_ALL_AUCTIONS}?username=${username}`, { params: filteredObj })
       .then((res) => {
         setAuctios(res.data);

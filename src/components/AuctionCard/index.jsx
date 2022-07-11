@@ -6,6 +6,7 @@ import { BsBookmarkStar } from "react-icons/bs";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "constant/routes";
+import cx from "classnames";
 
 export const ActionCard = ({
   imgSrc,
@@ -19,6 +20,7 @@ export const ActionCard = ({
   tags,
   id,
   token,
+  ourImage,
 }) => {
   let navigate = useNavigate();
   return (
@@ -27,7 +29,9 @@ export const ActionCard = ({
         <div className="flex items-start justify-center ">
           <img
             alt=""
-            className="rounded-xl lg:h-full lg:w-full h-1/2 w-3/4 "
+            className={cx("rounded-xl lg:h-full lg:w-full h-1/2 w-3/4 ", {
+              "p-3": !ourImage,
+            })}
             src={imgSrc}
           />
         </div>

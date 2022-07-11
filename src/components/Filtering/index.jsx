@@ -53,8 +53,8 @@ export const Filtering = ({
             fullWidth
             id="outlined-basic"
             placeholder="جست و جو"
-            value={auctionName}
-            onChange={(e) => setAuctionName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             InputProps={{
               startAdornment: <Search className="m-2" />,
             }}
