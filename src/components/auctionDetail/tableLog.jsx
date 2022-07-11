@@ -52,7 +52,7 @@ const columns = [
   },
 ];
 
-export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
+export const TableLog = ({ bidHistory, isLoading, isOwner, isOnline }) => {
   const [page, setPage] = React.useState(1);
   const dataOnPage = 5;
   const handleChange = (event, value) => {
@@ -70,7 +70,7 @@ export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
           <span className="flex h-97 justify-center items-center">
             <CircularProgress color="inherit" />
           </span>
-        ) : isOwner ? (
+        ) : isOwner || isOnline ? (
           <>
             <DataTable
               data={paginatedData()}

@@ -11,10 +11,27 @@ import { defineUnit } from "utils/formatPrice";
 import ReactTooltip from "react-tooltip";
 import { useWindowDimensions } from "pages/homePageComponents/lastMessages";
 import { dateConverter } from "utils/dateConverter";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import { host } from "utils/config";
 
 const setLengthOfDescription = (width) => {
   if (width < 500) return 100;
   return 220;
+};
+const defineAuctionType = (mode, isOnline) => {
+  if (mode === 1) {
+    if (isOnline) {
+      return 2;
+    } else {
+      return 1;
+    }
+  } else {
+    if (isOnline) {
+      return 5;
+    } else {
+      return 4;
+    }
+  }
 };
 
 export const AuctionDetailCard = ({ auctionData }) => {
@@ -29,7 +46,9 @@ export const AuctionDetailCard = ({ auctionData }) => {
         <img
           className="p-3 rounded-3xl h-52  col-span-5 md:col-span-6"
           src={
-            "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&w=1000&q=80"
+            !!auctionData.auction_image
+              ? host + auctionData.auction_image
+              : noAuctionImage
           }
           alt="عکس جزئیات مزایده"
         />
@@ -46,7 +65,11 @@ export const AuctionDetailCard = ({ auctionData }) => {
           </div>
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نوع : </div>
-            <div className="mr-1">{typeChipMaker(auctionData.mode)}</div>
+            <div className="mr-1">
+              {typeChipMaker(
+                defineAuctionType(auctionData.mode, auctionData.is_online)
+              )}
+            </div>
           </div>
           <div className="flex m-3 mr-1">
             <div className="font-bold"> شرکت : </div>

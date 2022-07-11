@@ -6,6 +6,7 @@ import { get } from "utils/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
 
 export const AuctionPage = () => {
   const [auctions, setAuctios] = useState([]);
@@ -58,7 +59,9 @@ export const AuctionPage = () => {
         <>
           {paginatedData().map((auction) => (
             <ActionCard
-              imgSrc="https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&w=1000&q=80"
+              imgSrc={
+                !!auction.auction_image ? auction.auction_image : noAuctionImage
+              }
               title={auction.name}
               city={auction.location}
               companyName={auction.user.username}

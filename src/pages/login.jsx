@@ -35,7 +35,12 @@ const theme = createTheme({
     },
   },
 });
-
+const changeDIR = (value) => {
+  if (value && value[0].match(/[a-z]/i)) {
+    return "ltr";
+  }
+  return "rtl";
+};
 export function Login() {
   const navigate = useNavigate();
   // const [isLoading, setIsLoading] = useState(false);
@@ -93,6 +98,9 @@ export function Login() {
             sx={{ mt: 1 }}
           >
             <TextField
+              style={{
+                direction: changeDIR(userName),
+              }}
               margin="normal"
               required
               fullWidth

@@ -140,7 +140,7 @@ export const PriceCard = ({
               data-tip
               data-for={`price-auction-${auctionData.id}`}
             >
-              {!!auctionData.best_bid && auctionData.best_bid.price
+              {!!auctionData.show_best_bid && auctionData.show_best_bid
                 ? defineUnit(auctionData.best_bid.price, 1)
                 : "غیرقابل‌نمایش"}
             </div>

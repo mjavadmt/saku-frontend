@@ -15,7 +15,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { Chip } from "@mui/material";
 import { useEffect } from "react";
-import { get, post } from "utils/api";
+import { get, patch, post } from "utils/api";
 import { GET_CATEGORIES } from "./../constant/apiRoutes";
 import { POST_AUCTION } from "constant/apiRoutes";
 import { toast } from "react-toastify";
@@ -32,6 +32,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [img, setImg] = useState();
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isUploadImg, setIsUploadImg] = useState(false);
@@ -41,21 +42,23 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
   const handleCloseTwo = () => setOpenTwo(false);
   const fileRef = useRef();
   const handleSubmit = () => {
-    let form_data = new FormData();
-    setAuctionValue({ ...auctionValue, user: localStorage.getItem("userId") });
-    for (var key in auctionValue) {
-      if (key === "tags") {
-        console.log(auctionValue[key].toString());
-        form_data.append(key, JSON.stringify(auctionValue[key].toString()));
-      } else {
-        form_data.append(key, auctionValue[key]);
-      }
-    }
-    for (var pair of form_data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    // let form_data = new FormData();
+    // setAuctionValue({ ...auctionValue, user: localStorage.getItem("userId") });
+    // for (var key in auctionValue) {
+    //   // if (key === "tags") {
+    //   //   form_data.append(key, auctionValue[key]);
+    //   // } else {
+    //   form_data.append(key, auctionValue[key]);
+    //   // }
+    // }
+    // for (var pair of form_data.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
     setIsLoading(true);
-    post(POST_AUCTION, form_data)
+    post(POST_AUCTION, {
+      ...auctionValue,
+      user: localStorage.getItem("userId"),
+    })
       .then((res) => {
         toast.success("با موفقیت انجام شد");
         setIsLoading(false);
@@ -70,6 +73,9 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         setStartDate(null);
         setDescription("");
         setTags([]);
+        let form_data = new FormData();
+        form_data.append("auction_image", img);
+        patch(`${POST_AUCTION}/${res.data.token}`, form_data);
       })
       .catch(() => setIsLoading(false));
   };
@@ -78,7 +84,8 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
       setImgUrl(URL.createObjectURL(img));
-      setAuctionValue({ ...auctionValue, auction_image: img });
+      setImg(img);
+      // setAuctionValue({ ...auctionValue, auction_image: img });
     }
   };
 
@@ -146,6 +153,12 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
       />
     </Box>
   );
+  const changeDIR = (value) => {
+    if (value && value[0].match(/[a-z]/i)) {
+      return "ltr";
+    }
+    return "rtl";
+  };
   const handleData = (e) => {
     setAuctionValue({ ...auctionValue, [e.target.name]: e.target.value });
   };
@@ -194,6 +207,9 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <OutlinedInput
+              style={{
+                direction: changeDIR(auctionValue["name"]),
+              }}
               fullWidth
               id="input-with-sx"
               name="name"
@@ -281,8 +297,11 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             <OutlinedInput
               fullWidth
               endAdornment={
-                <InputAdornment position="end">تومان</InputAdornment>
+                <InputAdornment position="start">تومان</InputAdornment>
               }
+              style={{
+                direction: "ltr",
+              }}
               id="input-with-sx"
               variant="standard"
               value={auctionValue.limit}
@@ -393,6 +412,9 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             sx={{ display: "flex", alignItems: "flex-end" }}
           >
             <OutlinedInput
+              style={{
+                direction: changeDIR(description),
+              }}
               fullWidth
               multiline
               id="input-with-sx"

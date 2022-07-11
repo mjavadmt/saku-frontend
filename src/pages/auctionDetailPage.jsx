@@ -15,17 +15,7 @@ import { get } from "utils/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
 
-const auction = {
-  ...auctions[0],
-  private: false,
-  bestPrice: 1222131,
-  canEnterPrice: true,
-  tags: ["شرکتی", "مهندسی", "کانونی"],
-  location: "تهران، خیابان رجایی، کوچه ذاکری",
-  userName: "محمد اجباری",
-  description:
-    "ین مزایده در این مکان ساعت مقرر برگزار می‌شود لطفا توجه داشته‌باشید که اعدادی که وارد می‌کنید معقول باشدین مزایده در این مکان ساعت مقرر برگزار می‌شود لطفا توجه داشته‌باشید که اعدادی که وارد می‌کنید معقول باشدین مزایده در این مکان ساعت مقرر برگزار می‌شود لطفا توجه داشته‌باشید که اعدادی که وارد می‌کنید معقول باشداین مزایده در این مکان ساعت مقرر برگزار می‌شود لطفا توجه داشته‌باشید که اعدادی که وارد می‌کنید معقول باشد",
-};
+
 
 export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
@@ -33,7 +23,6 @@ export const AuctionDetialPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
   const [auctionData, setAuctionData] = useState({});
-  const randomSide = true;
   const { token } = useParams();
   const [socketUrl, setSocketUrl] = useState(
     `ws://188.121.110.151:8888/auction/${token}/${localStorage.getItem(
@@ -102,6 +91,7 @@ export const AuctionDetialPage = () => {
             bidHistory={bidHistory}
             isLoading={isLoading}
             isOwner={isOwner}
+            isOnline={isOnline}
           />
         </Grid>
         <Grid item xs={12}>

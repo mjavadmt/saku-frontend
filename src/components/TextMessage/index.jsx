@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import { Avatar } from "@mui/material";
-export const TextMessage = ({ message }) => {
+export const TextMessage = ({ message, myImg, userImg }) => {
   const isSender =
     message.sender === localStorage.getItem("userId") ? true : false;
   return (
@@ -17,7 +17,7 @@ export const TextMessage = ({ message }) => {
           }
         )}
       >
-        <Avatar className="mb-4" />
+        <Avatar src={isSender ? myImg : userImg} className="mb-4" />
         <div
           className={cx(
             "max-w-sm w-fit break-words h-fit rounded-2xl p-4 mt-4",

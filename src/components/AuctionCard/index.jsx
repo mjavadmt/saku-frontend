@@ -24,14 +24,14 @@ export const ActionCard = ({
   return (
     <div className="mt-8 flex justify-center">
       <div className="lg:w-3/4  lg:h-52 sm:w-1/2 bg-cardColor rounded-2xl lg:grid lg:grid-cols-5 ">
-        <div className="flex items-start justify-center mt-4">
+        <div className="flex items-start justify-center ">
           <img
             alt=""
-            className="rounded-xl lg:h-5/6 lg:w-5/6 h-1/2 w-3/4 "
+            className="rounded-xl lg:h-full lg:w-full h-1/2 w-3/4 "
             src={imgSrc}
           />
         </div>
-        <div className="col-span-3 mt-3 p-3 lg:p-0  ">
+        <div className="col-span-3 mt-3 mr-6 p-3 lg:p-0  ">
           <div>
             <span>{title}</span>
             <Chip
