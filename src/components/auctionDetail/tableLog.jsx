@@ -90,10 +90,12 @@ export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
             </div>
           </>
         ) : (
-          <div className="flex w-full justify-center items-center">
-            <img src={notAccessible} alt="img" className="h-90 flex-1" />
-            <p>مشاهده این قسمت برای این نوع ممکن نیست</p>
-          </div>
+          <>
+            <div className="flex w-full justify-center items-center">
+              <img src={notAccessible} alt="img" className="h-80 flex-1" />
+            </div>
+            <div className="flex justify-center items-center mt-2">مشاهده این قسمت برای این نوع ممکن نیست</div>
+          </>
         )}
       </div>
     </div>

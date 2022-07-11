@@ -10,6 +10,8 @@ import { CircularProgress } from "@mui/material";
 export const AuctionPage = () => {
   const [auctions, setAuctios] = useState([]);
   const [page, setPage] = useState(1);
+  const [name, setName] = useState("");
+  const [basePrice, setBasePrice] = useState("");
   const dataOnPage = 5;
   const [isLoading, setIsLoading] = useState(true);
   const handleChange = (event, value) => {
@@ -18,6 +20,18 @@ export const AuctionPage = () => {
   const paginatedData = () => {
     let currentItem = (page - 1) * dataOnPage;
     return auctions.slice(currentItem, currentItem + dataOnPage);
+  };
+  const filterSubmited = () => {
+    setPage(1);
+    let filteredObj = {};
+    if (name !== "") filteredObj["name"] = name;
+    if (basePrice !== "") filteredObj["limit"] = basePrice;
+    get(`${GET_ALL_AUCTIONS}`, { params: filteredObj })
+      .then((res) => {
+        setAuctios(res.data);
+        setIsLoading(false);
+      })
+      .catch((e) => setIsLoading(false));
   };
   useEffect(() => {
     get(GET_ALL_AUCTIONS)
@@ -29,7 +43,13 @@ export const AuctionPage = () => {
   }, []);
   return (
     <div>
-      <Filtering />
+      <Filtering
+        name={name}
+        setName={setName}
+        basePrice={basePrice}
+        setBasePrice={setBasePrice}
+        filterSubmited={filterSubmited}
+      />
       {isLoading ? (
         <span className="flex h-full justify-center items-center mt-16  ">
           <CircularProgress color="inherit" />
