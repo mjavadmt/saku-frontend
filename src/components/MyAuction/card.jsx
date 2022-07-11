@@ -8,6 +8,8 @@ import { defineUnit } from "utils/formatPrice";
 import { useNavigate } from "react-router-dom";
 import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "constant/routes";
 import "./styles.scss";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import cx from "classnames";
 
 const defineStatus = (startDate, endDate) => {
   if (new Date(startDate) > new Date() && new Date(endDate) < new Date())
@@ -26,30 +28,33 @@ const defineStatus = (startDate, endDate) => {
 };
 
 const defineType = (num) => {
-  if (num <= 3) return "مزایده";
+  if (num === 1) return "مزایده";
   return "مناقصه";
 };
 
 export const Card = ({
-  img,
-  title,
-  participantsNum,
-  type,
-  endDate,
-  startDate,
+  auction_image,
+  name,
+  participants_num,
+  mode,
+  finished_at,
+  created_at,
   category,
-  price,
-  id,
+  limit,
+  token,
 }) => {
   let navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${id}`)}
+      onClick={() => navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`)}
       className="bg-cardColor rounded-3xl cursor-pointer my-auction-card"
     >
       <img
-        className="h-44 flex w-full  object-cover rounded-3xl"
-        src={img}
+        className={cx("flex w-full rounded-3xl", {
+          "h-44 object-cover": auction_image,
+          "h-44 ": !auction_image,
+        })}
+        src={auction_image ? auction_image : noAuctionImage}
         alt="عکس مزایده"
       />
 
@@ -57,22 +62,22 @@ export const Card = ({
         <div className="flex items-center m-1">
           <DescriptionIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">عنوان : ‌</p>
-          <p className="text-sm">{title}</p>
+          <p className="text-sm">{name}</p>
         </div>
         <div className="flex items-center m-1">
           <PeopleOutlineRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold"> شرکت‌کنندگان : ‌</p>
-          <p className="text-sm">{participantsNum} نفر</p>
+          <p className="text-sm">{participants_num} نفر</p>
         </div>
         <div className="flex items-center m-1">
           <GavelRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">نوع : ‌</p>
-          <p className="text-sm">{defineType(type)}</p>
+          <p className="text-sm">{defineType(mode)}</p>
         </div>
         <div className="flex items-center m-1">
           <DescriptionIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">وضعیت : ‌</p>
-          {defineStatus(startDate, endDate)}
+          {defineStatus(created_at, finished_at)}
         </div>
         <div className="flex items-center m-1">
           <CategoryRoundedIcon className="m-0.5" fontSize="inherit" />
@@ -82,7 +87,7 @@ export const Card = ({
         <div className="flex items-center m-1">
           <AttachMoneyRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">قیمت : ‌</p>
-          <p className="text-sm">{defineUnit(price, 1)}</p>
+          <p className="text-sm">{defineUnit(limit, 1)}</p>
         </div>
       </div>
     </div>

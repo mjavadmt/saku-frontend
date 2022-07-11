@@ -6,17 +6,27 @@ import { FiLogOut } from "react-icons/fi";
 import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import cx from "classnames";
-import { SPLASH, NOTIFICATIONS, PROFILE, LOGIN, LOGOUT } from "constant/routes";
+import {
+  SPLASH,
+  NOTIFICATIONS,
+  PROFILE,
+  LOGIN,
+  LOGOUT,
+  MESSAGES,
+} from "constant/routes";
 import { get } from "utils/api";
 import { PRIFILE } from "constant/apiRoutes";
 const NavBar = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
   let hoverColored = "hover:text-orange-500";
   const [userImage, setUserImage] = useState();
+  const [userName, setName] = useState("");
   useEffect(() => {
     get(PRIFILE).then((res) => {
       setUserImage(res.data.profile_image);
-      localStorage.setItem("userId", res.data.id);
+      setName(res.data.name);
+      localStorage.setItem("userId", res.data.user);
+      localStorage.setItem("profileImg", res.data.profile_image);
     });
   }, []);
   return (
@@ -26,7 +36,7 @@ const NavBar = ({ handleToggleSidebar }) => {
           <Link className={hoverColored} to={SPLASH}>
             <AiOutlineHome className="m-3" size={24} />
           </Link>
-          <Link className={hoverColored} to={PROFILE}>
+          <Link className={hoverColored} to={MESSAGES}>
             <AiOutlineMessage className="m-3" size={24} />
           </Link>
           <Link className={hoverColored} to={NOTIFICATIONS}>
@@ -38,12 +48,13 @@ const NavBar = ({ handleToggleSidebar }) => {
             size={24}
           />
           <div className="grow"></div>
+          <div>{userName}</div>
           <Avatar
             className="m-2 mr-4 "
             sx={{ bgcolor: "orange", height: 30, width: 30, color: "white" }}
             src={userImage}
           >
-            M
+            {userName[0]}
           </Avatar>
           <div
             className="btn-toggle m-3"

@@ -7,15 +7,15 @@
 export const categoryMapper = {
   1: "مزایده‌:به صورت آفلاین",
   2: "مزایده:به صورت آنلاین",
-  3: "مزایده‌:به‌روز‌رسانی دلخواه",
+  // 3: "مزایده‌:به‌روز‌رسانی دلخواه",
   4: "مناقصه:به صورت آفلاین",
   5: "مناقصه:به صورت آنلاین",
-  6: "مناقصه:به‌روز‌رسانی دلخواه",
+  // 6: "مناقصه:به‌روز‌رسانی دلخواه",
 };
 
 export const auctionCreated = [
   {
-    id : 1,
+    id: 1,
     type: "مزایده",
     name: "مصالح ساختمانی",
     participantsCount: 24,
@@ -25,7 +25,7 @@ export const auctionCreated = [
     category: 1,
   },
   {
-    id : 2,
+    id: 2,
     type: "مناقصه",
     name: " املاک",
     participantsCount: 524,
@@ -35,7 +35,7 @@ export const auctionCreated = [
     category: 5,
   },
   {
-    id : 3,
+    id: 3,
     type: "مزایده",
     name: "ماشین",
     participantsCount: 1024,
@@ -45,7 +45,7 @@ export const auctionCreated = [
     category: 2,
   },
   {
-    id : 4,
+    id: 4,
     type: "مناقصه",
     name: "پیمانکاری شهرداری",
     participantsCount: 1024,
@@ -55,7 +55,7 @@ export const auctionCreated = [
     category: 2,
   },
   {
-    id : 5,
+    id: 5,
     type: "مناقصه",
     name: "پیمانکاری شهرداری",
     participantsCount: 1024,
@@ -64,44 +64,44 @@ export const auctionCreated = [
     dueDate: "2021-09-05T12:29:53.000Z",
     category: 2,
   },
+  
 ];
 
 export const auctionParticipated = [
   {
-    id : 1,
+    id: 1,
     type: "مزایده",
     name: "مصالح ساختمانی",
     startDate: "2021-09-05T12:29:53.000Z",
     dueDate: "2021-09-05T12:29:53.000Z",
-    status : "win",
+    status: "win",
     category: 1,
   },
   {
-    id : 2,
+    id: 2,
     type: "مناقصه",
     name: " املاک",
     startDate: "2021-09-05T12:29:53.000Z",
     dueDate: "2021-09-05T12:29:53.000Z",
-    status : "fail",
+    status: "fail",
     category: 5,
   },
   {
-    id : 3,
+    id: 3,
     type: "مزایده",
     name: "ماشین",
     startDate: "2021-09-05T12:29:53.000Z",
     dueDate: "2021-09-05T12:29:53.000Z",
-    status : "fail",
+    status: "fail",
     category: 2,
   },
   {
-    id : 4,
+    id: 4,
     type: "مزایده",
     name: "مصالح ساختمانی",
     startDate: "2021-09-05T12:29:53.000Z",
     dueDate: "2021-09-05T12:29:53.000Z",
-    status : "win",
+    status: "win",
     category: 1,
   },
-  
 ];

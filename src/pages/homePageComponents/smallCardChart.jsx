@@ -11,6 +11,8 @@ import {
   inComeDetail,
 } from "statics/noAxisplot";
 import Chart from "react-apexcharts";
+import {formatPrice} from "utils/formatPrice"
+
 
 export const ViewFromDashboard = ({ list, total }) => {
   return (
@@ -42,7 +44,7 @@ export const PurchasedStats = ({ list, total }) => {
             fontSize="medium"
           />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">{total} تومان</div>
+        <div className="text-white m-2 mt-3 font-bold ">{formatPrice(total)} تومان</div>
         <div className="text-white font-thin text-xs"> هزینه‌ها تا کنون </div>
       </div>
       <Chart
@@ -65,7 +67,7 @@ export const InComeStats = ({ list, total }) => {
             fontSize="medium"
           />
         </div>
-        <div className="text-white m-2 mt-3 font-bold ">{total} تومان</div>
+        <div className="text-white m-2 mt-3 font-bold ">{formatPrice(total)} تومان</div>
         <div className="text-white font-thin text-xs"> درآمدها تا کنون </div>
       </div>
       <Chart
@@ -88,7 +90,7 @@ export const AuctionViewStats = ({ list, total }) => {
         <div className="text-white m-2 mt-3 font-bold ">{total}</div>
         <div className="text-white font-thin text-xs">
           {" "}
-          مشاهده افراد از مزایده شما{" "}
+          مشاهده افراد از مزایده/مناقصه شما{" "}
         </div>
       </div>
       <Chart

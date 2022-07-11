@@ -291,7 +291,7 @@ export const Profile = ({inTestEnvierment = false}) => {
                     {userData.city !== "" ? (
                       <TextField
                         fullWidth
-                        name="email"
+                        name="city"  
                         onChange={handleChange}
                         required
                         value={userData.city}

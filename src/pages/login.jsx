@@ -35,7 +35,12 @@ const theme = createTheme({
     },
   },
 });
-
+const changeDIR = (value) => {
+  if (value && value[0].match(/[a-z]/i)) {
+    return "ltr";
+  }
+  return "rtl";
+};
 export function Login() {
   const navigate = useNavigate();
   // const [isLoading, setIsLoading] = useState(false);
@@ -53,8 +58,9 @@ export function Login() {
         .then((response) => {
           localStorage.setItem("access", response.access);
           localStorage.setItem("refresh", response.refresh);
-          
+          localStorage.setItem("username", usertmp.username);
           setAPIHeader();
+
           navigate(SPLASH);
         })
         .catch((error) => toast.error(LOGIN_FAILED));
@@ -92,6 +98,9 @@ export function Login() {
             sx={{ mt: 1 }}
           >
             <TextField
+              style={{
+                direction: changeDIR(userName),
+              }}
               margin="normal"
               required
               fullWidth

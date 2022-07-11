@@ -11,59 +11,88 @@ import { defineUnit } from "utils/formatPrice";
 import ReactTooltip from "react-tooltip";
 import { useWindowDimensions } from "pages/homePageComponents/lastMessages";
 import { dateConverter } from "utils/dateConverter";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import { host } from "utils/config";
 
 const setLengthOfDescription = (width) => {
   if (width < 500) return 100;
   return 220;
 };
+const defineAuctionType = (mode, isOnline) => {
+  if (mode === 1) {
+    if (isOnline) {
+      return 2;
+    } else {
+      return 1;
+    }
+  } else {
+    if (isOnline) {
+      return 5;
+    } else {
+      return 4;
+    }
+  }
+};
 
-export const AuctionDetailCard = ({ auction }) => {
+export const AuctionDetailCard = ({ auctionData }) => {
   const { width } = useWindowDimensions();
 
   return (
     <React.Fragment>
       <div
         // style={{ height: "500px" }}
-        className={cx(cardClass, "grid grid-cols-12")}
+        className={cx(cardClass, "grid grid-cols-12 h-97")}
       >
         <img
-          className="p-3 rounded-3xl h-52 col-span-5 md:col-span-6"
-          src={auction.img}
+          className="p-3 rounded-3xl h-52  col-span-5 md:col-span-6"
+          src={
+            !!auctionData.auction_image
+              ? host + auctionData.auction_image
+              : noAuctionImage
+          }
           alt="عکس جزئیات مزایده"
         />
         <div className="p-0 m-1 col-span-7 md:col-span-6">
           <div className="flex m-3 mr-1">
             <div className="font-bold"> عنوان :‌ </div>
-            <div className="mr-2">{auction.title}</div>
+            <div className="mr-2">{auctionData.name}</div>
           </div>
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نام : </div>
-            <div className="mr-2">{auction.userName}</div>
+            <div className="mr-2">
+              {!!auctionData.user ? auctionData.user.name : ""}
+            </div>
           </div>
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نوع : </div>
-            <div className="mr-1">{typeChipMaker(auction.type)}</div>
+            <div className="mr-1">
+              {typeChipMaker(
+                defineAuctionType(auctionData.mode, auctionData.is_online)
+              )}
+            </div>
           </div>
           <div className="flex m-3 mr-1">
             <div className="font-bold"> شرکت : </div>
-            <div className="mr-2">{attendanceStatusChip(auction.private)}</div>
+            <div className="mr-2">
+              {attendanceStatusChip(auctionData.is_private)}
+            </div>
           </div>
 
           <div className="flex m-3 mr-1">
             <div className="font-bold"> شرکت‌کنندگان : </div>
             <div className="mr-2">
-              {defineParticipantsColor(auction.participantsNum)}
+              {defineParticipantsColor(auctionData.participants_num)}
             </div>
           </div>
         </div>
         <div className="p-3 flex col-span-12 md:col-span-6">
           <div className="font-bold"> تاریخ شروع : </div>
-          <div className="mr-2">{dateConverter(auction.startDate)}</div>
+          <div className="mr-2">{dateConverter(auctionData.created_at)}</div>
         </div>
 
         <div className="p-3 flex col-span-12 md:col-span-6">
           <div className="font-bold"> قیمت پایه : </div>
-          <div className="mr-2">{defineUnit(auction.price, 1)}</div>
+          <div className="mr-2">{defineUnit(auctionData.limit, 1)}</div>
         </div>
         <div className="p-5 col-span-12 ">
           <div className="font-bold"> توضیحات : </div>
@@ -72,14 +101,16 @@ export const AuctionDetailCard = ({ auction }) => {
             data-for={`description-toolbox`}
             className="mr-2 text-justify"
           >
-            {auction.description.length < 300
-              ? auction.description
-              : auction.description.substring(
-                  0,
-                  setLengthOfDescription(width)
-                ) + "..."}
+            {!!auctionData.description
+              ? auctionData.description.length < 300
+                ? auctionData.description
+                : auctionData.description.substring(
+                    0,
+                    setLengthOfDescription(width)
+                  ) + "..."
+              : ""}
           </div>
-          {auction.description.length > 300 && (
+          {!!auctionData.description && auctionData.description.length > 300 && (
             <ReactTooltip
               className="opaque w-72"
               effect="solid"
@@ -89,7 +120,7 @@ export const AuctionDetailCard = ({ auction }) => {
               id={`description-toolbox`}
               scrollHide={true}
             >
-              {auction.description}
+              {"sadfdas"}
             </ReactTooltip>
           )}
         </div>

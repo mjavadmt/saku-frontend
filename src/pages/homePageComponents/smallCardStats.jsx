@@ -1,16 +1,16 @@
 import { cardClass } from "constant/cardClass";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
+import GavelRoundedIcon from "@mui/icons-material/GavelRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
-
-
-export const IncomeGain = () => {
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import {formatPrice} from "utils/formatPrice"
+ 
+export const IncomeGain = ({ number }) => {
   return (
     <div className={cardClass}>
       <div className="p-3 flex ">
         <div className="text-white m-2 mt-3">
-          <div className="font-bold ">3.67 </div>
+          <div className="font-bold ">{formatPrice(number)}</div>
           <div className="font-thin text-xs">درآمد کسب شده</div>
         </div>
         <div className="grow"></div>
@@ -22,13 +22,13 @@ export const IncomeGain = () => {
   );
 };
 
-export const NumberOfAuctionCreated = () => {
+export const NumberOfAuctionCreated = ({ number }) => {
   return (
     <div className={cardClass}>
       <div className="p-3 flex ">
         <div className="text-white m-2 mt-3">
-          <div className="font-bold ">11</div>
-          <div className="font-thin text-xs"> مزایده تولیدشده</div>
+          <div className="font-bold ">{number}</div>
+          <div className="font-thin text-xs"> مزایده/مناقصه تولیدشده</div>
         </div>
         <div className="grow"></div>
         <div className="m-2 mt-3  bg-purple-100 rounded-full w-11 h-11 flex justify-center items-center ">
@@ -39,14 +39,16 @@ export const NumberOfAuctionCreated = () => {
   );
 };
 
-
-export const UniqueProfileParticipated = () => {
+export const UniqueProfileParticipated = ({ number }) => {
   return (
     <div className={cardClass}>
       <div className="p-3 flex ">
         <div className="text-white m-2 mt-3">
-          <div className="font-bold ">63</div>
-          <div className="font-thin text-xs">  کاربران شرکت کرده در مزایده شما</div>
+          <div className="font-bold ">{number}</div>
+          <div className="font-thin text-xs">
+            {" "}
+            تعداد شرکت در مزایده/مناقصه شما
+          </div>
         </div>
         <div className="grow"></div>
         <div className="m-2 mt-3  bg-yellow-100 rounded-full w-11 h-11 flex justify-center items-center ">
@@ -57,14 +59,16 @@ export const UniqueProfileParticipated = () => {
   );
 };
 
-
-export const SuccessfulAuctionParticipated = () => {
+export const SuccessfulAuctionParticipated = ({ number }) => {
   return (
     <div className={cardClass}>
       <div className="p-3 flex ">
         <div className="text-white m-2 mt-3">
-          <div className="font-bold ">2</div>
-          <div className="font-thin text-xs"> تعداد مزایده‌های موقق شرکت کرده</div>
+          <div className="font-bold ">{number}</div>
+          <div className="font-thin text-xs">
+            {" "}
+           ‌مزایده/مناقصه‌‌های موفق شرکت‌کرده 
+          </div>
         </div>
         <div className="grow"></div>
         <div className="m-2 mt-3  bg-violet-200 rounded-full w-11 h-11 flex justify-center items-center ">

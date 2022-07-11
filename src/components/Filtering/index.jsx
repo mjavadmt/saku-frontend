@@ -12,6 +12,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import "./index.css";
+import Button from "@mui/material/Button";
+import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 
 export const Filtering = ({
   hasRadioBtn = false,
@@ -21,115 +23,96 @@ export const Filtering = ({
   setStatus,
   type,
   setType,
+  name,
+  setName,
+  basePrice,
+  setBasePrice,
+  filterSubmited
 }) => {
   const [value, setValue] = useState([20, 37]);
   const [sortBy, setSortBy] = useState(10);
+  const [auctionName, setAuctionName] = useState("");
   const handleChangeRadio = (event, identifier) => {
     if (identifier === "type") onChangeType(event.target.value);
     else onChangeStatus(event.target.value);
   };
 
   return (
-    <div
-      className={cx(
-        "bg-cardColor p-4 grid rounded-3xl md:grid-cols-2 grid-cols-1",
-        {
-          " md:grid-rows-2  grid-rows-4": !hasRadioBtn,
-          " md:grid-rows-2  grid-rows-6": hasRadioBtn,
-        }
-      )}
-    >
-      <div className=" m-4 ">
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          placeholder="جست و جو"
-          InputProps={{
-            startAdornment: <Search className="m-2" />,
-            "data-testid": "Search",
-          }}
-          value =""
-          onChange={(e) => {}}
-          
-        />
+    <>
+      <div
+        className={cx(
+          "bg-cardColor p-4 grid rounded-3xl md:grid-cols-2 grid-cols-1",
+          {
+            " md:grid-rows-1  grid-rows-2": !hasRadioBtn,
+            " md:grid-rows-2  grid-rows-4": hasRadioBtn,
+          }
+        )}
+      >
+        <div className=" m-4 mb-0 ">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            placeholder="جست و جو"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            InputProps={{
+              startAdornment: <Search className="m-2" />,
+            }}
+          />
+        </div>
+
+        <div className="m-4 mb-0 ">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            placeholder="پایه قیمت"
+            value={basePrice}
+            onChange={(e) => {
+              if (e.target.value.length < 10) setBasePrice(e.target.value);
+            }}
+            type="number"
+            InputProps={{
+              startAdornment: <AttachMoneyRoundedIcon className="m-2" />,
+            }}
+          />
+        </div>
+        {hasRadioBtn && (
+          <React.Fragment>
+            <div className="m-4 mb-0">
+              <div className="mb-1">نوع :‌</div>
+              <Select
+                fullWidth
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <MenuItem value={1}>مزایده</MenuItem>
+                <MenuItem value={2}>مناقصه</MenuItem>
+              </Select>
+            </div>
+            <div className="m-4 mb-0">
+              <div className="mb-1">وضعیت :‌</div>
+              <Select
+                fullWidth
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                defaultValue={10}
+                placeholder="نوع"
+              >
+                <MenuItem value={false}>درجریان</MenuItem>
+                <MenuItem value={true}>پایان یافته</MenuItem>
+              </Select>
+            </div>
+          </React.Fragment>
+        )}
+
+        <div className="flex md:col-span-2 m-3">
+          <div className="grow"></div>
+
+          <Button onClick={filterSubmited} variant="contained" className="w-1/6 h-10">
+            اعمال
+          </Button>
+        </div>
       </div>
-      <div className=" m-4">
-        <Autocomplete
-          multiple
-          id="tags-standard"
-          options={top100Films}
-          getOptionLabel={(option) => option.title}
-          data-testid= "filters"
-          renderInput={(params) => (
-            <TextField
-              className="text-white"
-              {...params}
-              placeholder="فیلترها"
-            />
-          )}
-        />
-      </div>
-      <div className="m-4 mt-2">
-        <p>بازه قیمت:</p>
-        <Slider
-          value={value}
-          data-testid ="slider"
-          onChange={(e, newValue) => setValue(newValue)}
-          valueLabelDisplay="auto"
-          getAriaValueText={(w) => `${w} ریال`}
-          max={1000000000}
-          step={1000000}
-          valueLabelFormat={(v) => `${formatPrice(v)} ریال`}
-        />
-      </div>
-      <div className="m-4 ">
-        <Select
-          fullWidth
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" ,"data-testid" : "selectSort" }}
-          // defaultValue={10}
-          placeholder="مرتب‌سازی"
-        >
-          <MenuItem value={10}>کمترین قیمت</MenuItem>
-          <MenuItem value={20}>بیشترین قیمت</MenuItem>
-          <MenuItem value={30}>نزدیک ترین زمان</MenuItem>
-          <MenuItem value={40}>دور ترین زمان</MenuItem>
-        </Select>
-      </div>
-      {hasRadioBtn && (
-        <React.Fragment>
-          <div className="m-4">
-            <Select
-              fullWidth
-              value={type}
-              data-testid ="selectNo"
-              onChange={(e) => setType(e.target.value)}
-              defaultValue={10}
-              placeholder="نوع"
-            >
-              <MenuItem value={10}>مزایده</MenuItem>
-              <MenuItem value={20}>مناقصه</MenuItem>
-              <MenuItem value={30}>همه</MenuItem>
-            </Select>
-          </div>
-          <div className="m-4">
-            <Select
-              fullWidth
-              value={status}
-              data-testid ="selectSta"
-              onChange={(e) => setStatus(e.target.value)}
-              defaultValue={10}
-              placeholder="نوع"
-            >
-              <MenuItem value={10}>همه</MenuItem>
-              <MenuItem value={20}>درجریان</MenuItem>
-              <MenuItem value={30}>پایان یافته</MenuItem>
-            </Select>
-          </div>
-        </React.Fragment>
-      )}
-    </div>
+    </>
   );
 };

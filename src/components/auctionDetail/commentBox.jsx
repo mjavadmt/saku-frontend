@@ -9,21 +9,24 @@ import { useEffect, useRef, useState } from "react";
 import "./replyStyle.css";
 import ReplyIcon from "@mui/icons-material/Reply";
 import ClearIcon from "@mui/icons-material/Clear";
+import { get, post } from "utils/api";
+import { toast } from "react-toastify";
+import noComments from "assets/img/comment.svg";
+import { CircularProgress } from "@mui/material";
 
-export const CommentBox = () => {
-  const [comments, setComments] = useState(commentsData);
+export const CommentBox = ({ token }) => {
+  const [comments, setComments] = useState([]);
   const [commentTxt, setCommentTxt] = useState("");
   const [reply, setReply] = useState(null);
   const endOfMsg = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && commentTxt !== "" && !event.shiftKey) {
-      console.log("jafar");
       addComment();
       return;
     }
     if (event.key === "Enter" && event.shiftKey) {
-      console.log("mmd");
       setCommentTxt(commentTxt + "\n");
       return;
     }
@@ -34,7 +37,7 @@ export const CommentBox = () => {
   };
 
   const scrollToBottom = () => {
-    endOfMsg.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    // endOfMsg.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const toggleDirection = (e) => {
@@ -45,6 +48,7 @@ export const CommentBox = () => {
 
   const addComment = () => {
     if (reply) {
+      console.log(reply);
       replyComment(reply, commentTxt);
       setReply(null);
       setCommentTxt("");
@@ -52,19 +56,38 @@ export const CommentBox = () => {
     }
     const addedComment = {
       senderName: "Dutch User",
-      dateSent: `${new Date()}`,
+
+      user: {
+        id: 2,
+        username: "",
+        name: "",
+        profile_image: null,
+      },
+
+      date: `${new Date()}`,
       content: commentTxt,
-      profileImg: "",
       replies: [],
     };
+    setIsLoading(true);
+    post(`/comment/${token}`, addedComment)
+      .then((res) => {
+        toast.success("عملیات با موفیت انجام شد");
+        getComments();
+      })
+      .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     let commentsTmp = [...comments, addedComment];
     setComments(commentsTmp);
     setCommentTxt("");
   };
-
+  const getComments = () => {
+    get(`/comment/${token}`).then((res) => {
+      setComments(res.data);
+      setIsLoading(false);
+    });
+  };
   useEffect(() => {
-    scrollToBottom();
-  }, [comments.length]);
+    getComments();
+  }, [token]);
 
   const handleReplyCommentContent = (index) => {
     if (index[1] != -1) {
@@ -99,62 +122,98 @@ export const CommentBox = () => {
       let foundComment = { ...commentsTmp[index[0]], replies: firstReplies };
       commentsTmp[index[0]] = foundComment;
       setComments(commentsTmp);
+      let id = comments[index[0]].replies[index[1]].id;
+      post(`/comment/reply/${id}`, addedComment)
+        .then((res) => {
+          toast.success("عملیات با موفیت انجام شد");
+          getComments();
+        })
+        .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     } else {
       let comment = { ...commentsTmp[index[0]] };
       let replies = [...comment.replies, addedComment];
       comment.replies = replies;
       commentsTmp[index[0]] = comment;
       setComments(commentsTmp);
+      let id = comments[index[0]].id;
+      post(`/comment/reply/${id}`, addedComment)
+        .then((res) => {
+          toast.success("عملیات با موفیت انجام شد");
+          getComments();
+        })
+        .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     }
   };
   return (
     <div className={cx(cardClass, "p-4")}>
       <div className={headerClass}>دیدگاه‌ها</div>
-      <div className="overflow-y-auto h-96 p-2">
-        {comments.map((rootComment, index0) => (
-          <React.Fragment key={`whole-${index0}`}>
-            <Comment
-              commentDetail={rootComment}
-              index={[index0, -1, -1]}
-              depth={0}
-              changeCollapseState={changeCollapseState}
-              replyComment={replyComment}
-              replyClicked={replyClicked}
-              key={`${index0}-1-1`}
-            />
-            {rootComment.isCollapsed &&
-              rootComment.replies.map((secondComment, index1) => (
-                <React.Fragment key={`subcomments-${index1}`}>
-                  <Comment
-                    commentDetail={secondComment}
-                    index={[index0, index1, -1]}
-                    depth={1}
-                    key={`${index0}${index1}-1`}
-                    replyClicked={replyClicked}
-                    replyComment={replyComment}
-                  />
-                  {secondComment.replies.map((thirdComment, index2) => (
-                    <Comment
-                      commentDetail={thirdComment}
-                      index={[index0, index1, index2]}
-                      depth={2}
-                      key={`${index0}${index1}${index2}`}
-                    />
-                  ))}
-                </React.Fragment>
-              ))}
-            {index0 !== comments.length - 1 && (
-              <React.Fragment>
-                <hr
-                  key={`comment-${index0}`}
-                  className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor"
+      {isLoading ? (
+        <span className="flex h-full justify-center items-center mt-40 mb-40">
+          <CircularProgress color="inherit" />
+        </span>
+      ) : (
+        <div className="overflow-y-auto h-96 p-2">
+          {comments.length === 0 ? (
+            <>
+              <div className="flex items-center justify-center">
+                <img
+                  className="h-60 md:h-64"
+                  alt="no comments"
+                  src={noComments}
                 />
+              </div>
+              <div className="mt-8 flex items-center justify-center">
+                اولین کامنت را شما وارد کنید
+              </div>
+            </>
+          ) : (
+            comments.map((rootComment, index0) => (
+              <React.Fragment key={`whole-${index0}`}>
+                <Comment
+                  commentDetail={rootComment}
+                  index={[index0, -1, -1]}
+                  depth={0}
+                  changeCollapseState={changeCollapseState}
+                  replyComment={replyComment}
+                  replyClicked={replyClicked}
+                  key={`${index0}-1-1`}
+                />
+                {rootComment.isCollapsed &&
+                  rootComment.replies.map((secondComment, index1) => (
+                    <React.Fragment key={`subcomments-${index1}`}>
+                      <Comment
+                        commentDetail={secondComment}
+                        index={[index0, index1, -1]}
+                        depth={1}
+                        key={`${index0}${index1}-1`}
+                        replyClicked={replyClicked}
+                        replyComment={replyComment}
+                      />
+                      {secondComment.replies.map((thirdComment, index2) => (
+                        <Comment
+                          commentDetail={thirdComment}
+                          index={[index0, index1, index2]}
+                          depth={2}
+                          key={`${index0}${index1}${index2}`}
+                        />
+                      ))}
+                    </React.Fragment>
+                  ))}
+                {index0 !== comments.length - 1 && (
+                  <React.Fragment>
+                    <hr
+                      key={`comment-${index0}`}
+                      className="border-none h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor"
+                    />
+                  </React.Fragment>
+                )}
               </React.Fragment>
-            )}
-          </React.Fragment>
-        ))}
-        <div ref={endOfMsg}></div>
-      </div>
+            ))
+          )}
+          <div ref={endOfMsg}></div>
+        </div>
+      )}
+
       {reply && (
         <div className="replyDiv p-3 bg-blue-900 rounded-t-lg mr-9">
           <div className="flex">

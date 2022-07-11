@@ -9,12 +9,17 @@ import {
 } from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
+const modeHanlder = (mode) => {
+  if (mode == 1) return "مزایده";
+  return "مناقصه";
+};
+
 const columns = [
   {
     name: "نوع",
     center: true,
     minWidth: "100px",
-    selector: (row) => row.type,
+    selector: (row) => modeHanlder(row.mode),
   },
   {
     name: "نام",
@@ -26,34 +31,35 @@ const columns = [
     name: "تعداد شرکت‌کنندگان",
     center: true,
     minWidth: "150px",
-    selector: (row) => defineParticipantsColor(row.participantsCount),
+    selector: (row) => defineParticipantsColor(row.participants_num),
   },
 
   {
     name: "تاریخ شروع",
     center: true,
-    selector: (row) => dateConverter(row.startDate),
+    selector: (row) => dateConverter(row.created_at),
   },
   {
     name: "مهلت اتمام",
     center: true,
-    selector: (row) => dateConverter(row.dueDate),
+    selector: (row) => dateConverter(row.finished_at),
   },
-  {
-    name: "بهترین پیشنهاد",
-    center: true,
-    minWidth: "150px",
-    selector: (row) => definePriceColor(row.bestOffer),
-  },
+  // {
+  //   name: "بهترین پیشنهاد",
+  //   center: true,
+  //   minWidth: "150px",
+  //   selector: (row) => definePriceColor(row.best_bid),
+  // },
   {
     name: "دسته‌بندی",
     center: true,
     selector: (row) => (
       <span>
-        <span data-tip data-for={`category-${row.id}`}>
+        <span>{row.category}</span>
+        {/* <span data-tip data-for={`category-${row.id}`}>
           {row.category}
-        </span>
-        <ReactTooltip
+        </span> */}
+        {/* <ReactTooltip
           effect="solid"
           backgroundColor="white"
           textColor="#000"
@@ -61,7 +67,7 @@ const columns = [
           id={`category-${row.id}`}
         >
           {categoryMapper[row.category]}
-        </ReactTooltip>
+        </ReactTooltip> */}
       </span>
     ),
   },
@@ -74,19 +80,17 @@ tableStyle.height = "350px";
 tableObj = { ...tableObj, style: tableStyle };
 changedStyle = { ...changedStyle, table: tableObj };
 
-export const AuctionCreatedTable = () => {
+export const AuctionCreatedTable = ({ data }) => {
   return (
     <div className={cardClass}>
       <div className={headerClass}>‌آخرین مزایده‌های ایجاد‌کرده</div>
       <div className="p-6 ">
         <DataTable
-          data={auctionCreated}
+          data={data}
           columns={columns}
           noHeader
-          highlightOnHover
           responsive
           customStyles={changedStyle}
-          pointerOnHover
           noDataComponent="آیتمی برای نشان دادن نیست."
           data-testid="createdTable"
         />
