@@ -74,6 +74,11 @@ const ChildModal = ({
   );
 };
 
+const extractError = (errObj) => {
+  let keys = Object.keys(errObj);
+  return errObj[keys[0]];
+};
+
 export const PriceCard = ({
   auctionData,
   token,
@@ -87,7 +92,7 @@ export const PriceCard = ({
   const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    if (false) {
+    if (isOnline) {
       submitOnlinePrice({ price: valuePriceModal });
       setConfirmPriceModal(false);
       setEnterPriceModal(false);
@@ -105,7 +110,10 @@ export const PriceCard = ({
           setEnterPriceModal(false);
           setConfirmPriceModal(false);
         })
-        .catch(() => {});
+        .catch((e) => {
+          console.log(e.response.data);
+          toast.error("قیمت‌های بهتر برای این مزایده وجود دارد")
+        });
     }
   };
   return (
@@ -175,7 +183,7 @@ export const PriceCard = ({
               value={valuePriceModal}
               onChange={(e) => {
                 setOnInitializedInput(false);
-                if (e.target.value.length < 12)
+                if (e.target.value.length < 11)
                   setValuePriceModal(e.target.value);
               }}
               type="number"

@@ -15,6 +15,7 @@ import useWebSocket from "react-use-websocket";
 import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
 import { useParams } from "react-router-dom";
+import "assets/css/style.css";
 
 export const Messages = () => {
   const endOfMsg = useRef(null);
@@ -29,8 +30,9 @@ export const Messages = () => {
 
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const { sendJsonMessage, lastJsonMessage, readyState } =
-    useWebSocket(socketUrl);
+  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
+    socketUrl
+  );
 
   const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   // const { messages, sendMessage } = useChat(userName, msgList);
@@ -138,16 +140,7 @@ export const Messages = () => {
   let curDate = new Date();
   return (
     <React.Fragment>
-      <div
-        style={{
-          backgroundImage:
-            "url(https://i.pinimg.com/474x/85/ec/df/85ecdf1c3611ecc9b7fa85282d9526e0.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "repeat",
-        }}
-        className="flex m-12 h-4/5 md:rounded-3xl"
-      >
+      <div className="flex m-12 h-4/5 md:rounded-3xl chat-background-image">
         <div
           className={cx(
             "flex relative h-full md:w-1/3 w-full bg-sky-800  md:rounded-r-3xl overflow-y-auto",

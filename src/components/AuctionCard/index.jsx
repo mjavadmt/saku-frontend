@@ -27,7 +27,7 @@ export const ActionCard = ({
         <div className="flex items-start justify-center mt-4">
           <img
             alt=""
-            className="rounded-xl lg:h-3/4 lg:w-3/4 h-1/2 w-3/4 "
+            className="rounded-xl lg:h-5/6 lg:w-5/6 h-1/2 w-3/4 "
             src={imgSrc}
           />
         </div>

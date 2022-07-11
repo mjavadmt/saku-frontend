@@ -20,10 +20,11 @@ const NavBar = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
   let hoverColored = "hover:text-orange-500";
   const [userImage, setUserImage] = useState();
+  const [userName, setName] = useState("")
   useEffect(() => {
     get(PRIFILE).then((res) => {
       setUserImage(res.data.profile_image);
-      console.log(res.data);
+      setName(res.data.name)
       localStorage.setItem("userId", res.data.user);
     });
   }, []);
@@ -46,6 +47,9 @@ const NavBar = ({ handleToggleSidebar }) => {
             size={24}
           />
           <div className="grow"></div>
+          <div>
+            {userName}
+          </div>
           <Avatar
             className="m-2 mr-4 "
             sx={{ bgcolor: "orange", height: 30, width: 30, color: "white" }}

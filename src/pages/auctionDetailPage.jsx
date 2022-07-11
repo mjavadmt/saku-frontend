@@ -21,7 +21,7 @@ export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState(false);
   const [auctionData, setAuctionData] = useState({});
   const { token } = useParams();
   const [socketUrl, setSocketUrl] = useState(

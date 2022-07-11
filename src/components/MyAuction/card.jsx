@@ -8,6 +8,8 @@ import { defineUnit } from "utils/formatPrice";
 import { useNavigate } from "react-router-dom";
 import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "constant/routes";
 import "./styles.scss";
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import cx from "classnames";
 
 const defineStatus = (startDate, endDate) => {
   if (new Date(startDate) > new Date() && new Date(endDate) < new Date())
@@ -48,8 +50,11 @@ export const Card = ({
       className="bg-cardColor rounded-3xl cursor-pointer my-auction-card"
     >
       <img
-        className="h-44 flex w-full  object-cover rounded-3xl"
-        src={auction_image}
+        className={cx("flex w-full rounded-3xl", {
+          "h-44 object-cover": auction_image,
+          "h-44 ": !auction_image,
+        })}
+        src={auction_image ? auction_image : noAuctionImage}
         alt="عکس مزایده"
       />
 
