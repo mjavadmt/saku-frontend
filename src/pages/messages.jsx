@@ -219,56 +219,60 @@ export const Messages = () => {
                 بازگشت
               </small>
             </div>
-            {messageHistory.map((m) => {
-              if (
-                new Date(m.created_at).toLocaleDateString("fa-IR") !==
-                curDate.toLocaleDateString("fa-IR")
-              ) {
-                curDate = new Date(m.created_at);
+            {messageHistory.length !== 0 ? (
+              messageHistory.map((m) => {
+                if (
+                  new Date(m.created_at).toLocaleDateString("fa-IR") !==
+                  curDate.toLocaleDateString("fa-IR")
+                ) {
+                  curDate = new Date(m.created_at);
 
-                return (
-                  <>
-                    <div className="w-full flex justify-center items-center">
-                      <div className="bg-slate-600 rounded-3xl  p-2 ">
-                        {new Date(m.created_at).toLocaleDateString("fa-IR")}
+                  return (
+                    <>
+                      <div className="w-full flex justify-center items-center">
+                        <div className="bg-slate-600 rounded-3xl  p-2 ">
+                          {new Date(m.created_at).toLocaleDateString("fa-IR")}
+                        </div>
                       </div>
-                    </div>
 
-                    <TextMessage message={m} />
-                  </>
-                );
+                      <TextMessage message={m} />
+                    </>
+                  );
 
-                // case "image":
-                //   return (
-                //     <>
-                //       <div className="bg-slate-600 rounded-xl w-20 ">
-                //         {m.date.split(" ")[0]}
-                //       </div>
-                //       <ImageMessage message={m} />
-                //     </>
-                //   );
-                // case "file":
-                //   return (
-                //     <>
-                //       <div className="bg-slate-600 rounded-xl w-20 ">
-                //         {m.date.split(" ")[0]}
-                //       </div>
-                //       <FileMessage message={m} />
-                //     </>
-                //   );
-              }
-              // switch (m.type) {
-              //   case "text":
-              //     return <TextMessage message={m} />;
-              //   case "image":
-              //     return <ImageMessage message={m} />;
-              //   case "file":
-              //     return <FileMessage message={m} />;
-              //   default:
-              //     return null;
-              // }
-              return <TextMessage message={m} />;
-            })}
+                  // case "image":
+                  //   return (
+                  //     <>
+                  //       <div className="bg-slate-600 rounded-xl w-20 ">
+                  //         {m.date.split(" ")[0]}
+                  //       </div>
+                  //       <ImageMessage message={m} />
+                  //     </>
+                  //   );
+                  // case "file":
+                  //   return (
+                  //     <>
+                  //       <div className="bg-slate-600 rounded-xl w-20 ">
+                  //         {m.date.split(" ")[0]}
+                  //       </div>
+                  //       <FileMessage message={m} />
+                  //     </>
+                  //   );
+                }
+                // switch (m.type) {
+                //   case "text":
+                //     return <TextMessage message={m} />;
+                //   case "image":
+                //     return <ImageMessage message={m} />;
+                //   case "file":
+                //     return <FileMessage message={m} />;
+                //   default:
+                //     return null;
+                // }
+                return <TextMessage message={m} />;
+              })
+            ) : (
+              <img src={empty} className="mr-20" alt="empty" />
+            )}
             <div ref={endOfMsg}></div>
           </div>
 
@@ -277,7 +281,7 @@ export const Messages = () => {
               hidden: !isSmallScreen,
             })}
           >
-            <span
+            {/* <span
               role="button"
               onClick={() => fileRef.current.click()}
               className="p-2 bg-cyan-500 rounded-full m-2 "
@@ -290,7 +294,7 @@ export const Messages = () => {
                 ref={fileRef}
               />
               <AttachFileOutlined />
-            </span>
+            </span> */}
             <span
               role="button"
               onClick={sendMsg}

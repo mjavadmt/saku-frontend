@@ -26,7 +26,6 @@ export const MyAuctions = () => {
   };
   useEffect(() => {
     let username = localStorage.getItem("username");
-    console.log(`${GET_ALL_AUCTIONS}username=${username}`);
     get(`${GET_ALL_AUCTIONS}?username=${username}`)
       .then((res) => {
         setAuctios(res.data);

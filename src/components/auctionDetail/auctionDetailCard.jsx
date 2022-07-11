@@ -28,9 +28,7 @@ export const AuctionDetailCard = ({ auctionData }) => {
       >
         <img
           className="p-3 rounded-3xl h-52  col-span-5 md:col-span-6"
-          src={
-            "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&w=1000&q=80"
-          }
+          src={!!auctionData.auction_image ? auctionData.auction_image : ""}
           alt="عکس جزئیات مزایده"
         />
         <div className="p-0 m-1 col-span-7 md:col-span-6">
