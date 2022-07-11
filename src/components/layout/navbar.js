@@ -16,6 +16,7 @@ const NavBar = ({ handleToggleSidebar }) => {
   useEffect(() => {
     get(PRIFILE).then((res) => {
       setUserImage(res.data.profile_image);
+      console.log(res.data);
       localStorage.setItem("userId", res.data.user);
     });
   }, []);

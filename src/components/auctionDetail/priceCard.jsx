@@ -85,7 +85,7 @@ export const PriceCard = ({ auctionData, token }) => {
     post(`${POST_BID}/${token}`, {
       price: valuePriceModal,
       time: new Date().toISOString(),
-      user: localStorage.getItem("userId"),
+      user: parseInt(localStorage.getItem("userId")),
       auction: 0,
     })
       .then(() => {

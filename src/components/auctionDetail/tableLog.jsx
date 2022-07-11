@@ -74,7 +74,7 @@ export const TableLog = () => {
         />
         <div className="flex justify-center">
           <Pagination
-            count={Math.ceil(prices.length / 5)}
+            count={Math.ceil(prices.length / dataOnPage)}
             page={page}
             onChange={handleChange}
             color="primary"

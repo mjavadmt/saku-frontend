@@ -53,8 +53,9 @@ export function Login() {
         .then((response) => {
           localStorage.setItem("access", response.access);
           localStorage.setItem("refresh", response.refresh);
-          
+          localStorage.setItem("username", usertmp.username);
           setAPIHeader();
+
           navigate(SPLASH);
         })
         .catch((error) => toast.error(LOGIN_FAILED));
