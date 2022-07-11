@@ -62,6 +62,7 @@ export const AuctionPage = () => {
               imgSrc={
                 !!auction.auction_image ? auction.auction_image : noAuctionImage
               }
+              ourImage={!!auction.auction_image}
               title={auction.name}
               city={auction.location}
               companyName={auction.user.username}
