@@ -31,7 +31,7 @@ export const AuctionDetialPage = () => {
   const [popUpModal, setPopUpModal] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState(false);
   const [auctionData, setAuctionData] = useState({});
   const randomSide = true;
   const { token } = useParams();
@@ -57,7 +57,7 @@ export const AuctionDetialPage = () => {
       });
     get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
       setAuctionData(res.data);
-      // setIsOnline(res.data.is_online);
+      setIsOnline(res.data.is_online);
       if (res.data.user.id == localStorage.getItem("userId")) {
         setIsOwner(true);
       }
@@ -85,6 +85,7 @@ export const AuctionDetialPage = () => {
             token={token}
             auctionData={auctionData}
             isOnline={isOnline}
+            isOwner={isOwner}
             submitOnlinePrice={sendJsonMessage}
           />
         </Grid>

@@ -3,7 +3,8 @@ export const NOT_FOUND = "/not-found";
 export const PROFILE = "/profile";
 export const TRANSACTIONS = "/transactions";
 export const JOB_INFO = "/job-info";
-export const MESSAGES = "/messages";
+export const MESSAGES = "/messages/:username";
+export const MESSAGES_WITHOUT_SUFFIX = "/messages";
 export const FULL_LAYOUT_CHAT = "/fullChat";
 export const NOTIFICATIONS = "/notifications";
 export const CREATE_AUCTION = "/create-auction";
@@ -16,4 +17,3 @@ export const FORGOTPASSWORD = "/forgotpassword";
 export const AUCTION_DETAIL_PAGE = "/auction-detail/:token";
 export const AUCTION_DETAIL_WITHOUT_SUFFIX = "/auction-detail";
 export const LANDING_PAGE = "/landing";
-
