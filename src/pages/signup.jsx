@@ -56,6 +56,12 @@ export const SignUp = () => {
     data[e.target.name] = e.target.value;
     setUserData(data);
   };
+  const changeDIR = (value) => {
+    if (value && value[0].match(/[a-z]/i)) {
+      return "ltr";
+    }
+    return "rtl";
+  };
   const updateUserDara = (e) => {
     if (userData.password !== userData.confirmPassword) {
       toast.error(DIFFERENT_PASSWORDS);
@@ -127,6 +133,9 @@ export const SignUp = () => {
               {isConfirmStep ? (
                 <div>
                   <TextField
+                    style={{
+                      direction: "ltr",
+                    }}
                     margin="normal"
                     required
                     fullWidth
@@ -155,6 +164,9 @@ export const SignUp = () => {
                 <div>
                   <div>
                     <TextField
+                      style={{
+                        direction: changeDIR(userData.username),
+                      }}
                       margin="normal"
                       required
                       fullWidth
@@ -177,6 +189,9 @@ export const SignUp = () => {
                       value={userData.email}
                     />
                     <TextField
+                      style={{
+                        direction: "ltr",
+                      }}
                       margin="normal"
                       required
                       fullWidth

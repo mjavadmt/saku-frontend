@@ -91,6 +91,7 @@ export const AuctionDetialPage = () => {
             bidHistory={bidHistory}
             isLoading={isLoading}
             isOwner={isOwner}
+            isOnline={isOnline}
           />
         </Grid>
         <Grid item xs={12}>
