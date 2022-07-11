@@ -45,19 +45,15 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     setAuctionValue({ ...auctionValue, user: localStorage.getItem("userId") });
     for (var key in auctionValue) {
       if (key === "tags") {
-        console.log(auctionValue[key]);
-        for (var tag in auctionValue[key]) {
-          console.log(auctionValue[key][tag]);
-          form_data.append(
-            key,
-            JSON.stringify({ tag: auctionValue[key][tag] })
-          );
-        }
+        console.log(auctionValue[key].toString());
+        form_data.append(key, JSON.stringify(auctionValue[key].toString()));
       } else {
         form_data.append(key, auctionValue[key]);
       }
     }
-
+    for (var pair of form_data.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
     setIsLoading(true);
     post(POST_AUCTION, form_data)
       .then((res) => {
@@ -362,7 +358,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                 ));
               }}
               onChange={(e, newval) => {
-                setAuctionValue({ ...auctionValue, tags: newval });
+                setAuctionValue({ ...auctionValue, tags: newval.toString() });
                 setTags(newval);
               }}
               renderInput={(params) => (

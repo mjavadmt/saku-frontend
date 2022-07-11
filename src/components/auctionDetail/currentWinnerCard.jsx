@@ -11,7 +11,7 @@ export const CurrentWinner = ({ bestBidUser }) => {
   return (
     <div className={cardClass}>
       <div className={headerClass}>برنده تا کنون</div>
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center mb-3">
         <Avatar
           sx={{
             height: 100,
@@ -21,30 +21,40 @@ export const CurrentWinner = ({ bestBidUser }) => {
           src={!!bestBidUser && bestBidUser.user?.profile_image}
         />
       </div>
-      <div className="flex m-6 items-center">
+      <div className="flex m-4 items-center">
         <AccountCircleRoundedIcon className="mb-0.5" />
         <div className="p-2 font-bold"> نام :</div>
         <div className="p-2">{!!bestBidUser && bestBidUser.user?.name}</div>
       </div>
-      <hr className="border-none col-span-2  m-6 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
+      <hr className="border-none col-span-2  m-4 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
 
-      <div className="flex m-6 items-center">
+      <div className="flex m-4 items-center">
         <LocalAtmRoundedIcon className="mb-0.5" />
         <div className="p-2 font-bold"> قیمت :</div>
         <div className="p-2">
           {definePriceColor(!!bestBidUser && bestBidUser.price)}
         </div>
       </div>
-      <hr className="border-none col-span-2  m-6 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
+      <hr className="border-none col-span-2  m-4 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
 
-      <div className="flex m-6 items-center">
+      <div className="flex m-4 items-center">
         <DateRangeRoundedIcon className="mb-0.5" />
         <div className="p-2 font-bold"> تاریخ ثبت :</div>
         <div className="p-2">
           {dateConverter(!!bestBidUser && bestBidUser.time)}
         </div>
       </div>
-      <div className="h-4" />
+      <hr className="border-none col-span-2  m-4 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
+      <div className="flex justify-center mb-5">
+        <button
+          // onClick={handleSubmit}
+          className="bg-bodyBackground py-4 w-1/2 rounded-3xl "
+          data-testid="subBtn"
+        >
+          شروع مکالمه
+        </button>
+      </div>
+      {/* <div className="h-4" /> */}
       {/* <div className="col-span-1">قیمت ثبت‌شده</div>
       <div className="col-span-1">
         {definePriceColor(winnerStat.price_entered)}

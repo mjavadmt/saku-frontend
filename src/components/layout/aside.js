@@ -75,20 +75,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
           >
             پروفایل
           </MenuItem>
-          <MenuItem
-            active={window.location.pathname === JOB_INFO}
-            onClick={(e) => navigate(JOB_INFO)}
-            icon={<WorkIcon />}
-          >
-            کسب و کار
-          </MenuItem>
-          <MenuItem
-            active={window.location.pathname === TRANSACTIONS}
-            onClick={(e) => navigate(TRANSACTIONS)}
-            icon={<AccountBalanceWalletIcon />}
-          >
-            تراکنش‌های مالی
-          </MenuItem>
+
           <MenuItem
             active={window.location.pathname === MESSAGES}
             onClick={(e) => navigate(MESSAGES)}
@@ -96,13 +83,6 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             suffix={<span className="badge red">3</span>}
           >
             پیام‌ها
-          </MenuItem>
-          <MenuItem
-            active={window.location.pathname === NOTIFICATIONS}
-            onClick={(e) => navigate(NOTIFICATIONS)}
-            icon={<NotificationsIcon />}
-          >
-            اعلانات
           </MenuItem>
         </Menu>
         <Menu iconShape="circle">

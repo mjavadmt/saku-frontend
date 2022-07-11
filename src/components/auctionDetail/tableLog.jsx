@@ -67,7 +67,7 @@ export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
       <div className={headerClass}>تاریخچه قیمت‌های ثبت‌شده</div>
       <div className="p-6">
         {isLoading ? (
-          <span className="flex h-96 justify-center items-center">
+          <span className="flex h-97 justify-center items-center">
             <CircularProgress color="inherit" />
           </span>
         ) : isOwner ? (
