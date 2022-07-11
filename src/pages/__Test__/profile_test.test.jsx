@@ -29,14 +29,50 @@ describe("profile page test", () => {
     fireEvent.change(addInp, { target: { value: "Tehran" } });
     expect(addInp.value).toBe("Tehran");
   });
+  it("National code input onchange", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const ncode = screen.getByTestId("nCode");
+    fireEvent.change(ncode, { target: { value: "044028375" } });
+    expect(ncode.value).toBe("044028375");
+  });
   it("render email", async () => {
     render(<ProfileTest />, { flushUseEffects: false });
     const email = screen.getByTestId("emailInp");
-    expect(email).toBeTruthy();
+    expect(email).toBeInTheDocument();
+  });
+  it("render national code", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const ncode = screen.getByTestId("nCode");
+    expect(ncode).toBeInTheDocument();
   });
   it("render address", async () => {
     render(<ProfileTest />, { flushUseEffects: false });
     const address = screen.getByTestId("phoneInp");
-    expect(address).toBeTruthy();
+    expect(address).toBeInTheDocument();
+  });
+  it("checking be in the document ", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const headers = screen.getByTestId("cardHead");
+    expect(headers).toBeInTheDocument();
+  });
+  it("render nameinput ", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const name = screen.getByTestId("nameinp"); 
+    expect(name).toBeInTheDocument();
+    fireEvent.change(name, { target: { value: "ali" } });
+    expect(name.value).toBe("ali"); 
+  });
+  it("Change type input", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const userNameInput = screen.getByTestId("selectPer");
+    fireEvent.change(userNameInput, { target: { value: "20" } });
+    expect(userNameInput.value).toBe("20");
+    expect(userNameInput.value).not.toBe("10");
+  });
+  it("Change state input", async () => {
+    render(<ProfileTest />, { flushUseEffects: false });
+    const userNameInput = screen.getByTestId("select-state");
+    fireEvent.change(userNameInput, { target: { id: "0" } });
+    expect(userNameInput.id).toBe("0");
   });
 });
