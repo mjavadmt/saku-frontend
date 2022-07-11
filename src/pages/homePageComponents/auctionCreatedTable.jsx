@@ -44,12 +44,12 @@ const columns = [
     center: true,
     selector: (row) => dateConverter(row.finished_at),
   },
-  {
-    name: "بهترین پیشنهاد",
-    center: true,
-    minWidth: "150px",
-    selector: (row) => definePriceColor(row.best_bid),
-  },
+  // {
+  //   name: "بهترین پیشنهاد",
+  //   center: true,
+  //   minWidth: "150px",
+  //   selector: (row) => definePriceColor(row.best_bid),
+  // },
   {
     name: "دسته‌بندی",
     center: true,

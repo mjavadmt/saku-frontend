@@ -10,12 +10,14 @@ import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import { CircularProgress } from "@mui/material";
 
 export const MyAuctions = () => {
-  const [type, setType] = React.useState(10);
-  const [status, setStatus] = React.useState(10);
+  const [type, setType] = React.useState("");
+  const [status, setStatus] = React.useState("");
   const [page, setPage] = useState(1);
   const [auctions, setAuctios] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const dataOnPage = 6;
+  const [name, setName] = useState("");
+  const [basePrice, setBasePrice] = useState("");
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -23,6 +25,21 @@ export const MyAuctions = () => {
   const paginatedData = () => {
     let currentItem = (page - 1) * dataOnPage;
     return auctions.slice(currentItem, currentItem + dataOnPage);
+  };
+  const filterSubmited = () => {
+    setPage(1);
+    let username = localStorage.getItem("username");
+    let filteredObj = {};
+    if (name !== "") filteredObj["name"] = name;
+    if (status !== "") filteredObj["finished"] = status;
+    if (type !== "") filteredObj["mode"] = type;
+    if (basePrice !== "") filteredObj["limit"] = basePrice;
+    get(`${GET_ALL_AUCTIONS}?username=${username}`, { params: filteredObj })
+      .then((res) => {
+        setAuctios(res.data);
+        setIsLoading(false);
+      })
+      .catch((e) => setIsLoading(false));
   };
   useEffect(() => {
     let username = localStorage.getItem("username");
@@ -33,17 +50,22 @@ export const MyAuctions = () => {
       })
       .catch((e) => setIsLoading(false));
   }, []);
+
   return (
     <React.Fragment>
       <div className="mt-3">
         <Filtering
           hasRadioBtn={true}
-          onChangeType={setType}
-          onChangeStatus={setStatus}
+          setStatus={setStatus}
           type={type}
           setType={setType}
           status={status}
           setStatus={setStatus}
+          name={name}
+          setName={setName}
+          basePrice={basePrice}
+          setBasePrice={setBasePrice}
+          filterSubmited={filterSubmited}
         />
       </div>
       {isLoading ? (

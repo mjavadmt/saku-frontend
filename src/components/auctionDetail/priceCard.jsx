@@ -32,9 +32,11 @@ const style = {
   p: 4,
 };
 
-const showErrorInput = (value, basePrice) => {
-  return value < basePrice;
+const showErrorInput = (value, basePrice, mode) => {
+  if (mode === 1) return value < basePrice;
+  return value > basePrice;
 };
+
 
 const disabledSubmitPrice = (enddate) => {
   return new Date(enddate) < new Date();
@@ -118,7 +120,7 @@ export const PriceCard = ({
   };
   return (
     <React.Fragment>
-      <div className={cx(cardClass, "h-97")}>
+      <div className={cx(cardClass, "md:h-97 h-fit")}>
         <div className={headerClass}>ثبت قیمت</div>
         <div className="grid grid-cols-12">
           <div className="col-span-12 flex justify-center">
@@ -183,7 +185,7 @@ export const PriceCard = ({
               value={valuePriceModal}
               onChange={(e) => {
                 setOnInitializedInput(false);
-                if (e.target.value.length < 11)
+                if (e.target.value.length < 10)
                   setValuePriceModal(e.target.value);
               }}
               type="number"
@@ -191,7 +193,11 @@ export const PriceCard = ({
               inputProps={{ maxLength: 4 }}
               error={
                 !onInitializedInput &&
-                showErrorInput(valuePriceModal, auctionData.limit)
+                showErrorInput(
+                  valuePriceModal,
+                  auctionData.limit,
+                  auctionData.mode
+                )
               }
               placeholder="قیمت وارد شده به تومان می‌باشد"
               startAdornment={
@@ -201,11 +207,20 @@ export const PriceCard = ({
               }
             />
             {!onInitializedInput &&
-              showErrorInput(valuePriceModal, auctionData.limit) && (
+              showErrorInput(
+                valuePriceModal,
+                auctionData.limit,
+                auctionData.mode
+              ) &&
+              (auctionData.mode === 1 ? (
                 <p className="font-thin text-xs text-red-600 mt-2 mr-2">
                   قیمت ثبت شده باید از قیمت پایه وارد شده بالاتر باشد
                 </p>
-              )}
+              ) : (
+                <p className="font-thin text-xs text-red-600 mt-2 mr-2">
+                  قیمت ثبت شده باید از قیمت پایه وارد شده پایین‌تر باشد
+                </p>
+              ))}
           </div>
           <div className="flex justify-end mt-4">
             <Button
