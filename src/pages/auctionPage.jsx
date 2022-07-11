@@ -30,9 +30,12 @@ export const AuctionPage = () => {
           companyName={auction.user.username}
           date={new Date(auction.finished_at).toLocaleDateString("fa-IR")}
           price={auction.limit}
-          remainingDay={
-            new Date().getDay() - new Date(auction.finished_at).getDay()
-          }
+          mode={auction.mode}
+          isOnline={auction.is_online}
+          remainingDay={Math.ceil(
+            (new Date(auction.finished_at).getTime() - new Date().getTime()) /
+              (1000 * 3600 * 24)
+          )}
           tags={[...auction.tags.map((tag) => tag.name)]}
           id={1}
           token={auction.token}

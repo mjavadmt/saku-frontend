@@ -74,27 +74,38 @@ const ChildModal = ({
   );
 };
 
-export const PriceCard = ({ auctionData, token }) => {
+export const PriceCard = ({
+  auctionData,
+  token,
+  isOnline,
+  submitOnlinePrice,
+}) => {
   const [enterPriceModal, setEnterPriceModal] = React.useState(false);
   const [valuePriceModal, setValuePriceModal] = React.useState("");
   const [onInitializedInput, setOnInitializedInput] = React.useState(true);
   const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
-
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    post(`${POST_BID}/${token}`, {
-      price: valuePriceModal,
-      time: new Date().toISOString(),
-      user: parseInt(localStorage.getItem("userId")),
-      auction: 0,
-    })
-      .then(() => {
-        toast.success("ثبت قیمت با موفقیت انجام شد");
-        setValuePriceModal(0);
-        setEnterPriceModal(false);
-        setConfirmPriceModal(false);
+    if (isOnline) {
+      submitOnlinePrice({ price: valuePriceModal });
+      setConfirmPriceModal(false);
+      setEnterPriceModal(false);
+      setValuePriceModal(0);
+    } else {
+      post(`${POST_BID}/${token}`, {
+        price: valuePriceModal,
+        time: new Date().toISOString(),
+        user: localStorage.getItem("userId"),
+        auction: 0,
       })
-      .catch(() => {});
+        .then(() => {
+          toast.success("ثبت قیمت با موفقیت انجام شد");
+          setValuePriceModal(0);
+          setEnterPriceModal(false);
+          setConfirmPriceModal(false);
+        })
+        .catch(() => {});
+    }
   };
   return (
     <React.Fragment>

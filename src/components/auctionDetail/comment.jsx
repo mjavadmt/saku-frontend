@@ -30,7 +30,7 @@ export const Comment = ({
   depth,
   changeCollapseState,
   replyComment,
-  replyClicked
+  replyClicked,
 }) => {
   const [replyModal, setReplyModal] = React.useState(false);
   const [replyValue, setReplyValue] = React.useState("");
@@ -53,15 +53,15 @@ export const Comment = ({
             width: 40,
             color: "white",
           }}
-          src={commentDetail.profileImg}
+          src={!!commentDetail.user && commentDetail.user.profile_image}
         />
         <div className="mr-2">
           <div className="md:flex">
             <div className="md:font-bold font-light">
-              {commentDetail.senderName}
+              {!!commentDetail.user && commentDetail.user.name}
             </div>
             <div className="text-sm text-gray-500 mr-2">
-              {dateConverter(commentDetail.dateSent)}
+              {dateConverter(commentDetail.date)}
             </div>
           </div>
           <div className="text-sm mt-2 text-justify">
@@ -144,7 +144,7 @@ export const Comment = ({
               onClick={() => {
                 replyComment(index, replyValue);
                 setReplyModal(false);
-                setReplyValue("")
+                setReplyValue("");
               }}
               disabled={replyValue.length === 0}
               variant="contained"

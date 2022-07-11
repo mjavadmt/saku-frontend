@@ -31,20 +31,15 @@ const handlerContent = {
     کرد.`,
     "آنلاین",
   ],
-  0: [
-    `قیمت و مبلغ پیشنهادی در زمان های مشخص شده آپدیت می‌شوند.`,
-    "آپدیت زمان دار",
-  ],
 };
 
 const handleModalContent = (type) => {
   return (
     <li className="flex gap-3 justify-between">
       <span className="font-semibold text-sky-400/100 text-xl">
-        {" "}
-        {handlerContent[type % 3][1]}{" "}
+        {type ? handlerContent[2][1]:handlerContent[1][1]}
       </span>
-      {handlerContent[type % 3][0]}
+      {type ? handlerContent[2][0]:handlerContent[1][0]}
     </li>
   );
 };
