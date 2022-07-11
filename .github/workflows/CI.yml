@@ -39,4 +39,4 @@ jobs:
         docker login --username=${{ secrets.REGISTRY_USERNAME }} --password=${{ secrets.PAT }} ghcr.io
         export TAG=${{ github.sha }}
         docker pull ghcr.io/mjavadmt/saku:$TAG
-        docker run -e CI=true ghcr.io/mjavadmt/saku:$TAG /bin/sh -c "npm test --coverage"
+        docker run -e CI=true ghcr.io/mjavadmt/saku:$TAG /bin/sh -c "npm test -- --coverage"
