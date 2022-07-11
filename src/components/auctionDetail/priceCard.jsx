@@ -74,6 +74,11 @@ const ChildModal = ({
   );
 };
 
+const extractError = (errObj) => {
+  let keys = Object.keys(errObj);
+  return errObj[keys[0]];
+};
+
 export const PriceCard = ({
   auctionData,
   token,
@@ -104,7 +109,9 @@ export const PriceCard = ({
           setEnterPriceModal(false);
           setConfirmPriceModal(false);
         })
-        .catch(() => {});
+        .catch((e) => {
+          console.log(e.response.data);
+        });
     }
   };
   return (
