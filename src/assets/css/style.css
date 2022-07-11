@@ -1,0 +1,6 @@
+.chat-background-image {
+    background-image: url("../img/chat-background.jpg");
+    background-size: "cover";
+    background-position: "center";
+    background-repeat: "repeat";
+}

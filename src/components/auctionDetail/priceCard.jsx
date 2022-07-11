@@ -92,7 +92,7 @@ export const PriceCard = ({
   const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
   const onSubmitPrice = () => {
     // do the api things and send the price to server
-    if (false) {
+    if (isOnline) {
       submitOnlinePrice({ price: valuePriceModal });
       setConfirmPriceModal(false);
       setEnterPriceModal(false);
@@ -112,6 +112,7 @@ export const PriceCard = ({
         })
         .catch((e) => {
           console.log(e.response.data);
+          toast.error("قیمت‌های بهتر برای این مزایده وجود دارد")
         });
     }
   };
@@ -182,7 +183,7 @@ export const PriceCard = ({
               value={valuePriceModal}
               onChange={(e) => {
                 setOnInitializedInput(false);
-                if (e.target.value.length < 12)
+                if (e.target.value.length < 11)
                   setValuePriceModal(e.target.value);
               }}
               type="number"
