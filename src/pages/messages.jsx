@@ -14,18 +14,23 @@ import { GET_MSG_LIST, GET_USER_LIST } from "constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
 import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
+import { useParams } from "react-router-dom";
+
 export const Messages = () => {
   const endOfMsg = useRef(null);
-  const [userName, setUserName] = useState("");
+  const { username } = useParams();
+  const [userName, setUserName] = useState(username);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [socketUrl, setSocketUrl] = useState(
     `ws://188.121.110.151:8888/chat/${userName}/${localStorage.getItem(
       "access"
     )}`
   );
+
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
+  const { sendJsonMessage, lastJsonMessage, readyState } =
+    useWebSocket(socketUrl);
 
   const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   // const { messages, sendMessage } = useChat(userName, msgList);
@@ -49,7 +54,6 @@ export const Messages = () => {
   // const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   const [userList, setUserList] = useState([]);
   const sendMsg = (e) => {
-
     sendJsonMessage({
       message: msgInput,
       sender: localStorage.getItem("userId"),
@@ -97,6 +101,9 @@ export const Messages = () => {
       setMessageHistory(res.data.reverse())
     );
   };
+  const getUserList = () => {
+    get(GET_USER_LIST).then((res) => setUserList(res.data));
+  };
   useEffect(() => {
     if (lastJsonMessage !== null) {
       if (localStorage.getItem("userId") === lastJsonMessage.sender) {
@@ -119,9 +126,15 @@ export const Messages = () => {
         ]);
       }
     }
+    getUserList();
     scrollToBottom();
-    get(GET_USER_LIST).then((res) => setUserList(res.data));
-  }, [msgList.length, lastJsonMessage, setMessageHistory]);
+  }, [
+    msgList.length,
+    lastJsonMessage,
+    setMessageHistory,
+    userName,
+    readyState,
+  ]);
   let curDate = new Date();
   return (
     <React.Fragment>

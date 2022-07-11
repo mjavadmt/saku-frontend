@@ -6,8 +6,11 @@ import { winnerStat } from "statics/winnerStat";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import LocalAtmRoundedIcon from "@mui/icons-material/LocalAtmRounded";
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
+import { useNavigate } from "react-router-dom";
+import { MESSAGES, MESSAGES_WITHOUT_SUFFIX } from "constant/routes";
 
 export const CurrentWinner = ({ bestBidUser }) => {
+  const navigate = useNavigate();
   return (
     <div className={cardClass}>
       <div className={headerClass}>برنده تا کنون</div>
@@ -18,7 +21,7 @@ export const CurrentWinner = ({ bestBidUser }) => {
             width: 100,
             color: "white",
           }}
-          src={!!bestBidUser && bestBidUser.user?.profile_image}
+          src={!!bestBidUser && bestBidUser.user.profile_image}
         />
       </div>
       <div className="flex m-4 items-center">
@@ -47,9 +50,14 @@ export const CurrentWinner = ({ bestBidUser }) => {
       <hr className="border-none col-span-2  m-4 h-px bg-gradient-to-r from-cardColor via-gray-500 to-cardColor" />
       <div className="flex justify-center mb-5">
         <button
-          // onClick={handleSubmit}
+          onClick={() =>
+            navigate(
+              `${MESSAGES_WITHOUT_SUFFIX}/${
+                !!bestBidUser.user && bestBidUser.user.username
+              }`
+            )
+          }
           className="bg-bodyBackground py-4 w-1/2 rounded-3xl "
-          data-testid="subBtn"
         >
           شروع مکالمه
         </button>

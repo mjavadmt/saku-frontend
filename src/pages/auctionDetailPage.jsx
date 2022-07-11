@@ -85,6 +85,7 @@ export const AuctionDetialPage = () => {
             token={token}
             auctionData={auctionData}
             isOnline={isOnline}
+            isOwner={isOwner}
             submitOnlinePrice={sendJsonMessage}
           />
         </Grid>
