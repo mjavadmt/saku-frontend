@@ -195,6 +195,7 @@ export const Profile = ({inTestEnvierment = false}) => {
           <form autoComplete="off" noValidate>
             <div>
               <CardHeader
+              data-testid= "cardHead"
                 subheader="در صورت نیاز میتوانید موارد ذیل را اصلاح نمایید."
                 title="اطلاعات شخصی"
               />
@@ -208,7 +209,7 @@ export const Profile = ({inTestEnvierment = false}) => {
                         direction: changeDIR(userData["name"]),
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 20 }}
+                      inputProps={{ maxLength: 20 ,"data-testid": "nameinp"}}
                       // helperText="Please specify the first name"
                       name="name"
                       onChange={(e, val) => handleChange(e, val)}
@@ -228,12 +229,12 @@ export const Profile = ({inTestEnvierment = false}) => {
                         setUserData(data);
                       }}
                       displayEmpty
-                      inputProps={{ "aria-label": "Without label" }}
+                      inputProps={{ "aria-label": "Without label" , "data-testid": "selectPer"}}
                       defaultValue={userData.person_type === "N" ? 10 : 20}
                       value={userData.person_type === "N" ? 10 : 20}
                     >
-                      <MenuItem value={10}>حقیقی</MenuItem>
-                      <MenuItem value={20}>حقوقی</MenuItem>
+                      <MenuItem data-testid="select-optionPer" value={10}>حقیقی</MenuItem>
+                      <MenuItem data-testid="select-optionPer" value={20}>حقوقی</MenuItem>
                     </Select>
                   </Grid>
                   <Grid item md={6} xs={12}>
@@ -243,7 +244,7 @@ export const Profile = ({inTestEnvierment = false}) => {
                         direction: "ltr",
                       }}
                       fullWidth
-                      inputProps={{ maxLength: 10 }}
+                      inputProps={{ maxLength: 10 ,"data-testid": "nCode"}}
                       name="national_id"
                       onChange={handleChange}
                       required
@@ -274,7 +275,7 @@ export const Profile = ({inTestEnvierment = false}) => {
                       name="province"
                       onChange={handleChange}
                       displayEmpty
-                      inputProps={{ "aria-label": "Without label" }}
+                      inputProps={{ "aria-label": "Without label" , "data-testid": "select-state" }}
                       defaultValue={userData.province}
                       value={userData.province}
                     >

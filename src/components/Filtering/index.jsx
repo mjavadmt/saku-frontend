@@ -46,7 +46,11 @@ export const Filtering = ({
           placeholder="جست و جو"
           InputProps={{
             startAdornment: <Search className="m-2" />,
+            "data-testid": "Search",
           }}
+          value =""
+          onChange={(e) => {}}
+          
         />
       </div>
       <div className=" m-4">
@@ -55,6 +59,7 @@ export const Filtering = ({
           id="tags-standard"
           options={top100Films}
           getOptionLabel={(option) => option.title}
+          data-testid= "filters"
           renderInput={(params) => (
             <TextField
               className="text-white"
@@ -68,6 +73,7 @@ export const Filtering = ({
         <p>بازه قیمت:</p>
         <Slider
           value={value}
+          data-testid ="slider"
           onChange={(e, newValue) => setValue(newValue)}
           valueLabelDisplay="auto"
           getAriaValueText={(w) => `${w} ریال`}
@@ -82,7 +88,7 @@ export const Filtering = ({
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
           displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
+          inputProps={{ "aria-label": "Without label" ,"data-testid" : "selectSort" }}
           // defaultValue={10}
           placeholder="مرتب‌سازی"
         >
@@ -98,6 +104,7 @@ export const Filtering = ({
             <Select
               fullWidth
               value={type}
+              data-testid ="selectNo"
               onChange={(e) => setType(e.target.value)}
               defaultValue={10}
               placeholder="نوع"
@@ -111,6 +118,7 @@ export const Filtering = ({
             <Select
               fullWidth
               value={status}
+              data-testid ="selectSta"
               onChange={(e) => setStatus(e.target.value)}
               defaultValue={10}
               placeholder="نوع"
