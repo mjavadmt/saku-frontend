@@ -49,16 +49,7 @@ export const Messages = () => {
   // const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   const [userList, setUserList] = useState([]);
   const sendMsg = (e) => {
-    // msgList.push({
-    //   type: "text",
-    //   msg: msgInput,
-    //   date: `${new Date().toLocaleDateString(
-    //     "fa-IR"
-    //   )} ${new Date().toLocaleTimeString("fa-IR")}`,
-    //   from: 1,
-    //   to: 3,
-    //   fromUserName: "اصغر فرهادی",
-    // });
+
     sendJsonMessage({
       message: msgInput,
       sender: localStorage.getItem("userId"),

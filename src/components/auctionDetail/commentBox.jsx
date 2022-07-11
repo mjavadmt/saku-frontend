@@ -9,9 +9,11 @@ import { useEffect, useRef, useState } from "react";
 import "./replyStyle.css";
 import ReplyIcon from "@mui/icons-material/Reply";
 import ClearIcon from "@mui/icons-material/Clear";
+import { get, post } from "utils/api";
+import { toast } from "react-toastify";
 
-export const CommentBox = () => {
-  const [comments, setComments] = useState(commentsData);
+export const CommentBox = ({ token }) => {
+  const [comments, setComments] = useState([]);
   const [commentTxt, setCommentTxt] = useState("");
   const [reply, setReply] = useState(null);
   const endOfMsg = useRef(null);
@@ -32,7 +34,7 @@ export const CommentBox = () => {
   };
 
   const scrollToBottom = () => {
-    endOfMsg.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    // endOfMsg.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const toggleDirection = (e) => {
@@ -43,6 +45,7 @@ export const CommentBox = () => {
 
   const addComment = () => {
     if (reply) {
+      console.log(reply);
       replyComment(reply, commentTxt);
       setReply(null);
       setCommentTxt("");
@@ -50,19 +53,36 @@ export const CommentBox = () => {
     }
     const addedComment = {
       senderName: "Dutch User",
-      dateSent: `${new Date()}`,
+
+      user: {
+        id: 2,
+        username: "admin",
+        name: "ادمین",
+        profile_image: null,
+      },
+
+      date: `${new Date()}`,
       content: commentTxt,
-      profileImg: "",
       replies: [],
     };
+    post(`/comment/${token}`, addedComment)
+      .then((res) => {
+        toast.success("عملیات با موفیت انجام شد");
+        getComments();
+      })
+      .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     let commentsTmp = [...comments, addedComment];
     setComments(commentsTmp);
     setCommentTxt("");
   };
-
+  const getComments = () => {
+    get(`/comment/${token}`).then((res) => {
+      setComments(res.data);
+    });
+  };
   useEffect(() => {
-    scrollToBottom();
-  }, [comments.length]);
+    getComments();
+  }, [token]);
 
   const handleReplyCommentContent = (index) => {
     if (index[1] != -1) {
@@ -97,12 +117,26 @@ export const CommentBox = () => {
       let foundComment = { ...commentsTmp[index[0]], replies: firstReplies };
       commentsTmp[index[0]] = foundComment;
       setComments(commentsTmp);
+      let id = comments[index[0]].replies[index[1]].id;
+      post(`/comment/reply/${id}`, addedComment)
+        .then((res) => {
+          toast.success("عملیات با موفیت انجام شد");
+          getComments();
+        })
+        .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     } else {
       let comment = { ...commentsTmp[index[0]] };
       let replies = [...comment.replies, addedComment];
       comment.replies = replies;
       commentsTmp[index[0]] = comment;
       setComments(commentsTmp);
+      let id = comments[index[0]].id;
+      post(`/comment/reply/${id}`, addedComment)
+        .then((res) => {
+          toast.success("عملیات با موفیت انجام شد");
+          getComments();
+        })
+        .catch(() => toast.error("عملیات با موفیت انجام نشد"));
     }
   };
   return (

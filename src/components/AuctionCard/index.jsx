@@ -1,6 +1,6 @@
 import Chip from "@mui/material/Chip";
 import { FaRegBuilding } from "react-icons/fa";
-import { GoLocation } from "react-icons/go";
+import { VscTypeHierarchySub } from "react-icons/vsc";
 import { BiShareAlt, BiCopy } from "react-icons/bi";
 import { BsBookmarkStar } from "react-icons/bs";
 import Button from "@mui/material/Button";
@@ -12,8 +12,9 @@ export const ActionCard = ({
   title,
   remainingDay,
   companyName,
-  city,
+  isOnline,
   date,
+  mode,
   price,
   tags,
   id,
@@ -36,15 +37,20 @@ export const ActionCard = ({
             <Chip
               color="secondary"
               className=" mr-2"
-              label={`${remainingDay} روز مانده`}
+              label={
+                remainingDay > 0 ? `${remainingDay} روز مانده` : "پایان یافته"
+              }
             />
           </div>
 
           <div className="flex items-center">
             <FaRegBuilding />
             <span className="m-2">{companyName}</span>
-            <GoLocation />
-            <span className="m-2">{city}</span>
+            <VscTypeHierarchySub />
+            <span className="m-2">
+              {mode === 1 ? "مزایده" : "مناقصه"} -{" "}
+              {isOnline ? "آنلاین" : "آفلاین"}
+            </span>
           </div>
           <div className="flex items-center">
             مهلت:
@@ -62,9 +68,9 @@ export const ActionCard = ({
         </div>
         <div className="lg:grid lg:grid-rows-4 m-4 flex justify-between lg:justify-end">
           <div className="lg:row-span-3 lg:flex lg:justify-end flex m-2 gap-2">
-            <BiShareAlt size={24} />
+            {/* <BiShareAlt size={24} />
             <BsBookmarkStar size={24} />
-            <BiCopy size={24} />
+            <BiCopy size={24} /> */}
           </div>
           <div className="flex items-end justify-end">
             <Button

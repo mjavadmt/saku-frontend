@@ -6,7 +6,14 @@ import { FiLogOut } from "react-icons/fi";
 import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import cx from "classnames";
-import { SPLASH, NOTIFICATIONS, PROFILE, LOGIN, LOGOUT } from "constant/routes";
+import {
+  SPLASH,
+  NOTIFICATIONS,
+  PROFILE,
+  LOGIN,
+  LOGOUT,
+  MESSAGES,
+} from "constant/routes";
 import { get } from "utils/api";
 import { PRIFILE } from "constant/apiRoutes";
 const NavBar = ({ handleToggleSidebar }) => {
@@ -26,7 +33,7 @@ const NavBar = ({ handleToggleSidebar }) => {
           <Link className={hoverColored} to={SPLASH}>
             <AiOutlineHome className="m-3" size={24} />
           </Link>
-          <Link className={hoverColored} to={PROFILE}>
+          <Link className={hoverColored} to={MESSAGES}>
             <AiOutlineMessage className="m-3" size={24} />
           </Link>
           <Link className={hoverColored} to={NOTIFICATIONS}>

@@ -7,6 +7,8 @@ import { prices } from "statics/logEnteredPrice";
 import { dateConverter } from "utils/dateConverter";
 import Pagination from "@mui/material/Pagination";
 import React from "react";
+import { CircularProgress } from "@mui/material";
+import notAccessible from "assets/img/undraw_access_denied_re_awnf.svg";
 
 const columns = [
   {
@@ -37,20 +39,20 @@ const columns = [
     center: true,
     minWidth: "150px",
     sortable: true,
-    selector: "price_entered",
-    cell: (row) => <span>{definePriceColor(row.price_entered)}</span>,
+    selector: "price",
+    cell: (row) => <span>{definePriceColor(row.price)}</span>,
   },
   {
     name: "تاریخ ثبت",
     center: true,
     minWidth: "150px",
     sortable: true,
-    selector: "date_entered",
-    cell: (row) => <span>{dateConverter(row.date_entered)}</span>,
+    selector: "time",
+    cell: (row) => <span>{dateConverter(row.time)}</span>,
   },
 ];
 
-export const TableLog = () => {
+export const TableLog = ({ bidHistory, isLoading, isOwner }) => {
   const [page, setPage] = React.useState(1);
   const dataOnPage = 5;
   const handleChange = (event, value) => {
@@ -58,28 +60,41 @@ export const TableLog = () => {
   };
   const paginatedData = () => {
     let currentItem = (page - 1) * dataOnPage;
-    return prices.slice(currentItem, currentItem + dataOnPage);
+    return bidHistory.slice(currentItem, currentItem + dataOnPage);
   };
   return (
     <div className={cardClass}>
       <div className={headerClass}>تاریخچه قیمت‌های ثبت‌شده</div>
       <div className="p-6">
-        <DataTable
-          data={paginatedData()}
-          columns={columns}
-          noHeader
-          responsive
-          customStyles={tableStyles}
-          noDataComponent="آیتمی برای نشان دادن نیست."
-        />
-        <div className="flex justify-center">
-          <Pagination
-            count={Math.ceil(prices.length / 5)}
-            page={page}
-            onChange={handleChange}
-            color="primary"
-          />
-        </div>
+        {isLoading ? (
+          <span className="flex h-97 justify-center items-center">
+            <CircularProgress color="inherit" />
+          </span>
+        ) : isOwner ? (
+          <>
+            <DataTable
+              data={paginatedData()}
+              columns={columns}
+              noHeader
+              responsive
+              customStyles={tableStyles}
+              noDataComponent="آیتمی برای نشان دادن نیست."
+            />
+            <div className="flex justify-center">
+              <Pagination
+                count={Math.ceil(bidHistory.length / 5)}
+                page={page}
+                onChange={handleChange}
+                color="primary"
+              />
+            </div>
+          </>
+        ) : (
+          <div className="flex w-full justify-center items-center">
+            <img src={notAccessible} alt="img" className="h-90 flex-1" />
+            <p>مشاهده این قسمت برای این نوع ممکن نیست</p>
+          </div>
+        )}
       </div>
     </div>
   );
