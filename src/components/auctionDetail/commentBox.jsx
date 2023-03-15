@@ -2,7 +2,6 @@ import { cardClass, headerClass } from "constant/cardClass";
 import cx from "classnames";
 import { TextField } from "@mui/material";
 import { Comment } from "./comment";
-import { commentsData } from "statics/fakeDataComments";
 import React from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useRef, useState } from "react";
@@ -36,9 +35,7 @@ export const CommentBox = ({ token }) => {
     setReply(index);
   };
 
-  const scrollToBottom = () => {
-    // endOfMsg.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+
 
   const toggleDirection = (e) => {
     if (e.target.value && e.target.value[0].match(/[a-z]/i))
@@ -90,7 +87,7 @@ export const CommentBox = ({ token }) => {
   }, [token]);
 
   const handleReplyCommentContent = (index) => {
-    if (index[1] != -1) {
+    if (index[1] !== -1) {
       return comments[index[0]].replies[index[1]].content;
     }
     return comments[index[0]].content;

@@ -9,8 +9,6 @@ import cx from "classnames";
 import {
   SPLASH,
   NOTIFICATIONS,
-  PROFILE,
-  LOGIN,
   LOGOUT,
   MESSAGES,
 } from "constant/routes";

@@ -23,7 +23,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  // bgcolor: "#7848c0",
   border: "2px solid #353131",
   backgroundColor: "black",
   color: "white",
@@ -76,10 +75,10 @@ const ChildModal = ({
   );
 };
 
-const extractError = (errObj) => {
-  let keys = Object.keys(errObj);
-  return errObj[keys[0]];
-};
+// const extractError = (errObj) => {
+//   let keys = Object.keys(errObj);
+//   return errObj[keys[0]];
+// };
 
 export const PriceCard = ({
   auctionData,

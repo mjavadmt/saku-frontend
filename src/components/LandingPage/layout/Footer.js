@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import logo from "assets/img/gavel.svg";
-import FooterNav from "./partials/FooterNav";
 import FooterSocial from "./partials/FooterSocial";
 import { SPLASH } from "./../../../constant/routes";
 import { useNavigate } from "react-router-dom";

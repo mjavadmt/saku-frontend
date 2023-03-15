@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-import { auctions } from "statics/fakeDataMyAuction";
 import { AuctionDetailCard } from "components/auctionDetail/auctionDetailCard";
 import { CommentBox } from "components/auctionDetail/commentBox";
 import { PriceCard } from "components/auctionDetail/priceCard";
@@ -47,7 +46,7 @@ export const AuctionDetialPage = () => {
     get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
       setAuctionData(res.data);
       setIsOnline(res.data.is_online);
-      if (res.data.user.id == localStorage.getItem("userId")) {
+      if (res.data.user.id === localStorage.getItem("userId")) {
         setIsOwner(true);
       }
     });

@@ -4,9 +4,6 @@
 
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
   font-family: "Dana-FaNum";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -54,7 +51,7 @@ code {
 .Toastify__toast--error:hover {
   box-sizing: 0 !important;
   box-shadow: none !important;
-  /* color: rgb(245, 199, 100); */
+
 }
 
 .Toastify__toast--success:hover {
