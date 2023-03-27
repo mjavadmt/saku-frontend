@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { SectionProps } from "../utils/SectionProps";
 import start from "assets/img/Startup_Two Color.svg";
-import Image from "./../elements/Image";
+import Image from "../elements/Image";
 import { LOGIN } from "constant/routes";
 import { useNavigate } from "react-router-dom";
 
