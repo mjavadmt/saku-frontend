@@ -10,12 +10,9 @@ import {
   SPLASH,
   NOTIFICATIONS,
   PROFILE,
-  LOGIN,
   LOGOUT,
   MESSAGES,
 } from "constant/routes";
-import { get } from "utils/api";
-import { PRIFILE } from "constant/apiRoutes";
 import { getProfileInfo } from "requests/navbar";
 const NavBar = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();

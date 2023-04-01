@@ -1,5 +1,4 @@
 import React from "react";
-import useState from "react";
 import { Navigation } from "navigation";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./App.scss";

@@ -1,15 +1,11 @@
-import { AttachFileOutlined, SendRounded } from "@mui/icons-material";
+import {  SendRounded } from "@mui/icons-material";
 import { UserRow } from "components/MessageUserList";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState,} from "react";
 import { TextMessage } from "components/TextMessage";
-import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
-import { ImageMessage } from "components/ImageMessage";
+import { MSG_LIST_1_3} from "constant/chatData";
 import { useNavigate } from "react-router-dom";
 import { FULL_LAYOUT_CHAT } from "constant/routes";
-import { FileMessage } from "components/FileMessage";
-import { Avatar, Chip } from "@mui/material";
-import useChat from "hooks/useChatHook";
-import { get } from "utils/api";
+import { Avatar, } from "@mui/material";
 import { GET_MSG_LIST, GET_USER_LIST } from "constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
 import empty from "assets/img/Empty-Inbox.png";
@@ -55,7 +51,6 @@ export const Messages = () => {
   };
   const navigate = useNavigate();
   const [msgInput, setMsgInput] = useState("");
-  // const [msgList, setMsgList] = useState(MSG_LIST_1_3);
   const [userList, setUserList] = useState([]);
   const sendMsg = (e) => {
     sendJsonMessage({
@@ -63,7 +58,6 @@ export const Messages = () => {
       sender: localStorage.getItem("userId"),
     });
     setMsgInput("");
-    // setMsgList(msgList);
     scrollToBottom();
   };
   const uploadFile = (event) => {
@@ -241,35 +235,9 @@ export const Messages = () => {
                     </>
                   );
 
-                  // case "image":
-                  //   return (
-                  //     <>
-                  //       <div className="bg-slate-600 rounded-xl w-20 ">
-                  //         {m.date.split(" ")[0]}
-                  //       </div>
-                  //       <ImageMessage message={m} />
-                  //     </>
-                  //   );
-                  // case "file":
-                  //   return (
-                  //     <>
-                  //       <div className="bg-slate-600 rounded-xl w-20 ">
-                  //         {m.date.split(" ")[0]}
-                  //       </div>
-                  //       <FileMessage message={m} />
-                  //     </>
-                  //   );
+                 
                 }
-                // switch (m.type) {
-                //   case "text":
-                //     return <TextMessage message={m} />;
-                //   case "image":
-                //     return <ImageMessage message={m} />;
-                //   case "file":
-                //     return <FileMessage message={m} />;
-                //   default:
-                //     return null;
-                // }
+             
                 return (
                   <TextMessage
                     message={m}
@@ -289,20 +257,7 @@ export const Messages = () => {
               hidden: !isSmallScreen,
             })}
           >
-            {/* <span
-              role="button"
-              onClick={() => fileRef.current.click()}
-              className="p-2 bg-cyan-500 rounded-full m-2 "
-            >
-              <input
-                type="file"
-                onChange={uploadFile}
-                className="p-2 bg-cyan-500 rounded-full m-2 "
-                hidden
-                ref={fileRef}
-              />
-              <AttachFileOutlined />
-            </span> */}
+            
             <span
               role="button"
               onClick={sendMsg}

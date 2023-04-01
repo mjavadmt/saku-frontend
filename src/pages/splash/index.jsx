@@ -15,7 +15,6 @@ import {
 } from "..";
 import { useEffect, useState } from "react";
 import { homePageData } from "statics/homePageStats";
-import { get } from "utils/api";
 import { CircularProgress } from "@mui/material";
 import { getHomeData } from "requests/splash";
 

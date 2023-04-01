@@ -1,11 +1,10 @@
 import DataTable from "react-data-table-component";
-import { auctionCreated, categoryMapper } from "statics/fakeDataAuction";
 import tableStyles from "./tableStyles";
-import ReactTooltip from "react-tooltip";
+
 import {
   dateConverter,
   defineParticipantsColor,
-  definePriceColor,
+
 } from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
@@ -44,30 +43,14 @@ const columns = [
     center: true,
     selector: (row) => dateConverter(row.finished_at),
   },
-  // {
-  //   name: "بهترین پیشنهاد",
-  //   center: true,
-  //   minWidth: "150px",
-  //   selector: (row) => definePriceColor(row.best_bid),
-  // },
+  
   {
     name: "دسته‌بندی",
     center: true,
     selector: (row) => (
       <span>
         <span>{row.category}</span>
-        {/* <span data-tip data-for={`category-${row.id}`}>
-          {row.category}
-        </span> */}
-        {/* <ReactTooltip
-          effect="solid"
-          backgroundColor="white"
-          textColor="#000"
-          place="top"
-          id={`category-${row.id}`}
-        >
-          {categoryMapper[row.category]}
-        </ReactTooltip> */}
+       
       </span>
     ),
   },

@@ -1,16 +1,12 @@
-import { AttachFileOutlined, SendRounded } from "@mui/icons-material";
+import {  SendRounded } from "@mui/icons-material";
 import { UserRow } from "components/MessageUserList";
 import React, { useEffect, useRef, useState } from "react";
 import { TextMessage } from "components/TextMessage";
-import { MSG_LIST_1_3, USER_LIST } from "constant/chatData";
-import { ImageMessage } from "components/ImageMessage";
 import { useNavigate } from "react-router-dom";
 import { MESSAGES } from "constant/routes";
-import { FileMessage } from "components/FileMessage";
 import { Avatar } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useWebSocket from "react-use-websocket";
-import { get } from "utils/api";
 import { GET_MSG_LIST, GET_USER_LIST } from "constant/apiRoutes";
 import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
@@ -57,42 +53,10 @@ export const FullLayoutChat = () => {
       sender: localStorage.getItem("userId"),
     });
     setMsgInput("");
-    // setMsgList(msgList);
+   
     scrollToBottom();
   };
-  // const uploadFile = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     let img = event.target.files[0];
-  //     var msgList1 = [...msgList];
-  //     if (img.type.includes("image")) {
-  //       msgList1.push({
-  //         type: "image",
-  //         imageContent: URL.createObjectURL(img),
-  //         date: `${new Date().toLocaleDateString(
-  //           "fa-IR"
-  //         )} ${new Date().toLocaleTimeString("fa-IR")}`,
-  //         from: 1,
-  //         to: 3,
-  //         fromUserName: "اصغر فرهادی",
-  //       });
-  //       setMsgList(msgList1);
-  //       scrollToBottom();
-  //     } else {
-  //       msgList1.push({
-  //         type: "file",
-  //         fileContent: img,
-  //         date: `${new Date().toLocaleDateString(
-  //           "fa-IR"
-  //         )} ${new Date().toLocaleTimeString("fa-IR")}`,
-  //         from: 1,
-  //         to: 3,
-  //         fromUserName: "اصغر فرهادی",
-  //       });
-  //       setMsgList(msgList1);
-  //       scrollToBottom();
-  //     }
-  //   }
-  // };
+  
   const [userList, setUserList] = useState([]);
   const getMsgList = async(userName) => {
     const getMessagesRes = await getMessages(`${GET_MSG_LIST}${userName}/`);

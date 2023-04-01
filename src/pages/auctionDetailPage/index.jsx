@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-import { auctions } from "statics/fakeDataMyAuction";
 import { AuctionDetailCard } from "components/auctionDetail/auctionDetailCard";
 import { CommentBox } from "components/auctionDetail/commentBox";
 import { PriceCard } from "components/auctionDetail/priceCard";
@@ -11,7 +10,6 @@ import { useState } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { get } from "utils/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
 import { getAllAuctions, getBidHistory } from "requests/auctionDetail";

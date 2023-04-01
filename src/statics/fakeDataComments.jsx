@@ -13,7 +13,7 @@ export const images = [
   profileImg_5,
 ];
 
-// const colors = ["#000030", "#28C76F", "#EA5455", "#FF9F43"];
+
 
 const commentDetail = {
   isCollapsed: false,

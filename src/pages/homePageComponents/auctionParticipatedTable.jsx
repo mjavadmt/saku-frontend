@@ -1,7 +1,5 @@
 import DataTable from "react-data-table-component";
-import { auctionParticipated, categoryMapper } from "statics/fakeDataAuction";
 import tableStyles from "./tableStyles";
-import ReactTooltip from "react-tooltip";
 import { dateConverter, defineStatusColor } from "./tableCellFunctions";
 import { cardClass, headerClass } from "constant/cardClass";
 
@@ -39,28 +37,9 @@ const columns = [
     center: true,
     selector: (row) => defineStatusColor(row.success),
   },
-  // {
-  //   name: "دسته‌بندی",
-  //   center: true,
-  //   selector: (row) => (
-  //     <span>
-  //       <span data-tip data-for={`category-${row.id}`}>
-  //         {row.category}
-  //       </span>
-  //       <ReactTooltip
-  //         effect="solid"
-  //         backgroundColor="white"
-  //         textColor="#000"
-  //         place="top"
-  //         id={`category-${row.id}`}
-  //       >
-  //         {categoryMapper[row.category]}
-  //       </ReactTooltip>
-  //     </span>
-  //   ),
-  // },
+  
 ];
-// box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+
 let changedStyle = { ...tableStyles };
 let tableObj = { ...changedStyle.table };
 let tableStyle = { ...tableObj.style };
