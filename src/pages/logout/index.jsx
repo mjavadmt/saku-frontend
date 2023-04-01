@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { logout } from "requests/user";
 import { LOGIN } from "constant/routes";
 import { api } from "utils/api";
 
@@ -10,9 +8,7 @@ export const Logout = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // if (localStorage.getItem("access")) {
-      //   await logout();
-      // }
+    
       delete api.defaults.headers.Authorization;
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");

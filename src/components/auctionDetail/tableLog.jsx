@@ -3,7 +3,6 @@ import DataTable from "react-data-table-component";
 import tableStyles from "pages/homePageComponents/tableStyles";
 import Avatar from "@mui/material/Avatar";
 import { definePriceColor } from "pages/homePageComponents/tableCellFunctions";
-import { prices } from "statics/logEnteredPrice";
 import { dateConverter } from "utils/dateConverter";
 import Pagination from "@mui/material/Pagination";
 import React from "react";

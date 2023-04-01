@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
 import { useEffect } from "react";
-import { get } from "utils/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";

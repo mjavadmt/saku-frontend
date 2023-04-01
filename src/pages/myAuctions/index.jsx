@@ -1,10 +1,8 @@
 import { Filtering } from "components/Filtering/index";
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import { auctions } from "statics/fakeDataMyAuction";
 import { Card } from "components/MyAuction/card";
 import Pagination from "@mui/material/Pagination";
-import { get } from "utils/api";
 import { useEffect } from "react";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import { CircularProgress } from "@mui/material";

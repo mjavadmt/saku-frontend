@@ -20,7 +20,6 @@ import {
   RiPhoneFill,
   RiFingerprintFill,
 } from "react-icons/ri";
-import { get, post, put } from "utils/api";
 import { PRIFILE, DEL_IMAGE } from "constant/apiRoutes";
 import { provinceList } from "constant/iranProvince";
 import { cityList } from "constant/iranCities";
@@ -190,10 +189,7 @@ export const Profile = ({inTestEnvierment = false}) => {
                   </div>
                 )}
               </div>
-              {/* <div>
-                {" "}
-                <button className="bg-red-600  w-full h-8">حذف تصویر</button>
-              </div> */}
+             
             </div>
           ) : (
             "اطلاعات خود را کامل کنید."

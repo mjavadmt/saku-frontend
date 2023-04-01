@@ -8,26 +8,19 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import { FaInstagram } from "react-icons/fa";
-import { IoMdAlert } from "react-icons/io";
 import logo from "assets/img/gavel.svg";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import GavelIcon from "@mui/icons-material/Gavel";
 import Person from "@mui/icons-material/Person";
-import WorkIcon from "@mui/icons-material/Work";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import { useNavigate } from "react-router-dom";
 import {
   SPLASH,
   CREATE_AUCTION,
-  JOB_INFO,
   MESSAGES,
   MY_AUCTIONS,
-  NOTIFICATIONS,
   PROFILE,
-  TRANSACTIONS,
   AUCTION_PAGE,
 } from "constant/routes";
 

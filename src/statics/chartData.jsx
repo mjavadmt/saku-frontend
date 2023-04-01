@@ -8,9 +8,7 @@ const chartData = {
       id: "basic-bar",
       height: 100,
     },
-    // grid : {
-    //   show : false
-    // },
+
     legend: {
       show: true,
       fontFamily: "Dana-FaNum, Arial, sans-serif",
@@ -87,14 +85,7 @@ const chartData = {
           return numberWithCommas(value);
         },
       },
-      // title: {
-      //   text: "میزان حساب",
-      //   offsetX: -40,
-      //   style: {
-      //     color: "white",
-      //     fontFamily: "Dana-FaNum, Arial, sans-serif",
-      //   },
-      // },
+
     },
     tooltip: {
       style: {

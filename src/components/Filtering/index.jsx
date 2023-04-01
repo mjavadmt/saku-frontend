@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import { Search } from "@mui/icons-material";
-import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import top100Films from "constant/FilterungTag";
-import Slider from "@mui/material/Slider";
-import { formatPrice } from "utils/formatPrice";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import "./index.css";
 import Button from "@mui/material/Button";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
