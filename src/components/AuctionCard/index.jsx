@@ -3,7 +3,7 @@ import { FaRegBuilding } from "react-icons/fa";
 import { VscTypeHierarchySub } from "react-icons/vsc";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "constant/routes";
+import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "utils/constant/routes";
 import cx from "classnames";
 
 export const ActionCard = ({

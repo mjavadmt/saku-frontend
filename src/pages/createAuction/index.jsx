@@ -4,7 +4,7 @@ import { FcAddImage, FcInspection } from "react-icons/fc";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import top100Films from "constant/FilterungTag";
+import top100Films from "utils/constant/FilterungTag";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { FcInfo, FcCalendar } from "react-icons/fc";
@@ -15,15 +15,15 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { Chip } from "@mui/material";
 import { useEffect } from "react";
-import { GET_CATEGORIES } from "../../constant/apiRoutes";
-import { POST_AUCTION } from "constant/apiRoutes";
+import { GET_CATEGORIES } from "../../utils/constant/apiRoutes";
+import { POST_AUCTION } from "utils/constant/apiRoutes";
 import { toast } from "react-toastify";
 import { toUsDate } from "utils/dateConverter";
 import {
     addAuction,
     getCategories,
     updateAuction,
-} from "requests/createAuction";
+} from "utils/api/requests/createAuction";
 
 export const CreateAuction = ({ inTestEnvierment = false }) => {
     const [auctionType, setAuctionType] = useState("");
