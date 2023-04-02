@@ -1,8 +1,8 @@
-import { cardClass, headerClass } from "constant/cardClass";
+import { cardClass, headerClass } from "utils/constant/cardClass";
 import React, { useEffect, useState } from "react";
 import { dateConverter } from "utils/dateConverter";
 import { defineUnit } from "utils/formatPrice";
-import { GET_MY_BID } from "constant/apiRoutes";
+import { GET_MY_BID } from "utils/constant/apiRoutes";
 import { getEnteredPrices } from "requests/enteredPrices";
 
 const chipConstantClass =

@@ -1,5 +1,11 @@
 import { post } from "utils/api";
-import { LOGOUT, LOGIN, SIGNUP, FORGOT, VERIFY } from "constant/apiRoutes";
+import {
+    LOGOUT,
+    LOGIN,
+    SIGNUP,
+    FORGOT,
+    VERIFY,
+} from "utils/constant/apiRoutes";
 import axios from "axios";
 import { host } from "utils/config";
 

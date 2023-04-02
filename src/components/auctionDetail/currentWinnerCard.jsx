@@ -1,4 +1,4 @@
-import { cardClass, headerClass } from "constant/cardClass";
+import { cardClass, headerClass } from "utils/constant/cardClass";
 import Avatar from "@mui/material/Avatar";
 import { dateConverter } from "utils/dateConverter";
 import { definePriceColor } from "pages/homePageComponents/tableCellFunctions";
@@ -6,7 +6,7 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import LocalAtmRoundedIcon from "@mui/icons-material/LocalAtmRounded";
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
 import { useNavigate } from "react-router-dom";
-import { MESSAGES_WITHOUT_SUFFIX } from "constant/routes";
+import { MESSAGES_WITHOUT_SUFFIX } from "utils/constant/routes";
 
 export const CurrentWinner = ({ bestBidUser }) => {
     const navigate = useNavigate();

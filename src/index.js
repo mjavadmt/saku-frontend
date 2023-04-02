@@ -4,14 +4,14 @@ import ReactDOM from "react-dom";
 import "assets/scss/style.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./fonts/fontiran.css";
+import "./assets/fonts/fontiran.css";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

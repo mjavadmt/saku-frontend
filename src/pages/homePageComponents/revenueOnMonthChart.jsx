@@ -1,7 +1,7 @@
 import React from "react";
-import { cardClass, headerClass } from "constant/cardClass";
+import { cardClass, headerClass } from "utils/constant/cardClass";
 import Chart from "react-apexcharts";
-import chartData from "statics/chartData";
+import chartData from "utils/statics/chartData";
 import cx from "classnames";
 import "./chart.css";
 

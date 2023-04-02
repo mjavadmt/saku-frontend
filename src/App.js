@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation } from "navigation";
+import { Navigation } from "components/navigation";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
