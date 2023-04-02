@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
 import { toast } from "react-toastify";
-import { signup, vrify } from "requests/user";
+import { signup, vrify } from "utils/api/requests/user";
 import { useNavigate } from "react-router-dom";
 import { LOGIN } from "utils/constant/routes";
 import { CircularProgress } from "@mui/material";

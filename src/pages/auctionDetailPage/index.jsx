@@ -12,7 +12,10 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
-import { getAllAuctions, getBidHistory } from "requests/auctionDetail";
+import {
+    getAllAuctions,
+    getBidHistory,
+} from "utils/api/requests/auctionDetail";
 
 export const AuctionDetialPage = () => {
     const [popUpModal, setPopUpModal] = useState(true);

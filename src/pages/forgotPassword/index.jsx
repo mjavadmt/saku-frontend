@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
-import { forgot } from "requests/user";
+import { forgot } from "utils/api/requests/user";
 import { useNavigate } from "react-router-dom";
 import { LOGIN, SIGNUP } from "utils/constant/routes";
 import { CircularProgress } from "@mui/material";

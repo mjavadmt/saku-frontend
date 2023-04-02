@@ -13,7 +13,7 @@ import cx from "classnames";
 import { useParams } from "react-router-dom";
 import "assets/css/style.css";
 import { host } from "utils/config";
-import { getMessages, getUsers } from "requests/chat";
+import { getMessages, getUsers } from "utils/api/requests/chat";
 
 export const Messages = () => {
     const endOfMsg = useRef(null);

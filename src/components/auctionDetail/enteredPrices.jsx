@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { dateConverter } from "utils/dateConverter";
 import { defineUnit } from "utils/formatPrice";
 import { GET_MY_BID } from "utils/constant/apiRoutes";
-import { getEnteredPrices } from "requests/enteredPrices";
+import { getEnteredPrices } from "utils/api/requests/enteredPrices";
 
 const chipConstantClass =
     "rounded-2xl  p-1 pr-2 pl-2 text-xs flex justify-center w-28";

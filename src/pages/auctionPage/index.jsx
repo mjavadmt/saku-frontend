@@ -6,7 +6,10 @@ import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
-import { getAllAuctions, getFilteredAuctions } from "requests/myAuctions";
+import {
+    getAllAuctions,
+    getFilteredAuctions,
+} from "utils/api/requests/myAuctions";
 
 export const AuctionPage = () => {
     const [auctions, setAuctios] = useState([]);

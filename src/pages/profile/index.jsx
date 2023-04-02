@@ -24,7 +24,7 @@ import { PRIFILE, DEL_IMAGE } from "utils/constant/apiRoutes";
 import { provinceList } from "utils/constant/iranProvince";
 import { cityList } from "utils/constant/iranCities";
 import { toast } from "react-toastify";
-import { addImg, deleteImg, getProfileInfo } from "requests/navbar";
+import { addImg, deleteImg, getProfileInfo } from "utils/api/requests/navbar";
 
 export const Profile = ({ inTestEnvierment = false }) => {
     const fileRef = useRef(null);

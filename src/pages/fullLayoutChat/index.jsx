@@ -11,7 +11,7 @@ import { GET_MSG_LIST, GET_USER_LIST } from "utils/constant/apiRoutes";
 import empty from "assets/img/Empty-Inbox.png";
 import cx from "classnames";
 import { host } from "../../utils/config";
-import { getMessages, getUsers } from "requests/chat";
+import { getMessages, getUsers } from "utils/api/requests/chat";
 
 export const FullLayoutChat = () => {
     const endOfMsg = useRef(null);

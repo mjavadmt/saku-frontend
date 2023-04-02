@@ -15,7 +15,7 @@ import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import { toast } from "react-toastify";
 import submitPrice from "assets/img/submit-price.png";
 import { POST_BID } from "utils/constant/apiRoutes";
-import { SubmitPrice } from "requests/priceCard";
+import { SubmitPrice } from "utils/api/requests/priceCard";
 
 const style = {
     position: "absolute",

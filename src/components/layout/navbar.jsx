@@ -13,7 +13,7 @@ import {
     LOGOUT,
     MESSAGES,
 } from "utils/constant/routes";
-import { getProfileInfo } from "requests/navbar";
+import { getProfileInfo } from "utils/api/requests/navbar";
 const NavBar = ({ handleToggleSidebar }) => {
     const navigate = useNavigate();
     let hoverColored = "hover:text-orange-500";

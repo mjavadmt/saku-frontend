@@ -16,7 +16,7 @@ import {
 import { useEffect, useState } from "react";
 import { homePageData } from "utils/statics/homePageStats";
 import { CircularProgress } from "@mui/material";
-import { getHomeData } from "requests/splash";
+import { getHomeData } from "utils/api/requests/splash";
 
 const chartHandler = (name, listObj) => {
     return [

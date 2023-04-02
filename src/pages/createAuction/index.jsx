@@ -23,7 +23,7 @@ import {
     addAuction,
     getCategories,
     updateAuction,
-} from "requests/createAuction";
+} from "utils/api/requests/createAuction";
 
 export const CreateAuction = ({ inTestEnvierment = false }) => {
     const [auctionType, setAuctionType] = useState("");

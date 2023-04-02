@@ -9,12 +9,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepPurple, grey } from "@mui/material/colors";
-import { login } from "requests/user";
+import { login } from "utils/api/requests/user";
 import { useNavigate } from "react-router-dom";
 import { FORGOTPASSWORD, SIGNUP, SPLASH } from "utils/constant/routes";
 import { LOGIN_FAILED, EMPTY_ERROR_MESSAGE } from "utils/constant/errorText";
 import { toast } from "react-toastify";
-import { setAPIHeader } from "utils/api";
+import { setAPIHeader } from "utils/api/api";
 import cx from "classnames";
 const theme = createTheme({
     typography: {

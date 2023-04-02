@@ -6,7 +6,10 @@ import Pagination from "@mui/material/Pagination";
 import { useEffect } from "react";
 import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
 import { CircularProgress } from "@mui/material";
-import { getFilteredAuctions, getAllAuctions } from "requests/myAuctions";
+import {
+    getFilteredAuctions,
+    getAllAuctions,
+} from "utils/api/requests/myAuctions";
 
 export const MyAuctions = () => {
     const [type, setType] = React.useState("");

@@ -15,7 +15,7 @@ import {
     AddComment,
     GetComments,
     ReplyComment,
-} from "../../requests/commentBox";
+} from "../../utils/api/requests/commentBox";
 
 export const CommentBox = ({ token }) => {
     const [comments, setComments] = useState([]);

@@ -1,4 +1,4 @@
-import { post } from "utils/api";
+import { post } from "utils/api/api";
 import {
     LOGOUT,
     LOGIN,
