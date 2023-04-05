@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useReducer} from "react";
 import Avatar from "@mui/material/Avatar";
 import { dateConverter } from "utils/dateConverter";
 import cx from "classnames";
@@ -31,8 +31,20 @@ export const Comment = ({
     replyComment,
     replyClicked,
 }) => {
-    const [replyModal, setReplyModal] = React.useState(false);
-    const [replyValue, setReplyValue] = React.useState("");
+    //const [replyModal, setReplyModal] = React.useState(false);
+    //const [replyValue, setReplyValue] = React.useState("");
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "setReplyModal":
+                return {replyModal: false, replyValue: state.replyValue}
+            case "setReplyValue":
+                return {replyModal: state.replyModal, replyValue: ""}
+            default:
+                return state
+        }
+    }
+    const [state, dispatch] = useReducer(reducer, {replyModal: false, replyValue: ""});
+
     const toggleDirection = (e) => {
         if (e.target.value && e.target.value[0].match(/[a-z]/i))
             e.target.style.direction = "ltr";
@@ -127,14 +139,14 @@ export const Comment = ({
                     )}
                 </div>
             </div>
-            <Modal onClose={() => setReplyModal(false)} open={replyModal}>
+            <Modal onClose={() => dispatch({type: "setReplyModal"})} open={state.replyModal}>
                 <Box sx={style}>
                     <Typography variant='h6' component='h2'>
                         ثبت پاسخ
                     </Typography>
                     <div className='mt-4'>
                         <Input
-                            value={replyValue}
+                            value={state.replyValue}
                             onChange={(e) => {
                                 toggleDirection(e);
                                 setReplyValue(e.target.value);
@@ -147,11 +159,11 @@ export const Comment = ({
                     <div className='flex justify-end mt-4'>
                         <Button
                             onClick={() => {
-                                replyComment(index, replyValue);
-                                setReplyModal(false);
-                                setReplyValue("");
+                                replyComment(index, state.replyValue);
+                                dispatch({type: "setReplyModal"})
+                                dispatch({type: "setReplyValue"})
                             }}
-                            disabled={replyValue.length === 0}
+                            disabled={state.replyValue.length === 0}
                             variant='contained'
                             className='submit-price'
                         >
