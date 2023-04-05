@@ -36,9 +36,14 @@ export const Comment = ({
     const reducer = (state, action) => {
         switch (action.type) {
             case "setReplyModal":
-                return {replyModal: false, replyValue: state.replyValue}
+                return {replyModal: false}
             case "setReplyValue":
-                return {replyModal: state.replyModal, replyValue: ""}
+                return {replyValue: ""}
+            case "onChange":
+                {
+                    const newValue = action.payload;
+                    return newValue;
+                }
             default:
                 return state
         }
@@ -149,7 +154,7 @@ export const Comment = ({
                             value={state.replyValue}
                             onChange={(e) => {
                                 toggleDirection(e);
-                                setReplyValue(e.target.value);
+                                dispatch({type: "onChange"})
                             }}
                             autoFocus
                             className='w-full'
