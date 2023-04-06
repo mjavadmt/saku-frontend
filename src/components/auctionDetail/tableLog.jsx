@@ -5,9 +5,10 @@ import Avatar from "@mui/material/Avatar";
 import { definePriceColor } from "pages/homePageComponents/tableCellFunctions";
 import { dateConverter } from "utils/dateConverter";
 import Pagination from "@mui/material/Pagination";
-import React from "react";
+import React, {useContext} from "react";
 import { CircularProgress } from "@mui/material";
 import notAccessible from "assets/img/undraw_access_denied_re_awnf.svg";
+import { AppContex } from "pages/auctionDetailPage";
 
 const columns = [
     {
@@ -51,7 +52,11 @@ const columns = [
     },
 ];
 
-export const TableLog = ({ bidHistory, isLoading, isOwner, isOnline }) => {
+export const TableLog = ({ //bidHistory, isLoading, isOwner, isOnline 
+}) => {
+
+    const {bidHistory, isLoading, isOwner, isOnline} = useContext(AppContex);
+
     const [page, setPage] = React.useState(1);
     const dataOnPage = 5;
     const handleChange = (event, value) => {

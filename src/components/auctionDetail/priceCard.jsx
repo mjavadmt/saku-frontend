@@ -1,3 +1,4 @@
+import React, {useReducer, useContext} from "react";
 import { cardClass, headerClass } from "utils/constant/cardClass";
 import cx from "classnames";
 import { defineUnit } from "utils/formatPrice";
@@ -5,7 +6,6 @@ import "./auctionDetailCard.css";
 import ReactTooltip from "react-tooltip";
 import { dateConverter } from "utils/dateConverter";
 import Button from "@mui/material/Button";
-import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import submitPrice from "assets/img/submit-price.png";
 import { POST_BID } from "utils/constant/apiRoutes";
 import { SubmitPrice } from "utils/api/requests/priceCard";
+import { AppContex } from "pages/auctionDetailPage";
 
 const style = {
     position: "absolute",
@@ -89,34 +90,71 @@ const extractError = (errObj) => {
 };
 
 export const PriceCard = ({
-    auctionData,
-    token,
-    isOnline,
-    submitOnlinePrice,
-    isOwner,
+    // auctionData,
+    // token,
+    // isOnline,
+    // submitOnlinePrice,
+    // isOwner,
 }) => {
-    const [enterPriceModal, setEnterPriceModal] = React.useState(false);
-    const [valuePriceModal, setValuePriceModal] = React.useState("");
-    const [onInitializedInput, setOnInitializedInput] = React.useState(true);
+    //const [enterPriceModal, setEnterPriceModal] = React.useState(false);
+    //const [valuePriceModal, setValuePriceModal] = React.useState("");
+    //const [onInitializedInput, setOnInitializedInput] = React.useState(true);
+
     const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
+
+    const {auctionData,
+        token,
+        isOnline,
+        submitOnlinePrice,
+        isOwner} = useContext(AppContex);
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "setEnterPriceModalFalse":
+                return {enterPriceModal: false}
+                break
+            case "setEnterPriceModalTrue":
+                return {enterPriceModal: true}
+                break
+            case "setValuePriceModalToZero":
+                return {valuePriceModal: 0}
+                break
+            case "setValuePriceModalOnChange":
+                {
+                    state.valuePriceModal = action.payload;
+                    return state.valuePriceModal;
+                }
+                break
+            case "setOnInitializedInputFalse":
+                return {onInitializedInput: false}
+                break
+            default:
+                return state 
+        }
+    }
+    const [state, dispatch] = useReducer(reducer, {enterPriceModal: false,
+                                                   valuePriceModal: "",
+                                                   onInitializedInput: true,
+                                                   confirmPriceModal: false});
+
     const onSubmitPrice = async () => {
         // do the api things and send the price to server
         if (isOnline) {
-            submitOnlinePrice({ price: valuePriceModal });
+            submitOnlinePrice({ price: state.valuePriceModal });
             setConfirmPriceModal(false);
-            setEnterPriceModal(false);
-            setValuePriceModal(0);
+            dispatch({type: "setEnterPriceModalFalse"});
+            dispatch({type: "setValuePriceModalToZero"});
         } else {
             const submitPriceRes = await SubmitPrice(`${POST_BID}/${token}`, {
-                price: valuePriceModal,
+                price: state.valuePriceModal,
                 time: new Date().toISOString(),
                 user: localStorage.getItem("userId"),
                 auction: 0,
             });
             if (submitPriceRes && submitPriceRes.status === 200) {
                 toast.success("ثبت قیمت با موفقیت انجام شد");
-                setValuePriceModal(0);
-                setEnterPriceModal(false);
+                dispatch({type: "setValuePriceModalToZero"});
+                dispatch({type: "setEnterPriceModalFalse"});
                 setConfirmPriceModal(false);
             } else {
                 console.log(submitPriceRes.response.data);
@@ -181,15 +219,15 @@ export const PriceCard = ({
                             disabledSubmitPrice(auctionData.finished_at) ||
                             isOwner
                         }
-                        onClick={() => setEnterPriceModal(true)}
+                        onClick={() => dispatch({type: "setEnterPriceModalTrue"})}
                     >
                         ثبت قیمت
                     </Button>
                 </div>
             </div>
             <Modal
-                onClose={() => setEnterPriceModal(false)}
-                open={enterPriceModal}
+                onClose={() => dispatch({type: "setEnterPriceModalFalse"})}
+                open={state.enterPriceModal}
             >
                 <Box sx={style}>
                     <Typography variant='h6' component='h2'>
@@ -198,19 +236,19 @@ export const PriceCard = ({
                     <div className='mt-2'>
                         <Input
                             autoFocus
-                            value={valuePriceModal}
+                            value={state.valuePriceModal}
                             onChange={(e) => {
-                                setOnInitializedInput(false);
+                                dispatch({type: "setOnInitializedInputFalse"});
                                 if (e.target.value.length < 10)
-                                    setValuePriceModal(e.target.value);
+                                dispatch({type: "setValuePriceModalOnChange", payload: e.target.value});
                             }}
                             type='number'
                             className='w-full'
                             inputProps={{ maxLength: 4 }}
                             error={
-                                !onInitializedInput &&
+                                !state.onInitializedInput &&
                                 showErrorInput(
-                                    valuePriceModal,
+                                    state.valuePriceModal,
                                     auctionData.limit,
                                     auctionData.mode
                                 )
@@ -225,9 +263,9 @@ export const PriceCard = ({
                                 </InputAdornment>
                             }
                         />
-                        {!onInitializedInput &&
+                        {!state.onInitializedInput &&
                             showErrorInput(
-                                valuePriceModal,
+                                state.valuePriceModal,
                                 auctionData.limit,
                                 auctionData.mode
                             ) &&
@@ -248,7 +286,7 @@ export const PriceCard = ({
                             onClick={() => {
                                 if (
                                     !showErrorInput(
-                                        valuePriceModal,
+                                        state.valuePriceModal,
                                         auctionData.limit
                                     )
                                 ) {
@@ -258,7 +296,7 @@ export const PriceCard = ({
                             variant='contained'
                             className='submit-price '
                             disabled={showErrorInput(
-                                valuePriceModal,
+                                state.valuePriceModal,
                                 auctionData.limit
                             )}
                         >

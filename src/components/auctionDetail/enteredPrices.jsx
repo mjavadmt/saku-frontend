@@ -1,9 +1,10 @@
 import { cardClass, headerClass } from "utils/constant/cardClass";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { dateConverter } from "utils/dateConverter";
 import { defineUnit } from "utils/formatPrice";
 import { GET_MY_BID } from "utils/constant/apiRoutes";
 import { getEnteredPrices } from "utils/api/requests/enteredPrices";
+import { AppContex } from "pages/auctionDetailPage";
 
 const chipConstantClass =
     "rounded-2xl  p-1 pr-2 pl-2 text-xs flex justify-center w-28";
@@ -38,7 +39,10 @@ const definePriceColor = (num) => {
     );
 };
 
-export const EnteredPrices = ({ token }) => {
+export const EnteredPrices = ({ //token 
+}) => {
+    const {token} = useContext(AppContex);
+
     const [priceList, setPriceList] = useState([]);
     useEffect(() => {
         async function fetchData() {
