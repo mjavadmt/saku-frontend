@@ -75,7 +75,10 @@ export const AuctionDetialPage = () => {
         <React.Fragment>
             <Grid container spacing={0}>
                 <Grid item xs={12} md={7}>
-                    <AuctionDetailCard auctionData={auctionData} />
+                    <AppContex.Provider value={{auctionData}}>
+                        <AuctionDetailCard //auctionData={auctionData} 
+                        />
+                    </AppContex.Provider>
                 </Grid>
                 <Grid item xs={12} md={5}>
                     <AppContex.Provider value={{token, auctionData, isOnline, isOwner, sendJsonMessage}}>

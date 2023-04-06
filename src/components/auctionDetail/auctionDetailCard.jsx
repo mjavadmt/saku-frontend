@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { cardClass } from "utils/constant/cardClass";
 import cx from "classnames";
 import {
@@ -13,6 +13,7 @@ import { useWindowDimensions } from "pages/homePageComponents/lastMessages";
 import { dateConverter } from "utils/dateConverter";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
 import { host } from "utils/config";
+import { AppContex } from "pages/auctionDetailPage";
 
 const setLengthOfDescription = (width) => {
     if (width < 500) return 100;
@@ -34,8 +35,11 @@ const defineAuctionType = (mode, isOnline) => {
     }
 };
 
-export const AuctionDetailCard = ({ auctionData }) => {
+export const AuctionDetailCard = ({ //auctionData 
+}) => {
     const { width } = useWindowDimensions();
+
+    const {auctionData} = useContext(AppContex);
 
     return (
         <React.Fragment>
