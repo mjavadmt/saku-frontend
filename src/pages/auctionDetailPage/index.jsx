@@ -93,11 +93,14 @@ export const AuctionDetialPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                    {!isOwner ? (
-                        <EnteredPrices token={token} />
-                    ) : (
-                        <CurrentWinner bestBidUser={auctionData.best_bid} />
-                    )}
+                    <AppContex.Provider value={{token}}>
+                        {!isOwner ? (
+                            <EnteredPrices //token={token} 
+                            />
+                        ) : (
+                            <CurrentWinner bestBidUser={auctionData.best_bid} />
+                        )}
+                    </AppContex.Provider>
                 </Grid>
                 <Grid item xs={12} md={8}>
                     <AppContex.Provider value={{bidHistory, isLoading, isOwner, isOnline}}>
