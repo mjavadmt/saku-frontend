@@ -1,4 +1,4 @@
-import React, {useReducer} from "react";
+import React, {useReducer, useContext} from "react";
 import { cardClass, headerClass } from "utils/constant/cardClass";
 import cx from "classnames";
 import { defineUnit } from "utils/formatPrice";
@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import submitPrice from "assets/img/submit-price.png";
 import { POST_BID } from "utils/constant/apiRoutes";
 import { SubmitPrice } from "utils/api/requests/priceCard";
+import { AppContex } from "pages/auctionDetailPage";
 
 const style = {
     position: "absolute",
@@ -89,17 +90,23 @@ const extractError = (errObj) => {
 };
 
 export const PriceCard = ({
-    auctionData,
-    token,
-    isOnline,
-    submitOnlinePrice,
-    isOwner,
+    // auctionData,
+    // token,
+    // isOnline,
+    // submitOnlinePrice,
+    // isOwner,
 }) => {
     //const [enterPriceModal, setEnterPriceModal] = React.useState(false);
     //const [valuePriceModal, setValuePriceModal] = React.useState("");
     //const [onInitializedInput, setOnInitializedInput] = React.useState(true);
 
     const [confirmPriceModal, setConfirmPriceModal] = React.useState(false);
+
+    const {auctionData,
+        token,
+        isOnline,
+        submitOnlinePrice,
+        isOwner} = useContext(AppContex);
 
     const reducer = (state, action) => {
         switch (action.type) {

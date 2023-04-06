@@ -6,7 +6,7 @@ import { TableLog } from "components/auctionDetail/tableLog";
 import { EnteredPrices } from "components/auctionDetail/enteredPrices";
 import { PopUpModal } from "components/auctionDetail/popUpModal";
 import { CurrentWinner } from "components/auctionDetail/currentWinnerCard";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -16,6 +16,8 @@ import {
     getAllAuctions,
     getBidHistory,
 } from "utils/api/requests/auctionDetail";
+
+export const AppContex = createContext(null);
 
 export const AuctionDetialPage = () => {
     const [popUpModal, setPopUpModal] = useState(true);
@@ -76,13 +78,15 @@ export const AuctionDetialPage = () => {
                     <AuctionDetailCard auctionData={auctionData} />
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    <PriceCard
-                        token={token}
-                        auctionData={auctionData}
-                        isOnline={isOnline}
-                        isOwner={isOwner}
-                        submitOnlinePrice={sendJsonMessage}
-                    />
+                    <AppContex.Provider value={{token, auctionData, isOnline, isOwner, sendJsonMessage}}>
+                        <PriceCard
+                            // token={token}
+                            // auctionData={auctionData}
+                            // isOnline={isOnline}
+                            // isOwner={isOwner}
+                            // submitOnlinePrice={sendJsonMessage}
+                        />
+                    </AppContex.Provider>
                 </Grid>
 
                 <Grid item xs={12} md={4}>
