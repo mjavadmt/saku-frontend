@@ -108,7 +108,10 @@ export const AuctionDetialPage = () => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <CommentBox token={token} />
+                    <AppContex.Provider value={{token}}>
+                        <CommentBox //token={token} 
+                        />
+                    </AppContex.Provider>
                 </Grid>
             </Grid>
             <PopUpModal

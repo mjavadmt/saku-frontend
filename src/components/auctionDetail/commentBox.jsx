@@ -2,7 +2,7 @@ import { cardClass, headerClass } from "utils/constant/cardClass";
 import cx from "classnames";
 import { TextField } from "@mui/material";
 import { Comment } from "./comment";
-import React from "react";
+import React, {useContext} from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useRef, useState } from "react";
 import "./replyStyle.css";
@@ -16,8 +16,12 @@ import {
     GetComments,
     ReplyComment,
 } from "../../utils/api/requests/commentBox";
+import { AppContex } from "pages/auctionDetailPage";
 
-export const CommentBox = ({ token }) => {
+export const CommentBox = ({ //token 
+}) => {
+    const {token} = useContext(AppContex);
+
     const [comments, setComments] = useState([]);
     const [commentTxt, setCommentTxt] = useState("");
     const [reply, setReply] = useState(null);
