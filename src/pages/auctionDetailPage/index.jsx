@@ -100,12 +100,14 @@ export const AuctionDetialPage = () => {
                     )}
                 </Grid>
                 <Grid item xs={12} md={8}>
-                    <TableLog
-                        bidHistory={bidHistory}
-                        isLoading={isLoading}
-                        isOwner={isOwner}
-                        isOnline={isOnline}
-                    />
+                    <AppContex.Provider value={{bidHistory, isLoading, isOwner, isOnline}}>
+                        <TableLog
+                            // bidHistory={bidHistory}
+                            // isLoading={isLoading}
+                            // isOwner={isOwner}
+                            // isOnline={isOnline}
+                        />
+                    </AppContex.Provider>
                 </Grid>
                 <Grid item xs={12}>
                     <AppContex.Provider value={{token}}>
