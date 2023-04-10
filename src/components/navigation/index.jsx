@@ -1,4 +1,10 @@
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  BrowserRouter,
+  useLocation,
+} from "react-router-dom";
 import {
   NotFound,
   CreateAuction,
@@ -40,6 +46,18 @@ import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
+  const location = useLocation();
+  const path = location.pathname;
+  const isLogedIn = localStorage.getItem("access") != null;
+  if (
+    !isLogedIn &&
+    path !== LOGIN &&
+    path !== SIGNUP &&
+    path !== FORGOTPASSWORD &&
+    path !== LANDING_PAGE
+  ) {
+    return <Navigate to={LOGIN} />;
+  }
   return isFullscreen ? <div>{elemnt}</div> : <Layout>{elemnt}</Layout>;
 };
 
