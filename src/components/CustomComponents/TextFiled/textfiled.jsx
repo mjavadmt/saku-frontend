@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-export const CustomTextF = ({ ...attributes }) => {
+export const CustomTextFiled = ({ ...attributes }) => {
     const [userData, setUserData] = useState({});
     const [provinceId, setProvinceId] = useState(-1);
     const handleChange = (e, val) => {
@@ -17,7 +17,7 @@ export const CustomTextF = ({ ...attributes }) => {
     return (
         <TextField
             fullWidth
-            multiline
+            //multiline
             onChange={handleChange}
             required
             variant='outlined'

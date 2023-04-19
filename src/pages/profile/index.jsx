@@ -25,6 +25,7 @@ import { provinceList } from "utils/constant/iranProvince";
 import { cityList } from "utils/constant/iranCities";
 import { toast } from "react-toastify";
 import { addImg, deleteImg, getProfileInfo } from "utils/api/requests/navbar";
+import { CustomTextFiled } from "components/CustomComponents/TextFiled/textfiled";
 
 export const Profile = ({ inTestEnvierment = false }) => {
     const fileRef = useRef(null);
@@ -213,25 +214,21 @@ export const Profile = ({ inTestEnvierment = false }) => {
                                         <small>
                                             نام‌ونام‌خانوادگی/نام‌شرکت:
                                         </small>
-                                        <TextField
+                                        <CustomTextFiled
                                             style={{
                                                 direction: changeDIR(
                                                     userData["name"]
                                                 ),
                                             }}
-                                            fullWidth
                                             inputProps={{
                                                 maxLength: 20,
                                                 "data-testid": "nameinp",
                                             }}
-                                            // helperText="Please specify the first name"
                                             name='name'
                                             onChange={(e, val) =>
                                                 handleChange(e, val)
                                             }
-                                            required
                                             value={userData.name}
-                                            variant='outlined'
                                         />
                                     </Grid>
                                     <Grid item md={6} xs={12}>
@@ -279,39 +276,32 @@ export const Profile = ({ inTestEnvierment = false }) => {
                                     </Grid>
                                     <Grid item md={6} xs={12}>
                                         <small>کد/شناسه‌ملی:</small>
-                                        <TextField
+                                        <CustomTextFiled
                                             style={{
                                                 direction: "ltr",
                                             }}
-                                            fullWidth
                                             inputProps={{
                                                 maxLength: 10,
                                                 "data-testid": "nCode",
                                             }}
                                             name='national_id'
-                                            onChange={handleChange}
-                                            required
                                             value={userData.national_id}
-                                            variant='outlined'
                                         />
                                     </Grid>
                                     <Grid item md={6} xs={12}>
                                         <small>تلفن همراه:</small>
 
-                                        <TextField
+                                        <CustomTextFiled
                                             style={{
                                                 direction: "ltr",
                                             }}
-                                            fullWidth
                                             inputProps={{
                                                 maxLength: 11,
                                                 "data-testid": "phoneInp",
                                             }}
                                             name='phone'
-                                            onChange={handleChange}
                                             type='text'
                                             value={userData.phone}
-                                            variant='outlined'
                                         />
                                     </Grid>
                                     <Grid item md={6} xs={12}>
@@ -342,13 +332,9 @@ export const Profile = ({ inTestEnvierment = false }) => {
                                     <Grid item md={6} xs={12}>
                                         <small>شهر:</small>
                                         {userData.city !== "" ? (
-                                            <TextField
-                                                fullWidth
+                                            <CustomTextFiled
                                                 name='city'
-                                                onChange={handleChange}
-                                                required
                                                 value={userData.city}
-                                                variant='outlined'
                                             />
                                         ) : (
                                             <Select
@@ -382,41 +368,32 @@ export const Profile = ({ inTestEnvierment = false }) => {
                                     </Grid>
                                     <Grid item md={6} xs={12}>
                                         <small>ایمیل:</small>
-                                        <TextField
+                                        <CustomTextFiled
                                             style={{
                                                 direction: "ltr",
                                             }}
-                                            fullWidth
                                             inputProps={{
                                                 "data-testid": "emailInp",
                                             }}
-                                            // helperText="لطفا ایمیل صحیح واردکنید"
                                             name='email'
-                                            onChange={handleChange}
-                                            required
                                             value={userData.email}
-                                            variant='outlined'
                                         />
                                     </Grid>
                                     <Grid item md={6} xs={12}>
                                         <small>آدرس:</small>
-                                        <TextField
+                                        <CustomTextFiled
                                             style={{
                                                 direction: changeDIR(
                                                     userData["address"]
                                                 ),
                                             }}
-                                            fullWidth
                                             inputProps={{
                                                 maxLength: 50,
                                                 "data-testid": "addInp",
                                             }}
                                             name='address'
                                             multiline
-                                            onChange={handleChange}
-                                            required
                                             value={userData.address}
-                                            variant='outlined'
                                         />
                                     </Grid>
                                 </Grid>
