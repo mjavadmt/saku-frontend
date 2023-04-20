@@ -18,7 +18,7 @@ export const signin = (formData, navigate) => async (dispatch) => {
           localStorage.setItem("refresh", response.refresh);
           localStorage.setItem("username", usertmp.username);
           setAPIHeader();
-          dispatch({ type: AUTH, formData });
+          dispatch({ type: AUTH, payload: { isLogedIn: true } });
           navigate(SPLASH);
         })
         .catch((error) => toast.error(LOGIN_FAILED));

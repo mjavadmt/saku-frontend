@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import "./index.css";
 import Button from "@mui/material/Button";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Filtering = ({
   hasRadioBtn = false,
@@ -20,8 +21,9 @@ export const Filtering = ({
   setName,
   basePrice,
   setBasePrice,
-  filterSubmited
+  filterSubmited,
 }) => {
+  const dispatch = useDispatch();
   // const [value, setValue] = useState([20, 37]);
   // const [sortBy, setSortBy] = useState(10);
   // const [auctionName, setAuctionName] = useState("");
@@ -47,7 +49,7 @@ export const Filtering = ({
             id="outlined-basic"
             placeholder="جست و جو"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => dispatch(setName(e.target.value))}
             InputProps={{
               startAdornment: <Search className="m-2" />,
             }}
@@ -61,7 +63,8 @@ export const Filtering = ({
             placeholder="پایه قیمت"
             value={basePrice}
             onChange={(e) => {
-              if (e.target.value.length < 10) setBasePrice(e.target.value);
+              if (e.target.value.length < 10)
+                dispatch(setBasePrice(e.target.value));
             }}
             type="number"
             InputProps={{
@@ -101,7 +104,11 @@ export const Filtering = ({
         <div className="flex md:col-span-2 m-3">
           <div className="grow"></div>
 
-          <Button onClick={filterSubmited} variant="contained" className="w-1/6 h-10">
+          <Button
+            onClick={filterSubmited}
+            variant="contained"
+            className="w-1/6 h-10"
+          >
             اعمال
           </Button>
         </div>

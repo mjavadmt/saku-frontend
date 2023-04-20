@@ -1,11 +1,11 @@
 import * as actionType from "../constants/actionTypes";
 
-const authReducer = (formData, action) => {
+const authReducer = (state = { isLogedIn: false }, action) => {
   switch (action.type) {
     case actionType.AUTH:
-      return formData;
+      return { ...state, isLogedIn: action.payload.isLogedIn };
     default:
-      return false;
+      return state;
   }
 };
 export default authReducer;
