@@ -16,6 +16,8 @@ import { LOGIN_FAILED, EMPTY_ERROR_MESSAGE } from "utils/constant/errorText";
 import { toast } from "react-toastify";
 import { setAPIHeader } from "utils/api/api";
 import cx from "classnames";
+import { useDispatch } from "react-redux";
+import { signin } from "actions/auth";
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
