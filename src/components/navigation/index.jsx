@@ -66,16 +66,7 @@ export const Navigation = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isLogedIn ? (
-              <Navigate to={SPLASH} />
-            ) : (
-              <Navigate to={LANDING_PAGE} />
-            )
-          }
-        />
+        <Route path="/" element={<Navigate to={SPLASH} />} />
         <Route element={<ScreenLayout elemnt={<Splash />} />} path={SPLASH} />
         <Route
           element={<ScreenLayout elemnt={<CreateAuction />} />}
@@ -98,6 +89,10 @@ export const Navigation = () => {
         <Route
           element={<ScreenLayout elemnt={<MyAuctions />} />}
           path={MY_AUCTIONS}
+        />
+        <Route
+          element={<ScreenLayout elemnt={<Consultation />} />}
+          path={CONSULTATION}
         />
         <Route
           element={<ScreenLayout elemnt={<AuctionPage />} />}

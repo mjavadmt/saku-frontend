@@ -6,7 +6,7 @@ import { Profile } from "pages/profile";
 const ProfileTest = () => {
   return (
     <BrowserRouter>
-      <Profile inTestEnvierment/>
+      <Profile inTestEnvierment />
     </BrowserRouter>
   );
 };
@@ -57,10 +57,10 @@ describe("profile page test", () => {
   });
   it("render nameinput ", async () => {
     render(<ProfileTest />, { flushUseEffects: false });
-    const name = screen.getByTestId("nameinp"); 
+    const name = screen.getByTestId("nameinp");
     expect(name).toBeInTheDocument();
     fireEvent.change(name, { target: { value: "ali" } });
-    expect(name.value).toBe("ali"); 
+    expect(name.value).toBe("ali");
   });
   it("Change type input", async () => {
     render(<ProfileTest />, { flushUseEffects: false });
