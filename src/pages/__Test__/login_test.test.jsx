@@ -2,7 +2,7 @@ import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { screen } from "@testing-library/dom";
 import { Login } from "../login";
-import { wait } from '@testing-library/user-event/dist/utils';
+import { wait } from "@testing-library/user-event/dist/utils";
 
 const LoginTest = () => {
   return (
@@ -29,11 +29,24 @@ describe("Login component test", () => {
     fireEvent.change(userNameInput, { target: { value: "Ali_Alamdari" } });
     expect(userNameInput.value).toBe("Ali_Alamdari");
   });
+  it("Change password input", async () => {
+    render(<LoginTest />);
+    const password = screen.getByTestId("password");
+    fireEvent.change(password, { target: { value: "12345678" } });
+    expect(password.value).toBe("12345678");
+  });
   it("create account Tag click", async () => {
     render(<LoginTest />);
     const divTag = screen.getByTestId("createAccountLink");
     fireEvent.click(divTag);
     await wait(500);
     expect(window.location.pathname).toBe("/signup");
+  });
+  it("forget password Tag click", async () => {
+    render(<LoginTest />);
+    const divTag = screen.getByTestId("forgetpassword");
+    fireEvent.click(divTag);
+    await wait(500);
+    expect(window.location.pathname).toBe("/forgotpassword");
   });
 });
