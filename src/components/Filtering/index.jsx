@@ -23,13 +23,13 @@ export const Filtering = ({
   filterSubmited,
 }) => {
   const dispatch = useDispatch();
-  // const [value, setValue] = useState([20, 37]);
-  // const [sortBy, setSortBy] = useState(10);
-  // const [auctionName, setAuctionName] = useState("");
-  // const handleChangeRadio = (event, identifier) => {
-  //   if (identifier === "type") onChangeType(event.target.value);
-  //   else onChangeStatus(event.target.value);
-  // };
+  const [value, setValue] = useState([20, 37]);
+  const [sortBy, setSortBy] = useState(10);
+  const [auctionName, setAuctionName] = useState("");
+  const handleChangeRadio = (event, identifier) => {
+    if (identifier === "type") onChangeType(event.target.value);
+    else onChangeStatus(event.target.value);
+  };
 
   return (
     <>
