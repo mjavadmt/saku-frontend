@@ -20,6 +20,7 @@ import {
   Logout,
   AuctionDetialPage,
   LandingPage,
+  Consultation,
 } from "pages";
 import { Splash } from "pages/splash/index";
 import { FullLayoutChat } from "pages/fullLayoutChat/index";
@@ -41,6 +42,7 @@ import {
   FORGOTPASSWORD,
   FULL_LAYOUT_CHAT,
   LANDING_PAGE,
+  CONSULTATION,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";

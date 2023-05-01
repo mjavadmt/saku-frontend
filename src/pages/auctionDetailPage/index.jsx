@@ -11,7 +11,7 @@ import { useState } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { get } from "utils/api";
+import { get } from "utils/api/api";
 import { GET_ALL_AUCTIONS } from "constant/apiRoutes";
 import useWebSocket from "react-use-websocket";
 
