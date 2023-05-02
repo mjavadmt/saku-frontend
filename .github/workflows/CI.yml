@@ -11,17 +11,17 @@ on:
   #   - main
 
 jobs:
-  build:
+  # build:
 
-    runs-on: ubuntu-latest
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+  #   runs-on: ubuntu-latest
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16.x'
-        cache: 'npm'
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@v2
+  #     with:
+  #       node-version: '16.x'
+  #       cache: 'npm'
 
     # - name: Build
     #   run: docker build . -t ghcr.io/mjavadmt/saku:${{ github.sha }}
