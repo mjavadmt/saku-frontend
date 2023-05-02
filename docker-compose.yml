@@ -7,4 +7,5 @@ services:
         - CHOKIDAR_USEPOLLING=true
       build:
         dockerfile: Dockerfile
-        context: ./client
+        # context: ./client
+        context: .
