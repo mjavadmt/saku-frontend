@@ -1,10 +1,14 @@
 name: CI
 
 on:
+  # push:
+  #   branches: [ Develoop, main ]
+  # pull_request:
+  #   branches: [ Develoop, main ]
   push:
-    branches: [ Develoop, main ]
-  pull_request:
-    branches: [ Develoop, main ]
+    branches-ignore:
+    - Develoop
+    - main
 
 jobs:
   build:
