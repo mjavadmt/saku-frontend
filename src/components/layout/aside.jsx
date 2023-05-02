@@ -24,6 +24,7 @@ import {
     PROFILE,
     AUCTION_PAGE,
     CONSULTATION,
+    CITYAUCTION,
 } from "utils/constant/routes";
 
 const Aside = ({ toggled, handleToggleSidebar }) => {
@@ -107,6 +108,13 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                         icon={<QuestionAnswerIcon fontSize='small' />}
                     >
                         مشاوره
+                    </MenuItem>
+                    <MenuItem
+                        active={window.location.pathname === CITYAUCTION}
+                        onClick={(e) => navigate(CITYAUCTION)}
+                        icon={<QuestionAnswerIcon fontSize='small' />}
+                    >
+                        سارا
                     </MenuItem>
                 </Menu>
             </SidebarContent>

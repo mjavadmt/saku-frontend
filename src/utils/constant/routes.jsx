@@ -18,3 +18,4 @@ export const AUCTION_DETAIL_PAGE = "/auction-detail/:token";
 export const AUCTION_DETAIL_WITHOUT_SUFFIX = "/auction-detail";
 export const LANDING_PAGE = "/landing";
 export const CONSULTATION = "/consultation";
+export const CITYAUCTION = "/city-auction";
