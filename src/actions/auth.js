@@ -1,9 +1,10 @@
 import { setAPIHeader } from "utils/api/api";
 import { AUTH } from "../constants/actionTypes";
 import { login } from "utils/api/requests/user";
-import { SPLASH } from "utils/constant/routes";
+import { PROFILE, SPLASH } from "utils/constant/routes";
 import { EMPTY_ERROR_MESSAGE, LOGIN_FAILED } from "utils/constant/errorText";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export const signin = (formData, navigate) => async (dispatch) => {
   try {
