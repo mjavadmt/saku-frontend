@@ -1,6 +1,7 @@
 export const SPLASH = "/splash";
 export const NOT_FOUND = "/not-found";
 export const PROFILE = "/profile";
+export const GETPROFILE = "/profile/general";
 export const TRANSACTIONS = "/transactions";
 export const JOB_INFO = "/job-info";
 export const MESSAGES = "/messages/:username";
