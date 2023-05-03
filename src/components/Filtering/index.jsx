@@ -56,7 +56,7 @@ export const Filtering = ({
           }
         )}
       >
-        <div className=" m-4 mb-0 ">
+        <div className=" m-6 mb-0 ">
           <div className="mb-1"> نام :‌</div>
           <TextField
             fullWidth
@@ -71,7 +71,7 @@ export const Filtering = ({
           />
         </div>
 
-        <div className="m-4 mb-0 ">
+        <div className="m-6 mb-0 ">
           <div className="mb-1">پایه قیمت :‌</div>
           <TextField
             fullWidth
@@ -88,7 +88,7 @@ export const Filtering = ({
           />
         </div>
 
-        <div className=" m-4 mb-0 ">
+        <div className=" m-6 mb-0 ">
           <div className="mb-1">توضیحات :‌</div>
           <TextField
             fullWidth
@@ -105,7 +105,7 @@ export const Filtering = ({
 
         {hasRadioBtn && (
           <React.Fragment>
-            <div className="m-4 mb-0">
+            <div className="m-6 mb-0">
               <div className="mb-1">نوع :‌</div>
               <Select
                 fullWidth
@@ -117,7 +117,7 @@ export const Filtering = ({
                 <MenuItem value={""}></MenuItem>
               </Select>
             </div>
-            <div className="m-4 mb-0">
+            <div className="m-6 mb-0">
               <div className="mb-1">دسته بندی :‌</div>
               <Select
                 fullWidth
@@ -137,7 +137,7 @@ export const Filtering = ({
                 <MenuItem value={""}></MenuItem>
               </Select>
             </div>
-            <div className="m-4 mb-0">
+            <div className="m-6 mb-0">
               <div className="mb-1">آفلاین/آنلاین</div>
               <Select
                 fullWidth
@@ -149,7 +149,7 @@ export const Filtering = ({
                 <MenuItem value={""}></MenuItem>
               </Select>
             </div>
-            <div className="m-4 mb-0">
+            <div className="m-6 mb-0">
               <div className="mb-1">تگ های مرتبط</div>
               <Autocomplete
                 fullWidth
@@ -175,7 +175,7 @@ export const Filtering = ({
                 )}
               />
             </div>
-            <div className=" m-4 mb-0 pt-6">
+            <div className=" m-6 mb-0 pt-6">
               <Button
                 fullWidth
                 onClick={filterSubmited}
