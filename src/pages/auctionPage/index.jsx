@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
 import { useEffect } from "react";
@@ -20,6 +20,12 @@ export const AuctionPage = () => {
   });
   const dataOnPage = 5;
   const dispatch = useDispatch();
+  const [type, setType] = React.useState("");
+  const [status, setStatus] = React.useState("");
+  const [tag, setTag] = React.useState([]);
+  const [is_online, setIs_online] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [category, setCategory] = React.useState("");
   const handleChange = (event, value) => {
     dispatch({ type: SET_PAGE, payload: { page: value } });
   };
@@ -31,7 +37,13 @@ export const AuctionPage = () => {
     dispatch({ type: SET_PAGE, payload: { page: 1 } });
     let filteredObj = {};
     if (name !== "") filteredObj["name"] = name;
+    if (type !== "") filteredObj["mode"] = type;
     if (basePrice !== "") filteredObj["limit"] = basePrice;
+    if (tag !== "") filteredObj["tags"] = tag.join(",");
+    console.log("is Online is :", is_online);
+    if (is_online || is_online == "0") filteredObj["is_online"] = is_online;
+    if (description !== "") filteredObj["desc"] = description;
+    if (category !== "") filteredObj["category"] = category;
     dispatch(getfilteredAuctoin(filteredObj, `${GET_ALL_AUCTIONS}`));
     dispatch({ type: END_LOADING });
   };
@@ -42,6 +54,19 @@ export const AuctionPage = () => {
   return (
     <div>
       <Filtering
+        hasRadioBtn={true}
+        type={type}
+        setType={setType}
+        status={status}
+        setStatus={setStatus}
+        tag={tag}
+        setTag={setTag}
+        is_online={is_online}
+        setIs_online={setIs_online}
+        description={description}
+        setDescription={setDescription}
+        category={category}
+        setCategory={setCategory}
         name={name}
         basePrice={basePrice}
         filterSubmited={filterSubmited}
