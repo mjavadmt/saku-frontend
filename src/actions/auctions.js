@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   ALL_AUCTIONS,
   START_LOADING,
@@ -9,6 +10,7 @@ import {
   getAllAuctions,
   getFilteredAuctions,
 } from "utils/api/requests/myAuctions";
+import { host } from "utils/config";
 
 export const getallAuctoins = (url) => async (dispatch) => {
   try {
@@ -33,7 +35,7 @@ export const getfilteredAuctoin = (filteredObj, url) => async (dispatch) => {
     if (getAllAuctionsRes && getAllAuctionsRes.status === 200) {
       dispatch({
         type: FILTERED_AUCTION,
-        payload: { auction: getAllAuctionsRes.data },
+        payload: { auctions: getAllAuctionsRes.data },
       });
     }
   } catch (error) {
@@ -41,7 +43,7 @@ export const getfilteredAuctoin = (filteredObj, url) => async (dispatch) => {
   }
 };
 
-export const setName = (value) => async (dispatch) => {
+export const setTheName = (value) => async (dispatch) => {
   try {
     dispatch({
       type: SET_NAME,
@@ -52,7 +54,7 @@ export const setName = (value) => async (dispatch) => {
   }
 };
 
-export const setBasePlace = (value) => async (dispatch) => {
+export const setTheBasePrice = (value) => async (dispatch) => {
   try {
     dispatch({
       type: SET_BASEPRICE,

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import { Search } from "@mui/icons-material";
-import {TextField, Button} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import "./index.css";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTheName, setTheBasePrice } from "../../actions/auctions";
 
 export const Filtering = ({
   hasRadioBtn = false,
@@ -16,6 +17,14 @@ export const Filtering = ({
   setStatus,
   type,
   setType,
+  category,
+  setCategory,
+  description,
+  setDescription,
+  is_online,
+  setIs_online,
+  tag,
+  setTag,
   name,
   setName,
   basePrice,
@@ -23,13 +32,6 @@ export const Filtering = ({
   filterSubmited,
 }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState([20, 37]);
-  const [sortBy, setSortBy] = useState(10);
-  const [auctionName, setAuctionName] = useState("");
-  const handleChangeRadio = (event, identifier) => {
-    if (identifier === "type") onChangeType(event.target.value);
-    else onChangeStatus(event.target.value);
-  };
 
   return (
     <>
@@ -46,9 +48,11 @@ export const Filtering = ({
           <TextField
             fullWidth
             id="outlined-basic"
-            placeholder="جست و جو"
+            placeholder="نام"
             value={name}
-            onChange={(e) => dispatch(setName(e.target.value))}
+            onChange={(e) => {
+              dispatch(setTheName(e.target.value));
+            }}
             InputProps={{
               startAdornment: <Search className="m-2" />,
             }}
@@ -63,7 +67,7 @@ export const Filtering = ({
             value={basePrice}
             onChange={(e) => {
               if (e.target.value.length < 10)
-                dispatch(setBasePrice(e.target.value));
+                dispatch(setTheBasePrice(e.target.value));
             }}
             type="number"
             InputProps={{
@@ -71,30 +75,46 @@ export const Filtering = ({
             }}
           />
         </div>
+
+        <div className=" m-4 mb-0 ">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            placeholder="توضیحات"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            InputProps={{
+              startAdornment: <Search className="m-2" />,
+            }}
+          />
+        </div>
+
         {hasRadioBtn && (
           <React.Fragment>
             <div className="m-4 mb-0">
               <div className="mb-1">نوع :‌</div>
-              <Select
-                fullWidth
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-              >
+              <Select value={type} onChange={(e) => setType(e.target.value)}>
                 <MenuItem value={1}>مزایده</MenuItem>
                 <MenuItem value={2}>مناقصه</MenuItem>
               </Select>
             </div>
             <div className="m-4 mb-0">
-              <div className="mb-1">وضعیت :‌</div>
+              <div className="mb-1">دسته بندی :‌</div>
+              <Select value={type} onChange={(e) => setType(e.target.value)}>
+                <MenuItem value={1}>مزایده</MenuItem>
+                <MenuItem value={2}>مناقصه</MenuItem>
+              </Select>
+            </div>
+            <div className="m-4 mb-0">
+              <div className="mb-1">آفلاین/آنلاین</div>
               <Select
-                fullWidth
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                defaultValue={10}
-                placeholder="نوع"
+                value={is_online}
+                onChange={(e) => setIs_online(e.target.value)}
               >
-                <MenuItem value={false}>درجریان</MenuItem>
-                <MenuItem value={true}>پایان یافته</MenuItem>
+                <MenuItem value={1}>آنلاین</MenuItem>
+                <MenuItem value={0}>آفلاین</MenuItem>
               </Select>
             </div>
           </React.Fragment>
