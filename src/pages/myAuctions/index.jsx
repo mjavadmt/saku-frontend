@@ -22,7 +22,7 @@ export const MyAuctions = () => {
   const dispatch = useDispatch();
   const [type, setType] = React.useState("");
   const [status, setStatus] = React.useState("");
-  const [tag, setTag] = React.useState("");
+  const [tag, setTag] = React.useState([]);
   const [is_online, setIs_online] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [category, setCategory] = React.useState("");
@@ -41,8 +41,9 @@ export const MyAuctions = () => {
     if (name !== "") filteredObj["name"] = name;
     if (type !== "") filteredObj["mode"] = type;
     if (basePrice !== "") filteredObj["limit"] = basePrice;
-    if (tag !== "") filteredObj["tags"] = tag;
-    if (is_online) filteredObj["is_online"] = is_online;
+    if (tag !== "") filteredObj["tags"] = tag.join(",");
+    console.log("is Online is :", is_online);
+    if (is_online || is_online == "0") filteredObj["is_online"] = is_online;
     if (description !== "") filteredObj["desc"] = description;
     if (category !== "") filteredObj["category"] = category;
     dispatch(
