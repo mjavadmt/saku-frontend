@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+
+* {
+  transition: all 0.3s ease-out;
+}
+
+.card1 {
+  display: block;
+  position: relative;
+  /* max-width: 240px; */
+  max-height: 220px;
+  /* background-color: #f2f8f9; */
+  border-radius: 6px;
+  /* padding: 32px 24px; */
+  margin: 10px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+
+
+
+}
+
+.card1::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #3939c5;
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+  }
+ .card1:hover:before {
+    transform: scale(21);
+  }
+
+
+

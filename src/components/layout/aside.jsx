@@ -115,7 +115,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                         onClick={(e) => navigate(CITYAUCTION)}
                         icon={<ApartmentIcon fontSize='small' />}
                     >
-                        مزایده و مناقصه به تفکیک شهر{" "}
+                        شهرها{" "}
                     </MenuItem>
                 </Menu>
             </SidebarContent>
