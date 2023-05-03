@@ -16,6 +16,7 @@ import {
   AuctionDetialPage,
   FullLayoutChat,
   LandingPage,
+  Category
 } from "pages";
 import {
   NOT_FOUND,
@@ -35,6 +36,7 @@ import {
   FORGOTPASSWORD,
   FULL_LAYOUT_CHAT,
   LANDING_PAGE,
+  CATEGORY
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
