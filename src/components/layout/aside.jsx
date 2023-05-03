@@ -14,7 +14,7 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import Person from "@mui/icons-material/Person";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useNavigate } from "react-router-dom";
 import {
     SPLASH,
@@ -26,6 +26,7 @@ import {
     CONSULTATION,
     CITYAUCTION,
 } from "utils/constant/routes";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 
 const Aside = ({ toggled, handleToggleSidebar }) => {
     const navigate = useNavigate();
@@ -112,9 +113,9 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                     <MenuItem
                         active={window.location.pathname === CITYAUCTION}
                         onClick={(e) => navigate(CITYAUCTION)}
-                        icon={<QuestionAnswerIcon fontSize='small' />}
+                        icon={<ApartmentIcon fontSize='small' />}
                     >
-                        سارا
+                        مزایده و مناقصه به تفکیک شهر{" "}
                     </MenuItem>
                 </Menu>
             </SidebarContent>

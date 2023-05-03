@@ -21,8 +21,10 @@ import {
     AuctionDetialPage,
     LandingPage,
     Consultation,
-    CityAuction,
+    
 } from "pages";
+import { CityAuction } from "pages/cityauction";
+import { InComeStats } from "pages/cityauction";
 import { Splash } from "pages/splash/index";
 import { FullLayoutChat } from "pages/fullLayoutChat/index";
 import {

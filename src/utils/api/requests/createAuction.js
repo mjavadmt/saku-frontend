@@ -1,7 +1,7 @@
 import { get, patch, post } from "utils/api/api";
 
 export const addAuction = (url, { auctionValue, user }) => {
-  const response = post(url, { auctionValue, user })
+  const response = post(url, { ...auctionValue, user })
     .then((res) => res)
     .catch((e) => {
       return e;
