@@ -114,6 +114,7 @@ export const Filtering = ({
               >
                 <MenuItem value={1}>مزایده</MenuItem>
                 <MenuItem value={2}>مناقصه</MenuItem>
+                <MenuItem value={""}></MenuItem>
               </Select>
             </div>
             <div className="m-4 mb-0">
@@ -133,6 +134,7 @@ export const Filtering = ({
                 {categories.map((cat) => (
                   <MenuItem value={cat.name}>{cat.name}</MenuItem>
                 ))}
+                <MenuItem value={""}></MenuItem>
               </Select>
             </div>
             <div className="m-4 mb-0">
@@ -144,6 +146,7 @@ export const Filtering = ({
               >
                 <MenuItem value={1}>آنلاین</MenuItem>
                 <MenuItem value={0}>آفلاین</MenuItem>
+                <MenuItem value={""}></MenuItem>
               </Select>
             </div>
             <div className="m-4 mb-0">
