@@ -18,6 +18,7 @@ import { setAPIHeader } from "utils/api/api";
 import cx from "classnames";
 import { useDispatch } from "react-redux";
 import { signin } from "actions/auth";
+
 const theme = createTheme({
   typography: {
     fontFamily: ['"Dana-FaNum"'],
@@ -47,6 +48,7 @@ export function Login() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [pass, setPass] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -62,7 +64,6 @@ export function Login() {
           localStorage.setItem("username", usertmp.username);
           localStorage.setItem("userId", usertmp.username)
           setAPIHeader();
-
           navigate(SPLASH);
         })
         .catch((error) => toast.error(LOGIN_FAILED));
