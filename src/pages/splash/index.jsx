@@ -18,7 +18,7 @@ import { homePageData } from "utils/statics/homePageStats";
 import { CircularProgress } from "@mui/material";
 import { getHomeData } from "utils/api/requests/splash";
 
-const chartHandler = (name, listObj) => {
+export const chartHandler = (name, listObj) => {
   return [
     {
       name,
