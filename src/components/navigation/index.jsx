@@ -21,6 +21,7 @@ import {
   AuctionDetialPage,
   LandingPage,
   Consultation,
+  PublicProfile,
 } from "pages";
 import { Splash } from "pages/splash/index";
 import { FullLayoutChat } from "pages/fullLayoutChat/index";
@@ -43,6 +44,7 @@ import {
   FULL_LAYOUT_CHAT,
   LANDING_PAGE,
   CONSULTATION,
+  PUBLICPROFILE,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -140,6 +142,10 @@ export const Navigation = () => {
         <Route
           element={<ScreenLayout elemnt={<Logout />} isFullscreen={true} />}
           path={LOGOUT}
+        />
+        <Route
+          element={<ScreenLayout elemnt={<PublicProfile />} />}
+          path={PUBLICPROFILE}
         />
         <Route path="*" element={<Navigate to={NOT_FOUND} />} />
       </Routes>
