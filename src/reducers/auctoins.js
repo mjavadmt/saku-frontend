@@ -1,7 +1,13 @@
 import * as actionType from "../constants/actionTypes";
 
 const auctionReducer = (
-  state = { auctions: [], page: 1, name: "", basePrice: "", isLoading: true },
+  state = {
+    auctions: [],
+    page: 1,
+    name: "",
+    basePrice: "",
+    isLoading: true,
+  },
   action
 ) => {
   switch (action.type) {

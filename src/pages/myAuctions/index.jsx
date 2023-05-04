@@ -22,6 +22,10 @@ export const MyAuctions = () => {
   const dispatch = useDispatch();
   const [type, setType] = React.useState("");
   const [status, setStatus] = React.useState("");
+  const [tag, setTag] = React.useState([]);
+  const [is_online, setIs_online] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [category, setCategory] = React.useState("");
   const dataOnPage = 6;
   const handleChange = (event, value) => {
     dispatch({ type: SET_PAGE, payload: { page: value } });
@@ -35,9 +39,13 @@ export const MyAuctions = () => {
     let username = localStorage.getItem("username");
     let filteredObj = {};
     if (name !== "") filteredObj["name"] = name;
-    if (status !== "") filteredObj["finished"] = !status;
     if (type !== "") filteredObj["mode"] = type;
     if (basePrice !== "") filteredObj["limit"] = basePrice;
+    if (tag !== "") filteredObj["tags"] = tag.join(",");
+    console.log("is Online is :", is_online);
+    if (is_online || is_online == "0") filteredObj["is_online"] = is_online;
+    if (description !== "") filteredObj["desc"] = description;
+    if (category !== "") filteredObj["category"] = category;
     dispatch(
       getfilteredAuctoin(
         filteredObj,
@@ -61,6 +69,14 @@ export const MyAuctions = () => {
           setType={setType}
           status={status}
           setStatus={setStatus}
+          tag={tag}
+          setTag={setTag}
+          is_online={is_online}
+          setIs_online={setIs_online}
+          description={description}
+          setDescription={setDescription}
+          category={category}
+          setCategory={setCategory}
           name={name}
           basePrice={basePrice}
           filterSubmited={filterSubmited}
