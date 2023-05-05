@@ -21,7 +21,7 @@ import {
     AuctionDetialPage,
     LandingPage,
     Consultation,
-    CityAuction,
+    PublicProfile
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
@@ -47,7 +47,7 @@ import {
     LANDING_PAGE,
     CONSULTATION,
     CITYAUCTION,
-    CITYAUCTION,
+    PUBLICPROFILE,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -173,9 +173,9 @@ export const Navigation = () => {
                 />
                 <Route
                     element={
-                        <ScreenLayout elemnt={<CityAuction />} />
+                        <ScreenLayout elemnt={<PublicProfile />} />
                     }
-                    path={CITYAUCTION}
+                    path={PUBLICPROFILE}
                 />
                 <Route path='*' element={<Navigate to={NOT_FOUND} />} />
             </Routes>
