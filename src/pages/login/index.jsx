@@ -62,6 +62,7 @@ export function Login() {
           localStorage.setItem("access", response.access);
           localStorage.setItem("refresh", response.refresh);
           localStorage.setItem("username", usertmp.username);
+          localStorage.setItem("userId", usertmp.username)
           setAPIHeader();
           navigate(SPLASH);
         })
