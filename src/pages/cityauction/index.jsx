@@ -12,6 +12,7 @@ import axios, { post } from "axios";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useEffect } from "react";
 import { host } from "utils/config";
+import { useNavigate } from "react-router-dom";
 //مزایده مناقصه بر اساس شهر ها
 
 const bull = (
@@ -23,8 +24,9 @@ const bull = (
     </Box>
 );
 
-export const CityAuction = ({}) => {
+export const CityAuction = (props) => {
     const token = `Bearer ${localStorage.getItem("access")}`;
+    const navigate = useNavigate();
     const [auctionCity, setAuctionCity] = useState([]);
     const [city, setCity] = useState("");
     useEffect(() => {
@@ -40,6 +42,7 @@ export const CityAuction = ({}) => {
                 setAuctionCity(res.data);
             });
     }, []);
+    console.log(props);
     return (
         <Grid container>
             {auctionCity.map((city) => {
@@ -71,6 +74,11 @@ export const CityAuction = ({}) => {
                                     style={{
                                         color: "#c786d3",
                                         marginRight: "140px",
+                                    }}
+                                    onClick={() => {
+                                        navigate("/auction-page", {
+                                            state: { id: city.id },
+                                        });
                                     }}
                                 >
                                     مشاهده بیشتر <KeyboardBackspaceIcon />{" "}
