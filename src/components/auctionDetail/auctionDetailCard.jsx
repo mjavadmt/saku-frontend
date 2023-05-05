@@ -62,7 +62,7 @@ export const AuctionDetailCard = ({ auctionData }) => {
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نام : </div>
             <div className="mr-2">
-              <Link to={`{/public-profile/${!!auctionData.user ? auctionData.user.username : ""}}`}>
+              <Link to={`/public-profile/${!!auctionData.user ? auctionData.user.username : ""}`}>
               {!!auctionData.user ? auctionData.user.name : ""}
               </Link>
             </div>
