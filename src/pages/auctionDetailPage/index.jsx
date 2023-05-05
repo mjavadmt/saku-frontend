@@ -25,7 +25,7 @@ export const AuctionDetialPage = () => {
   const [auctionData, setAuctionData] = useState({});
   const { token } = useParams();
   const [socketUrl, setSocketUrl] = useState(
-    `ws://188.121.110.151:8888/auction/${token}/${localStorage.getItem(
+    `ws://188.121.97.132:8888/auction/${token}/${localStorage.getItem(
       "access"
     )}`
   );
@@ -44,7 +44,7 @@ export const AuctionDetialPage = () => {
       .catch(() => {
         setIsLoading(false);
       });
-    get(`${GET_ALL_AUCTIONS}/${token}`).then((res) => {
+    get(`${GET_ALL_AUCTIONS}${token}`).then((res) => {
       setAuctionData(res.data);
       setIsOnline(res.data.is_online);
       if (res.data.user.id == localStorage.getItem("userId")) {
