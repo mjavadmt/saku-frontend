@@ -13,6 +13,7 @@ import { useWindowDimensions } from "pages/homePageComponents/lastMessages";
 import { dateConverter } from "utils/dateConverter";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
 import { host } from "utils/config";
+import { Link } from "react-router-dom";
 
 const setLengthOfDescription = (width) => {
   if (width < 500) return 100;
@@ -57,12 +58,16 @@ export const AuctionDetailCard = ({ auctionData }) => {
             <div className="font-bold"> عنوان :‌ </div>
             <div className="mr-2">{auctionData.name}</div>
           </div>
+
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نام : </div>
             <div className="mr-2">
+              <Link to={`/public-profile/${!!auctionData.user ? auctionData.user.username : ""}`}>
               {!!auctionData.user ? auctionData.user.name : ""}
+              </Link>
             </div>
           </div>
+
           <div className="flex m-3 mr-1">
             <div className="font-bold"> نوع : </div>
             <div className="mr-1">

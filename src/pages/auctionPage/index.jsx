@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
 import { useEffect } from "react";
-import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
+import { GET_ALL_AUCTIONS, GET_ALL_CITY } from "utils/constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
@@ -18,6 +18,7 @@ import {
     getallCity,
     getfilteredAuctoin,
 } from "actions/auctions";
+//import { useLocation } from "react-router-dom";
 
 export const AuctionPage = () => {
     const { auctions, page, name, basePrice, isLoading } = useSelector(
@@ -26,14 +27,17 @@ export const AuctionPage = () => {
         }
     );
     const dataOnPage = 5;
+    const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
+
     const [type, setType] = React.useState("");
+    const [city, setCity] = React.useState("");
     const [status, setStatus] = React.useState("");
     const [tag, setTag] = React.useState([]);
     const [is_online, setIs_online] = React.useState("");
     const [description, setDescription] = React.useState("");
     const [category, setCategory] = React.useState("");
-    const location = useLocation();
     const handleChange = (event, value) => {
         dispatch({ type: SET_PAGE, payload: { page: value } });
     };
@@ -44,6 +48,7 @@ export const AuctionPage = () => {
     const filterSubmited = async () => {
         dispatch({ type: SET_PAGE, payload: { page: 1 } });
         let filteredObj = {};
+        if (city !== "") filteredObj["city"] = city;
         if (name !== "") filteredObj["name"] = name;
         if (type !== "") filteredObj["mode"] = type;
         if (basePrice !== "") filteredObj["limit"] = basePrice;
@@ -52,21 +57,19 @@ export const AuctionPage = () => {
         if (is_online || is_online == "0") filteredObj["is_online"] = is_online;
         if (description !== "") filteredObj["desc"] = description;
         if (category !== "") filteredObj["category"] = category;
-        console.log("filterd obj", category);
         dispatch(getfilteredAuctoin(filteredObj, `${GET_ALL_AUCTIONS}`));
         dispatch({ type: END_LOADING });
     };
 
     useEffect(() => {
-        if (category) filterSubmited();
-    }, [category]);
-
+        if (city) filterSubmited();
+    }, [city]);
+    
     useEffect(() => {
-        console.log("loc", location);
-        if (location?.state?.catId) {
-            console.log("saalllllllam", location?.state?.catId);
-            setCategory(location?.state?.catId);
-
+        if (location?.state?.id) {
+            console.log("id ", location?.state?.id);
+            console.log("saalllllllam");
+            setCity(location.state.id);
             dispatch({ type: END_LOADING });
         } else {
             dispatch(getallAuctoins(`${GET_ALL_AUCTIONS}`));

@@ -23,6 +23,7 @@ import {
     Consultation,
     Category,
     
+    PublicProfile
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
@@ -49,6 +50,7 @@ import {
     CONSULTATION,
     CATEGORY,
     CITYAUCTION,
+    PUBLICPROFILE,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -174,6 +176,12 @@ export const Navigation = () => {
                         <ScreenLayout elemnt={<Logout />} isFullscreen={true} />
                     }
                     path={LOGOUT}
+                />
+                <Route
+                    element={
+                        <ScreenLayout elemnt={<PublicProfile />} />
+                    }
+                    path={PUBLICPROFILE}
                 />
                 <Route path='*' element={<Navigate to={NOT_FOUND} />} />
             </Routes>

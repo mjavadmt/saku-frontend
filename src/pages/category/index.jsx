@@ -66,7 +66,19 @@ export const Category = () => {
                                 sx={{ minWidth: 330, minHeight: 230 }}
                                 className='card1'
                             >
+<<<<<<< HEAD
                                 <CardContent></CardContent>
+=======
+                                <CardContent>
+                                    {/* <Typography
+                                    variant='h6'
+                                    component='div'
+                                    className='city'
+                                >
+                                    تهران
+                                </Typography> */}
+                                </CardContent>
+>>>>>>> c15e0da303477c5faac5e3e286489071da638e0b
                                 <CardActions>
                                     <Button
                                         size='small'
