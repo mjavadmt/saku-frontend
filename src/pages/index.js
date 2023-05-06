@@ -33,7 +33,6 @@ export { AuctionDetialPage } from "./auctionDetailPage";
 export { FullLayoutChat } from "./fullLayoutChat";
 export { LandingPage } from "./landing";
 export {Category} from "./category";
-// export { CityAuction } from "./cityauction";
 export { PublicProfile } from "./publicProfile";
 export { CityAuction } from "./cityauction";
 

@@ -89,13 +89,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         }
     };
 
-    // function checkAge(age) {
-    //   return age > 18;
-    // }
 
-    // function handlecity() {
-    //   document.getElementById("demo").innerHTML = ages.find(checkAge);
-    // }
     useEffect(() => {
         async function fetchData() {
             const getCategoriesRes = await getCategories(GET_CATEGORIES);

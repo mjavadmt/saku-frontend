@@ -7,7 +7,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import "./index.css";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "utils/api/requests/createAuction";
 import { GET_CATEGORIES } from "utils/constant/apiRoutes";
@@ -66,9 +65,6 @@ export const Category = () => {
                                 sx={{ minWidth: 330, minHeight: 230 }}
                                 className='card1'
                             >
-<<<<<<< HEAD
-                                <CardContent></CardContent>
-=======
                                 <CardContent>
                                     {/* <Typography
                                     variant='h6'
@@ -78,7 +74,6 @@ export const Category = () => {
                                     تهران
                                 </Typography> */}
                                 </CardContent>
->>>>>>> c15e0da303477c5faac5e3e286489071da638e0b
                                 <CardActions>
                                     <Button
                                         size='small'
