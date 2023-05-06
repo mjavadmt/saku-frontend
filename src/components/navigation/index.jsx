@@ -22,7 +22,10 @@ import {
     LandingPage,
     Consultation,
     Category,
+    
 } from "pages";
+import { CityAuction } from "pages/cityauction";
+import { InComeStats } from "pages/cityauction";
 import { Splash } from "pages/splash/index";
 import { FullLayoutChat } from "pages/fullLayoutChat/index";
 import {
@@ -45,6 +48,7 @@ import {
     LANDING_PAGE,
     CONSULTATION,
     CATEGORY,
+    CITYAUCTION,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -107,7 +111,10 @@ export const Navigation = () => {
                 <Route
                     element={<ScreenLayout elemnt={<Category />} />}
                     path={CATEGORY}
+                  
                 />
+                <Route   element={<ScreenLayout elemnt={<CityAuction />} />}
+                    path={CITYAUCTION}/>
                 <Route
                     element={<ScreenLayout elemnt={<AuctionPage />} />}
                     path={AUCTION_PAGE}
