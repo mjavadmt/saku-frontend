@@ -2,22 +2,14 @@ import React, { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
 import { useEffect } from "react";
-import { GET_ALL_AUCTIONS, GET_ALL_CITY } from "utils/constant/apiRoutes";
+import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
-import {
-    getAllAuctions,
-    getFilteredAuctions,
-} from "utils/api/requests/myAuctions";
 import { useDispatch, useSelector } from "react-redux";
-import { END_LOADING, SET_PAGE, ALL_AUCTIONS } from "constants/actionTypes";
-import {
-    getallAuctoins,
-    getallCity,
-    getfilteredAuctoin,
-} from "actions/auctions";
+import { END_LOADING, SET_PAGE } from "constants/actionTypes";
 import { useNavigate, useLocation } from "react-router-dom";
+import { getallAuctoins, getfilteredAuctoin } from "actions/auctions";
 
 export const AuctionPage = () => {
     const { auctions, page, name, basePrice, isLoading } = useSelector(
@@ -63,11 +55,9 @@ export const AuctionPage = () => {
     useEffect(() => {
         if (city) filterSubmited();
     }, [city]);
-    
+
     useEffect(() => {
         if (location?.state?.id) {
-            console.log("id ", location?.state?.id);
-            console.log("saalllllllam");
             setCity(location.state.id);
             dispatch({ type: END_LOADING });
         } else {
@@ -75,6 +65,7 @@ export const AuctionPage = () => {
             dispatch({ type: END_LOADING });
         }
     }, []);
+
     return (
         <div>
             <Filtering

@@ -24,10 +24,11 @@ import {
     PROFILE,
     AUCTION_PAGE,
     CONSULTATION,
+    CATEGORY,
     CITYAUCTION,
 } from "utils/constant/routes";
+import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-
 const Aside = ({ toggled, handleToggleSidebar }) => {
     const navigate = useNavigate();
     return (
@@ -109,6 +110,13 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                         icon={<QuestionAnswerIcon fontSize='small' />}
                     >
                         مشاوره
+                    </MenuItem>
+                    <MenuItem
+                        active={window.location.pathname === CATEGORY}
+                        onClick={(e) => navigate(CATEGORY)}
+                        icon={<CategoryTwoToneIcon fontSize='small' />}
+                    >
+                        دسته بندی ها{" "}
                     </MenuItem>
                     <MenuItem
                         active={window.location.pathname === CITYAUCTION}

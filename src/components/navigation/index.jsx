@@ -21,6 +21,8 @@ import {
     AuctionDetialPage,
     LandingPage,
     Consultation,
+    Category,
+    
     PublicProfile
 } from "pages";
 import { CityAuction } from "pages/cityauction";
@@ -46,6 +48,7 @@ import {
     FULL_LAYOUT_CHAT,
     LANDING_PAGE,
     CONSULTATION,
+    CATEGORY,
     CITYAUCTION,
     PUBLICPROFILE,
 } from "utils/constant/routes";
@@ -108,9 +111,12 @@ export const Navigation = () => {
                     path={CONSULTATION}
                 />
                 <Route
-                    element={<ScreenLayout elemnt={<CityAuction />} />}
-                    path={CITYAUCTION}
+                    element={<ScreenLayout elemnt={<Category />} />}
+                    path={CATEGORY}
+                  
                 />
+                <Route   element={<ScreenLayout elemnt={<CityAuction />} />}
+                    path={CITYAUCTION}/>
                 <Route
                     element={<ScreenLayout elemnt={<AuctionPage />} />}
                     path={AUCTION_PAGE}

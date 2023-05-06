@@ -16,6 +16,7 @@ import {
   AuctionDetialPage,
   FullLayoutChat,
   LandingPage,
+  Category,
   CityAuction,
 } from "pages";
 import {
@@ -36,6 +37,7 @@ import {
   FORGOTPASSWORD,
   FULL_LAYOUT_CHAT,
   LANDING_PAGE,
+  CATEGORY,
   CITYAUCTION,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
