@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     ALL_AUCTIONS,
     START_LOADING,
@@ -8,7 +7,6 @@ import {
 } from "constants/actionTypes";
 import {
     getAllAuctions,
-    getAllCities,
     getFilteredAuctions,
 } from "utils/api/requests/myAuctions";
 import { host } from "utils/config";
@@ -21,23 +19,6 @@ export const getallAuctoins = (url) => async (dispatch) => {
             dispatch({
                 type: ALL_AUCTIONS,
                 payload: { auctions: getAllAuctionsRes.data },
-            });
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
-export const getallCity = (url, id) => async (dispatch) => {
-    try {
-        dispatch({ type: START_LOADING });
-        const getAllCityRes = await getAllCities(url, id);
-        console.log(getAllCityRes);
-
-        console.log("sara" + getAllCityRes.data.data.auctions);
-        if (getAllCityRes && getAllCityRes.status === 200) {
-            dispatch({
-                type: ALL_AUCTIONS,
-                payload: { auctions: getAllCityRes.data.data.auctions },
             });
         }
     } catch (error) {

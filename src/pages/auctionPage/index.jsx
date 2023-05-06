@@ -28,10 +28,10 @@ export const AuctionPage = () => {
     const dataOnPage = 5;
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
     const dispatch = useDispatch();
 
     const [type, setType] = React.useState("");
+    const [city, setCity] = React.useState("");
     const [status, setStatus] = React.useState("");
     const [tag, setTag] = React.useState([]);
     const [is_online, setIs_online] = React.useState("");
@@ -47,6 +47,7 @@ export const AuctionPage = () => {
     const filterSubmited = async () => {
         dispatch({ type: SET_PAGE, payload: { page: 1 } });
         let filteredObj = {};
+        if (city !== "") filteredObj["city"] = city;
         if (name !== "") filteredObj["name"] = name;
         if (type !== "") filteredObj["mode"] = type;
         if (basePrice !== "") filteredObj["limit"] = basePrice;
@@ -58,11 +59,16 @@ export const AuctionPage = () => {
         dispatch(getfilteredAuctoin(filteredObj, `${GET_ALL_AUCTIONS}`));
         dispatch({ type: END_LOADING });
     };
+
+    useEffect(() => {
+        if (city) filterSubmited();
+    }, [city]);
+    
     useEffect(() => {
         if (location?.state?.id) {
+            console.log("id ", location?.state?.id);
             console.log("saalllllllam");
-            dispatch(getallCity(`${GET_ALL_CITY}`, location.state.id));
-
+            setCity(location.state.id);
             dispatch({ type: END_LOADING });
         } else {
             dispatch(getallAuctoins(`${GET_ALL_AUCTIONS}`));
