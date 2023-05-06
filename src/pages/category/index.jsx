@@ -61,19 +61,8 @@ export const Category = () => {
                 {categories.map((cat) => {
                     return (
                         <Grid item>
-                            <Card
-                                sx={{ minWidth: 330, minHeight: 230 }}
-                                className='card1'
-                            >
-                                <CardContent>
-                                    {/* <Typography
-                                    variant='h6'
-                                    component='div'
-                                    className='city'
-                                >
-                                    تهران
-                                </Typography> */}
-                                </CardContent>
+                            <Card sx={{ minWidth: 265 }} className='card1'>
+                                <CardContent></CardContent>
                                 <CardActions>
                                     <Button
                                         size='small'
@@ -91,8 +80,12 @@ export const Category = () => {
                                             variant='h6'
                                             component='div'
                                             className='city'
+                                            style={{
+                                                marginLeft: "100px",
+                                                marginBottom: "40px",
+                                            }}
                                         >
-                                            {cat.name}
+                                            دسته بندی {cat.name}
                                         </Typography>{" "}
                                     </Button>
                                 </CardActions>

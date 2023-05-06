@@ -75,7 +75,7 @@
 
 .card1 {
   display: block;
-  position: relative;
+  /* position: relative; */
   /* max-height: 220px;
   max-width: 200 px; */
   border-radius: 6px;
@@ -91,7 +91,7 @@
 
 .card1::before {
     content: "";
-    position: absolute;
+    /* //position: absolute; */
     z-index: -1;
     top: -16px;
     right: -16px;
