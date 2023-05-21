@@ -107,10 +107,10 @@ export const Splash = () => {
                          onClick={() => history.push("/Book")}
                         className='home-banner__start-btn'
                     >
-                       {" "}
+                
                     </button> */}
                     <button className='button-36'>
-                        {" "}
+              
                         مزایده مناقصه را مشاهده کن
                     </button>
                 </div>
