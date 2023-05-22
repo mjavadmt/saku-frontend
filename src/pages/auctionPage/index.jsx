@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ActionCard } from "components/AuctionCard";
 import { Filtering } from "components/Filtering";
 import { useEffect } from "react";
@@ -6,58 +6,84 @@ import { GET_ALL_AUCTIONS } from "utils/constant/apiRoutes";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
 import noAuctionImage from "assets/img/no-auction-image-2.svg";
-import {
-    getAllAuctions,
-    getFilteredAuctions,
-} from "utils/api/requests/myAuctions";
+import { useDispatch, useSelector } from "react-redux";
+import { END_LOADING, SET_PAGE } from "constants/actionTypes";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getallAuctoins, getfilteredAuctoin } from "actions/auctions";
 
 export const AuctionPage = () => {
-    const [auctions, setAuctios] = useState([]);
-    const [page, setPage] = useState(1);
-    const [name, setName] = useState("");
-    const [basePrice, setBasePrice] = useState("");
+    const { auctions, page, name, basePrice, isLoading } = useSelector(
+        (data) => {
+            return data.auction;
+        }
+    );
     const dataOnPage = 5;
-    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    const [type, setType] = React.useState("");
+    const [city, setCity] = React.useState("");
+    const [status, setStatus] = React.useState("");
+    const [tag, setTag] = React.useState([]);
+    const [is_online, setIs_online] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const [category, setCategory] = React.useState("");
     const handleChange = (event, value) => {
-        setPage(value);
+        dispatch({ type: SET_PAGE, payload: { page: value } });
     };
     const paginatedData = () => {
         let currentItem = (page - 1) * dataOnPage;
-        return auctions.slice(currentItem, currentItem + dataOnPage);
+        return auctions?.slice(currentItem, currentItem + dataOnPage);
     };
     const filterSubmited = async () => {
-        setPage(1);
+        dispatch({ type: SET_PAGE, payload: { page: 1 } });
         let filteredObj = {};
+        if (city !== "") filteredObj["city"] = city;
         if (name !== "") filteredObj["name"] = name;
+        if (type !== "") filteredObj["mode"] = type;
         if (basePrice !== "") filteredObj["limit"] = basePrice;
-        const getAllAuctionsRes = await getFilteredAuctions(
-            `${GET_ALL_AUCTIONS}`,
-            { params: filteredObj }
-        );
-        if (getAllAuctionsRes && getAllAuctionsRes.status === 200) {
-            setAuctios(getAllAuctionsRes.data);
-        }
-        setIsLoading(false);
+        if (tag !== "") filteredObj["tags"] = tag.join(",");
+        console.log("is Online is :", is_online);
+        if (is_online || is_online == "0") filteredObj["is_online"] = is_online;
+        if (description !== "") filteredObj["desc"] = description;
+        if (category !== "") filteredObj["category"] = category;
+        dispatch(getfilteredAuctoin(filteredObj, `${GET_ALL_AUCTIONS}`));
+        dispatch({ type: END_LOADING });
     };
+
     useEffect(() => {
-        async function fetchData() {
-            const getAllAuctionsRes = await getAllAuctions({
-                GET_ALL_AUCTIONS,
-            });
-            if (getAllAuctionsRes && getAllAuctionsRes.status === 200) {
-                setAuctios(getAllAuctionsRes.data);
-            }
-            setIsLoading(false);
+        if (city) filterSubmited();
+    }, [city]);
+
+    useEffect(() => {
+        if (location?.state?.id) {
+            setCity(location.state.id);
+            dispatch({ type: END_LOADING });
+        } else {
+            dispatch(getallAuctoins(`${GET_ALL_AUCTIONS}`));
+            dispatch({ type: END_LOADING });
         }
-        fetchData();
     }, []);
+
     return (
         <div>
             <Filtering
+                hasRadioBtn={true}
+                type={type}
+                setType={setType}
+                status={status}
+                setStatus={setStatus}
+                tag={tag}
+                setTag={setTag}
+                is_online={is_online}
+                setIs_online={setIs_online}
+                description={description}
+                setDescription={setDescription}
+                category={category}
+                setCategory={setCategory}
                 name={name}
-                setName={setName}
                 basePrice={basePrice}
-                setBasePrice={setBasePrice}
                 filterSubmited={filterSubmited}
             />
             {isLoading ? (
@@ -66,42 +92,52 @@ export const AuctionPage = () => {
                 </span>
             ) : (
                 <>
-                    {paginatedData().map((auction) => (
-                        <ActionCard
-                            imgSrc={
-                                !!auction.auction_image
-                                    ? auction.auction_image
-                                    : noAuctionImage
-                            }
-                            ourImage={!!auction.auction_image}
-                            title={auction.name}
-                            city={auction.location}
-                            companyName={auction.user.username}
-                            date={new Date(
-                                auction.finished_at
-                            ).toLocaleDateString("fa-IR")}
-                            price={auction.limit}
-                            mode={auction.mode}
-                            isOnline={auction.is_online}
-                            remainingDay={Math.ceil(
-                                (new Date(auction.finished_at).getTime() -
-                                    new Date().getTime()) /
-                                    (1000 * 3600 * 24)
-                            )}
-                            tags={[...auction.tags.map((tag) => tag.name)]}
-                            id={1}
-                            token={auction.token}
-                        />
-                    ))}
+                    {auctions?.length > 0 && (
+                        <>
+                            {paginatedData()?.map((auction) => (
+                                <ActionCard
+                                    imgSrc={
+                                        !!auction.auction_image
+                                            ? auction.auction_image
+                                            : noAuctionImage
+                                    }
+                                    ourImage={!!auction.auction_image}
+                                    title={auction.name}
+                                    city={auction.location}
+                                    companyName={auction.user.username}
+                                    date={new Date(
+                                        auction.finished_at
+                                    ).toLocaleDateString("fa-IR")}
+                                    price={auction.limit}
+                                    mode={auction.mode}
+                                    isOnline={auction.is_online}
+                                    remainingDay={Math.ceil(
+                                        (new Date(
+                                            auction.finished_at
+                                        ).getTime() -
+                                            new Date().getTime()) /
+                                            (1000 * 3600 * 24)
+                                    )}
+                                    tags={[
+                                        ...auction.tags.map((tag) => tag.name),
+                                    ]}
+                                    id={1}
+                                    token={auction.token}
+                                />
+                            ))}
 
-                    <div className='flex justify-center mt-5'>
-                        <Pagination
-                            count={Math.ceil(auctions.length / dataOnPage)}
-                            page={page}
-                            onChange={handleChange}
-                            color='primary'
-                        />
-                    </div>
+                            <div className='flex justify-center mt-5'>
+                                <Pagination
+                                    count={Math.ceil(
+                                        auctions?.length / dataOnPage
+                                    )}
+                                    page={page}
+                                    onChange={handleChange}
+                                    color='primary'
+                                />
+                            </div>
+                        </>
+                    )}
                 </>
             )}
         </div>

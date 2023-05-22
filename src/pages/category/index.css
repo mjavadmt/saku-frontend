@@ -1,0 +1,108 @@
+.text{
+    text-align: center;
+ 
+    margin-top: 10px;
+    margin-bottom: 15px;
+    position: relative;
+  
+    font-size: 30px;
+  
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #3b0cb4, #3454a4, #6e98e0);
+    background-repeat:round;
+    background-size: 85%;
+    animation: animate 15s infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+@keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
+
+  .slide-container {
+    width: 70%;
+    margin: auto; }
+  
+  h3 {
+    text-align: center; }
+  
+  .each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 300px;
+  }
+  
+  .each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #a61212;
+    text-align: center;
+  }
+  
+  .each-fade {
+    display: flex;
+  }
+  
+  .each-fade .image-container {
+    width: 75%;
+    overflow: hidden;
+  }
+  
+  .each-fade .image-container img {
+    width: 100%;
+  }
+  
+  .each-fade h2 {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: #2304d6;
+  }
+
+
+/* * {
+  transition: all 0.3s ease-out;
+} */
+
+.card1 {
+  display: block;
+  /* position: relative; */
+  /* max-height: 220px;
+  max-width: 200 px; */
+  border-radius: 6px;
+  margin: 20px;
+
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+
+
+
+}
+
+.card1::before {
+    content: "";
+    /* //position: absolute; */
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #3939c5;
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+  }
+ .card1:hover:before {
+    transform: scale(21);
+  }

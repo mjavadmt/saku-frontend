@@ -4,6 +4,7 @@ export { CreateAuction } from "./createAuction";
 export { JobInfo } from "./jobInfo";
 export { Messages } from "./messages";
 export { MyAuctions } from "./myAuctions";
+export { Consultation } from "./consultation"
 export { Notifications } from "./notifications";
 export { Profile } from "./profile";
 export { Transactions } from "./transactions";
@@ -31,3 +32,7 @@ export { Logout } from "./logout";
 export { AuctionDetialPage } from "./auctionDetailPage";
 export { FullLayoutChat } from "./fullLayoutChat";
 export { LandingPage } from "./landing";
+export {Category} from "./category";
+export { PublicProfile } from "./publicProfile";
+export { CityAuction } from "./cityauction";
+

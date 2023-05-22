@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import { screen } from "@testing-library/dom";
 import { Filtering } from "../../components/Filtering";
 
-
 const AuctionTest = () => {
   return (
     <BrowserRouter>

@@ -24,8 +24,12 @@ import {
     getCategories,
     updateAuction,
 } from "utils/api/requests/createAuction";
-
+import { host } from "./../../utils/config";
+import axios, { post } from "axios";
+const token = `Bearer ${localStorage.getItem("access")}`;
 export const CreateAuction = ({ inTestEnvierment = false }) => {
+    const [auctionCity, setAuctionCity] = useState([]);
+    const [city, setCity] = useState("");
     const [auctionType, setAuctionType] = useState("");
     const [finishDate, setFinishDate] = useState(null);
     const [startDate, setStartDate] = useState(null);
@@ -40,6 +44,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     const [tags, setTags] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isUploadImg, setIsUploadImg] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleOpenTwo = () => setOpenTwo(true);
@@ -48,7 +53,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     const handleSubmit = async () => {
         setIsLoading(true);
         const addAuctionRes = await addAuction(POST_AUCTION, {
-            ...auctionValue,
+            auctionValue,
             user: localStorage.getItem("userId"),
         });
         if (addAuctionRes && addAuctionRes.status === 200) {
@@ -84,6 +89,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         }
     };
 
+
     useEffect(() => {
         async function fetchData() {
             const getCategoriesRes = await getCategories(GET_CATEGORIES);
@@ -93,6 +99,21 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         }
         if (!inTestEnvierment) fetchData();
     }, [inTestEnvierment]);
+
+    useEffect(() => {
+        axios
+            .get(`${host}auction/city/`, {
+                headers: {
+                    "Content-Type": "application/json ",
+                    Authorization: token,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setAuctionCity(res.data);
+            });
+    }, []);
+
     const style = {
         position: "absolute",
         top: "50%",
@@ -162,6 +183,8 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     const handleData = (e) => {
         setAuctionValue({ ...auctionValue, [e.target.name]: e.target.value });
     };
+
+    console.log(auctionCity);
     return (
         <div className='flex justify-center'>
             <div className='mt-12 bg-cardColor rounded-3xl w-11/12'>
@@ -202,6 +225,36 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                         </Select>
                     </Box>
 
+                    <div className='mt-5 flex justify-center'>
+                        <p>شهرها:</p>
+                    </div>
+                    <Box
+                        className='col-span-7 md:ml-24 px-5'
+                        sx={{ display: "flex", alignItems: "flex-end" }}
+                    >
+                        <Select
+                            fullWidth
+                            value={auctionCity.id}
+                            name='city'
+                            onChange={(e) => {
+                                setCity(e.target.value);
+                                console.log(e.target.value);
+                                setAuctionValue({
+                                    ...auctionValue,
+                                    city: e.target.value,
+                                });
+                            }}
+                            displayEmpty
+                            inputProps={{
+                                "aria-label": "Without label",
+                                "data-testid": "CatgorySelect",
+                            }}
+                        >
+                            {auctionCity.map((cat) => (
+                                <MenuItem value={cat.id}>{cat.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </Box>
                     <div className='mt-5 flex justify-center'>
                         <p>نام:</p>
                     </div>

@@ -8,7 +8,7 @@ export const getAllAuctions = (url) => {
 };
 
 export const getFilteredAuctions = (url, params) => {
-    const response = get(url, { params: params })
+    const response = get(url, params)
         .then((res) => res)
         .catch((e) => e);
     return response;

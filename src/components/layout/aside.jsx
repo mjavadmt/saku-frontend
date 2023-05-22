@@ -14,6 +14,7 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import Person from "@mui/icons-material/Person";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useNavigate } from "react-router-dom";
 import {
     SPLASH,
@@ -22,8 +23,12 @@ import {
     MY_AUCTIONS,
     PROFILE,
     AUCTION_PAGE,
+    CONSULTATION,
+    CATEGORY,
+    CITYAUCTION,
 } from "utils/constant/routes";
-
+import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 const Aside = ({ toggled, handleToggleSidebar }) => {
     const navigate = useNavigate();
     return (
@@ -97,6 +102,28 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                         icon={<LocalActivityIcon fontSize='small' />}
                     >
                         مزایده‌/ مناقصه های من
+                    </MenuItem>
+
+                    <MenuItem
+                        active={window.location.pathname === CONSULTATION}
+                        onClick={(e) => navigate(CONSULTATION)}
+                        icon={<QuestionAnswerIcon fontSize='small' />}
+                    >
+                        مشاوره
+                    </MenuItem>
+                    <MenuItem
+                        active={window.location.pathname === CATEGORY}
+                        onClick={(e) => navigate(CATEGORY)}
+                        icon={<CategoryTwoToneIcon fontSize='small' />}
+                    >
+                        دسته بندی ها{" "}
+                    </MenuItem>
+                    <MenuItem
+                        active={window.location.pathname === CITYAUCTION}
+                        onClick={(e) => navigate(CITYAUCTION)}
+                        icon={<ApartmentIcon fontSize='small' />}
+                    >
+                        شهرها{" "}
                     </MenuItem>
                 </Menu>
             </SidebarContent>
