@@ -365,7 +365,7 @@ export const Card = ({
                 </Dialog>
             </div>
         </div>
-        <div className="flex items-center m-1">
+        {/* <div className="flex items-center m-1">
           <PeopleOutlineRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold"> شرکت‌کنندگان : ‌</p>
           <p className="text-sm">{participants_num} نفر</p>
@@ -389,7 +389,7 @@ export const Card = ({
           <AttachMoneyRoundedIcon className="m-0.5" fontSize="inherit" />
           <p className="text-sm font-bold">قیمت : ‌</p>
           <p className="text-sm">{defineUnit(limit, 1)}</p>
-        </div>
+        </div> */}
     
     </div>
    
