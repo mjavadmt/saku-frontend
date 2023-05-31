@@ -9,4 +9,4 @@ services:
         dockerfile: Dockerfile
         # context: ./client
         context: .
-      command: /bin/sh -c "npm test -- --coverage"
+      command: docker run -e CI=true /bin/sh -c "npm test -- --coverage"
