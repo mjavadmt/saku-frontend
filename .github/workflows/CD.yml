@@ -6,7 +6,7 @@ on:
     # branches-ignore:
     #   - main
     #   - Develoop
-    branches: [feature/v.0.0.4/release_CD]
+    # branches: [feature/v.0.0.4/release_CD]
     types:
       - completed
 
