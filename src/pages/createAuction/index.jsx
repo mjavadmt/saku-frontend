@@ -247,7 +247,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                             displayEmpty
                             inputProps={{
                                 "aria-label": "Without label",
-                                "data-testid": "CatgorySelect",
+                                "data-testid": "CitySelect",
                             }}
                         >
                             {auctionCity.map((cat) => (
@@ -298,7 +298,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                             displayEmpty
                             inputProps={{
                                 "aria-label": "Without label",
-                                "data-testid": "CatgorySelect",
+                                "data-testid": "CategorySelect",
                             }}
                         >
                             {categories.map((cat) => (

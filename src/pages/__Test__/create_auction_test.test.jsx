@@ -26,7 +26,7 @@ describe("create auction component test", () => {
   });
   it("Change category input", async () => {
     render(<CreateAuctionTest />, { flushUseEffects: false });
-    const userNameInput = screen.getByTestId("CatgorySelect");
+    const userNameInput = screen.getByTestId("CategorySelect");
     fireEvent.change(userNameInput, { target: { value: "Honari" } });
     expect(userNameInput.value).toBe("");
   });
