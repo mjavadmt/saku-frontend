@@ -1,6 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { screen } from "@testing-library/react";
+import { screen } from "@testing-library/dom";
+import { ForgotPassword } from "../forgotPassword";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { ForgotPassword } from "pages/forgotPassword";
 
