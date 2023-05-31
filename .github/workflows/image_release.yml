@@ -13,21 +13,21 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16.x'
-        cache: 'npm'
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          cache: 'npm'
 
-    - name: Build frontend docker image
-      run: docker build . -t ghcr.io/saku-se/saku-frontend:${{ github.sha }}
+      - name: Build frontend docker image
+        run: docker build . -t ghcr.io/saku-se/saku-frontend:${{ github.sha }}
 
-    - name: Push frontend docker image to ghcr.io
-      run: |
-        docker login -u ${{ secrets.BACK_REG_USERNAME }} -p ${{ secrets.BACKEND_PAT }} ghcr.io
-        docker push ghcr.io/saku-se/saku-frontend:${{ github.sha }}
-    - name: Tag image as latest
-      run: |
-        docker pull ghcr.io/saku-se/saku-frontend:${{ github.sha }}
-        docker tag ghcr.io/saku-se/saku-frontend:${{ github.sha }} ghcr.io/saku-se/saku-frontend:latest
-        docker push ghcr.io/saku-se/saku-frontend:latest
+      - name: Push frontend docker image to ghcr.io
+        run: |
+          docker login -u ${{ secrets.BACK_REG_USERNAME }} -p ${{ secrets.BACKEND_PAT }} ghcr.io
+          docker push ghcr.io/saku-se/saku-frontend:${{ github.sha }}
+      - name: Tag image as latest
+        run: |
+          docker pull ghcr.io/saku-se/saku-frontend:${{ github.sha }}
+          docker tag ghcr.io/saku-se/saku-frontend:${{ github.sha }} ghcr.io/saku-se/saku-frontend:latest
+          docker push ghcr.io/saku-se/saku-frontend:latest
