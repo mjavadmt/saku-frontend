@@ -22,8 +22,8 @@ import {
     LandingPage,
     Consultation,
     Category,
-    
-    PublicProfile
+    PublicProfile,
+    WalletAndSubscription
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
@@ -51,6 +51,7 @@ import {
     CATEGORY,
     CITYAUCTION,
     PUBLICPROFILE,
+    WALLETANDSUBSCRIPTION
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -113,6 +114,11 @@ export const Navigation = () => {
                 <Route
                     element={<ScreenLayout elemnt={<Category />} />}
                     path={CATEGORY}
+                  
+                />
+                <Route
+                    element={<ScreenLayout elemnt={<WalletAndSubscription />} />}
+                    path={WALLETANDSUBSCRIPTION}
                   
                 />
                 <Route   element={<ScreenLayout elemnt={<CityAuction />} />}

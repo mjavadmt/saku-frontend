@@ -35,4 +35,5 @@ export { LandingPage } from "./landing";
 export {Category} from "./category";
 export { PublicProfile } from "./publicProfile";
 export { CityAuction } from "./cityauction";
+export {WalletAndSubscription} from "./walletAndSubscription"
 

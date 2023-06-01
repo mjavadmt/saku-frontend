@@ -22,3 +22,4 @@ export const CONSULTATION = "/consultation";
 export const CATEGORY = "/category";
 export const PUBLICPROFILE = "/public-profile/:username";
 export const CITYAUCTION = "/city-auction";
+export const WALLETANDSUBSCRIPTION = "/wallet-subscription";
