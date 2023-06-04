@@ -7,8 +7,8 @@ export const getAllQuestions = (url) => {
   return response;
 };
 
-export const addQuestion = (url, params) => {
-  const response = post(url, params)
+export const addQuestion = (url, ticket) => {
+  const response = post(url, ticket)
     .then((res) => res)
     .catch((e) => e);
   return response;

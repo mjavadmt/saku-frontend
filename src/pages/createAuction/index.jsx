@@ -108,7 +108,6 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setAuctionCity(res.data);
       });
   }, []);
@@ -135,7 +134,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         value={
           !!startDate
             ? `${startDate.year}/${startDate.month}/${startDate.day}`
-            : ""
+            : "" || ""
         }
         endAdornment={
           <InputAdornment position="end">
@@ -158,7 +157,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
         value={
           !!finishDate
             ? `${finishDate.year}/${finishDate.month}/${finishDate.day}`
-            : ""
+            : "" || ""
         }
         inputProps={{
           "data-testid": "startDate",
@@ -183,7 +182,6 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
     setAuctionValue({ ...auctionValue, [e.target.name]: e.target.value });
   };
 
-  console.log(auctionCity);
   return (
     <div className="flex justify-center">
       <div className="mt-12 bg-cardColor rounded-3xl w-11/12">
@@ -201,7 +199,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           >
             <Select
               fullWidth
-              value={auctionValue.mode}
+              value={auctionValue.mode || ""}
               name="mode"
               onChange={(e) =>
                 setAuctionValue({
@@ -215,10 +213,10 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                 "data-testid": "select",
               }}
             >
-              <MenuItem data-testid="select-option" value={1}>
+              <MenuItem data-testid="select" value={1}>
                 مزایده
               </MenuItem>
-              <MenuItem data-testid="select-option" value={2}>
+              <MenuItem data-testid="select" value={2}>
                 مناقصه
               </MenuItem>
             </Select>
@@ -233,11 +231,10 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           >
             <Select
               fullWidth
-              value={auctionCity.id}
+              value={auctionCity.id || ""}
               name="city"
               onChange={(e) => {
                 setCity(e.target.value);
-                console.log(e.target.value);
                 setAuctionValue({
                   ...auctionValue,
                   city: e.target.value,
@@ -246,7 +243,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               displayEmpty
               inputProps={{
                 "aria-label": "Without label",
-                "data-testid": "CatgorySelect",
+                "data-testid": "CitySelect",
               }}
             >
               {auctionCity.map((cat) => (
@@ -268,7 +265,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               fullWidth
               id="input-with-sx"
               name="name"
-              value={auctionValue.name}
+              value={auctionValue.name || ""}
               onChange={handleData}
               variant="standard"
               inputProps={{
@@ -301,7 +298,15 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               }}
             >
               {categories.map((cat) => (
-                <MenuItem value={cat.name}>{cat.name}</MenuItem>
+                <MenuItem
+                  inputProps={{
+                    "aria-label": "Without label",
+                    "data-testid": "CatgorySelect",
+                  }}
+                  value={cat.name}
+                >
+                  {cat.name}
+                </MenuItem>
               ))}
             </Select>
           </Box>
@@ -321,7 +326,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           >
             <Select
               fullWidth
-              value={auctionType}
+              value={auctionType || ""}
               onChange={(e) => {
                 setAuctionType(e.target.value);
                 setAuctionValue({
@@ -331,7 +336,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
-              defaultValue={10}
+              // defaultValue={10}
             >
               <MenuItem value={10}>آفلاین</MenuItem>
               <MenuItem value={20}>آنلاین</MenuItem>
@@ -362,7 +367,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               }}
               id="input-with-sx"
               variant="standard"
-              value={auctionValue.limit}
+              value={auctionValue.limit || ""}
               name="limit"
               onChange={handleData}
               inputProps={{
@@ -376,7 +381,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
           <div className="w-full col-span-7 md:ml-24 px-5">
             <DatePicker
               wrapperClassName="w-full"
-              value={startDate}
+              value={startDate || ""}
               onChange={(e) => {
                 setStartDate(e);
                 var x = toUsDate(e.year, e.month, e.day);
@@ -480,7 +485,7 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
               multiline
               id="input-with-sx"
               name="description"
-              value={description}
+              value={description || ""}
               onChange={(e) => {
                 handleData(e);
                 setDescription(e.target.value);
@@ -529,24 +534,23 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             className="text-white"
             id="modal-modal-description"
             sx={{ mt: 2 }}
-          >
-            <ul data-testid="modalContent">
-              <li className="flex gap-3 justify-between">
-                <span className="font-semibold text-sky-400/100 text-xl">
-                  افلاین:
-                </span>
-                قیمت ها برای کسانی که می‌خواهند قیمت ثبت کنند تا آخر تازیخ ثبت
-                قیمت پنهان است و در آخر برنده و مبلغ آن مشخص می‌شود.
-              </li>
-              <li className="flex gap-3 justify-between">
-                <span className="font-semibold text-sky-400/100 text-xl">
-                  انلاین:
-                </span>
-                قیمت ها برای همه قابل نمایش است و در هر لحظه قیمت ها تغییر خواهد
-                کرد.
-              </li>
-            </ul>
-          </Typography>
+          />
+          <ul data-testid="modalContent">
+            <li className="flex gap-3 justify-between">
+              <span className="font-semibold text-sky-400/100 text-xl">
+                افلاین:
+              </span>
+              قیمت ها برای کسانی که می‌خواهند قیمت ثبت کنند تا آخر تازیخ ثبت
+              قیمت پنهان است و در آخر برنده و مبلغ آن مشخص می‌شود.
+            </li>
+            <li className="flex gap-3 justify-between">
+              <span className="font-semibold text-sky-400/100 text-xl">
+                انلاین:
+              </span>
+              قیمت ها برای همه قابل نمایش است و در هر لحظه قیمت ها تغییر خواهد
+              کرد.
+            </li>
+          </ul>
         </Box>
       </Modal>
       <Modal
@@ -568,22 +572,21 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             className="text-white"
             id="modal-modal-description"
             sx={{ mt: 2 }}
-          >
-            <ul data-testid="modalContent2">
-              <li className=" gap-3 justify-between">
-                <span className="flex font-semibold text-sky-400/100 text-xl">
-                  نکته اول:
-                </span>
-                در مناقصه ها در حالت آفلاین میبایست از این قیمت پایین تر باشد.
-              </li>
-              <li className=" gap-3 justify-between">
-                <span className="flex font-semibold text-sky-400/100 text-xl">
-                  نکته دوم:
-                </span>
-                در مزایده ها در حالت آفلاین میبایست از این قیمت بالاتر باشد.
-              </li>
-            </ul>
-          </Typography>
+          />
+          <ul data-testid="modalContent2">
+            <li className=" gap-3 justify-between">
+              <span className="flex font-semibold text-sky-400/100 text-xl">
+                نکته اول:
+              </span>
+              در مناقصه ها در حالت آفلاین میبایست از این قیمت پایین تر باشد.
+            </li>
+            <li className=" gap-3 justify-between">
+              <span className="flex font-semibold text-sky-400/100 text-xl">
+                نکته دوم:
+              </span>
+              در مزایده ها در حالت آفلاین میبایست از این قیمت بالاتر باشد.
+            </li>
+          </ul>
         </Box>
       </Modal>
     </div>

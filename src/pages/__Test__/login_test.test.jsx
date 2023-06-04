@@ -1,6 +1,6 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
 import { Login } from "../login";
 import { wait } from "@testing-library/user-event/dist/utils";
 

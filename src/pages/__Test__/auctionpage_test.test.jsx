@@ -1,12 +1,18 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
 import { Filtering } from "../../components/Filtering";
 
 const AuctionTest = () => {
+  const mockStore = configureStore([]);
+  const store = mockStore({});
   return (
     <BrowserRouter>
-      <Filtering />
+      <Provider store={store}>
+        <Filtering />
+      </Provider>
     </BrowserRouter>
   );
 };

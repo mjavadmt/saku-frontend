@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import cx from "classnames";
 import { toast } from "react-toastify";
 import DoneIcon from "@mui/icons-material/Done";
-import { SUPPORT_API } from "utils/constant/apiRoutes";
+import { POST_TICKET } from "utils/constant/apiRoutes";
 import { addQuestion } from "utils/api/requests/support";
 
 const NewQuestion = (props) => {
@@ -16,7 +16,8 @@ const NewQuestion = (props) => {
     trigger,
   } = props;
   const handleSubmit = async () => {
-    const addRes = await addQuestion(SUPPORT_API, questionInput);
+    const addRes = await addQuestion(POST_TICKET, { question: questionInput });
+    console.log("question creation res:", addRes);
     if (questionInput != "") {
       if (addRes && addRes.status === 200) {
         setQuestionInput("");
@@ -47,11 +48,15 @@ const NewQuestion = (props) => {
             لطفا سوال های خود را از طریق فرم زیر برای ادمین های سکو ارسال کنید
           </div>
           <TextField
+            placeholder="متن سوال..."
             fullWidth
             id="outlined-basic"
+            inputProps={{
+              "data-testid": "input-field",
+            }}
             rows={5}
             value={questionInput}
-            multiline="true"
+            multiline={true}
             onChange={(e) => setQuestionInput(e.target.value)}
           />
         </div>
@@ -61,6 +66,10 @@ const NewQuestion = (props) => {
             onClick={handleSubmit}
             variant="contained"
             className="w-1/6 h-12"
+            data-testid="q-button"
+            // inputProps={{
+            //   "data-testid": "q-button",
+            // }}
           >
             <DoneIcon className="m-2 ml-3" />
             ارسال سوال

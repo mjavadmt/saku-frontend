@@ -13,4 +13,6 @@ export const GET_USER_LIST = "/chat/my/";
 export const GET_MSG_LIST = "/chat/messages/";
 export const POST_BID = "/bid/";
 export const GET_MY_BID = "/bid/my";
-export const SUPPORT_API = "/SUPPORT";
+export const POST_TICKET = "/profile/ticket/create";
+export const GET_TICKETS = "/profile/tickets";
+export const GET_TICKET = "/profile/ticket/";
