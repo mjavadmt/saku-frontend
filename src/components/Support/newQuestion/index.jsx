@@ -16,10 +16,12 @@ const NewQuestion = (props) => {
     trigger,
   } = props;
   const handleSubmit = async () => {
-    const addRes = await addQuestion(POST_TICKET, { question: questionInput });
-    console.log("question creation res:", addRes);
     if (questionInput != "") {
-      if (addRes && addRes.status === 200) {
+      const addRes = await addQuestion(POST_TICKET, {
+        question: questionInput,
+      });
+      if (addRes && addRes.status === 201) {
+        console.log("addres :'", addRes);
         setQuestionInput("");
         toast.success("پرسش شما برای ادمین های سکو ارسال شد!");
         setTrigger(!trigger);
@@ -34,6 +36,7 @@ const NewQuestion = (props) => {
   return (
     <>
       <div
+        data-testid="main-div"
         className={cx(
           "bg-cardColor p-4 grid rounded-3xl md:grid-cols-4 grid-cols-4",
           {
@@ -79,10 +82,17 @@ const NewQuestion = (props) => {
             fullWidth
             value={type}
             onChange={(e) => setType(e.target.value)}
+            data-testid="select"
           >
-            <MenuItem value={1}>پاسخ داده شده</MenuItem>
-            <MenuItem value={0}>بدون پاسخ</MenuItem>
-            <MenuItem value={2}>همه</MenuItem>
+            <MenuItem data-testid="select" value={1}>
+              پاسخ داده شده
+            </MenuItem>
+            <MenuItem data-testid="select" value={0}>
+              بدون پاسخ
+            </MenuItem>
+            <MenuItem data-testid="select" value={2}>
+              همه
+            </MenuItem>
           </Select>
         </div>
       </div>

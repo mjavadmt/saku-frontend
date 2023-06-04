@@ -69,6 +69,7 @@ const AllQuestions = (props) => {
     const questionsRes = await getAllQuestions(GET_TICKETS);
     console.log("questions get res:", questionsRes);
     if (questionsRes && questionsRes.status === 200) {
+      console.log("were here");
       setQuestions(questionsRes?.data);
       setIsLoading(false);
     } else {
@@ -130,10 +131,7 @@ const AllQuestions = (props) => {
 
   const HandleList = (Q) => {
     const { question } = Q;
-    if (type == 1 && question.answer != "") return questionCard(question);
-    if (type == 0 && question.answer == "") return questionCard(question);
-    if (type == 2) return questionCard(question);
-    return;
+    return questionCard(question);
   };
 
   return (
@@ -144,9 +142,27 @@ const AllQuestions = (props) => {
         </span>
       ) : (
         <Grid container spacing={2}>
-          {questionList?.length > 0 && (
+          {questions?.length > 0 && type == 1 && (
             <>
-              {questionList.map((question, index) => {
+              {questions
+                .filter((question) => question.answer != "")
+                .map((question, index) => {
+                  return <HandleList question={question} key={index} />;
+                })}
+            </>
+          )}
+          {questions?.length > 0 && type == 0 && (
+            <>
+              {questions
+                .filter((question) => question.answer == "")
+                .map((question, index) => {
+                  return <HandleList question={question} key={index} />;
+                })}
+            </>
+          )}
+          {questions?.length > 0 && type == 2 && (
+            <>
+              {questions.map((question, index) => {
                 return <HandleList question={question} key={index} />;
               })}
             </>

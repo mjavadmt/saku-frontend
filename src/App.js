@@ -8,6 +8,7 @@ function App() {
   return (
     <React.Fragment>
       <ToastContainer
+        data-testid="toast"
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

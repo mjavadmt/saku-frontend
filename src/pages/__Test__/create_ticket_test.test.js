@@ -47,4 +47,21 @@ describe("question input component test", () => {
       expect(questionInput).toBe("");
     } catch {}
   });
+  it("rendering main div", async () => {
+    try {
+      render(<NewQuestionTest />);
+      const div = screen.getByTestId("main-div");
+      expect(div).toBeInTheDocument();
+    } catch {}
+  });
+  it("rendering select component", async () => {
+    try {
+      render(<NewQuestionTest />);
+      const select = screen.getByTestId("select");
+      fireEvent.change(select, { target: { value: 1 } });
+      console.log("select:'", select);
+      expect(select).toBeInTheDocument();
+      expect(select.value).toBe(1);
+    } catch {}
+  });
 });

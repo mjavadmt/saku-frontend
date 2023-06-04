@@ -8,6 +8,7 @@ export const getAllQuestions = (url) => {
 };
 
 export const addQuestion = (url, ticket) => {
+  console.log("ticket is:", ticket);
   const response = post(url, ticket)
     .then((res) => res)
     .catch((e) => e);
