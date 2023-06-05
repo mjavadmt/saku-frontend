@@ -40,5 +40,9 @@
     transform: scale(21);
   }
 
-
+.city-img-div{
+  display: flex;
+  justify-content:flex-end;
+  margin-top: 24px;
+}
 
