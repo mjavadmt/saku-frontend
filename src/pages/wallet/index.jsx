@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import { Button, Paper, Typography } from "@mui/material";
+//import createCache from "@emotion/cache";
+//import rtlPlugin from "stylis-plugin-rtl";
+//import { prefixer } from "stylis";
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 import { host } from './../../utils/config';
 import { toast } from "react-toastify";
 
 export const Wallet = () => {
+
+    // const cacheRtl = createCache({
+    //     key: "muirtl",
+    //     stylisPlugins: [prefixer, rtlPlugin],
+    //   });
 
     let token = `Bearer ${localStorage.getItem(
         "access"
@@ -95,10 +103,11 @@ export const Wallet = () => {
 
         rerunder();
         rerunder();
+        rerunder();
     }
 
     return (
-
+        // <CacheProvider value={cacheRtl}>
         <center>
                 <Grid container style={{margin: "20px auto auto auto"}}>
                     <Grid item md={2.5} xs={0} ></Grid>
@@ -108,12 +117,12 @@ export const Wallet = () => {
                             <Typography style={{ position: "relative", top: "70px" }}>اعتبار شما</Typography>
                             <Typography style={{ position: "relative", top: "75px" }}>{balance.data ? balance.data.wallet : ""} تومان</Typography>
 
-                            <TextField onChange={sethandler} value={value}
+                            <TextField onChange={sethandler} value={value} variant="standard"
                                 style={{
                                     position: "relative", top: "150px", width: "212px",
                                     borderRadius: "8px"
                                 }}
-                                id="outlined-basic" label="مبلغ مورد نظر" variant="outlined" placeholder="مبلغ رو به تومان وارد کن" />
+                                id="outlined-basic" label="مبلغ مورد نظر" placeholder="مبلغ رو به تومان وارد کن" />
 
                             <Grid container style={{margin: "30px auto auto auto"}}>
 
@@ -186,7 +195,7 @@ export const Wallet = () => {
                     <Grid item md={7} xs={1} ></Grid>
                 </Grid >
         </center >
-
+        // </CacheProvider>
     )
 }
 

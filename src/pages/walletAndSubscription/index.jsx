@@ -27,10 +27,30 @@ export const WalletAndSubscription = () => {
 
   const navigate = useNavigate();
 
-  //const [id, setId] = useState();
+  const [open, setopen] = useState(true);
+  const [result, setresult] = useState(null);
+
   let token = `Bearer ${localStorage.getItem(
     "access"
   )}`;
+
+  useEffect(() => {
+    axios
+        .get(
+            `${host}subscription/active`,
+            {
+                headers: {
+
+                    "Content-Type": "application/json",
+                    Authorization: token
+                },
+            }
+        )
+    .then((res) => {
+        console.log(res.data.name);
+        setresult(res.data.name);
+    })
+    }, []);
 
   const handleBuy = (selfid) => {
 
@@ -55,17 +75,41 @@ export const WalletAndSubscription = () => {
             if (res.status === 200) {
                toast.success("اشتراک با موفقیت خریداری شد");
             }
-            if (res.status === 400){
+            else if (res.status === 400){
                 toast.error("شما در حال حاضر اشتراک فعال دارید یا موجودی کافی ندارید");
             }
         });
-
 }
+
+let show = null;
+
+  show = (
+    <div>
+        <Dialog open={open} onClose={() => setopen(false)}>
+            <DialogTitle>وضعیت اشتراک</DialogTitle>
+            <DialogContent>
+                <DialogContentText style={{color:"white"}}>
+                    اشتراک فعال شما : {result ? result : "هیچ اشتراک فعالی ندارید" }
+                </DialogContentText>
+            </DialogContent>
+
+            <DialogActions>
+                <Button
+                 variant="outlined" 
+                 size="small" 
+                 style={{color:"white"}} 
+                 onClick={() => setopen(false)}>متوجه شدم</Button>
+            </DialogActions>
+        </Dialog>
+    </div>
+  );
+
 
   return ( 
     <div>
-    
+        
         <center>
+        {show}
             <Grid style={{margin:"50px auto 40px auto"}} container item lg={10} xs={10} >
                 <Grid item lg={12} xs={12} >
                     <Typography style={{fontSize: 23, fontWeight:"bold", color: "#white"}}> خرید اشتراک </Typography>
@@ -217,8 +261,6 @@ export const WalletAndSubscription = () => {
         </Grid>
         </center>
 
-        {/* <Footer/> */}
-    
     </div>
  );
 
