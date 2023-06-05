@@ -1,30 +1,28 @@
 import {
-    Routes,
-    Route,
-    Navigate,
-    BrowserRouter,
-    useLocation,
+  Routes,
+  Route,
+  Navigate,
+  BrowserRouter,
+  useLocation,
 } from "react-router-dom";
 import {
-    NotFound,
-    CreateAuction,
-    JobInfo,
-    Messages,
-    MyAuctions,
-    Notifications,
-    Profile,
-    Transactions,
-    Login,
-    SignUp,
-    AuctionPage,
-    Logout,
-    AuctionDetialPage,
-    LandingPage,
-    Consultation,
-    Category,
-    PublicProfile,
-    WalletAndSubscription,
-    Wallet
+  NotFound,
+  CreateAuction,
+  JobInfo,
+  Messages,
+  MyAuctions,
+  Notifications,
+  Profile,
+  Transactions,
+  Login,
+  SignUp,
+  AuctionPage,
+  Logout,
+  AuctionDetialPage,
+  LandingPage,
+  Consultation,
+  Category,
+  PublicProfile,
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
@@ -53,25 +51,27 @@ import {
     CITYAUCTION,
     PUBLICPROFILE,
     WALLETANDSUBSCRIPTION,
-    WALLET
+    WALLET,
+    SUPPORT
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
+import { Support } from "pages/support";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
-    const location = useLocation();
-    const path = location.pathname;
-    const isLogedIn = localStorage.getItem("access") != null;
-    if (
-        !isLogedIn &&
-        path !== LOGIN &&
-        path !== SIGNUP &&
-        path !== FORGOTPASSWORD &&
-        path !== LANDING_PAGE
-    ) {
-        return <Navigate to={LOGIN} />;
-    }
-    return isFullscreen ? <div>{elemnt}</div> : <Layout>{elemnt}</Layout>;
+  const location = useLocation();
+  const path = location.pathname;
+  const isLogedIn = localStorage.getItem("access") != null;
+  if (
+    !isLogedIn &&
+    path !== LOGIN &&
+    path !== SIGNUP &&
+    path !== FORGOTPASSWORD &&
+    path !== LANDING_PAGE
+  ) {
+    return <Navigate to={LOGIN} />;
+  }
+  return isFullscreen ? <div>{elemnt}</div> : <Layout>{elemnt}</Layout>;
 };
 
 export const Navigation = () => {
@@ -196,6 +196,7 @@ export const Navigation = () => {
                     }
                     path={PUBLICPROFILE}
                 />
+                <Route element={<ScreenLayout elemnt={<Support />} />} path={SUPPORT} />
                 <Route path='*' element={<Navigate to={NOT_FOUND} />} />
             </Routes>
         </BrowserRouter>

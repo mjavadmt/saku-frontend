@@ -180,7 +180,7 @@ export const SignUp = () => {
                       }}
                       name="username"
                       onChange={(e, val) => handleChange(e, val)}
-                      value={userData.username}
+                      value={userData.username || ""}
                     />
                     <TextField
                       margin="normal"
@@ -193,7 +193,7 @@ export const SignUp = () => {
                       placeholder="ایمیل"
                       name="email"
                       onChange={(e, val) => handleChange(e, val)}
-                      value={userData.email}
+                      value={userData.email || ""}
                     />
                     <TextField
                       style={{
@@ -210,7 +210,7 @@ export const SignUp = () => {
                       type="password"
                       id="password"
                       onChange={(e, val) => handleChange(e, val)}
-                      value={userData.password}
+                      value={userData.password || ""}
                     />
                     <TextField
                       margin="normal"
@@ -224,7 +224,7 @@ export const SignUp = () => {
                       type="password"
                       id="confirmPassword"
                       onChange={(e, val) => handleChange(e, val)}
-                      value={userData.confirmPassword}
+                      value={userData.confirmPassword || ""}
                     />
 
                     <button

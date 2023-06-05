@@ -24,3 +24,4 @@ export const PUBLICPROFILE = "/public-profile/:username";
 export const CITYAUCTION = "/city-auction";
 export const WALLETANDSUBSCRIPTION = "/wallet-subscription";
 export const WALLET = "/wallet";
+export const SUPPORT = "/support";
