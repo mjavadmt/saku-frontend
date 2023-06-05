@@ -13,38 +13,22 @@ import {
     SuccessfulAuctionParticipated,
     UniqueProfileParticipated,
 } from "..";
-import Chip from "@mui/material/Chip";
-import { FaRegBuilding } from "react-icons/fa";
-import { VscTypeHierarchySub } from "react-icons/vsc";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { AUCTION_DETAIL_WITHOUT_SUFFIX } from "utils/constant/routes";
-import cx from "classnames";
 import { useEffect, useState } from "react";
 import { homePageData } from "utils/statics/homePageStats";
 import { CircularProgress } from "@mui/material";
 import { getHomeData } from "utils/api/requests/splash";
 import "./index.css";
 import Home from "./S.jpg";
-import Typical from "react-typical";
 import { ActionCard } from "components/AuctionCard";
-// export const ActionCard = ({
-//     imgSrc,
-//     title,
-//     remainingDay,
-//     companyName,
-//     isOnline,
-//     date,
-//     mode,
-//     price,
-//     tags,
-//     id,
-//     token,
-//     ourImage,
-// }) => {
-//     let navigate = useNavigate();}
+import noAuctionImage from "assets/img/no-auction-image-2.svg";
+import { useSelector } from "react-redux";
+import { host } from "utils/config";
+import axios from "axios";
+import { AUCTION_PAGE } from "constant/routes";
 
-export const chartHandler = (
+const chartHandler = (
     name,
     listObj,
     imgSrc,
@@ -90,8 +74,18 @@ const pieChartHanlder = (num1, num2, num3, num4) => {
 };
 
 export const Splash = () => {
+    let navigate = useNavigate();
     const [data, setData] = useState({});
+    const [cartData, setCartData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const dataOnPage = 5;
+    const { auctions, page } = useSelector((data) => {
+        return data.auction;
+    });
+    const paginatedData = () => {
+        let currentItem = (page - 1) * dataOnPage;
+        return auctions?.slice(currentItem, currentItem + dataOnPage);
+    };
 
     async function fetchData() {
         const getHomeDataRes = await getHomeData("/homepage/2022");
@@ -102,10 +96,30 @@ export const Splash = () => {
             setIsLoading(false);
         }
     }
+    const token = `Bearer ${localStorage.getItem("access")}`;
+
+    function getcarddata() {
+        axios
+            .get(`${host}auction/recent/4`, {
+                headers: {
+                    "Content-Type": "application/json ",
+                    Authorization: token,
+                },
+            })
+            .then((res) => {
+                setCartData(res.data);
+                console.log(res.data);
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     useEffect(() => {
         setData(homePageData);
         fetchData();
+        getcarddata();
     }, []);
 
     return isLoading ? (
@@ -125,16 +139,14 @@ export const Splash = () => {
                     alt='homeimg'
                     style={{
                         backgroundImage: "url(" + "S.png" + ")",
-                        height: "400px",
+                        height: "450px",
                         width: "100%",
                     }}
                 />
 
                 <div class='centered'>
                     {" "}
-                    <h2 className='home_title'>
-                        <Typical steps={["سکو", 10000]} loop={Infinity} />
-                    </h2>
+                    <h2 className='home_title'>سکو </h2>
                     <div className='home_info'>
                         هیچ آگهی مزایده مناقصه دیگری را از دست ندهید.{" "}
                     </div>
@@ -142,164 +154,46 @@ export const Splash = () => {
                         اولین دایرکتوری آگهی های مزایده مناقصه و معرفی شرکت ها و
                         افراد حقیقی حوزه خدمات
                     </div>
-                    {/* <button
-                         onClick={() => history.push("/Book")}
-                        className='home-banner__start-btn'
+                    <button
+                        className='button-36'
+                        style={{ marginTop: "40px" }}
+                        onClick={() => navigate(AUCTION_PAGE)}
                     >
-                
-                    </button> */}
-                    <button className='button-36'>
-                        مزایده مناقصه را مشاهده کن
+                        مزایده مناقصه ها را مشاهده کن
                     </button>
                 </div>
             </div>
-            <p>جدیدترین آگهی ها</p>
-            {/* <ActionCard/> */}
-            <div className='mt-8 flex justify-center'>
-                <div
-                    className='lg:w-3/4  lg:h-52 sm:w-1/2 bg-cardColor rounded-2xl lg:grid lg:grid-cols-5 '
-                    style={{ width: "400px" }}
-                >
-                    <div className='flex items-start justify-center '>
-                        <img
-                            alt=''
-                            className={cx(
-                                "rounded-xl lg:h-full lg:w-full h-1/2 w-3/4 "
-                                // {
-                                //     "p-3": !ourImage,
-                                // }
-                            )}
-                            // src={imgSrc}
-                        />
-                    </div>
-                    <div className='col-span-3 mt-3 mr-6 p-3 lg:p-0  '>
-                        <div>
-                            <span>تایتل</span>
-                            <Chip
-                                color='secondary'
-                                className=' mr-2'
-                                // label={
-                                //     remainingDay > 0
-                                //         ? `${"روز مانده عدد"} روز مانده`
-                                //         : "پایان یافته"
-                                // }
-                            />
-                        </div>
-
-                        <div className='flex items-center'>
-                            <FaRegBuilding />
-                            <span className='m-2'>گلرنگ</span>
-                            <VscTypeHierarchySub />
-                            <span className='m-2'>
-                                {/* {mode === 1 ? "مزایده" : "مناقصه"} -{" "}
-                            {isOnline ? "آنلاین" : "آفلاین"} */}
-                            </span>
-                        </div>
-                        <div className='flex items-center'>
-                            مهلت:
-                            <span className='m-2'>12</span>
-                        </div>
-                        <div className='flex items-center'>
-                            قیمت پایه :<span className='m-2'>1452</span>
-                            <span>ریال</span>
-                        </div>
-                        <div className='flex items-center flex-wrap gap-2'>
-                            {/* {tags.map((label) => (
-                            <Chip color='primary' label={label} />
-                        ))} */}
-                        </div>
-                    </div>
-                    <div className='lg:grid lg:grid-rows-4 m-4 flex justify-between lg:justify-end'>
-                        <div className='lg:row-span-3 lg:flex lg:justify-end flex m-2 gap-2'></div>
-                        <div className='flex items-end justify-end'>
-                            <Button
-                                // onClick={() =>
-                                //     navigate(
-                                //         `${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`
-                                //     )
-                                // }
-                                className='rounded-lg'
-                                variant='contained'
-                                size='medium'
-                            >
-                                جزئیات
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='mt-8 flex justify-center'>
-                <div
-                    className='lg:w-3/4  lg:h-52 sm:w-1/2 bg-cardColor rounded-2xl lg:grid lg:grid-cols-5 '
-                    style={{ width: "400px" }}
-                >
-                    <div className='flex items-start justify-center '>
-                        <img
-                            alt=''
-                            className={cx(
-                                "rounded-xl lg:h-full lg:w-full h-1/2 w-3/4 "
-                                // {
-                                //     "p-3": !ourImage,
-                                // }
-                            )}
-                            // src={imgSrc}
-                        />
-                    </div>
-                    <div className='col-span-3 mt-3 mr-6 p-3 lg:p-0  '>
-                        <div>
-                            <span>تایتل</span>
-                            <Chip
-                                color='secondary'
-                                className=' mr-2'
-                                // label={
-                                //     remainingDay > 0
-                                //         ? `${"روز مانده عدد"} روز مانده`
-                                //         : "پایان یافته"
-                                // }
-                            />
-                        </div>
-
-                        <div className='flex items-center'>
-                            <FaRegBuilding />
-                            <span className='m-2'>گلرنگ</span>
-                            <VscTypeHierarchySub />
-                            <span className='m-2'>
-                                {/* {mode === 1 ? "مزایده" : "مناقصه"} -{" "}
-                            {isOnline ? "آنلاین" : "آفلاین"} */}
-                            </span>
-                        </div>
-                        <div className='flex items-center'>
-                            مهلت:
-                            <span className='m-2'>12</span>
-                        </div>
-                        <div className='flex items-center'>
-                            قیمت پایه :<span className='m-2'>1452</span>
-                            <span>ریال</span>
-                        </div>
-                        <div className='flex items-center flex-wrap gap-2'>
-                            {/* {tags.map((label) => (
-                            <Chip color='primary' label={label} />
-                        ))} */}
-                        </div>
-                    </div>
-                    <div className='lg:grid lg:grid-rows-4 m-4 flex justify-between lg:justify-end'>
-                        <div className='lg:row-span-3 lg:flex lg:justify-end flex m-2 gap-2'></div>
-                        <div className='flex items-end justify-end'>
-                            <Button
-                                // onClick={() =>
-                                //     navigate(
-                                //         `${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`
-                                //     )
-                                // }
-                                className='rounded-lg'
-                                variant='contained'
-                                size='medium'
-                            >
-                                جزئیات
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+            <p style={{ margin: "24px 0px", fontSize: "1.5em" }}>
+                جدیدترین آگهی ها
+            </p>
+            <div className='card-content'>
+                {cartData.map((auction) => (
+                    <ActionCard
+                        imgSrc={
+                            !!auction.auction_image
+                                ? auction.auction_image
+                                : noAuctionImage
+                        }
+                        ourImage={!!auction.auction_image}
+                        title={auction.name}
+                        city={auction.location}
+                        companyName={auction.user.username}
+                        date={new Date(auction.finished_at).toLocaleDateString(
+                            "fa-IR"
+                        )}
+                        price={auction.limit}
+                        mode={auction.mode}
+                        isOnline={auction.is_online}
+                        remainingDay={Math.ceil(
+                            (new Date(auction.finished_at).getTime() -
+                                new Date().getTime()) /
+                                (1000 * 3600 * 24)
+                        )}
+                        tags={[...auction.tags.map((tag) => tag.name)]}
+                        id={1}
+                        token={auction.token}
+                    />
+                ))}
             </div>
             <Grid container spacing={2}>
                 <Grid

@@ -14,6 +14,12 @@
     /* position: absolute; */
    
 }
+.card-content{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  column-gap: 16px;
+}
 .container {
     position: relative;
     text-align: center;
@@ -185,7 +191,7 @@
 }
 
 .button-36:hover {
-  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  box-shadow: rgba(89, 26, 167, 0.5) 0 1px 30px;
   transition-duration: .1s;
 }
 
