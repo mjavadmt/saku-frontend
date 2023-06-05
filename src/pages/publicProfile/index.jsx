@@ -95,13 +95,16 @@ export const PublicProfile = () => {
 
 
     return (
-        <Paper style={{ height: "500px", borderRadius:"15px" }} elevation={0}>
+        <center>
+        <Grid item md={6.5} xs={12} >
+        <Paper style={{marginTop: "20px", height: "500px", borderRadius:"15px" }} elevation={0}>
 
             <center>
-                <Grid style={{marginTop: "30px"}} container lg={8} xs={12}>
+                <Grid style={{marginTop: "20px"}} container lg={8} xs={12}>
 
                     <Grid item lg={12} xs={12} className="Editprofile_divider" 
-                        style={{ backgroundColor: "#8978f5",
+                        style={{ 
+                        marginTop: "60px",
                         borderRadius:"15px",
                         margin: "auto auto auto auto", 
                         height: "350px" }}>
@@ -166,6 +169,8 @@ export const PublicProfile = () => {
             </center>
             
         </Paper>
+        </Grid>
+        </center>
     );
 }
 

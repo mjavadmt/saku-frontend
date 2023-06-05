@@ -28,6 +28,7 @@ import {
   CATEGORY,
   CITYAUCTION,
   SUPPORT,
+  WALLETANDSUBSCRIPTION
 } from "utils/constant/routes";
 import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
 import ApartmentIcon from "@mui/icons-material/Apartment";
@@ -130,6 +131,13 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             icon={<SupportAgentIcon fontSize="small" />}
           >
             پشتیبانی{" "}
+          </MenuItem>
+          <MenuItem
+            active={window.location.pathname === WALLETANDSUBSCRIPTION}
+            onClick={(e) => navigate(WALLETANDSUBSCRIPTION)}
+            icon={<SupportAgentIcon fontSize="small" />}
+          >
+            خرید اشتراک{" "}
           </MenuItem>
         </Menu>
       </SidebarContent>
