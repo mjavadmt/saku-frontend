@@ -23,6 +23,8 @@ import {
   Consultation,
   Category,
   PublicProfile,
+  WalletAndSubscription,
+  Wallet
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
