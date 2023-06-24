@@ -274,42 +274,87 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
             />
           </Box>
 
-          <div className="mt-5 flex justify-center">
-            <p>دسته بندی:</p>
-          </div>
-          <Box
-            className="col-span-7 md:ml-24 px-5"
-            sx={{ display: "flex", alignItems: "flex-end" }}
-          >
-            <Select
-              fullWidth
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-                setAuctionValue({
-                  ...auctionValue,
-                  category: e.target.value,
-                });
-              }}
-              displayEmpty
-              inputProps={{
-                "aria-label": "Without label",
-                "data-testid": "CatgorySelect",
-              }}
-            >
-              {categories.map((cat) => (
-                <MenuItem
-                  inputProps={{
-                    "aria-label": "Without label",
-                    "data-testid": "CatgorySelect",
-                  }}
-                  value={cat.name}
-                >
-                  {cat.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
+                    <div className='mt-5 flex justify-center'>
+                        <p>شهرها:</p>
+                    </div>
+                    <Box
+                        className='col-span-7 md:ml-24 px-5'
+                        sx={{ display: "flex", alignItems: "flex-end" }}
+                    >
+                        <Select
+                            fullWidth
+                            value={auctionCity.id}
+                            name='city'
+                            onChange={(e) => {
+                                setCity(e.target.value);
+                                console.log(e.target.value);
+                                setAuctionValue({
+                                    ...auctionValue,
+                                    city: e.target.value,
+                                });
+                            }}
+                            displayEmpty
+                            inputProps={{
+                                "aria-label": "Without label",
+                                "data-testid": "CitySelect",
+                            }}
+                        >
+                            {auctionCity.map((cat) => (
+                                <MenuItem value={cat.id}>{cat.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </Box>
+                    <div className='mt-5 flex justify-center'>
+                        <p>نام:</p>
+                    </div>
+                    <Box
+                        className='col-span-7 md:ml-24 px-5'
+                        sx={{ display: "flex", alignItems: "flex-end" }}
+                    >
+                        <OutlinedInput
+                            style={{
+                                direction: changeDIR(auctionValue["name"]),
+                            }}
+                            fullWidth
+                            id='input-with-sx'
+                            name='name'
+                            value={auctionValue.name}
+                            onChange={handleData}
+                            variant='standard'
+                            inputProps={{
+                                "data-testid": "nameInp",
+                            }}
+                        />
+                    </Box>
+
+                    <div className='mt-5 flex justify-center'>
+                        <p>دسته بندی:</p>
+                    </div>
+                    <Box
+                        className='col-span-7 md:ml-24 px-5'
+                        sx={{ display: "flex", alignItems: "flex-end" }}
+                    >
+                        <Select
+                            fullWidth
+                            value={category}
+                            onChange={(e) => {
+                                setCategory(e.target.value);
+                                setAuctionValue({
+                                    ...auctionValue,
+                                    category: e.target.value,
+                                });
+                            }}
+                            displayEmpty
+                            inputProps={{
+                                "aria-label": "Without label",
+                                "data-testid": "CategorySelect",
+                            }}
+                        >
+                            {categories.map((cat) => (
+                                <MenuItem value={cat.name}>{cat.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </Box>
 
           <div className="mt-5 flex justify-center gap-2">
             <FcInfo
