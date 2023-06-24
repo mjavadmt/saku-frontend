@@ -7,7 +7,7 @@ on:
     - Develoop
   
 jobs:
-  build:
+  build-and-push-image:
 
     runs-on: ubuntu-latest
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
