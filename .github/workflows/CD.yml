@@ -3,10 +3,7 @@ name: CD
 on:
   workflow_run:
     workflows: [image-release]
-    # branches-ignore:
-    #   - main
-    #   - Develoop
-    # branches: [feature/v.0.0.4/release_CD]
+    branches: [main]
     types:
       - completed
 
