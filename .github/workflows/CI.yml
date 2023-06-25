@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ Develoop, main ]
+  pull_request:
+    branches: [ Develoop, main ]
+  # push:
+  #   branches-ignore:
+  #   - Develoop
+  #   - main
+
+jobs:
+  # build:
+
+    # runs-on: ubuntu-latest
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    # steps:
+    # - uses: actions/checkout@v2
+    # - uses: actions/setup-node@v2
+    #   with:
+    #     node-version: '16.x'
+    #     cache: 'npm'
+
+    # - name: Build
+    #   run: docker build . -t ghcr.io/sakue-se/saku-frontend:testing
+
+    # - name: push
+    #   run: |
+    #     docker login --username=${{ secrets.REGISTRY_USERNAME }} --password=${{ secrets.PAT }} ghcr.io
+    #     docker push ghcr.io/mjavadmt/saku:${{ github.sha }}
+
+  build_and_test:
+    runs-on: ubuntu-latest
+    # needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+        cache: 'npm'
+
+    - name: Build
+      run: docker build . -t ghcr.io/saku-se/saku-frontend:testing
+
+    - name: Run Tests
+      run: |
+        docker run -e CI=true ghcr.io/saku-se/saku-frontend:testing /bin/sh -c "npm test -- --coverage"
+      # run: |
+      #   docker-compose -f docker-compose.test.yml run client
