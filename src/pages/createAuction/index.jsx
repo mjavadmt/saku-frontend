@@ -304,28 +304,6 @@ export const CreateAuction = ({ inTestEnvierment = false }) => {
                             ))}
                         </Select>
                     </Box>
-                    <div className='mt-5 flex justify-center'>
-                        <p>نام:</p>
-                    </div>
-                    <Box
-                        className='col-span-7 md:ml-24 px-5'
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                    >
-                        <OutlinedInput
-                            style={{
-                                direction: changeDIR(auctionValue["name"]),
-                            }}
-                            fullWidth
-                            id='input-with-sx'
-                            name='name'
-                            value={auctionValue.name}
-                            onChange={handleData}
-                            variant='standard'
-                            inputProps={{
-                                "data-testid": "nameInp",
-                            }}
-                        />
-                    </Box>
 
                     <div className='mt-5 flex justify-center'>
                         <p>دسته بندی:</p>

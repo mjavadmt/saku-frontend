@@ -80,7 +80,7 @@ export const Splash = () => {
     const [isLoading, setIsLoading] = useState(true);
     const dataOnPage = 5;
     const { auctions, page } = useSelector((data) => {
-        return data.auction;
+        return data?.auction || null;
     });
     const paginatedData = () => {
         let currentItem = (page - 1) * dataOnPage;

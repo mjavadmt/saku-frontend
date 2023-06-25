@@ -6,7 +6,7 @@ COPY package-lock.json ./
 COPY ./ ./
 # RUN npm ci
 # RUN npm install
-RUN npm install --save react-tinder-card --legacy-peer-deps
+RUN npm install --save --legacy-peer-deps
 
 EXPOSE "80"
 CMD ["npm", "run", "start"]
