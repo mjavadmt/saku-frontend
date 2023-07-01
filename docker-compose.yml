@@ -9,3 +9,5 @@ services:
         dockerfile: Dockerfile
         # context: ./client
         context: .
+      ports:
+        - "3000:80"
