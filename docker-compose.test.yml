@@ -9,5 +9,4 @@ services:
         dockerfile: Dockerfile
         # context: ./client
         context: .
-      ports:
-        - "3000:80"
+      command: docker run -e CI=true /bin/sh -c "npm test -- --coverage"
