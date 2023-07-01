@@ -36,7 +36,7 @@ export const FullLayoutChat = () => {
     const [userImg, setUserImg] = useState("");
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [socketUrl, setSocketUrl] = useState(
-        `ws://188.121.110.151:8888/chat/${userName}/${localStorage.getItem(
+        `ws://188.121.97.132:8888/chat/${userName}/${localStorage.getItem(
             "access"
         )}`
     );
@@ -132,7 +132,7 @@ export const FullLayoutChat = () => {
                                         getMsgList(user.username);
                                         setUserImg(host + user.profile_image);
                                         setSocketUrl(
-                                            `ws://188.121.110.151:8888/chat/${
+                                            `ws://188.121.97.132:8888/chat/${
                                                 user.username
                                             }/${localStorage.getItem("access")}`
                                         );
