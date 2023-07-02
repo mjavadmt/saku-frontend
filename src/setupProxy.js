@@ -2,12 +2,13 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
   app.use(
-    "/saku**",
+    // "/saku**",
+    "http://188.121.113.13:8888/",
     createProxyMiddleware({
-      target: "http://188.121.110.151:8888/",
+      target: "http://188.121.113.13:8888/",
     //   target: "http://localhost:3000",
-      changeOrigin: true,
-      pathRewrite: { "^/saku": "" },
+      // changeOrigin: true,
+      // pathRewrite: { "^/saku": "" },
       secure: false,
     })
   );
