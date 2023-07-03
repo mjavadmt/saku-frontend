@@ -25,7 +25,7 @@ export const AuctionDetialPage = () => {
   const [auctionData, setAuctionData] = useState({});
   const { token } = useParams();
   const [socketUrl, setSocketUrl] = useState(
-    `ws://188.121.97.132:8888/auction/${token}/${localStorage.getItem(
+    `ws://188.121.113.13:8888/auction/${token}/${localStorage.getItem(
       "access"
     )}`
   );
