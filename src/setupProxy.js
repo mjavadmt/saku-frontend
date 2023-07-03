@@ -5,7 +5,6 @@ module.exports = function (app) {
     "/saku**",
     createProxyMiddleware({
       target: "http://188.121.110.151:8888/",
-    //   target: "http://localhost:3000",
       changeOrigin: true,
       pathRewrite: { "^/saku": "" },
       secure: false,
