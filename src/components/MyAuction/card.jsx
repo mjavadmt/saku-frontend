@@ -148,7 +148,9 @@ export const Card = ({
                     ]);
                     setOpen(false);
                 })
-                .catch((e) => console.log(e));
+                .catch((e) => {
+                    toast.success("متاسفانه ثبت نظر با مشکل مواجه شد");
+                });
         } else {
             toast.warning("همه گزینه ها را پر کنید ");
         }
