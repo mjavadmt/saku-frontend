@@ -25,48 +25,60 @@ import FormLabel from "@mui/material/FormLabel";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { post } from "utils/api/api";
+import { toast } from "react-toastify";
+
 // import Transition from "@mui/material/Transition";
 const defineStatus = (startDate, endDate) => {
-  if (new Date(startDate) > new Date() && new Date(endDate) < new Date())
+    if (new Date(startDate) > new Date() && new Date(endDate) < new Date())
+        return (
+            <React.Fragment>
+                <div className='h-2 w-2 m-1 rounded-full bg-success shadow-slate-700' />
+                <p className='text-sm'>در جریان</p>
+            </React.Fragment>
+        );
     return (
-      <React.Fragment>
-        <div className="h-2 w-2 m-1 rounded-full bg-success shadow-slate-700" />
-        <p className="text-sm">در جریان</p>
-      </React.Fragment>
+        <React.Fragment>
+            <div className='h-2 w-2 m-1 rounded-full bg-danger' />
+            <p className='text-sm'>اتمام یافته</p>
+        </React.Fragment>
     );
-  return (
-    <React.Fragment>
-      <div className="h-2 w-2 m-1 rounded-full bg-danger" />
-      <p className="text-sm">اتمام یافته</p>
-    </React.Fragment>
-  );
 };
 
 const defineType = (num) => {
-  if (num === 1) return "مزایده";
-  return "مناقصه";
+    if (num === 1) return "مزایده";
+    return "مناقصه";
 };
 
 export const Card = ({
-  auction_image,
-  name,
-  participants_num,
-  mode,
-  finished_at,
-  created_at,
-  category,
-  limit,
-  token,
+    auction_image,
+    name,
+    participants_num,
+    mode,
+    finished_at,
+    created_at,
+    category,
+    limit,
+    token,
 }) => {
     const [openAlart, setOpenAlart] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = useState([20, 37]);
     const [sortBy, setSortBy] = useState(10);
     const [auctionName, setAuctionName] = useState("");
-    const handleChangeRadio = (event, identifier) => {
-        // if (identifier === "type") onChangeType(event.target.value);
-        // else onChangeStatus(event.target.value);
+
+    const handleChangeRadio = (e, id) => {
+        
     };
+
+    const [result, setResult] = useState([
+        { id: "q1", value: "" },
+        { id: "q2", value: "" },
+        { id: "q3", value: "" },
+        { id: "q4", value: "" },
+        { id: "q5", value: "" },
+    ]);
+
     const handleClickOpen = (e) => {
         if (e) {
             e.stopPropagation();
@@ -79,6 +91,13 @@ export const Card = ({
         if (e) {
             e.stopPropagation();
             e.preventDefault();
+            setResult([
+                { id: "q1", value: "" },
+                { id: "q2", value: "" },
+                { id: "q3", value: "" },
+                { id: "q4", value: "" },
+                { id: "q5", value: "" },
+            ]);
             setOpen(false);
         }
     };
@@ -95,80 +114,93 @@ export const Card = ({
         setOpenAlart(false);
     };
     let navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        
+    };
+
     return (
         <div>
-        <div
-            onClick={(e) => {
-                if (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`);
-                }
-            }}
-            className='bg-cardColor rounded-3xl cursor-pointer my-auction-card'
-        >
-            <img
-                className={cx("flex w-full rounded-3xl", {
-                    "h-44 object-cover": auction_image,
-                    "h-44 ": !auction_image,
-                })}
-                src={auction_image ? auction_image : noAuctionImage}
-                alt='عکس مزایده'
-            />
+            <div
+                onClick={(e) => {
+                    if (e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        navigate(`${AUCTION_DETAIL_WITHOUT_SUFFIX}/${token}`);
+                    }
+                }}
+                className='bg-cardColor rounded-3xl cursor-pointer my-auction-card'
+            >
+                <img
+                    className={cx("flex w-full rounded-3xl", {
+                        "h-44 object-cover": auction_image,
+                        "h-44 ": !auction_image,
+                    })}
+                    src={auction_image ? auction_image : noAuctionImage}
+                    alt='عکس مزایده'
+                />
 
-            <div className='mt-2 p-4 grid grid-cols-2 grid-rows-3'>
-                <div className='flex items-center m-1'>
-                    <DescriptionIcon className='m-0.5' fontSize='inherit' />
-                    <p className='text-sm font-bold'>عنوان : ‌</p>
-                    <p className='text-sm'>{name}</p>
+                <div className='mt-2 p-4 grid grid-cols-2 grid-rows-3'>
+                    <div className='flex items-center m-1'>
+                        <DescriptionIcon className='m-0.5' fontSize='inherit' />
+                        <p className='text-sm font-bold'>عنوان : ‌</p>
+                        <p className='text-sm'>{name}</p>
+                    </div>
+                    <div className='flex items-center m-1'>
+                        <PeopleOutlineRoundedIcon
+                            className='m-0.5'
+                            fontSize='inherit'
+                        />
+                        <p className='text-sm font-bold'> شرکت‌کنندگان : ‌</p>
+                        <p className='text-sm'>{participants_num} نفر</p>
+                    </div>
+                    <div className='flex items-center m-1'>
+                        <GavelRoundedIcon
+                            className='m-0.5'
+                            fontSize='inherit'
+                        />
+                        <p className='text-sm font-bold'>نوع : ‌</p>
+                        <p className='text-sm'>{defineType(mode)}</p>
+                    </div>
+                    <div className='flex items-center m-1'>
+                        <DescriptionIcon className='m-0.5' fontSize='inherit' />
+                        <p className='text-sm font-bold'>وضعیت : ‌</p>
+                        {defineStatus(created_at, finished_at)}
+                    </div>
+                    <div className='flex items-center m-1'>
+                        <CategoryRoundedIcon
+                            className='m-0.5'
+                            fontSize='inherit'
+                        />
+                        <p className='text-sm font-bold'>‌دسته‌بندی : ‌</p>
+                        <p className='text-sm'>{category}</p>
+                    </div>
+                    <div className='flex items-center m-1'>
+                        <AttachMoneyRoundedIcon
+                            className='m-0.5'
+                            fontSize='inherit'
+                        />
+                        <p className='text-sm font-bold'>قیمت : ‌</p>
+                        <p className='text-sm'>{defineUnit(limit, 1)}</p>
+                    </div>
                 </div>
-                <div className='flex items-center m-1'>
-                    <PeopleOutlineRoundedIcon
-                        className='m-0.5'
-                        fontSize='inherit'
-                    />
-                    <p className='text-sm font-bold'> شرکت‌کنندگان : ‌</p>
-                    <p className='text-sm'>{participants_num} نفر</p>
-                </div>
-                <div className='flex items-center m-1'>
-                    <GavelRoundedIcon className='m-0.5' fontSize='inherit' />
-                    <p className='text-sm font-bold'>نوع : ‌</p>
-                    <p className='text-sm'>{defineType(mode)}</p>
-                </div>
-                <div className='flex items-center m-1'>
-                    <DescriptionIcon className='m-0.5' fontSize='inherit' />
-                    <p className='text-sm font-bold'>وضعیت : ‌</p>
-                    {defineStatus(created_at, finished_at)}
-                </div>
-                <div className='flex items-center m-1'>
-                    <CategoryRoundedIcon className='m-0.5' fontSize='inherit' />
-                    <p className='text-sm font-bold'>‌دسته‌بندی : ‌</p>
-                    <p className='text-sm'>{category}</p>
-                </div>
-                <div className='flex items-center m-1'>
-                    <AttachMoneyRoundedIcon
-                        className='m-0.5'
-                        fontSize='inherit'
-                    />
-                    <p className='text-sm font-bold'>قیمت : ‌</p>
-                    <p className='text-sm'>{defineUnit(limit, 1)}</p>
-                </div>
-            </div>
-            <div>
+
                 <Button variant='outlined' onClick={(e) => handleClickOpen(e)}>
                     ثبت نظر
                 </Button>
+            </div>
+            <div>
                 <Dialog
                     open={open}
                     // TransitionComponent={Transition}
-                    keepMounted
+                    // keepMounted
                     onClose={handleClose}
-                    aria-describedby='alert-dialog-slide-description'
+                    // aria-describedby='alert-dialog-slide-description'
                 >
                     <DialogTitle>{"فرم نظرسنجی"}</DialogTitle>
                     <DialogContent>
                         <FormControl>
-                            <FormLabel id='demo-row-radio-buttons-group-label'>
+                            <FormLabel className="label-question" id='demo-row-radio-buttons-group-label'>
                                 1.نسبت ارزش به هزینه در این مزایده مناقصه معقول
                                 بود:
                             </FormLabel>
@@ -176,24 +208,33 @@ export const Card = ({
                                 row
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
+                                value={result[0].value}
+                                className="labels-div"
+                                onChange={(e) => handleChangeRadio(e, "q1")}
                             >
                                 <FormControlLabel
-                                    value='best'
+                                    style={{ margin: 0 }}
+                                    value='1'
                                     control={<Radio />}
                                     label='عالی'
                                 />
                                 <FormControlLabel
-                                    value='good'
+                                    value='2'
+                                    control={<Radio />}
+                                    label='خیلی خوب '
+                                />
+                                <FormControlLabel
+                                    value='3'
                                     control={<Radio />}
                                     label='خوب'
                                 />
                                 <FormControlLabel
-                                    value='normal'
+                                    value='4'
                                     control={<Radio />}
                                     label='متوسط'
                                 />
                                 <FormControlLabel
-                                    value='bad'
+                                    value='5'
                                     control={<Radio />}
                                     label='ضعیف'
                                 />
@@ -202,31 +243,39 @@ export const Card = ({
                     </DialogContent>
                     <DialogContent>
                         <FormControl>
-                            <FormLabel id='demo-row-radio-buttons-group-label'>
+                            <FormLabel className="label-question" id='demo-row-radio-buttons-group-label'>
                                 2.میزان در دسترس پذیری فرد مناقصه/مزایده گزار:
                             </FormLabel>
                             <RadioGroup
                                 row
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
+                                value={result[1].value}
+                                className="labels-div"
+                                onChange={(e) => handleChangeRadio(e, "q2")}
                             >
                                 <FormControlLabel
-                                    value='best'
+                                    value='1'
                                     control={<Radio />}
                                     label='عالی'
                                 />
                                 <FormControlLabel
-                                    value='good'
+                                    value='2'
+                                    control={<Radio />}
+                                    label='خیلی خوب '
+                                />
+                                <FormControlLabel
+                                    value='3'
                                     control={<Radio />}
                                     label='خوب'
                                 />
                                 <FormControlLabel
-                                    value='normal'
+                                    value='4'
                                     control={<Radio />}
                                     label='متوسط'
                                 />
                                 <FormControlLabel
-                                    value='bad'
+                                    value='5'
                                     control={<Radio />}
                                     label='ضعیف'
                                 />
@@ -242,24 +291,32 @@ export const Card = ({
                                 row
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
+                                value={result[2].value}
+                                className="labels-div"
+                                onChange={(e) => handleChangeRadio(e, "q3")}
                             >
                                 <FormControlLabel
-                                    value='best'
+                                    value='1'
                                     control={<Radio />}
                                     label='عالی'
                                 />
                                 <FormControlLabel
-                                    value='good'
+                                    value='2'
+                                    control={<Radio />}
+                                    label='خیلی خوب '
+                                />
+                                <FormControlLabel
+                                    value='3'
                                     control={<Radio />}
                                     label='خوب'
                                 />
                                 <FormControlLabel
-                                    value='normal'
+                                    value='4'
                                     control={<Radio />}
                                     label='متوسط'
                                 />
                                 <FormControlLabel
-                                    value='bad'
+                                    value='5'
                                     control={<Radio />}
                                     label='ضعیف'
                                 />
@@ -275,24 +332,32 @@ export const Card = ({
                                 row
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
+                                value={result[3].value}
+                                className="labels-div"
+                                onChange={(e) => handleChangeRadio(e, "q4")}
                             >
                                 <FormControlLabel
-                                    value='best'
+                                    value='1'
                                     control={<Radio />}
                                     label='عالی'
                                 />
                                 <FormControlLabel
-                                    value='good'
+                                    value='2'
+                                    control={<Radio />}
+                                    label='خیلی خوب '
+                                />
+                                <FormControlLabel
+                                    value='3'
                                     control={<Radio />}
                                     label='خوب'
                                 />
                                 <FormControlLabel
-                                    value='normal'
+                                    value='4'
                                     control={<Radio />}
                                     label='متوسط'
                                 />
                                 <FormControlLabel
-                                    value='bad'
+                                    value='5'
                                     control={<Radio />}
                                     label='ضعیف'
                                 />
@@ -309,24 +374,32 @@ export const Card = ({
                                 row
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
+                                value={result[4].value}
+                                className="labels-div"
+                                onChange={(e) => handleChangeRadio(e, "q5")}
                             >
                                 <FormControlLabel
-                                    value='best'
+                                    value='1'
                                     control={<Radio />}
                                     label='عالی'
                                 />
                                 <FormControlLabel
-                                    value='good'
+                                    value='2'
+                                    control={<Radio />}
+                                    label='خیلی خوب '
+                                />
+                                <FormControlLabel
+                                    value='3'
                                     control={<Radio />}
                                     label='خوب'
                                 />
                                 <FormControlLabel
-                                    value='normal'
+                                    value='4'
                                     control={<Radio />}
                                     label='متوسط'
                                 />
                                 <FormControlLabel
-                                    value='bad'
+                                    value='5'
                                     control={<Radio />}
                                     label='ضعیف'
                                 />
@@ -342,7 +415,7 @@ export const Card = ({
                         </Button>
                         <Stack>
                             <Button
-                                onClick={handleClickAlart}
+                                onClick={handleSubmit}
                                 style={{ color: "#1de9b6" }}
                             >
                                 ثبت
@@ -365,34 +438,5 @@ export const Card = ({
                 </Dialog>
             </div>
         </div>
-        {/* <div className="flex items-center m-1">
-          <PeopleOutlineRoundedIcon className="m-0.5" fontSize="inherit" />
-          <p className="text-sm font-bold"> شرکت‌کنندگان : ‌</p>
-          <p className="text-sm">{participants_num} نفر</p>
-        </div>
-        <div className="flex items-center m-1">
-          <GavelRoundedIcon className="m-0.5" fontSize="inherit" />
-          <p className="text-sm font-bold">نوع : ‌</p>
-          <p className="text-sm">{defineType(mode)}</p>
-        </div>
-        <div className="flex items-center m-1">
-          <DescriptionIcon className="m-0.5" fontSize="inherit" />
-          <p className="text-sm font-bold">وضعیت : ‌</p>
-          {defineStatus(created_at, finished_at)}
-        </div>
-        <div className="flex items-center m-1">
-          <CategoryRoundedIcon className="m-0.5" fontSize="inherit" />
-          <p className="text-sm font-bold">‌دسته‌بندی : ‌</p>
-          <p className="text-sm">{category}</p>
-        </div>
-        <div className="flex items-center m-1">
-          <AttachMoneyRoundedIcon className="m-0.5" fontSize="inherit" />
-          <p className="text-sm font-bold">قیمت : ‌</p>
-          <p className="text-sm">{defineUnit(limit, 1)}</p>
-        </div> */}
-    
-    </div>
-   
-    
-  );
+    );
 };

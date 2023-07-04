@@ -8,3 +8,18 @@
   --tw-shadow-color: #334155;
   --tw-shadow: var(--tw-shadow-colored);
 }
+
+.labels-div {
+  .MuiFormControlLabel-root {
+    margin: 0;
+  }
+}
+
+.label-question {
+  color: white;
+}
+
+.MuiFormLabel-root {
+  color: rgb(225, 223, 223) !important;
+
+}

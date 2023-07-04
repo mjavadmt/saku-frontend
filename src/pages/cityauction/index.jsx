@@ -31,6 +31,7 @@ export const CityAuction = (props) => {
     const navigate = useNavigate();
     const [auctionCity, setAuctionCity] = useState([]);
     const [city, setCity] = useState("");
+
     useEffect(() => {
         axios
             .get(`${host}auction/city/`, {
@@ -48,9 +49,9 @@ export const CityAuction = (props) => {
     return (
         <div>
             <Grid container>
-                {auctionCity.map((city) => {
+                {auctionCity.map((city, i) => {
                     return (
-                        <Grid item>
+                        <Grid item key={i}>
                             <Card sx={{ minWidth: 265 }} className='card1'>
                                 <CardContent>
                                     <Typography

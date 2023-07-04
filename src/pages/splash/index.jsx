@@ -108,7 +108,6 @@ export const Splash = () => {
             })
             .then((res) => {
                 setCartData(res.data);
-                console.log(res.data);
             })
 
             .catch((error) => {
@@ -167,8 +166,9 @@ export const Splash = () => {
                 جدیدترین آگهی ها
             </p>
             <div className='card-content'>
-                {cartData.map((auction) => (
+                {cartData.map((auction, i) => (
                     <ActionCard
+                        key={i}
                         imgSrc={
                             !!auction.auction_image
                                 ? auction.auction_image
