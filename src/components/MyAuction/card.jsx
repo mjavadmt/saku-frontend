@@ -128,7 +128,30 @@ export const Card = ({
     let navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        
+        event.preventDefault();
+        if (result.filter((item) => item.value === "").length === 0) {
+            post(`http://188.121.113.13:8888/auction/score/${token}`, {
+                q1: Number(result[0].value),
+                q2: Number(result[1].value),
+                q3: Number(result[2].value),
+                q4: Number(result[3].value),
+                q5: Number(result[4].value),
+            })
+                .then((res) => {
+                    toast.success(" نظر شما با موفقیت ثبت شد");
+                    setResult([
+                        { id: "q1", value: "" },
+                        { id: "q2", value: "" },
+                        { id: "q3", value: "" },
+                        { id: "q4", value: "" },
+                        { id: "q5", value: "" },
+                    ]);
+                    setOpen(false);
+                })
+                .catch((e) => console.log(e));
+        } else {
+            toast.warning("همه گزینه ها را پر کنید ");
+        }
     };
 
     return (
@@ -212,7 +235,10 @@ export const Card = ({
                     <DialogTitle>{"فرم نظرسنجی"}</DialogTitle>
                     <DialogContent>
                         <FormControl>
-                            <FormLabel className="label-question" id='demo-row-radio-buttons-group-label'>
+                            <FormLabel
+                                className='label-question'
+                                id='demo-row-radio-buttons-group-label'
+                            >
                                 1.نسبت ارزش به هزینه در این مزایده مناقصه معقول
                                 بود:
                             </FormLabel>
@@ -221,7 +247,7 @@ export const Card = ({
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
                                 value={result[0].value}
-                                className="labels-div"
+                                className='labels-div'
                                 onChange={(e) => handleChangeRadio(e, "q1")}
                             >
                                 <FormControlLabel
@@ -255,7 +281,10 @@ export const Card = ({
                     </DialogContent>
                     <DialogContent>
                         <FormControl>
-                            <FormLabel className="label-question" id='demo-row-radio-buttons-group-label'>
+                            <FormLabel
+                                className='label-question'
+                                id='demo-row-radio-buttons-group-label'
+                            >
                                 2.میزان در دسترس پذیری فرد مناقصه/مزایده گزار:
                             </FormLabel>
                             <RadioGroup
@@ -263,7 +292,7 @@ export const Card = ({
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
                                 value={result[1].value}
-                                className="labels-div"
+                                className='labels-div'
                                 onChange={(e) => handleChangeRadio(e, "q2")}
                             >
                                 <FormControlLabel
@@ -304,7 +333,7 @@ export const Card = ({
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
                                 value={result[2].value}
-                                className="labels-div"
+                                className='labels-div'
                                 onChange={(e) => handleChangeRadio(e, "q3")}
                             >
                                 <FormControlLabel
@@ -345,7 +374,7 @@ export const Card = ({
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
                                 value={result[3].value}
-                                className="labels-div"
+                                className='labels-div'
                                 onChange={(e) => handleChangeRadio(e, "q4")}
                             >
                                 <FormControlLabel
@@ -387,7 +416,7 @@ export const Card = ({
                                 aria-labelledby='demo-row-radio-buttons-group-label'
                                 name='row-radio-buttons-group'
                                 value={result[4].value}
-                                className="labels-div"
+                                className='labels-div'
                                 onChange={(e) => handleChangeRadio(e, "q5")}
                             >
                                 <FormControlLabel
