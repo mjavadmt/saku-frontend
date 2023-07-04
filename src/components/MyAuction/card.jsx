@@ -68,7 +68,19 @@ export const Card = ({
     const [auctionName, setAuctionName] = useState("");
 
     const handleChangeRadio = (e, id) => {
-        
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            setResult((prevState) => {
+                const newState = prevState.map((obj) => {
+                    if (obj.id.toString() === id.toString()) {
+                        return { ...obj, value: e.target.value };
+                    }
+                    return obj;
+                });
+                return newState;
+            });
+        }
     };
 
     const [result, setResult] = useState([
