@@ -57,8 +57,15 @@ export const AuctionPage = () => {
     }, [city]);
 
     useEffect(() => {
+        if (category) filterSubmited();
+    }, [category]);
+
+    useEffect(() => {
         if (location?.state?.id) {
             setCity(location.state.id);
+            dispatch({ type: END_LOADING });
+        } else if (location?.state?.catId) {
+            setCategory(location?.state?.catId);
             dispatch({ type: END_LOADING });
         } else {
             dispatch(getallAuctoins(`${GET_ALL_AUCTIONS}`));
@@ -94,8 +101,9 @@ export const AuctionPage = () => {
                 <>
                     {auctions?.length > 0 && (
                         <>
-                            {paginatedData()?.map((auction) => (
+                            {paginatedData()?.map((auction, index) => (
                                 <ActionCard
+                                    key={index}
                                     imgSrc={
                                         !!auction.auction_image
                                             ? auction.auction_image
