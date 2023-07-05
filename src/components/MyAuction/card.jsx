@@ -233,267 +233,273 @@ export const Card = ({
                 </Button>
             </div>
             <div>
-                <Dialog
-                    open={open}
-                    // TransitionComponent={Transition}
-                    // keepMounted
-                    onClose={handleClose}
-                    // aria-describedby='alert-dialog-slide-description'
-                >
-                    <DialogTitle>
-                        {"فرم نظرسنجی"} <AssignmentRoundedIcon />
-                        <img src={formm} className='cat-image' alt='cat' />
-                    </DialogTitle>
+                <div >
+                    {" "}
+                    <Dialog
+                        className='kojast'
+                        open={open}
+                        // TransitionComponent={Transition}
+                        // keepMounted
+                        onClose={handleClose}
+                        // aria-describedby='alert-dialog-slide-description'
+                    >
+                        <DialogTitle>
+                            {"فرم نظرسنجی"} <AssignmentRoundedIcon />
+                            <img src={formm} className='cat-image' alt='cat' />
+                        </DialogTitle>
 
-                    <DialogContent>
-                        <FormControl>
-                            <FormLabel
-                                className='label-question'
-                                id='demo-row-radio-buttons-group-label'
-                            >
-                                1.نسبت ارزش به هزینه در این مزایده مناقصه معقول
-                                بود:
-                            </FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby='demo-row-radio-buttons-group-label'
-                                name='row-radio-buttons-group'
-                                value={result[0].value}
-                                className='labels-div'
-                                onChange={(e) => handleChangeRadio(e, "q1")}
-                            >
-                                <FormControlLabel
-                                    style={{ margin: 0 }}
-                                    value='1'
-                                    control={<Radio />}
-                                    label='عالی'
-                                />
-                                <FormControlLabel
-                                    value='2'
-                                    control={<Radio />}
-                                    label='خیلی خوب '
-                                />
-                                <FormControlLabel
-                                    value='3'
-                                    control={<Radio />}
-                                    label='خوب'
-                                />
-                                <FormControlLabel
-                                    value='4'
-                                    control={<Radio />}
-                                    label='متوسط'
-                                />
-                                <FormControlLabel
-                                    value='5'
-                                    control={<Radio />}
-                                    label='ضعیف'
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogContent>
-                        <FormControl>
-                            <FormLabel
-                                className='label-question'
-                                id='demo-row-radio-buttons-group-label'
-                            >
-                                2.میزان در دسترس پذیری فرد مناقصه/مزایده گزار:
-                            </FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby='demo-row-radio-buttons-group-label'
-                                name='row-radio-buttons-group'
-                                value={result[1].value}
-                                className='labels-div'
-                                onChange={(e) => handleChangeRadio(e, "q2")}
-                            >
-                                <FormControlLabel
-                                    value='1'
-                                    control={<Radio />}
-                                    label='عالی'
-                                />
-                                <FormControlLabel
-                                    value='2'
-                                    control={<Radio />}
-                                    label='خیلی خوب '
-                                />
-                                <FormControlLabel
-                                    value='3'
-                                    control={<Radio />}
-                                    label='خوب'
-                                />
-                                <FormControlLabel
-                                    value='4'
-                                    control={<Radio />}
-                                    label='متوسط'
-                                />
-                                <FormControlLabel
-                                    value='5'
-                                    control={<Radio />}
-                                    label='ضعیف'
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogContent>
-                        <FormControl>
-                            <FormLabel id='demo-row-radio-buttons-group-label'>
-                                3. پکیج مزایده/مناقصه کامل و گویا بود:
-                            </FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby='demo-row-radio-buttons-group-label'
-                                name='row-radio-buttons-group'
-                                value={result[2].value}
-                                className='labels-div'
-                                onChange={(e) => handleChangeRadio(e, "q3")}
-                            >
-                                <FormControlLabel
-                                    value='1'
-                                    control={<Radio />}
-                                    label='عالی'
-                                />
-                                <FormControlLabel
-                                    value='2'
-                                    control={<Radio />}
-                                    label='خیلی خوب '
-                                />
-                                <FormControlLabel
-                                    value='3'
-                                    control={<Radio />}
-                                    label='خوب'
-                                />
-                                <FormControlLabel
-                                    value='4'
-                                    control={<Radio />}
-                                    label='متوسط'
-                                />
-                                <FormControlLabel
-                                    value='5'
-                                    control={<Radio />}
-                                    label='ضعیف'
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogContent>
-                        <FormControl>
-                            <FormLabel id='demo-row-radio-buttons-group-label'>
-                                4.زمان، مکان و تاریخ گشایش پیشنهاد مناسب بود:
-                            </FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby='demo-row-radio-buttons-group-label'
-                                name='row-radio-buttons-group'
-                                value={result[3].value}
-                                className='labels-div'
-                                onChange={(e) => handleChangeRadio(e, "q4")}
-                            >
-                                <FormControlLabel
-                                    value='1'
-                                    control={<Radio />}
-                                    label='عالی'
-                                />
-                                <FormControlLabel
-                                    value='2'
-                                    control={<Radio />}
-                                    label='خیلی خوب '
-                                />
-                                <FormControlLabel
-                                    value='3'
-                                    control={<Radio />}
-                                    label='خوب'
-                                />
-                                <FormControlLabel
-                                    value='4'
-                                    control={<Radio />}
-                                    label='متوسط'
-                                />
-                                <FormControlLabel
-                                    value='5'
-                                    control={<Radio />}
-                                    label='ضعیف'
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogContent>
-                        <FormControl>
-                            <FormLabel id='demo-row-radio-buttons-group-label'>
-                                5. نیازهای شما از طریق این مزایده/مناقصه برآورده
-                                شد:
-                            </FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby='demo-row-radio-buttons-group-label'
-                                name='row-radio-buttons-group'
-                                value={result[4].value}
-                                className='labels-div'
-                                onChange={(e) => handleChangeRadio(e, "q5")}
-                            >
-                                <FormControlLabel
-                                    value='1'
-                                    control={<Radio />}
-                                    label='عالی'
-                                />
-                                <FormControlLabel
-                                    value='2'
-                                    control={<Radio />}
-                                    label='خیلی خوب '
-                                />
-                                <FormControlLabel
-                                    value='3'
-                                    control={<Radio />}
-                                    label='خوب'
-                                />
-                                <FormControlLabel
-                                    value='4'
-                                    control={<Radio />}
-                                    label='متوسط'
-                                />
-                                <FormControlLabel
-                                    value='5'
-                                    control={<Radio />}
-                                    label='ضعیف'
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button
-                            className='sabt'
-                            onClick={handleSubmit}
-                            style={{ color: "#1de9b6" }}
-                            variant='outlined'
-                        >
-                            ثبت
-                        </Button>
-
-                        <Stack>
+                        <DialogContent>
+                            <FormControl>
+                                <FormLabel
+                                    className='label-question'
+                                    id='demo-row-radio-buttons-group-label'
+                                >
+                                    1.نسبت ارزش به هزینه در این مزایده مناقصه
+                                    معقول بود:
+                                </FormLabel>
+                                <RadioGroup
+                                    row
+                                    aria-labelledby='demo-row-radio-buttons-group-label'
+                                    name='row-radio-buttons-group'
+                                    value={result[0].value}
+                                    className='labels-div'
+                                    onChange={(e) => handleChangeRadio(e, "q1")}
+                                >
+                                    <FormControlLabel
+                                        style={{ margin: 0 }}
+                                        value='1'
+                                        control={<Radio />}
+                                        label='عالی'
+                                    />
+                                    <FormControlLabel
+                                        value='2'
+                                        control={<Radio />}
+                                        label='خیلی خوب '
+                                    />
+                                    <FormControlLabel
+                                        value='3'
+                                        control={<Radio />}
+                                        label='خوب'
+                                    />
+                                    <FormControlLabel
+                                        value='4'
+                                        control={<Radio />}
+                                        label='متوسط'
+                                    />
+                                    <FormControlLabel
+                                        value='5'
+                                        control={<Radio />}
+                                        label='ضعیف'
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogContent>
+                            <FormControl>
+                                <FormLabel
+                                    className='label-question'
+                                    id='demo-row-radio-buttons-group-label'
+                                >
+                                    2.میزان در دسترس پذیری فرد مناقصه/مزایده
+                                    گزار:
+                                </FormLabel>
+                                <RadioGroup
+                                    row
+                                    aria-labelledby='demo-row-radio-buttons-group-label'
+                                    name='row-radio-buttons-group'
+                                    value={result[1].value}
+                                    className='labels-div'
+                                    onChange={(e) => handleChangeRadio(e, "q2")}
+                                >
+                                    <FormControlLabel
+                                        value='1'
+                                        control={<Radio />}
+                                        label='عالی'
+                                    />
+                                    <FormControlLabel
+                                        value='2'
+                                        control={<Radio />}
+                                        label='خیلی خوب '
+                                    />
+                                    <FormControlLabel
+                                        value='3'
+                                        control={<Radio />}
+                                        label='خوب'
+                                    />
+                                    <FormControlLabel
+                                        value='4'
+                                        control={<Radio />}
+                                        label='متوسط'
+                                    />
+                                    <FormControlLabel
+                                        value='5'
+                                        control={<Radio />}
+                                        label='ضعیف'
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogContent>
+                            <FormControl>
+                                <FormLabel id='demo-row-radio-buttons-group-label'>
+                                    3. پکیج مزایده/مناقصه کامل و گویا بود:
+                                </FormLabel>
+                                <RadioGroup
+                                    row
+                                    aria-labelledby='demo-row-radio-buttons-group-label'
+                                    name='row-radio-buttons-group'
+                                    value={result[2].value}
+                                    className='labels-div'
+                                    onChange={(e) => handleChangeRadio(e, "q3")}
+                                >
+                                    <FormControlLabel
+                                        value='1'
+                                        control={<Radio />}
+                                        label='عالی'
+                                    />
+                                    <FormControlLabel
+                                        value='2'
+                                        control={<Radio />}
+                                        label='خیلی خوب '
+                                    />
+                                    <FormControlLabel
+                                        value='3'
+                                        control={<Radio />}
+                                        label='خوب'
+                                    />
+                                    <FormControlLabel
+                                        value='4'
+                                        control={<Radio />}
+                                        label='متوسط'
+                                    />
+                                    <FormControlLabel
+                                        value='5'
+                                        control={<Radio />}
+                                        label='ضعیف'
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogContent>
+                            <FormControl>
+                                <FormLabel id='demo-row-radio-buttons-group-label'>
+                                    4.زمان، مکان و تاریخ گشایش پیشنهاد مناسب
+                                    بود:
+                                </FormLabel>
+                                <RadioGroup
+                                    row
+                                    aria-labelledby='demo-row-radio-buttons-group-label'
+                                    name='row-radio-buttons-group'
+                                    value={result[3].value}
+                                    className='labels-div'
+                                    onChange={(e) => handleChangeRadio(e, "q4")}
+                                >
+                                    <FormControlLabel
+                                        value='1'
+                                        control={<Radio />}
+                                        label='عالی'
+                                    />
+                                    <FormControlLabel
+                                        value='2'
+                                        control={<Radio />}
+                                        label='خیلی خوب '
+                                    />
+                                    <FormControlLabel
+                                        value='3'
+                                        control={<Radio />}
+                                        label='خوب'
+                                    />
+                                    <FormControlLabel
+                                        value='4'
+                                        control={<Radio />}
+                                        label='متوسط'
+                                    />
+                                    <FormControlLabel
+                                        value='5'
+                                        control={<Radio />}
+                                        label='ضعیف'
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogContent>
+                            <FormControl>
+                                <FormLabel id='demo-row-radio-buttons-group-label'>
+                                    5. نیازهای شما از طریق این مزایده/مناقصه
+                                    برآورده شد:
+                                </FormLabel>
+                                <RadioGroup
+                                    row
+                                    aria-labelledby='demo-row-radio-buttons-group-label'
+                                    name='row-radio-buttons-group'
+                                    value={result[4].value}
+                                    className='labels-div'
+                                    onChange={(e) => handleChangeRadio(e, "q5")}
+                                >
+                                    <FormControlLabel
+                                        value='1'
+                                        control={<Radio />}
+                                        label='عالی'
+                                    />
+                                    <FormControlLabel
+                                        value='2'
+                                        control={<Radio />}
+                                        label='خیلی خوب '
+                                    />
+                                    <FormControlLabel
+                                        value='3'
+                                        control={<Radio />}
+                                        label='خوب'
+                                    />
+                                    <FormControlLabel
+                                        value='4'
+                                        control={<Radio />}
+                                        label='متوسط'
+                                    />
+                                    <FormControlLabel
+                                        value='5'
+                                        control={<Radio />}
+                                        label='ضعیف'
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogActions>
                             <Button
-                                className='laghv'
-                                onClick={(e) => handleClose(e)}
-                                style={{ color: "#f06292" }}
+                                className='sabt'
+                                onClick={handleSubmit}
+                                style={{ color: "#1de9b6" }}
                                 variant='outlined'
                             >
-                                لغو
+                                ثبت
                             </Button>
-                            <Snackbar
-                                open={openAlart}
-                                autoHideDuration={3000}
-                                onClose={handleCloseAlart}
-                            >
-                                <Alert
-                                    onClose={handleCloseAlart}
-                                    severity='success'
-                                    sx={{ width: "100%" }}
+
+                            <Stack>
+                                <Button
+                                    className='laghv'
+                                    onClick={(e) => handleClose(e)}
+                                    style={{ color: "#f06292" }}
+                                    variant='outlined'
                                 >
-                                    نظر شما با موفقیت ثبت شد.
-                                </Alert>
-                            </Snackbar>
-                        </Stack>
-                    </DialogActions>
-                </Dialog>
+                                    لغو
+                                </Button>
+                                <Snackbar
+                                    open={openAlart}
+                                    autoHideDuration={3000}
+                                    onClose={handleCloseAlart}
+                                >
+                                    <Alert
+                                        onClose={handleCloseAlart}
+                                        severity='success'
+                                        sx={{ width: "100%" }}
+                                    >
+                                        نظر شما با موفقیت ثبت شد.
+                                    </Alert>
+                                </Snackbar>
+                            </Stack>
+                        </DialogActions>
+                    </Dialog>
+                </div>
             </div>
         </div>
     );
