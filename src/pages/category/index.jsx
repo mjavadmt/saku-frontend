@@ -10,7 +10,7 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "utils/api/requests/createAuction";
 import { GET_CATEGORIES } from "utils/constant/apiRoutes";
-import eStste from "assets/img/estate.svg";
+import eStste from "assets/img/777.svg";
 import slideph from "assets/img/111.png";
 import slidephh from "assets/img/333.png";
 
@@ -70,21 +70,13 @@ export const Category = () => {
                         {/* <span>Slide 2</span> */}
                     </div>
                 </div>
-                {/* <div className='each-slide'>
-                    <div
-                        style={{
-                            backgroundImage: `url(${slideImages[2]})`,
-                        }}
-                    >
-                       
-                    </div>
-                </div> */}
             </Slide>
             <div className='category-div'>
                 {categories.map((cat, i) => {
                     return (
                         <div key={i}>
                             <button
+                                style={{ width: "565px " }}
                                 className='cat-button'
                                 onClick={() => {
                                     navigate("/auction-page", {
