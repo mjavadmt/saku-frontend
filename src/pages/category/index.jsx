@@ -10,13 +10,11 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "utils/api/requests/createAuction";
 import { GET_CATEGORIES } from "utils/constant/apiRoutes";
-import eStste from "assets/img/estate.svg";
+import eStste from "assets/img/777.svg";
+import slideph from "assets/img/111.png";
+import slidephh from "assets/img/333.png";
 
-const slideImages = [
-    "https://dummyimage.com/600x400/b1e6b2/1c2ae8.png",
-    "https://dummyimage.com/700x300.png",
-    "https://dummyimage.com/600x400/e8b2e8/1c2ae8.png",
-];
+const slideImages = [slideph, slidephh];
 
 const properties = {
     duration: 5000,
@@ -46,30 +44,39 @@ export const Category = () => {
     }, []);
     return (
         <div>
-            <div className='text'>مزایده / مناقصه بر اساس دسته بندی </div>
-            <Slide {...properties} style={{ color: "red" }}>
+            {/* <div className='text'>مزایده / مناقصه بر اساس دسته بندی </div> */}{" "}
+            <Slide
+                className='div-style'
+                {...properties}
+                style={{ color: "red" }}
+            >
                 <div className='each-slide'>
-                    <div style={{ backgroundImage: `url(${slideImages[0]})` }}>
-                        <span>Slide 1</span>
+                    <div
+                        style={{
+                            backgroundImage: `url(${slideImages[0]})`,
+                        }}
+                    >
+                        <div className='text'>
+                            مزایده / مناقصه بر اساس دسته بندی{" "}
+                        </div>
                     </div>
                 </div>
                 <div className='each-slide'>
-                    <div style={{ backgroundImage: `url(${slideImages[1]})` }}>
-                        <span>Slide 2</span>
-                    </div>
-                </div>
-                <div className='each-slide'>
-                    <div style={{ backgroundImage: `url(${slideImages[2]})` }}>
-                        <span>Slide 3</span>
+                    <div
+                        style={{
+                            backgroundImage: `url(${slideImages[1]})`,
+                        }}
+                    >
+                        {/* <span>Slide 2</span> */}
                     </div>
                 </div>
             </Slide>
-
-            <div className="category-div">
+            <div className='category-div'>
                 {categories.map((cat, i) => {
                     return (
                         <div key={i}>
                             <button
+                                style={{ width: "565px " }}
                                 className='cat-button'
                                 onClick={() => {
                                     navigate("/auction-page", {
