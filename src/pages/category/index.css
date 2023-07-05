@@ -1,0 +1,149 @@
+.text{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 350px;
+    position: relative;
+  
+    font-size: 30px;
+  
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #3b0cb4, #3454a4, #6e98e0);
+    background-repeat:round;
+    background-size: 85%;
+    animation: animate 15s infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+@keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
+
+  .slide-container {
+    width: 70%;
+
+  
+    margin: auto; }
+  
+  h3 {
+    text-align: center; }
+  
+  .each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 400px !important;
+    margin-top: 20px;
+  }
+  
+  .each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #a61212;
+    text-align: center;
+  }
+  
+  .each-fade {
+    display: flex;
+  }
+  
+  .each-fade .image-container {
+    width: 75%;
+    overflow: hidden;
+  }
+  
+  .each-fade .image-container img {
+    width: 100%;
+  }
+  
+  .each-fade h2 {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: #2304d6;
+  }
+
+
+/* * {
+  transition: all 0.3s ease-out;
+} */
+
+.card1 {
+  display: block;
+  /* position: relative; */
+  /* max-height: 220px;
+  max-width: 200 px; */
+  max-width:700px;
+  border-radius: 6px;
+  margin: 20px;
+
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+  padding: 0;
+
+
+}
+
+.card1::before {
+    content: "";
+    /* //position: absolute; */
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #3939c5;
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+    align-items: center;
+  }
+ .card1:hover:before {
+    transform: scale(21);
+  }
+
+  .cat-image{
+    max-width: 140px;
+    align-items: center;
+    margin-left: 250px;
+
+  }
+
+  .cat-button{
+    flex-direction: column;
+    padding: 18px 24px !important;
+    display:flex;
+    color: white;
+    row-gap: 24px;
+    justify-content:center;
+    align-items: center;
+    background-color: rgb(63, 52, 162);
+    border-radius: 4px;
+  }
+
+  .cat-name{
+    color: white;
+    font-size: 20px ;
+  }
+
+  .category-div {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 16px;
+    column-gap: 16px;
+    align-items: center;
+  
+  }
+
+  .div-style{
+    height: 600px !important;
+  }

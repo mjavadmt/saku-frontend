@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import "./replyStyle.css";
 import ReplyIcon from "@mui/icons-material/Reply";
 import ClearIcon from "@mui/icons-material/Clear";
-import { get, post } from "utils/api";
+import { get, post } from "utils/api/api";
 import { toast } from "react-toastify";
 import noComments from "assets/img/comment.svg";
 import { CircularProgress } from "@mui/material";

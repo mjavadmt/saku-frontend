@@ -9,7 +9,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  // bgcolor: "#7848c0",
   border: "2px solid #353131",
   backgroundColor: "black",
   color: "white",

@@ -1,0 +1,32 @@
+.button-style{
+    color : white !important;
+    background-color:#512da8 !important;
+     margin-right: 275px !important;
+     margin-bottom: 15px !important;
+}
+
+.cat-image{
+    margin-right: 265px !important;
+}
+
+.sabt{
+    margin-left:20px !important;
+    background-color:#5c33bc !important;
+    color: white !important;
+    margin-bottom: 13px !important;
+}
+
+.laghv{
+    background-color:#db3b70 !important;
+    color:white !important;
+    margin-left: 20px !important;
+    margin-bottom: 13px !important;
+
+}
+
+.kojast
+{
+    width: 550px !important;
+    align-items:center;
+    margin-right: 500px;
+}
