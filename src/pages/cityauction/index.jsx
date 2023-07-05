@@ -13,7 +13,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useEffect } from "react";
 import { host } from "utils/config";
 import { useNavigate } from "react-router-dom";
-import first from "./1.svg";
+import first from "assets/img/1.svg";
 // import "./2.png";
 //مزایده مناقصه بر اساس شهر ها
 
@@ -69,7 +69,7 @@ export const CityAuction = (props) => {
                                         مزایده مناقصه {city.name}{" "}
                                     </Typography>
                                     <Typography variant='body2'>
-                                        1234 آگهی
+                                    تعداد آگهی ها {city.num_auctions}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
