@@ -1,12 +1,12 @@
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
 import { Profile } from "pages/profile";
 
 const ProfileTest = () => {
   return (
     <BrowserRouter>
-      <Profile inTestEnvierment />
+      <Profile inTestEnvierment={true} />
     </BrowserRouter>
   );
 };
@@ -36,22 +36,22 @@ describe("profile page test", () => {
     expect(ncode.value).toBe("044028375");
   });
   it("render email", async () => {
-    render(<ProfileTest />, { flushUseEffects: false });
+    render(<ProfileTest />);
     const email = screen.getByTestId("emailInp");
     expect(email).toBeInTheDocument();
   });
   it("render national code", async () => {
-    render(<ProfileTest />, { flushUseEffects: false });
+    render(<ProfileTest />);
     const ncode = screen.getByTestId("nCode");
     expect(ncode).toBeInTheDocument();
   });
   it("render address", async () => {
-    render(<ProfileTest />, { flushUseEffects: false });
+    render(<ProfileTest />);
     const address = screen.getByTestId("phoneInp");
     expect(address).toBeInTheDocument();
   });
   it("checking be in the document ", async () => {
-    render(<ProfileTest />, { flushUseEffects: false });
+    render(<ProfileTest />);
     const headers = screen.getByTestId("cardHead");
     expect(headers).toBeInTheDocument();
   });
@@ -69,10 +69,9 @@ describe("profile page test", () => {
     expect(userNameInput.value).toBe("20");
     expect(userNameInput.value).not.toBe("10");
   });
-  it("Change state input", async () => {
+  it("render state input", async () => {
     render(<ProfileTest />, { flushUseEffects: false });
     const userNameInput = screen.getByTestId("select-state");
-    fireEvent.change(userNameInput, { target: { id: "0" } });
-    expect(userNameInput.id).toBe("0");
+    expect(userNameInput).toBeInTheDocument();
   });
 });

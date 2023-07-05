@@ -221,7 +221,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                       name="name"
                       onChange={(e, val) => handleChange(e, val)}
                       required
-                      value={userData.name}
+                      value={userData.name || ""}
                       variant="outlined"
                     />
                   </Grid>
@@ -240,7 +240,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                         "aria-label": "Without label",
                         "data-testid": "selectPer",
                       }}
-                      defaultValue={userData.person_type === "N" ? 10 : 20}
+                      // defaultValue={userData.person_type === "N" ? 10 : 20}
                       value={userData.person_type === "N" ? 10 : 20}
                     >
                       <MenuItem data-testid="select-optionPer" value={10}>
@@ -265,7 +265,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                       name="national_id"
                       onChange={handleChange}
                       required
-                      value={userData.national_id}
+                      value={userData.national_id || ""}
                       variant="outlined"
                     />
                   </Grid>
@@ -284,7 +284,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                       name="phone"
                       onChange={handleChange}
                       type="text"
-                      value={userData.phone}
+                      value={userData.phone || ""}
                       variant="outlined"
                     />
                   </Grid>
@@ -299,8 +299,8 @@ export const Profile = ({ inTestEnvierment = false }) => {
                         "aria-label": "Without label",
                         "data-testid": "select-state",
                       }}
-                      defaultValue={userData.province}
-                      value={userData.province}
+                      // defaultValue={userData.province || ""}
+                      value={userData.province || ""}
                     >
                       {provinceList.map((p) => (
                         <MenuItem key={p.id} id={p.id} value={p.name}>
@@ -317,7 +317,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                         name="city"
                         onChange={handleChange}
                         required
-                        value={userData.city}
+                        value={userData.city || ""}
                         variant="outlined"
                       />
                     ) : (
@@ -329,7 +329,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                         inputProps={{
                           "aria-label": "Without label",
                         }}
-                        defaultValue={userData.city}
+                        // defaultValue={userData.city}
                         value={userData.city}
                       >
                         {cityList
@@ -356,7 +356,8 @@ export const Profile = ({ inTestEnvierment = false }) => {
                       name="email"
                       onChange={handleChange}
                       required
-                      value={userData.email}
+                      // defaultValue={userData.email || ""}
+                      value={userData.email || ""}
                       variant="outlined"
                     />
                   </Grid>
@@ -375,7 +376,7 @@ export const Profile = ({ inTestEnvierment = false }) => {
                       multiline
                       onChange={handleChange}
                       required
-                      value={userData.address}
+                      value={userData.address || ""}
                       variant="outlined"
                     />
                   </Grid>

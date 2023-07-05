@@ -6,22 +6,25 @@ import {
     useLocation,
 } from "react-router-dom";
 import {
-    NotFound,
-    CreateAuction,
-    JobInfo,
-    Messages,
-    MyAuctions,
-    Notifications,
-    Profile,
-    Transactions,
-    Login,
-    SignUp,
-    AuctionPage,
-    Logout,
-    AuctionDetialPage,
-    LandingPage,
-    Consultation,
-    PublicProfile
+  NotFound,
+  CreateAuction,
+  JobInfo,
+  Messages,
+  MyAuctions,
+  Notifications,
+  Profile,
+  Transactions,
+  Login,
+  SignUp,
+  AuctionPage,
+  Logout,
+  AuctionDetialPage,
+  LandingPage,
+  Consultation,
+  Category,
+  PublicProfile,
+  WalletAndSubscription,
+  Wallet
 } from "pages";
 import { CityAuction } from "pages/cityauction";
 import { InComeStats } from "pages/cityauction";
@@ -46,11 +49,16 @@ import {
     FULL_LAYOUT_CHAT,
     LANDING_PAGE,
     CONSULTATION,
+    CATEGORY,
     CITYAUCTION,
     PUBLICPROFILE,
+    WALLETANDSUBSCRIPTION,
+    WALLET,
+    SUPPORT,
 } from "utils/constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
+import { Support } from "pages/support";
 
 const ScreenLayout = ({ elemnt, isFullscreen = false }) => {
     const location = useLocation();
@@ -106,6 +114,20 @@ export const Navigation = () => {
                 <Route
                     element={<ScreenLayout elemnt={<Consultation />} />}
                     path={CONSULTATION}
+                />
+                <Route
+                    element={<ScreenLayout elemnt={<Category />} />}
+                    path={CATEGORY}
+                />
+                <Route
+                    element={
+                        <ScreenLayout elemnt={<WalletAndSubscription />} />
+                    }
+                    path={WALLETANDSUBSCRIPTION}
+                />
+                <Route
+                    element={<ScreenLayout elemnt={<Wallet />} />}
+                    path={WALLET}
                 />
                 <Route
                     element={<ScreenLayout elemnt={<CityAuction />} />}
@@ -172,10 +194,12 @@ export const Navigation = () => {
                     path={LOGOUT}
                 />
                 <Route
-                    element={
-                        <ScreenLayout elemnt={<PublicProfile />} />
-                    }
+                    element={<ScreenLayout elemnt={<PublicProfile />} />}
                     path={PUBLICPROFILE}
+                />
+                <Route
+                    element={<ScreenLayout elemnt={<Support />} />}
+                    path={SUPPORT}
                 />
                 <Route path='*' element={<Navigate to={NOT_FOUND} />} />
             </Routes>

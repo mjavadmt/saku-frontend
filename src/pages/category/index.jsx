@@ -7,10 +7,10 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import "./index.css";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "utils/api/requests/createAuction";
 import { GET_CATEGORIES } from "utils/constant/apiRoutes";
+import eStste from "assets/img/estate.svg";
 
 const slideImages = [
     "https://dummyimage.com/600x400/b1e6b2/1c2ae8.png",
@@ -28,6 +28,13 @@ const properties = {
 export const Category = () => {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
+    // const categoryData=[
+    //     {
+    //         id: 1,
+    //         name: "",
+    //         Image: ""
+    //     }
+    // ]
     useEffect(() => {
         async function fetchData() {
             const getCategoriesRes = await getCategories(GET_CATEGORIES);
@@ -58,50 +65,31 @@ export const Category = () => {
                 </div>
             </Slide>
 
-            <Grid container>
-                {categories.map((cat) => {
+            <div className="category-div">
+                {categories.map((cat, i) => {
                     return (
-                        <Grid item>
-                            <Card
-                                sx={{ minWidth: 330, minHeight: 230 }}
-                                className='card1'
+                        <div key={i}>
+                            <button
+                                className='cat-button'
+                                onClick={() => {
+                                    navigate("/auction-page", {
+                                        state: { catId: cat.name },
+                                    });
+                                }}
                             >
-                                <CardContent>
-                                    {/* <Typography
-                                    variant='h6'
-                                    component='div'
-                                    className='city'
-                                >
-                                    تهران
-                                </Typography> */}
-                                </CardContent>
-                                <CardActions>
-                                    <Button
-                                        size='small'
-                                        style={{
-                                            color: "white",
-                                            marginRight: "98px",
-                                        }}
-                                        onClick={() => {
-                                            navigate("/auction-page", {
-                                                state: { catId: cat.name },
-                                            });
-                                        }}
-                                    >
-                                        <Typography
-                                            variant='h6'
-                                            component='div'
-                                            className='city'
-                                        >
-                                            {cat.name}
-                                        </Typography>{" "}
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+                                <img
+                                    src={eStste}
+                                    className='cat-image'
+                                    alt='cat'
+                                />
+                                <span className='cat-name'>
+                                    دسته بندی {cat.name}
+                                </span>
+                            </button>
+                        </div>
                     );
                 })}
-            </Grid>
+            </div>
         </div>
     );
 };

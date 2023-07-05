@@ -9,7 +9,7 @@ import {
     getAllAuctions,
     getFilteredAuctions,
 } from "utils/api/requests/myAuctions";
-import { host } from "utils/config";
+
 
 export const getallAuctoins = (url) => async (dispatch) => {
     try {

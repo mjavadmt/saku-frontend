@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -13,6 +13,8 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useEffect } from "react";
 import { host } from "utils/config";
 import { useNavigate } from "react-router-dom";
+import first from "./1.svg";
+// import "./2.png";
 //مزایده مناقصه بر اساس شهر ها
 
 const bull = (
@@ -29,6 +31,7 @@ export const CityAuction = (props) => {
     const navigate = useNavigate();
     const [auctionCity, setAuctionCity] = useState([]);
     const [city, setCity] = useState("");
+
     useEffect(() => {
         axios
             .get(`${host}auction/city/`, {
@@ -44,50 +47,52 @@ export const CityAuction = (props) => {
     }, []);
     console.log(props);
     return (
-        <Grid container>
-            {auctionCity.map((city) => {
-                return (
-                    <Grid item>
-                        <Card sx={{ minWidth: 265 }} className='card1'>
-                            <CardContent>
-                                <Typography
-                                    variant='h5'
-                                    component='div'
-                                    className='city'
-                                >
-                                    {city.name}{" "}
-                                </Typography>
+        <div>
+            <Grid container>
+                {auctionCity.map((city, i) => {
+                    return (
+                        <Grid item key={i}>
+                            <Card sx={{ minWidth: 265 }} className='card1'>
+                                <CardContent>
+                                    <Typography
+                                        variant='h5'
+                                        component='div'
+                                        className='city'
+                                    >
+                                        {city.name}{" "}
+                                    </Typography>
 
-                                <Typography
-                                    sx={{ mb: 1.5 }}
-                                    color='text.secondary'
-                                >
-                                    مزایده مناقصه {city.name}{" "}
-                                </Typography>
-                                <Typography variant='body2'>
-                                    تعداد آگهی {city.num_auctions}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    size='small'
-                                    style={{
-                                        color: "#c786d3",
-                                        marginRight: "140px",
-                                    }}
-                                    onClick={() => {
-                                        navigate("/auction-page", {
-                                            state: { id: city.id },
-                                        });
-                                    }}
-                                >
-                                    مشاهده بیشتر <KeyboardBackspaceIcon />{" "}
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                );
-            })}
-        </Grid>
+                                    <Typography
+                                        sx={{ mb: 1.5 }}
+                                        color='text.secondary'
+                                    >
+                                        مزایده مناقصه {city.name}{" "}
+                                    </Typography>
+                                    <Typography variant='body2'>
+                                        تعداد آگهی {city.num_auctions}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button
+                                        size='small'
+                                        style={{
+                                            color: "#c786d3",
+                                            marginRight: "140px",
+                                        }}
+                                        onClick={() => {
+                                            navigate("/auction-page", {
+                                                state: { id: city.id },
+                                            });
+                                        }}
+                                    >
+                                        مشاهده بیشتر <KeyboardBackspaceIcon />{" "}
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        </div>
     );
 };
