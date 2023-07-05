@@ -69,7 +69,7 @@ export const CityAuction = (props) => {
                                         مزایده مناقصه {city.name}{" "}
                                     </Typography>
                                     <Typography variant='body2'>
-                                        1234 آگهی
+                                    تعداد آگهی ها {city.num_auctions}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
