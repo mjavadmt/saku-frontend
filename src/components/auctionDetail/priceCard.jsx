@@ -14,7 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import { toast } from "react-toastify";
 import submitPrice from "assets/img/submit-price.png";
-import { post } from "utils/api";
+import { post } from "utils/api/api";
 import { POST_BID } from "constant/apiRoutes";
 
 const style = {

@@ -20,20 +20,29 @@
 			width: 100%;
 
 			img,
-			svg,
-			video {
+			svg{
 				width: auto;
 				height: auto;
 				max-width: 100%;
+				overflow: visible;
+			}
+			video {
+				
+				width: 100%;
+				height: 100%;
 				overflow: visible;
 			}
 
 			&.split-item-image-fill {
 
 				img,
-				svg,
+				svg{
+					width: 100%;
+				}
 				video {
 					width: 100%;
+					
+					height: 100%;
 				}
 			}
 		}
@@ -118,9 +127,13 @@
 			.split-item-image {
 
 				img,
-				svg,
+				svg{
+					margin-left: auto;
+				}
 				video {
 					margin-left: auto;
+					width: 100%;
+					height: 100%;
 				}
 			}
 		}

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  client:
+      stdin_open: true
+      environment:
+        - CHOKIDAR_USEPOLLING=true
+      build:
+        dockerfile: Dockerfile
+        # context: ./client
+        context: .
+      command: docker run -e CI=true /bin/sh -c "npm test -- --coverage"
