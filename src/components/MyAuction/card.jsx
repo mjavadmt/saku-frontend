@@ -27,7 +27,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { post } from "utils/api/api";
 import { toast } from "react-toastify";
-
+import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
+import "./card.css";
+import formm from "assets/img/form.svg";
 // import Transition from "@mui/material/Transition";
 const defineStatus = (startDate, endDate) => {
     if (new Date(startDate) > new Date() && new Date(endDate) < new Date())
@@ -222,7 +224,11 @@ export const Card = ({
                     </div>
                 </div>
 
-                <Button variant='outlined' onClick={(e) => handleClickOpen(e)}>
+                <Button
+                    className='button-style'
+                    variant='outlined'
+                    onClick={(e) => handleClickOpen(e)}
+                >
                     ثبت نظر
                 </Button>
             </div>
@@ -234,7 +240,11 @@ export const Card = ({
                     onClose={handleClose}
                     // aria-describedby='alert-dialog-slide-description'
                 >
-                    <DialogTitle>{"فرم نظرسنجی"}</DialogTitle>
+                    <DialogTitle>
+                        {"فرم نظرسنجی"} <AssignmentRoundedIcon />
+                        <img src={formm} className='cat-image' alt='cat' />
+                    </DialogTitle>
+
                     <DialogContent>
                         <FormControl>
                             <FormLabel
@@ -451,17 +461,22 @@ export const Card = ({
                     </DialogContent>
                     <DialogActions>
                         <Button
-                            onClick={(e) => handleClose(e)}
-                            style={{ color: "#f06292" }}
+                            className='sabt'
+                            onClick={handleSubmit}
+                            style={{ color: "#1de9b6" }}
+                            variant='outlined'
                         >
-                            لغو
+                            ثبت
                         </Button>
+
                         <Stack>
                             <Button
-                                onClick={handleSubmit}
-                                style={{ color: "#1de9b6" }}
+                                className='laghv'
+                                onClick={(e) => handleClose(e)}
+                                style={{ color: "#f06292" }}
+                                variant='outlined'
                             >
-                                ثبت
+                                لغو
                             </Button>
                             <Snackbar
                                 open={openAlart}
