@@ -70,11 +70,16 @@ img {
 }
 
 img,
-svg,
-video {
+svg{
 	display: block;
 	height: auto; /* Make sure images are scaled correctly. */
-	max-width: 100%; /* Adhere to container width. */
+	max-width: 100%;
+}
+video {
+	width: 100%;
+	display: block;
+	height: 100%; /* Make sure images are scaled correctly. */
+ /* Adhere to container width. */
 }
 
 figure {

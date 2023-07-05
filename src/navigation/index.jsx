@@ -16,6 +16,9 @@ import {
   AuctionDetialPage,
   FullLayoutChat,
   LandingPage,
+  Category,
+  CityAuction,
+  Support,
 } from "pages";
 import {
   NOT_FOUND,
@@ -35,6 +38,9 @@ import {
   FORGOTPASSWORD,
   FULL_LAYOUT_CHAT,
   LANDING_PAGE,
+  CATEGORY,
+  CITYAUCTION,
+  SUPPORT,
 } from "constant/routes";
 import { Layout } from "components/layout/layout";
 import { ForgotPassword } from "pages/forgotPassword";
@@ -106,6 +112,14 @@ export const Navigation = () => (
       <Route
         element={<ScreenLayout elemnt={<Logout />} isFullscreen={true} />}
         path={LOGOUT}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<CityAuction />} isFullscreen={true} />}
+        path={CITYAUCTION}
+      />
+      <Route
+        element={<ScreenLayout elemnt={<Support />} isFullscreen={true} />}
+        path={SUPPORT}
       />
       <Route path="*" element={<Navigate to={NOT_FOUND} />} />
     </Routes>

@@ -7,4 +7,7 @@ services:
         - CHOKIDAR_USEPOLLING=true
       build:
         dockerfile: Dockerfile
-        context: ./client
+        # context: ./client
+        context: .
+      ports:
+        - "3000:3000"

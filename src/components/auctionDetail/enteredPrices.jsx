@@ -3,7 +3,7 @@ import { enteredPrices } from "statics/userEnteredPrices";
 import React, { useEffect, useState } from "react";
 import { dateConverter } from "utils/dateConverter";
 import { defineUnit } from "utils/formatPrice";
-import { get } from "utils/api";
+import { get } from "utils/api/api";
 import { GET_MY_BID } from "constant/apiRoutes";
 import { Token } from "@mui/icons-material";
 
