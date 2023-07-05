@@ -2,7 +2,7 @@
     text-align: center;
  
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 300px;
     position: relative;
   
     font-size: 30px;
@@ -26,6 +26,8 @@
 
   .slide-container {
     width: 70%;
+
+  
     margin: auto; }
   
   h3 {
@@ -36,7 +38,8 @@
     align-items: center;
     justify-content: center;
     background-size: cover;
-    height: 300px;
+    height: 400px !important;
+    margin-top: 20px;
   }
   
   .each-slide span {
@@ -133,4 +136,8 @@
     flex-wrap: wrap;
     row-gap: 16px;
     column-gap: 16px;
+  }
+
+  .div-style{
+    height: 600px !important;
   }
