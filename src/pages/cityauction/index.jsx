@@ -13,7 +13,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useEffect } from "react";
 import { host } from "utils/config";
 import { useNavigate } from "react-router-dom";
-import first from "./1.svg";
+import first from "assets/img/1.svg";
 // import "./2.png";
 //مزایده مناقصه بر اساس شهر ها
 
